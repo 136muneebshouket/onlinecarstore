@@ -1,0 +1,108 @@
+.login-body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  /* flex-direction: column; */
+}
+.main {
+  width: 350px;
+  height: 500px;
+margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+  background-color: rgba(47, 125, 228, 1);
+}
+.login {
+  height: 560px;
+  background: rgb(248, 248, 248);
+  border-radius: 60% / 10%;
+  text-align: center;
+}
+.CHECKBOX{
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    margin: 0px 97px;
+    height: 30px;
+    color: #fff;
+}
+
+.Login_text {
+  color: rgb(255, 255, 255);
+  font-size: 2.3em;
+  justify-content: center;
+  display: flex;
+  padding: 30px;
+  transition: 0.5s ease-in-out;
+}
+.login .overlay form div{
+  position: relative;
+}
+.login .overlay form label.inputlabels{
+  /* margin-right: 51%;  */
+  margin-top: 15px;
+  border-bottom: 1px solid gray;
+  color: #242424;
+  font-family: system-ui;
+  /* padding-right: 7px; */
+  display: flex;
+  width: 23%;
+  left: 17%;
+  position: relative;
+}
+
+.login .overlay form input {
+  width: 60%;
+  height: 10px;
+  background: rgb(248, 248, 248);
+  justify-content: center;
+  display: flex;
+  margin: 0px auto;
+  padding: 15px 10px;
+  border: none;
+  outline: none;
+  border-left: 1px solid gray;
+  border-bottom: 1px solid gray;
+  font-size: 14px;
+}
+.login .overlay form .showpass_icon {
+  display: inline;
+  position: absolute;
+  top: 30%;
+  left: 75%;
+}
+.login .overlay form .showpass_icon i{
+  font-size: 20px;
+  cursor: pointer;
+}
+.login-button {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: rgb(12 109 236);
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+.login-button:hover {
+  background: rgba(47, 125, 228, 1);
+  color: white;
+}
+.forget_password{
+  color: whitesmoke;
+}

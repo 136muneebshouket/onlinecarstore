@@ -1,0 +1,481 @@
+
+.NavBar {
+    position: sticky;
+    top: 0;
+    z-index: 9999999;
+  
+    border-radius: 0px !important;
+    background-color: rgba(255, 255, 255);
+    border-bottom:1px solid #c1c1c1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48 48 48);
+    
+  }
+  .NavBar .uppernav{
+    display: flex;
+    justify-content: end;  
+    border-bottom: 1px solid grey;
+    margin: 0px 12%;
+    margin-bottom: 8px;
+  }
+  .NavBar .uppernav .profile{
+    padding:5px 10px;
+    display: flex;
+    margin-left: 20px;
+    position: relative;
+}
+
+.NavBar .uppernav .profile .profileDropDown{
+    position: absolute;
+    top:200%;
+    right: 20%;
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    background-color: #fff;
+    width: 90%;
+    padding:15px 20px;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 30%);
+    border-radius: .30rem;
+    transition:all .4s ease-in;
+}
+
+
+.NavBar .uppernav .profile .profileDropDown.active{
+    visibility: visible;
+    top:120%;
+    right: 20%;
+    opacity: 1;
+    z-index: 999;
+}
+
+
+
+.NavBar .uppernav .profile .profileDropDown div{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.NavBar .uppernav .profile .profileDropDown ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.NavBar .uppernav .profile .profileDropDown ul li{
+    padding:5px 10px;
+    border-radius: .30rem;
+    width: 90%;
+}
+
+.NavBar .uppernav .profile .profileDropDown ul li a{
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    color:#666975!important;
+    font-family: system-ui;;
+}
+
+.NavBar .uppernav .profile .profileDropDown ul li:hover{
+    background-color: #f6f6f6;
+}
+
+.NavBar .uppernav .profile .profileDropDown ul li a .bx{
+    margin-right: 10px;
+}
+.NavBar .uppernav .profile .username{
+    font-size: 15px;
+    font-weight: 500;
+    font-family: system-ui;
+    color: #e6e6e6;
+    border-left: 1px solid grey;
+    margin: 0px 1px;
+    text-decoration: none;
+    padding: 0px 5px;
+}
+
+.NavBar .uppernav .profile .role{
+    font-size: 14px;
+    font-weight: 400;
+    color:#878a99;
+}
+
+.NavBar .uppernav .profile .arrowDown{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.NavBar .uppernav .profile .arrowDown i{
+    transition: .2s ease-in;
+    color: #e6e6e6;
+}
+  
+  .NavBar nav .logo {
+    padding: 0;
+    height: 100%;
+  }
+  
+  .NavBar nav svg{
+    height: 100%;
+    width: 120px;
+    transition: .5s;
+    cursor: pointer;
+  
+  }
+  
+  
+  .NavBar nav .logo .minWidth {
+    width: 170px;
+  }
+  
+  .NavBar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px calc(10px + 1.5vw);
+    padding-top: 0px;
+    position: relative;
+    height: 50px;
+    margin: 0px 10%;
+    padding-bottom: 0px;
+  }
+  
+  .NavBar nav .navLinks {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    /* padding-right: 100px; */
+  }
+  
+  .NavBar nav .navLinks>ul {
+    display: flex;
+    list-style: none;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 100%;
+  }
+  
+  .NavBar nav .navLinks ul li a {
+    color: #e6e6e6;
+   font-family: system-ui;;
+    font-weight: 400;
+    line-height: 18px;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: .5s;
+    text-shadow: var(--darkneon);
+  }
+  
+  .NavBar nav .navLinks>ul>li,
+  .services_one {
+    position: relative;
+    /* margin: 0px 8px; */
+    transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 8px;
+  }
+  .NavBar nav .navLinks>ul>li:hover {
+    background-color: white;
+  }
+  .NavBar nav .navLinks>ul>li:hover a{
+    color: rgb(48 48 48);
+  }
+  
+  .NavBar nav .navLinks .services_two {
+    display: none;
+    visibility: hidden;
+  }
+  
+  
+  .NavBar nav .navLinks>ul>li>a {
+    padding: 3px;
+    position: relative;
+    font-weight: 400;
+    margin: 7px;
+    font-size: max(16px,1.2vw);
+    text-decoration: none;
+  
+  }
+  
+  .NavBar nav .navLinks>ul a.postaddlink{
+    width: 135px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: rgb(165, 0, 0);
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+  }
+  .NavBar nav .navLinks>ul a.postaddlink p{
+    font-size: max(16px,1.2vw);
+    font-weight: 600;
+    font-family: sans-serif;   
+    color:#FFFFFF ;
+   
+  }
+  /* .NavBar nav .navLinks ul li a::after {
+    content: "";
+    height: 2px;
+    background: #202020;
+    width: 0%;
+    position: absolute;
+    left: 3px;
+    bottom: 0px;
+    transition: all 0.3s;
+    border-radius: 10px;
+    box-shadow: var(--darkneon);
+  } */
+  
+  /* .NavBar nav .navLinks ul li:hover a::after {
+    width: 50%;
+  } */
+  
+  .NavBar nav .navLinks>ul>li>a .bx-menu{
+    margin: 0px 3px 0px 7px;
+    transition: .5s;
+  
+    font-size: large;
+    font-weight: 800;
+  }
+  
+  
+  .NavBar nav .navLinks>ul>li>a .fa-phone {
+    color: var(--orange);
+  }
+  
+  .dropDownList {
+    position: absolute;
+    top: 130%;
+  
+    height: 330px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    list-style: none;
+    border: 2px solid;
+    transition: .5s;
+    background: white;
+    width: 271px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  
+  .NavBar nav .navLinks>ul>li:hover .dropDownList {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+    z-index: 999;
+  
+  }
+  
+  .NavBar nav .navLinks>ul>li:hover .dropDownList li a::after {
+    background: transparent;
+  }
+  
+  .dropDownList li {
+    margin: 13px 13px;
+    width: 216px;
+    border-radius: 5px;
+    padding-left: 7px;
+  }
+  
+  .dropDownList li:hover {
+    background: #dddddd;
+  }
+  
+  .dropDownList li a {
+    padding: 5px 0px;
+    display: grid;
+  
+  }
+  
+  .NavBar nav .navLinks .bx-menu{
+    display: none;
+    cursor: pointer;
+  
+  }
+  
+  
+  .NavBar nav .navLinks .orangeBtn {
+    margin-left: 15px;
+    color: #fff;
+  }
+  
+  
+  
+  
+  @media (max-width:1230px) {
+    .NavBar .phoneLink {
+      display: none;
+    }
+  }
+  
+  @media (max-width:1070px) {
+    .NavBar nav .navLinks>ul>li {
+      margin: 0 4px;
+    }
+  }
+  
+  @media (max-width:1024px) {
+    .NavBar nav .navLinks>ul>li>a .bx-menu {
+      margin-left: 3px;
+    }
+  
+    .NavBar nav .navLinks ul li a {
+      font-size: 13px;
+  
+    }
+  }
+  
+  /* @media (max-width:972px) {
+    .NavBar .logo img {
+      width: calc(160px + .5vw);
+      height: auto;
+    }
+  } */
+  
+  @media (max-width:900px) {
+  
+    /* .NavBar nav{
+        background-color: white;
+      } */
+      .NavBar nav .navLinks{
+        padding-right: 0px;
+      }
+    .NavBar nav .navLinks .services_one {
+      display: none;
+  
+    }
+  
+    .NavBar nav .navLinks .services_two {
+      display: block;
+      visibility: visible;
+    }
+  
+    .NavBar nav .navLinks>ul>li>a .bx-menu{
+      display: block;
+    }
+  
+    .NavBar nav .navLinks ul li a {
+      color: black;
+      font-size: 15px;
+  
+    }
+  
+    .NavBar nav .navLinks .dropDownList li {
+      padding-left: 0px;
+      margin: 10px 0px !important;
+    }
+  
+    .NavBar nav .navLinks .dropDownList li a {
+      color: black;
+      font-size: 15px;
+      margin: 0px;
+    }
+  
+    .NavBar nav .navLinks ul li:hover a::after {
+      background-color: black;
+      width: 100%;
+      height: 1%;
+      left: 0
+    }
+  
+    .NavBar nav .navLinks>ul {
+        width: 200px;
+    position: absolute;
+    top: 100%;
+    flex-direction: column;
+    padding: 10px calc(10px + 1.5vw);
+    background-color: hsla(0, 0%, 100%, .95);
+    transition: .8s ease;
+    z-index: 100;
+    height: 90vh;
+    border: 1px solid;
+   
+    }
+  
+    .NavBar nav .navLinks>ul>li {
+      margin: 0;
+      justify-content: flex-start;
+    border-bottom: 1px solid #999999;
+    padding-bottom: 0px !important;
+    }
+  
+    .NavBar nav .navLinks>ul>li>a {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  
+    .dropDownList {
+      z-index: 22;
+      position: static;
+      opacity: 1;
+      background-color: #eee;
+      border-radius: 0px;
+      display: none;
+      opacity: 1;
+      visibility: hidden;
+      z-index: 999;
+      border: none;
+    }
+  
+    .dropDownList li a {
+      display: flex;
+      justify-content: flex-start;
+    }
+  
+    .NavBar nav .navLinks>ul>li .dropDownList {
+      display: block;
+      visibility: visible;
+      left: 130px;
+      position: absolute;
+      width: 180px;
+      height: 270px;
+      padding-right: 5px;
+      top: 80% !important;
+      transition: .5s ease-in-out;
+  
+    }
+  
+    .NavBar nav .navLinks>ul>li .dropDownList a::after {
+      background-color: transparent;
+      width: 100%;
+      height: 1%;
+      left: 0;
+    }
+  
+    .NavBar nav .navLinks .bx-menu {
+      display: block;
+      font-size: 30px;
+      color: #e6e6e6;
+      font-weight: 800;
+      margin: 10px;
+    }
+  
+    .NavBar nav .navLinks .loginBtnItem {
+      display: flex;
+      justify-content: flex-end;
+    }
+  
+  }
+  
+  /* navbar css end////////////////////////////////////////////////////////////////////////////////// */
