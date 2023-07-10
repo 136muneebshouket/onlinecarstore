@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
 // import { signIn } from "next-auth/react";
+import FullLoader from "@/components/Modals/Loader/fullLoader";
 import axios from "axios";
 import Link from "next/link";
 // import "./Login.css"
 
 const Register = () => {
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState({
+    success:true,
+    message:''
+  });
   const [loading, setLoading] = useState(false);
   const [full_name, setfull_name] = useState("");
   const [password, setPassword] = useState("");
@@ -69,32 +73,25 @@ const Register = () => {
     };
 
     await axios
-      .post(`/api/register`, loginobj)
+      .post(`/api/auth/register`, loginobj)
       .then((res) => {
-        console.log(res);
-        if (res.status == 201) {
-          // localStorage.setItem("access_token", res.data.token)
-          // localStorage.setItem("refresh_token", res.data.refreshToken)
-          // localStorage.setItem("user_id", res.data.userid)
-          setError("user has been sucsesfully created");
 
-          setUsername("");
+        if (res.status == 201) {
+          // setError(res?.data);
+          setError({...error, success: res?.data.success , message: res?.data.message});
           setPassword("");
           setEmail("");
           setfull_name("");
-          setIsadmin(false);
-          setImage(null);
-          setImagetoshow(null);
-          setUsername("");
-          setPassword("");
-          setLoading(false);
+          setLoading(false)
         }
       })
-      .catch((error) => {
-        console.log(error.response.data);
-        setError(error.response.data);
+      .catch((err) => {
+        setError({...error, success:err?.response?.data.success , message: err?.response?.data.message});
         setLoading(false);
+      }).finally(()=>{
+        console.log(error)
       });
+     
   };
 
   return (
@@ -106,6 +103,7 @@ const Register = () => {
           </label>
           <div className="login">
             <div className="overlay">
+
               <form onSubmit={upload}>
                 <label htmlFor="chk" aria-hidden="true"></label>
                 <br />
@@ -134,7 +132,7 @@ const Register = () => {
                         style={{ background: "white", color: "green" }}
                         className="errorPara"
                       >
-                        {error}
+                        {error.message}
                       </p>
                     )}
                   </>
@@ -170,8 +168,9 @@ const Register = () => {
                   name="img"
                   placeholder="upload ur profile image"
                 /> */}
+
                   <label className="inputlabels" htmlFor="pswd">Password</label>
-                  <div>
+                  <div style={{position:'relative'}}>
                   <input
                    type={showpass ? "text" : "password"}
                   name="pswd"
@@ -198,12 +197,10 @@ const Register = () => {
                   </div>
                
 
-                <button className="login-button">Submit</button>
+                <button type="submit" style={{marginTop:'30px'}} className="login-button" disabled={loading && 'true'}> {!loading ? "Submit" : "Processing..."}</button>
               </form>
             </div>
-            <Link className="forget_password" href="/forgetpassword">
-              forgetpassword
-            </Link>
+   
           </div>
         </div>
         {/* <div className="register_img">
@@ -214,6 +211,8 @@ const Register = () => {
           />
         </div> */}
       </div>
+         {/* loader fullpage */}
+         {loading ? <FullLoader /> : '' } 
     </>
   );
 };

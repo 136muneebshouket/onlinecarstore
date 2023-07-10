@@ -1,5 +1,6 @@
 import mongoose, { model } from "mongoose";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
+import bcrypt from 'bcrypt'
 
 // const mongoose = require("mongoose");
 
@@ -15,7 +16,8 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
+      unique: [true, 'Email must be lowercase'],
+      lowercase:[true, 'Email must be lowercase'],
       required: [true, 'Email is required'],
     },
     avatar:{

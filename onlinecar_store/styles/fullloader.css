@@ -1,0 +1,36 @@
+.fullLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.13);
+    
+    backdrop-filter: blur(5.1px);
+    -webkit-backdrop-filter: blur(5.1px);
+}
+
+.fullLoader i{
+    font-size: 20vw;
+    color: rgb(250, 25, 44);
+    border-radius: 50px;
+}
+
+.fullLoader i{
+    -webkit-animation: rotating 2s linear infinite;
+	        animation: rotating 2s linear infinite;
+}
+@keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

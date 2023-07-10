@@ -1,0 +1,96 @@
+
+.profile_div{
+    background-color: rgb(247, 247, 247);
+    width: max(70vw, min(700px,90vw));
+    border: 1px solid rgb(177, 177, 177);
+    height: fit-content;
+    padding: 30px;
+    margin: 30px;
+}
+.profile_div .profile_avatar{
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.profile_div .profile_tag{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-top: 20px;
+}
+.profile_div .profile_tag h2{
+font-weight: 300;
+}
+.profile_div .profile_tag .profile_links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    height: fit-content;
+}
+.profile_div .profile_tag .profile_links a{
+    font-size: small;
+    text-decoration: none;
+    margin: 0px 2px;
+    word-spacing: 0px;
+    color: #007cd5;
+    padding: 0px 2px;
+    font-weight: 500;
+    height: fit-content;
+}
+.profile_div .profile_tag .profile_links a:first-child{
+    border-right: 1px solid rgb(190, 190, 190);
+    padding: 0px 9px;
+}
+.profile_div .avatar_section{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.profile_div .avatar_section .profile_image{
+    border-radius: 50%;
+    border: 3px solid #e6eaf3;
+    margin: 0px 25px 20px 25px;
+    overflow: hidden;
+
+    width: 100px;
+    height: 100px;
+}
+.profile_div .avatar_section .profile_warning{
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    height: fit-content;
+    padding: 7px;
+    border-radius: 3px;
+}
+.profile_div .profile_form{
+    padding: 20px;
+}
+.profile_div .profile_form form .inputs{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 60%;
+    flex-wrap: wrap;
+}
+.profile_form form .inputs label{
+    margin: 10px;
+    font-size: 16px;
+}
+.profile_form form .inputs input,select{
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    border-radius: 4px;
+  
+    padding: 15px 18px;
+    font-size: 14px;
+    vertical-align: middle;
+    width: -webkit-fill-available;
+    max-width: 356px;
+}
+.profile_form form .inputs .option {
+    color: #000;
+    padding: 0 10px;
+  
+}

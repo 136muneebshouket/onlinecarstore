@@ -75,7 +75,7 @@
     display: block;
     font-size: 15px;
     color:#666975!important;
-    font-family: system-ui;;
+   
 }
 
 .NavBar .uppernav .profile .profileDropDown ul li:hover{
@@ -88,7 +88,7 @@
 .NavBar .uppernav .profile .username{
     font-size: 15px;
     font-weight: 500;
-    font-family: system-ui;
+
     color: #e6e6e6;
     border-left: 1px solid grey;
     margin: 0px 1px;
@@ -161,7 +161,7 @@
   
   .NavBar nav .navLinks ul li a {
     color: #e6e6e6;
-   font-family: system-ui;;
+  
     font-weight: 400;
     line-height: 18px;
     font-size: 15px;
@@ -222,7 +222,7 @@
   .NavBar nav .navLinks>ul a.postaddlink p{
     font-size: max(16px,1.2vw);
     font-weight: 600;
-    font-family: sans-serif;   
+    
     color:#FFFFFF ;
    
   }

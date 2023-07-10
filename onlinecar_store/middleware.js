@@ -1,6 +1,6 @@
 export { default } from "next-auth/middleware";
 
-export const config = { matcher: ["/Used_cars/Sell/Post_ad"]};
+export const config = { matcher: ["/Used_cars/Sell/Post_ad" , "/users/profile/(.*)" ]};
 
 
 

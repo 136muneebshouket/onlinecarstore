@@ -21,16 +21,19 @@ const NavBar = () => {
   var dropDownRef = useRef();
   var dropDownRef2 = useRef();
   var dropDownRef3 = useRef();
+  var profileDrop = useRef();
+  var arrowDown = useRef();
 
   return (
     <>
       <div className="NavBar">
         <div className="uppernav">
-          <div className="profile">
+          <div className="profile" ref={arrowDown}>
             {isLoggedIn ? (
               <>
                 <div
-                  onClick={() => setProfileDropDown(!profileDropDown)}
+                 
+                  // onClick={() => setProfileDropDown(!profileDropDown)}
                   className="arrowDown"
                 >
                   <div className="username">
@@ -61,21 +64,21 @@ const NavBar = () => {
            
 
             {/* Profile Click DropDown */}
-            <div
+            <div ref={profileDrop}
               className={`profileDropDown ${profileDropDown ? "active" : ""}`}
             >
               <ul>
                 <li>
-                  <a href="/">Profile</a>
+                  <Link href={`/users/profile/${sessionData?.user?.full_name.replace(/\s/g, '')}`} >Profile</Link>
                 </li>
                 <li>
-                  <a href="/">Task Board</a>
+                  <Link href="/">Task Board</Link>
                 </li>
                 <li>
-                  <a href="/">Setting</a>
+                  <Link href="/">Setting</Link>
                 </li>
                 <li>
-                  <a href="/" onClick={() => signOut()}>
+                  <a href="/" onClick={() => {signOut()}}>
                     Logout
                   </a>
                 </li>
@@ -166,6 +169,15 @@ const NavBar = () => {
                 ) {
                   setToggleNavBar(false);
                   setToggleul(false);
+                }
+                if(profileDrop.current != event.target 
+                  // || arrowDown.current.contains(event.target)
+                   ){
+                 setProfileDropDown(false);
+                }
+                if(arrowDown.current.contains(event.target)){
+                  setProfileDropDown(!profileDropDown);
+                  // console.log('im clicked')
                 }
               }}
             >
