@@ -4,6 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const profile = () => {
+ 
+
+
+
+
+
+
   return (
     <>
       <div className="main_container">
@@ -17,21 +24,25 @@ const profile = () => {
               </div>
             </div>
             <div className="avatar_section">
+              <div>
               <Image
                 src="/images/default-profile-image-.gif"
                 className="profile_image"
                 width={200}
                 height={200}
               />
+              {/* <button>Upload Image</button> */}
+              </div>
               <span className="profile_warning">
                 Picture can't be changed for unverified emails. Verify your
                 email first
               </span>
             </div>
           </div>
+          < hr />
           <div className="profile_form">
             <center>
-              <form action="">
+              <form action="" style={{maxWidth:'590px'}}>
                 <div className="inputs">
                   <label htmlFor="">Full Name</label>
                   <input type="text" />
@@ -65,11 +76,20 @@ const profile = () => {
                 </div>
                 <div className="inputs">
                   <label htmlFor="">Mobile Number</label>
-                  <input type="submit" />
+                  <button className="btn">Add Number</button>
                 </div>
               </form>
             </center>
           </div>
+          < hr />
+           <div className="savechanges">
+           
+            <button>
+              Save changes
+            </button>
+           
+           
+           </div>
         </div>
       </div>
     </>

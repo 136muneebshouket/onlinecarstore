@@ -7,18 +7,21 @@
     padding: 30px;
     margin: 30px;
 }
-.profile_div .profile_avatar{
-    border-bottom: 1px solid #c3c3c3;
-}
+/* .profile_div .profile_avatar{
+     border-bottom: 1px solid #c3c3c3; 
+} */
 
 .profile_div .profile_tag{
 display: flex;
 flex-direction: row;
 justify-content: space-between;
 margin-top: 20px;
+margin: 20px 0px;
 }
 .profile_div .profile_tag h2{
-font-weight: 300;
+    font-weight: 400;
+    font-size: max(26px,2vw);
+    width: 50%;
 }
 .profile_div .profile_tag .profile_links{
     display: flex;
@@ -65,18 +68,18 @@ font-weight: 300;
     border-radius: 3px;
 }
 .profile_div .profile_form{
-    padding: 20px;
+    padding:0px 20px ;
 }
 .profile_div .profile_form form .inputs{
-    margin: 10px;
+    margin: 15px 0px;
     display: flex;
-    justify-content: space-between;
-    max-width: 60%;
     flex-wrap: wrap;
 }
 .profile_form form .inputs label{
     margin: 10px;
     font-size: 16px;
+    width: 120px;
+    text-align: initial;
 }
 .profile_form form .inputs input,select{
     border: 1px solid #e6e6e6;
@@ -92,5 +95,31 @@ font-weight: 300;
 .profile_form form .inputs .option {
     color: #000;
     padding: 0 10px;
-  
+    height: 48px;
+}
+/* .profile_form form .btninput{
+ 
+max-width: 60%;
+}
+*/
+.profile_form form .inputs .btn , .savechanges button{
+    background: #213974;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: medium;
+    cursor: pointer;
+
+} 
+.profile_div .savechanges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+hr{
+    color: #c3c3c3;
+    height: 1px;
 }

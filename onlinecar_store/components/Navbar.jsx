@@ -4,17 +4,13 @@ import Logo from "@/pages/z_icons/Logo";
 import Link from "next/link";
 import Image from "next/image";
 
-
 import { useSession, signOut } from "next-auth/react";
 
 const NavBar = () => {
   const { data: sessionData } = useSession();
   const isLoggedIn = sessionData?.user;
 
-
-
   const [profileDropDown, setProfileDropDown] = useState(false);
- 
 
   const [toggleNavBar, setToggleNavBar] = useState(false);
   const [toggleul, setToggleul] = useState(false);
@@ -23,6 +19,18 @@ const NavBar = () => {
   var dropDownRef3 = useRef();
   var profileDrop = useRef();
   var arrowDown = useRef();
+  // console.log(profileDropDown);
+
+  const logout=async()=>{
+  // let logout = await signOut();
+  // if(logout){
+  //   if(isLoggedIn == true){
+  //     console.log(isLoggedIn)
+  //     logout();
+  //   }
+  // }
+  console.log('logout"')
+  }
 
   return (
     <>
@@ -32,12 +40,11 @@ const NavBar = () => {
             {isLoggedIn ? (
               <>
                 <div
-                 
                   // onClick={() => setProfileDropDown(!profileDropDown)}
                   className="arrowDown"
                 >
                   <div className="username">
-                  Welcome {sessionData?.user?.full_name}
+                    Welcome {sessionData?.user?.full_name}
                   </div>
                   <i
                     style={{
@@ -47,6 +54,41 @@ const NavBar = () => {
                     }}
                     className="bx bx-chevron-down"
                   ></i>
+                </div>
+
+                {/* Profile Click DropDown */}
+                <div
+                  ref={profileDrop}
+                  className={`profileDropDown ${
+                    profileDropDown ? "active" : ""
+                  }`}
+                >
+                  <ul>
+                    <li>
+                      <Link
+                        href={`/users/profile/${sessionData?.user?.full_name.replace(
+                          /\s/g,
+                          ""
+                        )}`}
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/">Task Board</Link>
+                    </li>
+                    <li>
+                      <Link href="/">Setting</Link>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        onClick={()=>{signOut()}}
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </>
             ) : (
@@ -61,36 +103,13 @@ const NavBar = () => {
                 </div>
               </>
             )}
-           
-
-            {/* Profile Click DropDown */}
-            <div ref={profileDrop}
-              className={`profileDropDown ${profileDropDown ? "active" : ""}`}
-            >
-              <ul>
-                <li>
-                  <Link href={`/users/profile/${sessionData?.user?.full_name.replace(/\s/g, '')}`} >Profile</Link>
-                </li>
-                <li>
-                  <Link href="/">Task Board</Link>
-                </li>
-                <li>
-                  <Link href="/">Setting</Link>
-                </li>
-                <li>
-                  <a href="/" onClick={() => {signOut()}}>
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
         <nav>
           <div className="logo">
             <Link href="/">
-             {/* <Image width="120" height="70" src="images/next.svg" alt="logo" />  */}
-             <Logo/>
+              {/* <Image width="120" height="70" src="images/next.svg" alt="logo" />  */}
+              <Logo />
             </Link>
           </div>
           <div className="navLinks">
@@ -170,14 +189,15 @@ const NavBar = () => {
                   setToggleNavBar(false);
                   setToggleul(false);
                 }
-                if(profileDrop.current != event.target 
+                if (
+                  profileDrop.current != event.target
                   // || arrowDown.current.contains(event.target)
-                   ){
-                 setProfileDropDown(false);
+                ) {
+                  setProfileDropDown(false);
                 }
-                if(arrowDown.current.contains(event.target)){
+                if (arrowDown.current.contains(event.target)) {
                   setProfileDropDown(!profileDropDown);
-                  // console.log('im clicked')
+                  console.log("im clicked");
                 }
               }}
             >

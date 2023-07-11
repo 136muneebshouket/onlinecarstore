@@ -43,6 +43,7 @@
 
 
 .NavBar .uppernav .profile .profileDropDown.active{
+  /* display: block; */
     visibility: visible;
     top:120%;
     right: 20%;

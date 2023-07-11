@@ -1,0 +1,68 @@
+.home_main {}
+
+.home_main .home_header {
+    width: 100%;
+    height: 38vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #022456;
+}
+
+.home_main .home_header .header_title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.home_main .home_header .header_title h1 {
+    font-size: 38px;
+    line-height: normal;
+    font-weight: normal;
+    margin: 5px;
+    color: #fff;
+}
+
+.home_main .home_header .header_title p {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 5px;
+    color: #fff;
+}
+
+.home_main .home_header .home_search {
+    display: flex;
+    max-width: 80vw;
+
+}
+
+.home_main .home_header .home_search select,
+.home_main .home_header .home_search input {
+    width: 300px;
+    border: 1px solid lightgray;
+    border-radius: unset;
+}
+
+.home_main .home_header .home_search input {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 0px 18px;
+}
+
+.home_main .home_header .home_search .icon_search {
+    background: #02c702;
+   
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    width: 57px;
+    justify-content: center;
+    align-items: center;
+}
+
+.home_search .icon_search i {
+    font-size: 25px;
+    color: #fff;
+    font-weight: 600;
+   
+}

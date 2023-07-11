@@ -6,6 +6,7 @@ import '@/styles/Login.css'
 import '@/styles/profile.css'
 import '@/styles/modal.css'
 import '@/styles/fullloader.css'
+import '@/styles/home.css'
 
 import Head from 'next/head'
 
