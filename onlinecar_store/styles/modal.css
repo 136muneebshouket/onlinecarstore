@@ -36,7 +36,7 @@
     padding: 0px 10px;
     flex-direction: column;
   }
-  .modal_content .modal_title p ,h2{
+  .modal_content .modal_title p ,.modal_title h2{
     text-align: left;
  
     margin: 10px 0px;

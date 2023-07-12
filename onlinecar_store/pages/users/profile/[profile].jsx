@@ -50,7 +50,7 @@ const profile = () => {
                 <div className="inputs">
                   <label htmlFor="">Gender</label>
                   <select id="gender" name="gender" className="option">
-                    <option value="" selected>
+                    <option defaultValue="Select your Gender" >
                       Select your Gender
                     </option>
 
@@ -64,7 +64,14 @@ const profile = () => {
                 </div>
                 <div className="inputs">
                   <label htmlFor="">Country</label>
-                  <input type="text" />
+                  <select id="gender" name="gender" className="option">
+                    <option value="" selected>
+                      All Cities
+                    </option>
+
+                    <option value="Male">Lahore</option>
+                    <option value="Female">Fsd</option>
+                  </select>
                 </div>
                 <div className="inputs">
                   <label htmlFor="">Username</label>
