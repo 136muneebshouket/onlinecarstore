@@ -2,7 +2,7 @@ import React, { useReducer, useState, useRef } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Logo from "@/pages/z_icons/Logo";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 import { useSession, signOut } from "next-auth/react";
 

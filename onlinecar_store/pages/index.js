@@ -1,6 +1,12 @@
 import Head from 'next/head'
 import NavBar from '@/components/Navbar'
-import Homepage from './Home/Homepage'
+// import  from './Home/Homepage'
+
+import dynamic from 'next/dynamic'
+
+const Homepage = dynamic(() => import('./Home/Homepage'), {
+  loading: () => <p>Loading...</p>,
+})
 
 
 export default function Home() {

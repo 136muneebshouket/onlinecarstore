@@ -1,7 +1,13 @@
 "use client";
 
-import NavBar from "./Navbar";
+// import NavBar from "./Navbar";
 import { SessionProvider } from "next-auth/react";
+
+import dynamic from 'next/dynamic'
+
+const NavBar = dynamic(() => import('./Navbar'), {
+  loading: () => <p>Loading...</p>,
+})
 
 const Layout = ({children}) => {
 

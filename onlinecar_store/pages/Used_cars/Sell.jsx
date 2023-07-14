@@ -30,10 +30,10 @@ const Sell = () => {
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
-            <button>
+           
+            <a href="/Used_cars/Sell/Post_ad"> <button> post an add</button></a>
             
-              Post an Ad
-            </button>
+            
             </div>
             
           </div>
@@ -46,10 +46,7 @@ const Sell = () => {
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
-            <button>
-            
-              post an add
-            </button>
+            <a href="/Used_cars/Sell/Post_ad"> <button> post an add</button></a>
             </div>
             
           </div>

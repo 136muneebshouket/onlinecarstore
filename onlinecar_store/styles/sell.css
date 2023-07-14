@@ -59,7 +59,7 @@ font-size: 14px;
 .header_cards .card ul li i{
 font-size: 17px;
 }
-.header_cards .card div button{
+.header_cards .card div a button{
 padding: 10px 15px ;
 font-size: 14px;
 color: #fff;
@@ -69,6 +69,7 @@ width: 60%;
 border: none;
 border-radius: 5px;
 font-weight: 600;
+cursor: pointer;
 }
 
 

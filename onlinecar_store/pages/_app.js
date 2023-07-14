@@ -8,15 +8,22 @@ import '@/styles/modal.css'
 import '@/styles/fullloader.css'
 import '@/styles/home.css'
 import '@/styles/sell.css'
+import '@/styles/Post_ad.css'
 
 import Head from 'next/head'
 
 import React,{useState , useEffect} from 'react'
-import FullLoader from '@/components/Modals/Loader/fullLoader'
+// import FullLoader from '@/components/Modals/Loader/fullLoader'
 import { useRouter } from 'next/router'
 
+import dynamic from 'next/dynamic'
 
-
+// const Layout = dynamic(() => import('../components/Layout'), {
+//   loading: () => <p>Loading...</p>,
+// })
+const FullLoader = dynamic(() => import('../components/Modals/Loader/fullLoader'), {
+  loading: () => <p>Loading...</p>,
+})
 
 
 export default function App({ Component, pageProps }) {
