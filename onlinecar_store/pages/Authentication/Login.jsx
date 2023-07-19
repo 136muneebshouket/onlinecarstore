@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
-import ForgetpasswordModal from "@/components/Modals/ForgetpasswordModal";
+// import ForgetpasswordModal from "@/components/Modals/ForgetpasswordModal";
 import FullLoader from "@/components/Modals/Loader/fullLoader";
 import { useRouter } from "next/router";
+import dynamic from 'next/dynamic'
 // import "./Login.css"
+
+
+const ForgetpasswordModal = dynamic(() => import('../../components/Modals/ForgetpasswordModal'), {
+  loading: () => <p>Loading...</p>
+})
+
+
 
 const Login = () => {
   const router = useRouter();

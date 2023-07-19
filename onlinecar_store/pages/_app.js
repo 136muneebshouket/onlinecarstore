@@ -9,6 +9,7 @@ import '@/styles/fullloader.css'
 import '@/styles/home.css'
 import '@/styles/sell.css'
 import '@/styles/Post_ad.css'
+import '@/styles/Textareamodal.css'
 
 import Head from 'next/head'
 

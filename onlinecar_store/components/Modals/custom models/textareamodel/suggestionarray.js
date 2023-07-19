@@ -1,0 +1,31 @@
+const suggestionarray=[
+    { name: 'Bumper-to-Bumper Original', desc: 'Everything is in genuine condition.' },
+      { name: 'Like New', desc: 'In showroom condition.' },
+      { name: 'Authorized Workshop Maintained', desc: 'Authorized dealership maintained.' },
+      { name: 'Complete Service History', desc: 'Complete service details available .' },
+      { name: 'Fresh Import', desc: 'Recently imported.' },
+      { name: 'Price Negotiable', desc: ' Price is slightly negotiable.' },
+      { name: 'Alloy Rims', desc: 'After Market Alloy rims.' },
+      { name: 'Original Book', desc: 'Original book is available as well.' },
+      { name: 'Duplicate Book', desc: 'Original book is missing but duplicate book is available .' },
+      { name: 'Complete Original File', desc: 'Complete original file is availble .' },
+      { name: 'Duplicate File', desc: 'Original file missing, duplicate file is available.' },
+      { name: 'Duplicate Number Plate', desc: 'Original number plates are not available. ' },
+      { name: 'Non Accidental Car', desc: 'Never been into any accident .' },
+      { name: 'New Tires', desc: 'Brand new tires installed.' },
+      { name: 'Auction Sheet Available', desc: 'Complete auction sheet available.' },
+      { name: 'Token or Tax Up to Date', desc: 'All taxes paid.' },
+      { name: 'Lifetime Token Paid', desc: 'Lifetime token tax paid.' },
+      { name: 'Urgent Sale', desc: 'Urgently need to sell the car.' },
+      { name: 'Driven on Petrol', desc: 'Petrol driven, CNG never installed.' },
+      { name: 'Factory Fitted CNG', desc: 'Factory Fitted CNG.' },
+      { name: 'Army Officer Car', desc: 'Army Officer driven.' },
+      { name: 'Minor Touch Ups', desc: 'Minor touchups.' },
+      { name: 'Engine Repaired', desc: 'Engine is repaired .' },
+      { name: 'Sealed Engine', desc: 'Engine is good condition.' },
+      { name: 'Engine Swapped', desc: 'Engine is replaced with a powerful one. ' },
+      { name: 'Contact During Office Hours', desc: 'No call/SMS will be answered after office hours ' },
+      { name: 'Exchange Possible', desc: 'Exchange is possible with other car' }
+]
+
+export default suggestionarray;

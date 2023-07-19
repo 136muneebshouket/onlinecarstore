@@ -1,6 +1,7 @@
 import React, {} from "react";
 
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
 const Sell = () => {
@@ -24,14 +25,14 @@ const Sell = () => {
           <div className="card">
             <div>
             <h2>Post your Ad on PakWheels</h2>
-            <img src="https://wsa2.pakwheels.com/assets/postad-img-58f5eb96777aff56872a2ee71b6475fd.png" alt="loading" />
+            <Image src="/images/postad-img.png" alt="loading" width={200} height={200}  />
             <ul>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
            
-            <a href="/Used_cars/Sell/Post_ad"> <button> post an add</button></a>
+            <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
             
             
             </div>
@@ -40,13 +41,13 @@ const Sell = () => {
           <div className="card">
             <div>
             <h2>Post your Ad on PakWheels</h2>
-            <img src="https://wsa2.pakwheels.com/assets/postad-img-58f5eb96777aff56872a2ee71b6475fd.png" alt="loading" />
+            <Image src="/images/postad-img.png" alt="loading" width={200} height={200} />
             <ul>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
-            <a href="/Used_cars/Sell/Post_ad"> <button> post an add</button></a>
+            <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
             </div>
             
           </div>
