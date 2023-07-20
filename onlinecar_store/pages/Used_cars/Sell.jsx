@@ -27,9 +27,9 @@ const Sell = () => {
             <h2>Post your Ad on PakWheels</h2>
             <Image src="/images/postad-img.png" alt="loading" width={200} height={200}  />
             <ul>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
            
             <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
@@ -43,9 +43,9 @@ const Sell = () => {
             <h2>Post your Ad on PakWheels</h2>
             <Image src="/images/postad-img.png" alt="loading" width={200} height={200} />
             <ul>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
-              <li><i class='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
+              <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
             <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
             </div>

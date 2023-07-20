@@ -212,9 +212,9 @@
     background-color: rgb(165, 0, 0);
     text-decoration: none;
     border: none;
-    text-align: center;
+    text-align: center !important;
     margin: auto;
-    text-align: center;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,7 +223,7 @@
   .NavBar nav .navLinks>ul a.postaddlink p{
     font-size: max(16px,1.2vw);
     font-weight: 600;
-    
+    margin: 0 !important;
     color:#FFFFFF ;
    
   }

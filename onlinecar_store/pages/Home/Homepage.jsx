@@ -19,7 +19,7 @@ const Home = () => {
                     <option value="">Range</option>
                 </select>
               <div className="icon_search">
-              <i class='bx bx-search'></i>
+              <i className='bx bx-search'></i>
               </div>
 
             </div>
