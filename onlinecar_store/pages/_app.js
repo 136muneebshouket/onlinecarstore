@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import Layout from '@/Components/Layout'
-
 import '@/styles/navbar.css'
 import '@/styles/Login.css'
 import '@/styles/profile.css'
@@ -10,6 +9,7 @@ import '@/styles/home.css'
 import '@/styles/sell.css'
 import '@/styles/Post_ad.css'
 import '@/styles/Textareamodal.css'
+import '@/styles/optionsmodal.css'
 
 import Head from 'next/head'
 

@@ -1,10 +1,14 @@
 "use client";
 import React, { useState } from "react";
 // import { signIn } from "next-auth/react";
-import FullLoader from "@/components/Modals/Loader/fullLoader";
+// import FullLoader from "@/components/Modals/Loader/fullLoader";
 import axios from "axios";
 import Link from "next/link";
+import dynamic from 'next/dynamic'
 // import "./Login.css"
+const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
+  loading: () => <p>Loading...</p>,
+})
 
 const Register = () => {
 

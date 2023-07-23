@@ -1,27 +1,56 @@
 import React, { useState, useCallback, useRef } from "react";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Head from "next/head";
-import { set } from "mongoose";
+import dynamic from 'next/dynamic'
+
+const OptionsModal = dynamic(() => import('@/components/Modals/custom models/Optionsmodal/Optionsmodal'), {
+  loading: () => <p>Loading...</p>,
+})
+
 
 const Post_ad = () => {
   const textareaRef = useRef(null);
 
+
+  const [carobj, setCarobj] = useState({
+    brand:"",
+    model:"",
+    variant_name:"",
+    specs:'',
+    duration:''
+  });
+
+// console.log(carobj)
+
+  
+
   const [desc, setDesc] = useState("");
   // const [resettxtarea, setResettxtarea] = useState(false);
-  const [concatenatedValue, setConcatenatedValue] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalvalue, setModalvalue] = useState('');
+
+// functions for toggling modals..
+  const handleOpenModal = (value) => {
+    setModalOpen(true);
+    setModalvalue(value)
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
 
   const Addtext = useCallback(
     (value) => {
       setDesc(desc + value);
-    },
-    [desc]
-  );
+    },[desc]);
 
   const resettextarea = () => {
     setDesc("");
     textareaRef.current.resetfunc();
   };
 
+
+  
   const uploadcar = (e) => {
     e.preventDefault();
   };
@@ -76,11 +105,9 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div>
+                    <div onClick={()=>{handleOpenModal('Location')}}>
                       <label htmlFor="">Location</label>
-                      <select name="" id="">
-                        <option value="select">City</option>
-                      </select>
+                     <input type="text"  placeholder="City"  disabled/>
                     </div>
                     <div className="input_alert">
                       <i className="bx bx-error-circle"></i>
@@ -89,7 +116,7 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div>
+                    <div >
                       <label htmlFor="">City Area</label>
                       <select name="" id="">
                         <option value="select">-Select Area-</option>
@@ -98,11 +125,12 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div>
+                    <div onClick={()=>{handleOpenModal('carData')}}>
                       <label htmlFor="">Car Model</label>
-                      <select name="" id="">
+                      {/* <select name="" id="">
                         <option value="select">Make/Model/Version</option>
-                      </select>
+                      </select> */}
+                      <input type="text" name="" id="" placeholder="Make/Model/Version" disabled/>
                     </div>
                   </div>
                   <div className="input_field">
@@ -127,9 +155,7 @@ const Post_ad = () => {
                     <i className="bx bxs-car"></i>
                     <div>
                       <label htmlFor="">Mileage * (km)</label>
-                      <select name="" id="">
-                        <option value="select">Specify Km driven</option>
-                      </select>
+                      <input type="number" />
                     </div>
                     <div className="input_alert">
                       <i className="bx bx-error-circle"></i>
@@ -143,9 +169,7 @@ const Post_ad = () => {
                     <i className="bx bxs-car"></i>
                     <div>
                       <label htmlFor="">Price* (Rs.)</label>
-                      <select name="" id="">
-                        <option value="select">select</option>
-                      </select>
+                      <input type="number" />
                     </div>
                     <div className="input_alert">
                       <i className="bx bx-error-circle"></i>
@@ -291,6 +315,9 @@ const Post_ad = () => {
           </div>
         </div>
       </div>
+   
+      {isModalOpen && <OptionsModal isOpen={isModalOpen} onClose={handleCloseModal} modalvalue={modalvalue} 
+      />}
     </>
   );
 };

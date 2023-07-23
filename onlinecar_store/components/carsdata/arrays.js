@@ -1,40 +1,4 @@
-// const carrData = [
-//     {
-//       name: "Toyota",
-//       models: [
-//         {
-//           name: "Corolla",
-//           variants: ["GLi", "XLi", "Altis"],
-//         },
-//         {
-//           name: "Camry",
-//           variants: ["LE", "SE", "XLE"],
-//         },
-//         {
-//           name: "RAV4",
-//           variants: ["LE", "XLE", "Limited"],
-//         },
-//       ],
-//     },
-//     {
-//       name: "Honda",
-//       models: [
-//         {
-//           name: "Accord",
-//           variants: ["LX", "Sport", "Touring"],
-//         },
-//         {
-//           name: "Civic",
-//           variants: ["DX", "EX", "Touring"],
-//         },
-//         {
-//           name: "CR-V",
-//           variants: ["LX", "EX", "Touring"],
-//         },
-//       ],
-//     },
-//     // Add more car companies, models, and variants as needed
-//   ];
+
 
 const carData = [
   {
@@ -3080,3 +3044,6 @@ const carData = [
     models: [],
   },
 ];
+
+
+export default carData;

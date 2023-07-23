@@ -1,8 +1,13 @@
 // Modal.js
 import React, { useRef, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
-import FullLoader from "./Loader/FullLoader";
+// import FullLoader from "./Loader/FullLoader";
 import axios from "axios";
+import dynamic from 'next/dynamic'
+
+const FullLoader = dynamic(() => import('./Loader/FullLoader'), {
+  loading: () => <p>Loading...</p>,
+})
 
 const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) {
@@ -51,9 +56,10 @@ const Modal = ({ isOpen, onClose }) => {
     <>
       <div className="modal">
         <div ref={modalref} className="modal-content">
-          <i className="bx bx-arrow-back modal-close" onClick={onClose}></i>
+     
+          <i className="bx bx-x modal-close" onClick={onClose}></i>
 
-          <div className="modal_content">
+          <div className="modal_innercontent">
             <div className="modal_title">
               <h2>Forget Password ? &#129300;</h2>
               <p>

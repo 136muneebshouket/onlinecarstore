@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import FullLoader from "@/components/Modals/Loader/fullLoader";
+// import FullLoader from "@/components/Modals/Loader/fullLoader";
+import dynamic from 'next/dynamic'
 
+const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
+  loading: () => <p>Loading...</p>,
+})
 const Resetpasswordpage = () => {
 
 

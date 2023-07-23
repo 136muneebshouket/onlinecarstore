@@ -129,6 +129,7 @@ flex-direction: column;
 display: flex;
 flex-direction: column;
 width: 50%;
+
 }
 .upper_form_section .input_alert,.number_upload_section .input_alert{
     width: 40% !important;
@@ -166,8 +167,11 @@ width: 50%;
  
     height: 20px;
 }
-.upload_ad_page form .upper_form_section .input_field div select,.upper_form_section .input_field textarea,
-.number_upload_section .input_field input,.watsapp_field{
+.upload_ad_page form .upper_form_section .input_field div select,
+.upper_form_section .input_field div input,
+.upper_form_section .input_field textarea,
+.number_upload_section .input_field input,
+.watsapp_field{
     height: 45px;
     width: 100% ;
     border-radius: 3px;
@@ -175,6 +179,7 @@ width: 50%;
     font-size: 14px;
     padding-left: 5px;
     color: #727171;
+    cursor:pointer;
 }
 .upload_ad_page form .upper_form_section .input_field p,.bx-error-circle,
 .number_upload_section .input_field p{
@@ -210,15 +215,16 @@ height: auto !important;
 .form_section form .upload_img_section .upload_img_input .uploadimg_input{
     display: block;
     border: 1px solid;
-    padding: 8px 20px;
+    padding: 5px 20px;
     background: #057c05;
     color: white;
     text-align: center;
     border-radius: 5px;
-    margin: 10px;
+   margin: 10px;
     cursor: pointer;
-    width: 160px;
+    width: fit-content;
     position: relative;
+    height: -moz-fit-content;
     height: fit-content;
 }
 .upload_img_input .uploadimg_input::after{
@@ -227,7 +233,9 @@ height: auto !important;
     bottom: -20px;
      right: 0;
     font-size: small;
+    width: 170px;
     color: #727171;
+    text-align: end;
 }
 .form_section form .upload_img_section .upload_img_input .upload_input{
 display: flex;
@@ -310,18 +318,31 @@ margin-left: 10%;
     color: #333333 !important;
     margin: 0 !important;
 }
+.submit_section{
+    display: flex;
+    justify-content: center;
+}
+
  .submit_section button{
     border: none;
     background: #018901;
     color: white;
     padding: 8px 20px;
     font-size: large;
-    margin:0px 10px 20px 10px;
+    margin:10px 10px 20px 10px;
     text-align: center;
     border-radius: 5px;
-    position: relative;
-    left: 40%;
+
 }
+
+@media only screen and (max-width: 1024px){
+    .postad_formsection .car_info{
+        width: 80vw ;
+    }
+}
+
+
+
 
 @media only screen and (max-width: 770px) {
     .upload_ad_page .uploadpage_banner{
@@ -341,7 +362,10 @@ margin-left: 10%;
         padding-left: 0px !important;
     }
     .upload_ad_page form .upper_form_section .input_field i, .number_upload_section .input_field i{
-        margin: 5px !important;
+      
+        margin: 2px 5px 2px 2px !important;
+    font-size: 25px;
+    padding: 5px;
     }
     .upload_ad_page form .upper_form_section .input_field div.input_alert{
         display: none !important;
@@ -350,12 +374,17 @@ margin-left: 10%;
         width: 100% ;
         margin-left: 0px;
     }
-    .upload_ad_page form .upper_form_section .input_field div select, .upper_form_section .input_field textarea, .number_upload_section .input_field input, .watsapp_field{
+    .upload_ad_page form .upper_form_section .input_field div select,
+    .upper_form_section .input_field div input,
+     .upper_form_section .input_field textarea,
+      .number_upload_section .input_field input,
+       .watsapp_field{
         border: none;
         border-bottom:1px solid #bebebe !important;
         border-radius: unset !important;
 height: auto;
 padding: 3px;
+box-shadow: 0px 0px 5px 0px #dbdbdbb5 inset !important;
     }
     .upload_ad_page form .upper_form_section .input_field div label, .number_upload_section .input_field label{
         color: #333333;
@@ -387,6 +416,14 @@ padding: 3px;
     .upload_img_input .upload_alerts{
         display: none;
     }
+    .upload_img_input .upload_input .bx-image-add{
+        padding: 5px;
+        font-size: 35px;
+        margin-right: 20px;
+    }
+    .form_section form .upload_img_section .upload_img_input .uploadimg_input{
+margin: 0;
+    }
     .form_section form .upload_img_section{
         order: 1;
         
@@ -400,13 +437,18 @@ padding: 3px;
     .submit_section{
         order: 4; 
     }
+
+    
     .number_upload_section .watsapp_field{
         justify-content: center;
     }
     .watsapp_field .form-switch{
         width: 50% !important;
     }
+    .watsapp_field .form-switch input{
+   border-radius: 20px !important;
+    }
     .watsapp_field p{
-        font-size: smaller !important;
+        font-size: medium !important;
     }
 }
