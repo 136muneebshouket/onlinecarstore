@@ -1,56 +1,81 @@
 import React, { useState, useCallback, useRef } from "react";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Head from "next/head";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const OptionsModal = dynamic(() => import('@/components/Modals/custom models/Optionsmodal/Optionsmodal'), {
-  loading: () => <p>Loading...</p>,
-})
-
+const OptionsModal = dynamic(
+  () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
+  {
+    loading: () => <p>Loading...</p>,
+  }
+);
 
 const Post_ad = () => {
+
+
   const textareaRef = useRef(null);
 
-
   const [carobj, setCarobj] = useState({
-    brand:"",
-    model:"",
-    variant_name:"",
-    specs:'',
-    duration:''
+    city:'',
+    area:'',
+    modelyear:"",
+    brand: "",
+    model: "",
+    variant_name: "",
+    enginecc: "",
+    transmission: "",
+    enginetype: "",
+    duration: "",
   });
 
+  // console.log(carobj)
+  // const getfromoptionsmodal=(b,m,v_name,enginecc,transmision,enginetype)=>{
+    const getfromoptionsmodal = (values) => {
+      // console.log(values);
+      if (values) {
+        setCarobj((prevCarobj) => {
+          return {
+            ...prevCarobj,
+            ...(values.cityname && { city: values.cityname }),
+            ...(values.area && { area: values.area }),
+            ...(values.modelyear && { modelyear: values.modelyear }),
+            ...(values.b && { brand: values.b }),
+            ...(values.m && { model: values.m }),
+            ...(values.v_name && { variant_name: values.v_name }),
+            ...(values.enginecc && { enginecc: values.enginecc }),
+            ...(values.transmission && { transmission: values.transmission }),
+            ...(values.enginetype && { enginetype: values.enginetype }),
+            ...(values.duration && { duration: values.duration }),
+          };
+        });
+      }
+    };
+    
 // console.log(carobj)
-
-  
-
   const [desc, setDesc] = useState("");
   // const [resettxtarea, setResettxtarea] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [modalvalue, setModalvalue] = useState('');
+  const [modalvalue, setModalvalue] = useState("");
 
-// functions for toggling modals..
+  // functions for toggling modals..
   const handleOpenModal = (value) => {
     setModalOpen(true);
-    setModalvalue(value)
+    setModalvalue(value);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
   };
 
-
   const Addtext = useCallback(
     (value) => {
       setDesc(desc + value);
-    },[desc]);
+    }, [desc]);
 
   const resettextarea = () => {
     setDesc("");
     textareaRef.current.resetfunc();
   };
 
-
-  
   const uploadcar = (e) => {
     e.preventDefault();
   };
@@ -105,9 +130,13 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div onClick={()=>{handleOpenModal('Location')}}>
+                    <div
+                      onClick={() => {
+                        handleOpenModal("Location");
+                      }}
+                    >
                       <label htmlFor="">Location</label>
-                     <input type="text"  placeholder="City"  disabled/>
+                      <input type="text" placeholder="City" disabled />
                     </div>
                     <div className="input_alert">
                       <i className="bx bx-error-circle"></i>
@@ -116,7 +145,7 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div >
+                    <div>
                       <label htmlFor="">City Area</label>
                       <select name="" id="">
                         <option value="select">-Select Area-</option>
@@ -125,12 +154,25 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div onClick={()=>{handleOpenModal('carData')}}>
+                    <div
+                      onClick={() => {
+                        handleOpenModal("Car Model");
+                      }}
+                    >
                       <label htmlFor="">Car Model</label>
                       {/* <select name="" id="">
                         <option value="select">Make/Model/Version</option>
                       </select> */}
-                      <input type="text" name="" id="" placeholder="Make/Model/Version" disabled/>
+                      <input
+                        type="text"
+                        name=""
+                        id=""                
+                        value={
+                         carobj.brand  ? `${carobj.modelyear} ${carobj.brand} ${carobj.model} ${carobj.variant_name}`
+                        : ''}                      
+                        placeholder="Make/Model/Version"
+                        disabled
+                        />
                     </div>
                   </div>
                   <div className="input_field">
@@ -144,12 +186,14 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div>
+                      <div
+                      onClick={() => {
+                        handleOpenModal("Color");
+                      }}
+                    >
                       <label htmlFor="">Exterior Color</label>
-                      <select name="" id="">
-                        <option value="select">Color</option>
-                      </select>
-                    </div>
+                      <input type="text" placeholder="City" disabled />
+                    </div>                 
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
@@ -286,24 +330,25 @@ const Post_ad = () => {
                       />
                     </div>
                   </div>
-                  <div className="input_field" style={{alignItems:'center' , justifyContent:'center'}}>
+                  <div
+                    className="input_field"
+                    style={{ alignItems: "center", justifyContent: "center" }}
+                  >
                     <div>
-                    <div className="watsapp_field" >
-                      <i className="bx bxl-whatsapp"></i>
-                      <p> Allow WhatsApp Contact</p>
-                      <div className="form-check form-switch">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          role="switch"
-                          id="flexSwitchCheckChecked"
-                          defaultChecked
-                        />
-                       
+                      <div className="watsapp_field">
+                        <i className="bx bxl-whatsapp"></i>
+                        <p> Allow WhatsApp Contact</p>
+                        <div className="form-check form-switch">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="flexSwitchCheckChecked"
+                            defaultChecked
+                          />
+                        </div>
                       </div>
                     </div>
-                    </div>
-                   
                   </div>
                 </div>
 
@@ -315,9 +360,15 @@ const Post_ad = () => {
           </div>
         </div>
       </div>
-   
-      {isModalOpen && <OptionsModal isOpen={isModalOpen} onClose={handleCloseModal} modalvalue={modalvalue} 
-      />}
+
+      {isModalOpen && (
+        <OptionsModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          modalvalue={modalvalue}
+          carrdata={getfromoptionsmodal}
+        />
+      )}
     </>
   );
 };

@@ -240,6 +240,7 @@ height: auto !important;
 .form_section form .upload_img_section .upload_img_input .upload_input{
 display: flex;
 margin-bottom: 30px;
+margin-top: 30px;
 
 }
 .upload_img_input .upload_input .bx-image-add{
