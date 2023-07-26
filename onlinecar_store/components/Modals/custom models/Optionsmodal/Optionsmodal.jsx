@@ -30,7 +30,7 @@ const Optionsmodal = ({ isOpen, onClose, modalvalue, carrdata }) => {
             </div>
            {modalvalue == 'Car Model' && <Cardatamodal onClose={onClose} carrdata={carrdata}/>} 
            {modalvalue == 'Location' && <Locationsmodal onClose={onClose}  carrdata={carrdata} />} 
-           {modalvalue == 'Color' && <Colorsmodal />} 
+           {modalvalue == 'Color' && <Colorsmodal onClose={onClose}  carrdata={carrdata} />} 
          
 
           </div>
@@ -40,4 +40,4 @@ const Optionsmodal = ({ isOpen, onClose, modalvalue, carrdata }) => {
   );
 };
 
-export default Optionsmodal;
+export default React.memo(Optionsmodal);

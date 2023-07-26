@@ -70,3 +70,13 @@ font-size: small;
 color: rgb(0, 102, 255);
 font-weight: 500;
 }
+
+.color_code{
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    float: right;
+    border: 1px solid #EAEDEF;
+    margin-right: 20px;
+}

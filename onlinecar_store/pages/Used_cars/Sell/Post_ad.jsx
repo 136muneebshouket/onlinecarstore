@@ -1,6 +1,8 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
+import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Show_img_modal";
 import Head from "next/head";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const OptionsModal = dynamic(
@@ -11,14 +13,20 @@ const OptionsModal = dynamic(
 );
 
 const Post_ad = () => {
-
-
   const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  const [desc, setDesc] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isimgModalOpen, setIsimgModalOpen] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState('');
+  const [modalvalue, setModalvalue] = useState("");
+  const [imagestoshow, setImagestoshow] = useState([]);
 
   const [carobj, setCarobj] = useState({
-    city:'',
-    area:'',
-    modelyear:"",
+    city: "",
+    area: "",
+    modelyear: "",
     brand: "",
     model: "",
     variant_name: "",
@@ -26,56 +34,107 @@ const Post_ad = () => {
     transmission: "",
     enginetype: "",
     duration: "",
+    color: "",
   });
 
-  // console.log(carobj)
-  // const getfromoptionsmodal=(b,m,v_name,enginecc,transmision,enginetype)=>{
-    const getfromoptionsmodal = (values) => {
-      // console.log(values);
-      if (values) {
-        setCarobj((prevCarobj) => {
-          return {
-            ...prevCarobj,
-            ...(values.cityname && { city: values.cityname }),
-            ...(values.area && { area: values.area }),
-            ...(values.modelyear && { modelyear: values.modelyear }),
-            ...(values.b && { brand: values.b }),
-            ...(values.m && { model: values.m }),
-            ...(values.v_name && { variant_name: values.v_name }),
-            ...(values.enginecc && { enginecc: values.enginecc }),
-            ...(values.transmission && { transmission: values.transmission }),
-            ...(values.enginetype && { enginetype: values.enginetype }),
-            ...(values.duration && { duration: values.duration }),
-          };
-        });
-      }
-    };
-    
-// console.log(carobj)
-  const [desc, setDesc] = useState("");
-  // const [resettxtarea, setResettxtarea] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalvalue, setModalvalue] = useState("");
+  useEffect(() => {
+    // Clear the images array when the component mounts.
+    setImagestoshow([]);
+  }, []);
 
-  // functions for toggling modals..
-  const handleOpenModal = (value) => {
-    setModalOpen(true);
+  //closing and opening modal /////////////////////////////////////////////////////////////////////////////////
+  const handleOpenModal = useCallback((value) => {
+    setIsModalOpen(true);
     setModalvalue(value);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  }, []);
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  /////////////////////////////////////////////////////////////////////////////////
+
+  ////geting data from options modal//////////////////////////////////////////////////////////////////////
+  const getfromoptionsmodal = useCallback((values) => {
+    if (values.b) {
+      setCarobj((prevCarobj) => {
+        return {
+          ...prevCarobj,
+          ...(values.b && { brand: values.b }),
+          ...{ modelyear: values.modelyear },
+          ...{ model: values.m },
+          ...{ variant_name: values.v_name },
+          ...{ enginecc: values.enginecc },
+          ...{ transmission: values.transmission },
+          ...{ enginetype: values.enginetype },
+          ...{ duration: values.duration },
+        };
+      });
+    }
+    if (values.city) {
+      setCarobj((prevCarobj) => {
+        return {
+          ...prevCarobj,
+          ...(values.city && { city: values.city }),
+          ...{ area: values.area },
+        };
+      });
+    }
+    if (values.colorname) {
+      setCarobj((prevCarobj) => {
+        return {
+          ...prevCarobj,
+          ...(values.colorname && { color: values.colorname }),
+        };
+      });
+    }
+  }, []);
+
+  // console.log(carobj);
+  console.log(imagestoshow);
+
+  //add text from text area///////////////////////////////////////////////////////////////////////////
   const Addtext = useCallback(
     (value) => {
       setDesc(desc + value);
-    }, [desc]);
+    },
+    [desc]
+  );
 
   const resettextarea = () => {
     setDesc("");
     textareaRef.current.resetfunc();
   };
 
+  //uploading images section///////////////////////////////////////////////////////////////////////////
+  const handleImagePicked = async (event) => {
+    const files = event.target.files;
+
+    // Loop through the selected files
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      // Check if the size of the current image exceeds the limit (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image size should not exceed 5MB.");
+        continue;
+      }
+
+      // Read the selected image and convert it to a Data URL
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagestoshow((prevSelectedImages) => [
+          ...prevSelectedImages,
+          { url: e.target.result, file },
+        ]);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Clear the file input after image selection
+    fileInputRef.current.value = null;
+  };
+
+  // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = (e) => {
     e.preventDefault();
   };
@@ -136,7 +195,15 @@ const Post_ad = () => {
                       }}
                     >
                       <label htmlFor="">Location</label>
-                      <input type="text" placeholder="City" disabled />
+                      <input
+                        type="text"
+                        placeholder="Location"
+                        value={
+                          carobj.city &&
+                          `${carobj.city} > ${carobj.area && carobj.area} `
+                        }
+                        disabled
+                      />
                     </div>
                     <div className="input_alert">
                       <i className="bx bx-error-circle"></i>
@@ -166,13 +233,15 @@ const Post_ad = () => {
                       <input
                         type="text"
                         name=""
-                        id=""                
+                        id=""
                         value={
-                         carobj.brand  ? `${carobj.modelyear} ${carobj.brand} ${carobj.model} ${carobj.variant_name}`
-                        : ''}                      
+                          carobj.brand
+                            ? `${carobj.modelyear} ${carobj.brand} ${carobj.model} ${carobj.variant_name}`
+                            : ""
+                        }
                         placeholder="Make/Model/Version"
                         disabled
-                        />
+                      />
                     </div>
                   </div>
                   <div className="input_field">
@@ -186,14 +255,19 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                      <div
+                    <div
                       onClick={() => {
                         handleOpenModal("Color");
                       }}
                     >
                       <label htmlFor="">Exterior Color</label>
-                      <input type="text" placeholder="City" disabled />
-                    </div>                 
+                      <input
+                        type="text"
+                        value={carobj.color && `${carobj.color}`}
+                        placeholder="Color"
+                        disabled
+                      />
+                    </div>
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
@@ -247,6 +321,7 @@ const Post_ad = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className="upload_img_section">
                   <div className="form_title">
                     <h2>Upload Photos</h2>
@@ -263,10 +338,52 @@ const Post_ad = () => {
                       <input
                         name="upload_images_input"
                         id="upload_images_input"
+                        onChange={handleImagePicked}
+                        multiple
+                        accept="image/*"
                         type="file"
+                        ref={fileInputRef}
                         style={{ display: "none" }}
                       />
                     </div>
+                    <div
+                      className="uploaded_images"
+                      style={{ display: "flex", flexWrap: "wrap" }}
+                    >
+                      {imagestoshow.map((image, index) =>
+                        image.url ? (
+                          <div
+                            key={index}
+                            style={{
+                              width: "160px",
+                              height: "130px",
+                              margin: "10px",
+                              overflow: "hidden",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              setSelectedImageUrl(image.url);
+                              setIsimgModalOpen(true);
+                            }}
+                          >
+                            <Image
+                              src={image.url}
+                              alt={`Image ${index + 1}`}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                              }}
+                              width={100}
+                              height={100}
+                            />
+                          </div>
+                        ) : (
+                          <>loading img..</>
+                        )
+                      )}
+                    </div>
+
                     <div className="upload_alerts">
                       <div>
                         <i className="bx bx-check"></i>
@@ -295,6 +412,7 @@ const Post_ad = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className="number_upload_section">
                   <div className="form_title">
                     <h2>Car Information</h2>
@@ -368,6 +486,9 @@ const Post_ad = () => {
           modalvalue={modalvalue}
           carrdata={getfromoptionsmodal}
         />
+      )}
+      {isimgModalOpen && (
+        <Show_img_modal onClose={setIsimgModalOpen} imgurl={selectedImageUrl} />
       )}
     </>
   );

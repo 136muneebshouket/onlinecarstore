@@ -10,6 +10,7 @@ import '@/styles/sell.css'
 import '@/styles/Post_ad.css'
 import '@/styles/Textareamodal.css'
 import '@/styles/optionsmodal.css'
+import '@/styles/show_img_modal.css'
 
 import Head from 'next/head'
 

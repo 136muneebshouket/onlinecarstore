@@ -189,4 +189,4 @@ const Cardatamodal = ({ onClose, carrdata }) => {
   );
 };
 
-export default Cardatamodal;
+export default React.memo(Cardatamodal);

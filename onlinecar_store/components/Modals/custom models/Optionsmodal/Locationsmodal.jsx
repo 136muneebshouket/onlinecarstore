@@ -20,7 +20,8 @@ const Locationsmodal = ({ onClose, carrdata }) => {
         }
       });
       setCitiesdata(filtereddata);
-    } else {
+    } 
+    else {
       setCitiesdata(cities);
       // setModelyears(arrayOfyears);
     }
@@ -34,12 +35,11 @@ const Locationsmodal = ({ onClose, carrdata }) => {
   });
 
   const addcity = async (obj) => {
-    console.log(obj)
+    // console.log(obj)
     if (obj.cityname) {
-      setLocation((s)=>{return {...s,
-        ...(obj.cityname && {city:obj.cityname})   
-      } })
-      carrdata(location);
+    location.city=obj.cityname;
+     setLocation(location);
+     await carrdata(location);
     }
     if (obj.areas) {
       if (obj.areas.length > 0) {
@@ -48,14 +48,17 @@ const Locationsmodal = ({ onClose, carrdata }) => {
         onClose();
       }
     } else {
-      console.log('i ran')
-     await setLocation((s)=>{return {...s, area:obj } })
+      // console.log('i ran')
+    //  await setLocation((s)=>{return {...s, area:obj } })
+    location.area=obj;
+    setLocation(location);
+    await carrdata(location);
       onClose();
     }
    
-    carrdata(location);
+    
   };
-console.log(location)
+// console.log(location)
   return (
     <>
       <div className="caroptions_search">
@@ -91,4 +94,4 @@ console.log(location)
   );
 };
 
-export default Locationsmodal;
+export default React.memo(Locationsmodal);
