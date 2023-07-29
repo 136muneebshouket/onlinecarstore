@@ -1,7 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-const Show_img_modal = ({ onClose, imgurl }) => {
+const Show_img_modal = ({ onClose, selectedimg,delimages }) => {
+
+
+
+
   return (
     <>
       <div className="image_show_modal">
@@ -15,7 +19,10 @@ const Show_img_modal = ({ onClose, imgurl }) => {
           ></i>
         </div>
         <div className="imginmodal">
-          <Image src={imgurl} alt="loading" width={100} height={100} />
+          <Image src={selectedimg.imgurl} alt="loading" width={10} height={10} />
+        </div>
+        <div>
+          <button onClick={()=>{delimages(selectedimg.index)}}>Delete image</button>
         </div>
       </div>
     </>

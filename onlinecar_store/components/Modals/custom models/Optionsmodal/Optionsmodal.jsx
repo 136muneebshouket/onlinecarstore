@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Cardatamodal from "./Cardatamodal";
 import Locationsmodal from "./Locationsmodal";
 import Colorsmodal from "./Colorsmodal";
+import Registeroptionsmodal from "./Registeroptionsmodal";
 // import carData from "@/components/carsdata/arrays";
 
 
@@ -31,6 +32,7 @@ const Optionsmodal = ({ isOpen, onClose, modalvalue, carrdata }) => {
            {modalvalue == 'Car Model' && <Cardatamodal onClose={onClose} carrdata={carrdata}/>} 
            {modalvalue == 'Location' && <Locationsmodal onClose={onClose}  carrdata={carrdata} />} 
            {modalvalue == 'Color' && <Colorsmodal onClose={onClose}  carrdata={carrdata} />} 
+           {modalvalue == 'Registration' && <Registeroptionsmodal onClose={onClose}  carrdata={carrdata} />} 
          
 
           </div>

@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState,useCallback } from "react";
 import cities from "@/components/carsdata/citiesdata";
 // import { carData } from "@/components/carsdata/arrays";
 
 const Locationsmodal = ({ onClose, carrdata }) => {
-  const [citiesdata, setCitiesdata] = useState([]);
-  const [searchval, setSearchval] = useState("");
+  
 
-  useEffect(() => {
-    if (searchval !== "") {
-      const filtereddata = citiesdata.filter((obj) => {
-        if (obj.cityname) {
-          if (obj.cityname.toLowerCase().includes(searchval.toLowerCase())) {
-            return obj.cityname;
+  const [citiesdata, setCitiesdata] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
+  const [searchval, setSearchval] = useState("");
+  // const [arraychange, setArraychange] = useState(false);
+
+  // const filter = useMemo(() => {
+    useEffect(()=>{
+      setCitiesdata(cities[1].cities);
+      setOriginalData(cities[1].cities); 
+    },[])
+    // 
+    useEffect(() => {
+      // Apply filtering only when the search input is not empty
+      if (searchval !== "") {
+        const filteredData = originalData.filter((obj) => {
+          if (obj.cityname) {
+            return obj.cityname.toLowerCase().includes(searchval.toLowerCase());
           }
-        } else if (obj) {
-          if (obj.toLowerCase().includes(searchval.toLowerCase())) {
-            return obj;
-          }
-        }
-      });
-      setCitiesdata(filtereddata);
-    } 
-    else {
-      setCitiesdata(cities);
-      // setModelyears(arrayOfyears);
-    }
-  }, [searchval]);
+          return obj.toLowerCase().includes(searchval.toLowerCase());
+        });
+        setCitiesdata(filteredData);
+      } else {
+        // Reset citiesdata to the original data when the search input is empty
+        setCitiesdata(originalData);
+      }
+    }, [searchval, originalData]);
 
   const [location, setLocation] = useState({
    
@@ -43,7 +48,9 @@ const Locationsmodal = ({ onClose, carrdata }) => {
     }
     if (obj.areas) {
       if (obj.areas.length > 0) {
+        // setArraychange(true)
         setCitiesdata(obj.areas);
+        setOriginalData(obj.areas)
       } else {
         onClose();
       }
@@ -55,10 +62,9 @@ const Locationsmodal = ({ onClose, carrdata }) => {
     await carrdata(location);
       onClose();
     }
-   
-    
   };
-// console.log(location)
+
+// console.log(originalData.length)
   return (
     <>
       <div className="caroptions_search">
@@ -68,17 +74,22 @@ const Locationsmodal = ({ onClose, carrdata }) => {
             setSearchval(e.target.value);
           }}
           placeholder="Type to refine search"
+          autoFocus
         />
       </div>
+      <p className="options_guide">{location.city !== '' ? <>Select area/town in {location.city}</>:<>Select City</>}</p>
       <div className="cars_options">
-        {citiesdata.map((obj) => {
+         
+        {citiesdata.length > 0 ? (
+        citiesdata.map((obj,index) => {
           return (
             <>
+           
               <div className="car_option">
                 <p
                   style={{ margin: "4px" }}
                   className="carmodel_name"
-                  key={obj.cityname ? obj.cityname : obj}
+                  key={index}
                   onClick={() => {
                     addcity(obj);
                   }}
@@ -88,7 +99,9 @@ const Locationsmodal = ({ onClose, carrdata }) => {
               </div>
             </>
           );
-        })}
+        })
+        ):<>not found</>
+      }
       </div>
     </>
   );

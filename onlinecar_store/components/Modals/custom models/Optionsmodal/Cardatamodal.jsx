@@ -1,42 +1,40 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { arrayOfyears, carData } from "@/components/carsdata/arrays";
+// import cardata from '../../../carsdata/cardata.json'
 // import from "@/components/carsdata/arrays";
 
 const Cardatamodal = ({ onClose, carrdata }) => {
-  const [model_year, setModel_year] = useState(0);
-  const [modelyears, setModelyears] = useState([]);
-  const [carsoptions, setCarsoptions] = useState([]);
+  const [model_year, setModel_year] = useState(null);
+  const [modelyears, setModelyears] = useState(arrayOfyears);
+  const [carsoptions, setCarsoptions] = useState(carData);
   const [searchval, setSearchval] = useState("");
   const [varients, setVarients] = useState([]);
   // const [brandmatch, setBrandmatch] = useState(false);
 
-  useEffect(() => {
-    if (searchval !== "") {
-      const filteredCarData = carData.filter((brand) => {
-        const brandName = brand.name.toLowerCase();
-        const modelNames = brand.models.map((model) =>
-          model.name.toLowerCase()
-        );
+  //  console.log('im rendering')
+  const filter = useMemo(() => {
+    // if (searchval !== "") {
+    const filteredCarData = carData.filter((brand) => {
+      const brandName = brand.name.toLowerCase();
+      const modelNames = brand.models.map((model) => model.name.toLowerCase());
 
-        // Check if the brand name includes the search term
-        if (brandName.includes(searchval.toLowerCase())) {
-          return brand;
-        }
+      // Check if the brand name includes the search term
+      if (brandName.includes(searchval.toLowerCase())) {
+        return brand;
+      }
 
-        // Check if any model name includes the search term
-        return modelNames.some((name) =>
-          name.includes(searchval.toLowerCase())
-        );
-      });
-      setCarsoptions(filteredCarData);
-    } else {
-      setCarsoptions(carData);
-      setModelyears(arrayOfyears);
-    }
+      // Check if any model name includes the search term
+      return modelNames.some((name) => name.includes(searchval.toLowerCase()));
+    });
+    setCarsoptions(filteredCarData);
+    // } else {
+    //   setCarsoptions(carData);
+    //   setModelyears(arrayOfyears);
+    // }
   }, [searchval]);
 
   const [cardata_obj, setCardata_obj] = useState({
-    modelyear: 0,
+    modelyear: null,
     b: "",
     m: "",
     v_name: "",
@@ -91,16 +89,26 @@ const Cardatamodal = ({ onClose, carrdata }) => {
             setSearchval(e.target.value);
           }}
           placeholder="Type to refine search"
+          autoFocus
         />
       </div>
+      <p className="options_guide">
+        {model_year === null ? (
+          <>Select year of Car Model</>
+        ) : (
+          <>
+            {cardata_obj.b === "" ? <>Select Brand and Model</> : <>Select Varient of Model</>}
+          </>
+        )}
+      </p>
       <div className="cars_options">
-        {model_year == 0 ? (
+        {model_year == null ? (
           modelyears.map((year) => {
             return (
               <>
                 <div className="car_option">
                   <p
-                    style={{ cursor: "pointer", margin:"4px" }}
+                    style={{ cursor: "pointer", margin: "4px" }}
                     className="carmodel_name"
                     key={year}
                     onClick={() => {
@@ -136,11 +144,11 @@ const Cardatamodal = ({ onClose, carrdata }) => {
           carsoptions.map((brand, index) => {
             return (
               <>
-                <div className="car_option" key={brand.name}>
+                <div className="car_option" key={index}>
                   <p className="cars_brand" style={{ margin: "2px 5px" }}>
                     {brand.name}
                   </p>
-                  {brand.models.map((model) => {
+                  {brand.models.map((model, index) => {
                     if (
                       model.name.toLowerCase().includes(searchval.toLowerCase())
                     ) {
@@ -148,7 +156,7 @@ const Cardatamodal = ({ onClose, carrdata }) => {
                         <>
                           <p
                             className="carmodel_name"
-                            key={model.name}
+                            key={index}
                             onClick={() => {
                               addcar(brand.name, model.name, model.variants);
                             }}
@@ -164,7 +172,7 @@ const Cardatamodal = ({ onClose, carrdata }) => {
                         <>
                           <p
                             className="carmodel_name"
-                            key={model.name}
+                            key={index}
                             onClick={() => {
                               addcar(brand.name, model.name, model.variants);
                             }}

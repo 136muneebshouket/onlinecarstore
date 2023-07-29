@@ -19,7 +19,10 @@ const Post_ad = () => {
   const [desc, setDesc] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isimgModalOpen, setIsimgModalOpen] = useState(false);
-  const [selectedImageUrl, setSelectedImageUrl] = useState('');
+  const [selectedImageUrl, setSelectedImageUrl] = useState({
+    imgurl: "",
+    index: null,
+  });
   const [modalvalue, setModalvalue] = useState("");
   const [imagestoshow, setImagestoshow] = useState([]);
 
@@ -35,6 +38,7 @@ const Post_ad = () => {
     enginetype: "",
     duration: "",
     color: "",
+    Registered_In: ""
   });
 
   useEffect(() => {
@@ -87,10 +91,18 @@ const Post_ad = () => {
         };
       });
     }
+    if(values.registerationin){
+      setCarobj((prevCarobj) => {
+        return {
+          ...prevCarobj,
+          ...(values.registerationin && { Registered_In: values.registerationin }),
+        };
+      });
+    }
   }, []);
 
-  // console.log(carobj);
-  console.log(imagestoshow);
+  console.log(carobj);
+  // console.log(imagestoshow);
 
   //add text from text area///////////////////////////////////////////////////////////////////////////
   const Addtext = useCallback(
@@ -108,14 +120,17 @@ const Post_ad = () => {
   //uploading images section///////////////////////////////////////////////////////////////////////////
   const handleImagePicked = async (event) => {
     const files = event.target.files;
-
+  if(files.length >= 10 || imagestoshow.length >= 10){
+    alert("Maximum 10 images are allowed");
+    return;
+  }
     // Loop through the selected files
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       // Check if the size of the current image exceeds the limit (5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image size should not exceed 5MB.");
+      if (file.size > 4 * 1024 * 1024) {
+        alert("Image size should not exceed 4MB. Upload your Images again");
         continue;
       }
 
@@ -133,7 +148,17 @@ const Post_ad = () => {
     // Clear the file input after image selection
     fileInputRef.current.value = null;
   };
+  // function for deleting selected images///////////////////////////////////////////////////////////////////////////
 
+  const delimages = (imgindex) => {
+   const filteredimages= imagestoshow.filter((obj,index) => {
+      if (index !== imgindex) {
+        return obj;
+      }
+    });
+    setImagestoshow(filteredimages)
+    setIsimgModalOpen(false);
+  }
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = (e) => {
     e.preventDefault();
@@ -246,11 +271,21 @@ const Post_ad = () => {
                   </div>
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
-                    <div>
+                    <div
+                     onClick={() => {
+                      handleOpenModal("Registration");
+                    }}
+                    >
                       <label htmlFor="">Registered In</label>
-                      <select name="" id="">
-                        <option value="select">Un-Registered</option>
-                      </select>
+                      <input
+                        type="text"
+                        placeholder="Registered_In"
+                        value={
+                          carobj.registerationin &&
+                          `${carobj.registerationin}  `
+                        }
+                        disabled
+                      />
                     </div>
                   </div>
                   <div className="input_field">
@@ -361,8 +396,13 @@ const Post_ad = () => {
                               overflow: "hidden",
                               cursor: "pointer",
                             }}
+                            className={index == 0 && "coverphototag"}
                             onClick={() => {
-                              setSelectedImageUrl(image.url);
+                              setSelectedImageUrl((s) => ({
+                                ...s,
+                                imgurl: image.url,
+                                index: index,
+                              }));
                               setIsimgModalOpen(true);
                             }}
                           >
@@ -488,7 +528,11 @@ const Post_ad = () => {
         />
       )}
       {isimgModalOpen && (
-        <Show_img_modal onClose={setIsimgModalOpen} imgurl={selectedImageUrl} />
+        <Show_img_modal
+          onClose={setIsimgModalOpen}
+          selectedimg={selectedImageUrl}
+          delimages={delimages}
+        />
       )}
     </>
   );
