@@ -50,3 +50,14 @@
   .modalerror{
     text-align: center;
   }
+
+  .input_field .features_div{
+    display: flex;
+    flex-wrap: wrap !important ;
+    width: 100% !important ;
+  }
+  @media screen and (max-width:550px) {
+    .input_field .features_div .single_feature{
+ width: 50% !important;
+ }
+  }

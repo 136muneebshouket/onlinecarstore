@@ -94,7 +94,7 @@ width: max(70vw, min(700px,90vw));
 }
 .postad_formsection .car_info .form_title{
     padding: 0px 30px;
-    margin: 30px 0px 20px 0px;
+    margin:25px 0px 10px 0px;
 
 }
 .car_info .form_section{
@@ -337,7 +337,7 @@ margin-left: 10%;
 }
 .coverphototag{
     position: relative;
-    border: 1px solid greenyellow;
+    /* border: 1px solid greenyellow; */
 }
 .coverphototag::after{
     content: 'cover photo';
@@ -355,6 +355,11 @@ margin-left: 10%;
     top: 0;
     right: 0;
     border-radius: 10px;
+}
+.errorspan{
+    font-size: small;
+    color: red;
+    font-weight: 500;
 }
 
 @media only screen and (max-width: 1024px){
@@ -433,7 +438,7 @@ box-shadow: 0px 0px 5px 0px #dbdbdbb5 inset !important;
         align-items: center;
     }
     .form_section form .upload_img_section .upload_img_input .upload_input{
-        margin-bottom: 0px;
+        margin-bottom: 20px;
     }
     .upload_img_input .upload_alerts{
         display: none;

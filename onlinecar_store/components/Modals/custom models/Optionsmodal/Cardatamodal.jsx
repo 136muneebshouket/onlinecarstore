@@ -39,7 +39,7 @@ const Cardatamodal = ({ onClose, carrdata }) => {
     m: "",
     v_name: "",
     duration: "",
-    enginecc: "",
+    enginecc: null,
     transmission: "",
     enginetype: "",
   });
@@ -71,9 +71,9 @@ const Cardatamodal = ({ onClose, carrdata }) => {
 
     cardata_obj.duration = obj.duration;
     cardata_obj.v_name = obj.variant_name;
-    cardata_obj.enginecc = enginecc;
-    cardata_obj.transmission = transmission;
-    cardata_obj.enginetype = enginetype;
+    cardata_obj.enginecc = parseInt(enginecc.split("c")[0]);
+    cardata_obj.transmission = transmission.trim();
+    cardata_obj.enginetype = enginetype.trim();
     setCardata_obj(cardata_obj);
     await carrdata(cardata_obj);
     onClose();
