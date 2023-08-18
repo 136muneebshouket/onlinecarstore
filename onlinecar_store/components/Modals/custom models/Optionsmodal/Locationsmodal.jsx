@@ -12,8 +12,8 @@ const Locationsmodal = ({ onClose, carrdata }) => {
 
   // const filter = useMemo(() => {
     useEffect(()=>{
-      setCitiesdata(cities[1].cities);
-      setOriginalData(cities[1].cities); 
+      setCitiesdata(cities[2].cities);
+      setOriginalData(cities[2].cities); 
     },[])
     // 
     useEffect(() => {

@@ -11,6 +11,9 @@ import '@/styles/Post_ad.css'
 import '@/styles/Textareamodal.css'
 import '@/styles/optionsmodal.css'
 import '@/styles/show_img_modal.css'
+import '@/styles/searchcar.css'
+import '@/styles/filtermodal.css'
+import '@/styles/doublerange.css'
 
 import Head from 'next/head'
 

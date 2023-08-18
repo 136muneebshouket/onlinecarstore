@@ -1,0 +1,176 @@
+
+.filtermodal{
+    /* background-color: white; */
+}
+.filtermodal .head_banner {
+    background-color: #213974;
+    color: white;
+    padding: 10px;
+    margin: 2px;
+}
+.filtermodal .apllied_filters{
+    background-color: white !important;
+    border: 1px solid rgb(216, 216, 216);
+}
+.filtermodal .head_banner p{
+margin: 0;
+text-align: center;
+font-weight: 500;
+}
+.filtermodal .input_field label{
+    cursor:pointer;
+}
+.filtermodal .input_field{
+    margin: 2px;
+    display: flex;
+    align-items: baseline;
+    /* cursor: pointer; */
+    border: 1px solid rgb(216, 216, 216);
+    background-color: white;
+    position: relative;
+}
+
+.filtermodal .input_field i{
+    font-size: 15px;
+    margin: 5px ;
+    /* display: none; */
+   
+}
+.filtermodal .bx-chevron-down{
+    font-size: 25px !important;
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+.filtermodal .input_field label{
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.filtermodal .input_field .bxs-car,.bx-phone{
+    color: gray;
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.filtermodal .input_field div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+ 
+    margin-left: 5px;
+}
+.filtermodal .range_inputs{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+}
+.related_filters{
+min-height: 2px;
+}
+.filtermodal .ranges{
+margin: 2px;
+    cursor: pointer;
+    border: 1px solid rgb(216, 216, 216);
+    background-color: white;  
+    padding-bottom: 5px;
+}
+.filtermodal .range_figure{
+    display: flex;
+    justify-content: space-around;
+}
+.filtermodal .range_figure span{
+    font-size: small;
+    color: grey;
+}
+
+
+.filtermodal .range_inputs input{
+    width: 40%;
+    margin: 5px;
+    border: 1px solid rgb(202, 202, 202);
+    background: rgb(243 243 243);
+    border-radius: 2px;
+    text-align: center;
+}
+.filtermodal .range_line{
+    text-align: center;
+}
+.filtermodal .range_line .horizontal-slider{
+    width: 90%;
+    margin: auto;
+    height: 30px;
+    /* border: 1px solid grey; */
+    
+}
+.filtermodal .input_field .related_filters{
+    margin-bottom: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap !important;
+    flex-direction: unset;
+    margin-left: -15px;
+}
+.filtermodal .input_field .related_filters span{
+    /* border: 1px solid; */
+    padding: 1px 9px;
+    width: fit-content;
+    font-size: 14px;
+    border-radius: 15px;
+    background: #ededed;
+    margin: 3px 3px;
+    border: 1px solid #cccccc;
+}
+.filtermodal .input_field .related_filters span:hover{
+    border: 1px solid #213974;
+    color: #213974;
+    cursor: pointer;
+    /* transform: scale(1.1); */
+}
+.filtermodal .input_field .related_filters .color_span{
+border-radius: 50% !important;
+height: 20px;
+width: 20px;
+}
+.filtermodal .filter_colorsoption{
+    max-height: 100px;
+    overflow: hidden;
+    transition: 1s;
+}
+.filtermodal .input_field .see_morebtn{
+background-color: #ededed;
+color: #213974;
+border: 1px solid #213974;
+padding: 0px 5px ;
+margin-bottom: 5px ;
+width: fit-content;
+border-radius: 20px;
+font-weight: 500;
+cursor: pointer;
+}
+.filtermodal .input_field .small_btns{
+    padding: 0px 5px;
+    border: none;
+    border-radius: 50%;
+    background: #213974;
+    color: white;
+    /* margin-left: 6px; */
+    /* display: flex; */
+    margin: 2px 0px 2px 8px;
+}
+.filtermodal .input_field .addbtn{
+    font-size: larger;
+    /* background: none !important; */
+    /* color: #213974; */
+    font-weight: 600;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: flex-end;
+    /* margin: auto; */
+    margin-left:auto
+
+}

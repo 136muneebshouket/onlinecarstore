@@ -27,21 +27,10 @@ const Post_ad = () => {
   const { data: sessionData } = useSession();
 
 
-  useEffect(() => {
-    setid()
-  }, []);
+
 
   
-  async function setid(){
-    let userid = await sessionData?.user._id;
-   
-    setCarobj((prevCarobj) => {
-      return {
-        ...prevCarobj,
-        ...({ seller_id: userid }),
-      };
-    });
-  }
+ 
 
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -88,6 +77,19 @@ const Post_ad = () => {
   };
 
   const [carobj, setCarobj] = useState(initialState);
+
+
+  useEffect(() => {
+    let userid = sessionData?.user._id;
+
+    setCarobj((prevCarobj) => {
+      return {
+        ...prevCarobj,
+        ...({ seller_id: userid }),
+      };
+    });
+  }, [imagestoshow]);
+
 
   const resetState = () => {
     setCarobj(initialState);
@@ -195,7 +197,6 @@ const Post_ad = () => {
     if (files.length > 10 || imagestoshow.length >= 10) {
       setLoading(false);
       alert("Maximum 10 images are allowed");
-      
       return;
     }
   
@@ -307,7 +308,7 @@ const Post_ad = () => {
     }else if(err_values.length === 0){
      await setErrors(false)
 
-     if (imagestoshow.length < 10 && err_values.length == 0) {
+     if (imagestoshow.length < 1 && err_values.length == 0) {
       await setErrors(true);
        const element = document.getElementById("carphotos");
        // console.log(element);
@@ -355,12 +356,39 @@ console.log(imagestoshow[0].file)
         console.error('Upload failed:', error);
       }
     }
+
+      if(Cloudimages.length == imagestoshow.length ){
+        let images={
+          carid,
+          Cloudimages
+        }
+        await axios
+        .post(`/api/uploadcar/uploadimages`, images)
+        .then(async (res) => {
+    
+          if (res.status == 201) {
+            // setError(res?.data);
+            console.log(res?.data)
+            // resetState();
+            // resettextarea();
+          //  await uploadimages(res?.data.car_id)
+          setLoading(false)
+          }
+        })
+        .catch((err) => {
+         console.log(err?.response?.data)
+        }).finally(()=>{
+          setLoading(false)
+        });
+
+      } 
+    
     // console.log(Cloudimages)
 }
 
 // console.log(Cloudimages)
-console.log(Cloudimages)
-console.log(imagestoshow)
+// console.log(Cloudimages)
+// console.log(imagestoshow)
 
 
 
@@ -368,35 +396,35 @@ console.log(imagestoshow)
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
-    // await geterrors();
+    await geterrors();
      console.log(err_values.length);
     console.log(errors,phoneerr)
    
     
-    // if(err_values.length == 0 && errors == false && phoneerr == false){
-    // console.log('done')
-    // setLoading(true)
-    //   await axios
-    //   .post(`/api/uploadcar/postmy_ad`, carobj)
-    //   .then(async (res) => {
+    if(err_values.length == 0 && errors == false && phoneerr == false){
+    console.log('done')
+    setLoading(true)
+      await axios
+      .post(`/api/uploadcar/postmy_ad`, carobj)
+      .then(async (res) => {
   
-    //     if (res.status == 201) {
-    //       // setError(res?.data);
-    //       console.log(res?.data)
-    //       // resetState();
-    //       // resettextarea();
-        //  await uploadimages(res?.data.car_id)
-    //     }
-    //   })
-    //   .catch((err) => {
-    //    console.log(err?.response?.data)
-    //   }).finally(()=>{
-    //     setLoading(false)
-    //   });
-    // }
+        if (res.status == 201) {
+          // setError(res?.data);
+          console.log(res?.data)
+          resetState();
+          resettextarea();
+         await uploadimages(res?.data.car_id)
+        }
+      })
+      .catch((err) => {
+       console.log(err?.response?.data)
+      }).finally(()=>{
+        setLoading(false)
+      });
+    }
     
   };
-  // console.log(carobj);
+  console.log(carobj);
   // console.log(imagestoshow);
   // console.log(regex.test(carobj.Phone_no));
 
@@ -455,7 +483,7 @@ console.log(imagestoshow)
                         handleOpenModal("Location");
                       }}
                     >
-                      <label htmlFor="location">Location</label>
+                      <label >Location</label>
                       <input
                         id="city"
                         type="text"
@@ -465,7 +493,8 @@ console.log(imagestoshow)
                           carobj.city &&
                           `${carobj.city} > ${carobj.area && carobj.area} `
                         }
-                        disabled
+                        // disabled
+                        readOnly
                         // required
                       />
                       {errors && carobj.city == "" ? (
@@ -489,7 +518,7 @@ console.log(imagestoshow)
                         handleOpenModal("Car Model");
                       }}
                     >
-                      <label htmlFor="">Car Model</label>
+                      <label >Car Model</label>
                       <input
                         type="text"
                         name=""
@@ -500,7 +529,7 @@ console.log(imagestoshow)
                             : ""
                         }
                         placeholder="Make/Model/Version"
-                        disabled
+                        readOnly
                       />
                       {errors && carobj.brand == "" ? (
                         <span className="errorspan">
@@ -518,7 +547,7 @@ console.log(imagestoshow)
                         handleOpenModal("Registration");
                       }}
                     >
-                      <label htmlFor="">Registered In</label>
+                      <label >Registered In</label>
                       <input
                       id="Registered_In"
                         type="text"
@@ -526,7 +555,7 @@ console.log(imagestoshow)
                         value={
                           carobj.Registered_In && `${carobj.Registered_In}`
                         }
-                        disabled
+                        readOnly
                       />
                       {errors && carobj.Registered_In == "" ? (
                         <span className="errorspan">
@@ -544,13 +573,13 @@ console.log(imagestoshow)
                         handleOpenModal("Color");
                       }}
                     >
-                      <label htmlFor="">Exterior Color</label>
+                      <label >Exterior Color</label>
                       <input
                         id="color"
                         type="text"
                         value={carobj.color && `${carobj.color}`}
                         placeholder="Color"
-                        disabled
+                        readOnly
                       />
                       {errors && carobj.color == "" ? (
                         <span className="errorspan">
@@ -564,7 +593,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Mileage * (km)</label>
+                      <label >Mileage * (km)</label>
                       <input
                       value={(carobj.Mileage !== null) && carobj.Mileage}
                       id="Mileage"
@@ -608,7 +637,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Price* (Rs.)</label>
+                      <label >Price* (Rs.)</label>
                       <input
                         type="number"
                         id="price"
@@ -802,7 +831,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Engine Type</label>
+                      <label >Engine Type</label>
                       <select
                         name=""
                         id="enginetype"
@@ -836,7 +865,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Engine Capacity * (cc)</label>
+                      <label >Engine Capacity * (cc)</label>
                       <input
                         id="enginecc"
                         type="number"
@@ -863,7 +892,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Transmission</label>
+                      <label >Transmission</label>
                       <select
                         name=""
                         id="transmission"
@@ -893,7 +922,7 @@ console.log(imagestoshow)
                   <div className="input_field">
                     <i className="bx bxs-car"></i>
                     <div>
-                      <label htmlFor="">Assembly</label>
+                      <label >Assembly</label>
                       <select
                         name=""
                         id="Assembly"

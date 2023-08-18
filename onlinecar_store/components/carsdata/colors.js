@@ -20,6 +20,7 @@ const colors = [
     { colorname: 'Indigo', colorcode: '#4B0082' },
     { colorname: 'Magenta', colorcode: '#FF00FF' },
     { colorname: 'Navy', colorcode: '#000080' },
+    { colorname: 'unlisted', colorcode: '#0000' },
   ];
 
   export default colors;

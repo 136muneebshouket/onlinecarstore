@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const Home = () => {
   return (
@@ -22,6 +23,11 @@ const Home = () => {
               <i className='bx bx-search'></i>
               </div>
 
+            </div>
+            <div className="advance_searchbtn">
+            <Link  href="/Used_cars/Search_car">
+                Advance Search &gt;
+                </Link>
             </div>
         </div>
     </div>

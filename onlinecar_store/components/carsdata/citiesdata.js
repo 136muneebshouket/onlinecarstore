@@ -1,5 +1,10 @@
 const cities = [
   {
+    cities: [
+      { cityname: "Un-Registered" },
+    ],
+  },
+  {
     name: "Provinces",
     cities: [
       { cityname: "Punjab" },

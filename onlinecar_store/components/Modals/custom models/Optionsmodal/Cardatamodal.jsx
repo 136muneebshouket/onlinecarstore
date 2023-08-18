@@ -3,13 +3,16 @@ import { arrayOfyears, carData } from "@/components/carsdata/arrays";
 // import cardata from '../../../carsdata/cardata.json'
 // import from "@/components/carsdata/arrays";
 
-const Cardatamodal = ({ onClose, carrdata }) => {
+const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
   const [model_year, setModel_year] = useState(null);
   const [modelyears, setModelyears] = useState(arrayOfyears);
   const [carsoptions, setCarsoptions] = useState(carData);
   const [searchval, setSearchval] = useState("");
   const [varients, setVarients] = useState([]);
   // const [brandmatch, setBrandmatch] = useState(false);
+  useEffect(() => {
+    filtermodal && setModel_year(0);
+  }, []);
 
   //  console.log('im rendering')
   const filter = useMemo(() => {
@@ -80,6 +83,17 @@ const Cardatamodal = ({ onClose, carrdata }) => {
   };
   // console.log(varients)
 
+  //adding only brand for filtercarmodel
+
+  async function addonlybrand(b) {
+    if (filtermodal == true) {
+      cardata_obj.b = b;
+      await setCardata_obj(cardata_obj);
+      await carrdata(cardata_obj);
+      onClose();
+    }
+  }
+
   return (
     <>
       <div className="caroptions_search">
@@ -97,7 +111,11 @@ const Cardatamodal = ({ onClose, carrdata }) => {
           <>Select year of Car Model</>
         ) : (
           <>
-            {cardata_obj.b === "" ? <>Select Brand and Model</> : <>Select Varient of Model</>}
+            {cardata_obj.b === "" ? (
+              <>Select Brand and Model</>
+            ) : (
+              <>Select Varient of Model</>
+            )}
           </>
         )}
       </p>
@@ -145,9 +163,26 @@ const Cardatamodal = ({ onClose, carrdata }) => {
             return (
               <>
                 <div className="car_option" key={index}>
-                  <p className="cars_brand" style={{ margin: "2px 5px" }}>
+                  <p
+                    className="cars_brand"
+                    style={{ margin: "2px 5px" }}
+                    onClick={() => {
+                      addonlybrand(brand.name);
+                    }}
+                  >
                     {brand.name}
                   </p>
+                  {filtermodal && (
+                    <p
+                      className="carmodel_name"
+                      key={index}
+                      onClick={() => {
+                        addonlybrand(brand.name);
+                      }}
+                    >
+                      All Models
+                    </p>
+                  )}
                   {brand.models.map((model, index) => {
                     if (
                       model.name.toLowerCase().includes(searchval.toLowerCase())
