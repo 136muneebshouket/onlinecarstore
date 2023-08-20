@@ -2,8 +2,34 @@ import React, { useState, useCallback, useEffect } from "react";
 import colors from "@/components/carsdata/colors";
 import Optionsmodal from "@/components/Modals/custom models/Optionsmodal/Optionsmodal";
 import ReactSlider from "react-slider";
+import { useRouter } from "next/router";
 
-const Filtermodal = () => {
+
+const Filtermodal = ({getfilters}) => {
+
+  const router = useRouter();
+  useEffect(()=>{
+    let filters = router.query.filters
+      
+    if(filters){ 
+    let queryobj = JSON.parse(filters)
+    // let parsequery= queryString.parse(quer)
+    let appliedfilters={};
+    Object.entries(queryobj)
+    .map(([key, value]) => {
+       if(typeof value === "string"){
+        appliedfilters[key] = JSON.parse(value)
+      }else{
+        appliedfilters[key] = (value)
+      }
+    }) 
+    console.log(appliedfilters)
+  }
+ 
+    // console.log(queryobj)
+   
+  },[])
+
   const [showcolors, setShowcolors] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalvalue, setModalvalue] = useState("");
@@ -11,11 +37,16 @@ const Filtermodal = () => {
     parseInt(new Date().getFullYear())
   );
   const [trustedcars, setTrustedcars] = useState([
-    "Certified",
-    "Inspected",
-    "Auction Sheet Verified",
-    "Managed_by_Carselection",
+    {v:"Certified",field:'certified'} ,
+    {v:"Inspected",field:'inspected'} ,
+    {v:"Auction Sheet Verified",field:'auction_sheet'} ,
+    {v:"Managed_by_Carselection",field:'managed_by'} ,
   ]);
+  const [fueltype, setFueltype] = useState(["Petrol", "Diesel", "Hybrid", "Electric", "CNG", "LPG"]);
+
+  // const [finalfilters, setFinalfilters] = useState({});
+
+
 
   //closing and opening modal /////////////////////////////////////////////////////////////////////////////////
   const handleOpenModal = useCallback((value) => {
@@ -37,7 +68,7 @@ const Filtermodal = () => {
     price: { Gt: null, Lt: null },
     enginetype: [],
     model: [],
-    enginecc: null,
+    enginecc: { Gt: null, Lt: null },
     transmission: [],
     Assembly: [],
     variant_name: [],
@@ -145,18 +176,18 @@ const Filtermodal = () => {
     if(carfilters[key] == true ){
       setCarfilters((prevcarfilters) => ({
               ...prevcarfilters,
-              [key]: false,
+              [key]: null,
             }));
     }
 
   }
-console.log(carfilters)
-  const add_del_btn_filters = (field, index) => {
+
+  const add_del_btn_filters = (field, v) => {
     const key = field;
 
     if (key in carfilters) {
       if (carfilters[key].includes(v)) {
-        const updatedArray = carfilters[key].filter((_, i) => i !== index);
+        const updatedArray = carfilters[key].filter((val) => val !== v);
         setCarfilters((prevcarfilters) => ({
           ...prevcarfilters,
           [key]: updatedArray,
@@ -164,14 +195,16 @@ console.log(carfilters)
       } else {
         setCarfilters((prevcarfilters) => ({
           ...prevcarfilters,
-          [key]: updatedArray,
+          [key]:[...prevcarfilters[key], v],
         }));
       }
     }
   };
+
   // console.log(carfilters.modelyear);
   // console.log(citty);
 
+  // connverting numeric figures//////////////////////////////////////////////////////////
   const [GT, setGT] = useState("0");
   const [LT, setLT] = useState("Any");
 
@@ -228,6 +261,64 @@ console.log(carfilters)
   // console.log(GT);
   // console.log(carfilters.Mileage);
   // console.log(LT);
+  // console.log(carfilters)
+
+
+  let Finalfilters={};
+  // apllying filters////////////////////////////////////////////////////////////////////////////////
+  const applyfilters=async()=>{
+
+    for (const key in carfilters) {
+      if (Array.isArray(carfilters[key])) {
+        // console.log(carfilters[key])
+        if(carfilters[key].length > 0){   
+             Finalfilters[key] = carfilters[key];
+            }
+      }
+      if(!(Array.isArray(carfilters[key])) && typeof carfilters[key] != 'boolean'){
+
+        if(carfilters[key] !== true && carfilters[key] !== false  && carfilters[key] !== null){
+          let rangeobj={};
+          let parentkey = carfilters[key];
+          const inkey = Object.keys(parentkey);
+          
+          if(inkey[0]){
+            if(parentkey[inkey[0]] != null ) {
+              if((parentkey[inkey[0]] > 0)){
+                rangeobj.$gt = parentkey[inkey[0]];
+              }
+          }  
+         }
+          if(inkey[1]){
+            if(parentkey[inkey[1]] != null ) {
+              if((parentkey[inkey[1]] > 0)){
+                rangeobj.$lt = parentkey[inkey[1]];
+              }   
+          }  
+         }
+         if(parentkey[inkey[0]] == null && parentkey[inkey[1]] == null ){
+         
+         }else{
+          Finalfilters[key] = rangeobj;
+         }
+         
+
+        // }
+        }
+      }
+      if(carfilters[key] == true){
+        Finalfilters[key] = carfilters[key];
+      }
+      
+    }
+    // console.log(Finalfilters)
+    if(Object.keys(Finalfilters).length > 0){
+      await getfilters(Finalfilters)
+    }
+      
+  }
+  
+ 
 
   return (
     <>
@@ -739,18 +830,18 @@ console.log(carfilters)
           <div>
             <label htmlFor="location">Trusted Cars</label>
             <div className="related_filters">
-              {trustedcars.map((v, index) => {
+              {trustedcars.map((obj, index) => {
                 return (
                   <>
                     <span
-                    // className={ }
-                    style={{border:`${carfilters[v] ? '1px solid blue' : ''}`}}
+                    className={carfilters[obj.field] ? 'selected_filter' : ''}
+                    // style={{border:`${carfilters[v] ? '1px solid blue' : ''}`}}
                       key={index}
                       onClick={() => {
-                        add_trusted_filter(v);
+                        add_trusted_filter(obj.field);
                       }}
                     >
-                      {v}
+                      {obj.v}
                     </span>
                   </>
                 );
@@ -766,8 +857,15 @@ console.log(carfilters)
           <div>
             <label htmlFor="location">Transmission</label>
             <div className="related_filters">
-              <span>Automatic</span>
-              <span>Manual</span>
+              <span
+              className={carfilters.transmission.includes('Automatic') ? 'selected_filter':''}
+              onClick={()=>{add_del_btn_filters('transmission','Automatic')}}
+              >Automatic</span>
+
+              <span
+              className={carfilters.transmission.includes('Manual') ? 'selected_filter':''}
+              onClick={()=>{add_del_btn_filters('transmission','Manual')}}
+              >Manual</span>
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -784,9 +882,11 @@ console.log(carfilters)
               {colors.map((Obj, index) => {
                 return (
                   <>
-                    <span
+                    <span 
+                    className={carfilters.color.includes(Obj.colorname) ? 'selected_filter':''}
                       style={{ display: "flex", alignItems: "center" }}
                       key={index}
+                      onClick={()=>{add_del_btn_filters('color',Obj.colorname)}}
                     >
                       <div
                         className="color_span"
@@ -815,12 +915,15 @@ console.log(carfilters)
           <div>
             <label htmlFor="location">Fuel Type</label>
             <div className="related_filters">
-              <span>Petrol</span>
-              <span>Diesel</span>
-              <span>Hybrid</span>
-              <span>Electric</span>
-              <span>CNG</span>
-              <span>LPG</span>
+            {fueltype.map((v,index)=>{
+              return(<>
+              <span 
+               className={carfilters.enginetype.includes(v) ? 'selected_filter':''}
+               key={index}
+              onClick={()=>{add_del_btn_filters('enginetype',v)}}
+              >{v}</span>
+              </>)
+            })}
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -834,20 +937,65 @@ console.log(carfilters)
             </div>
           </div>
           <div className="range_inputs">
-            <input type="number" /> <span>to</span> <input type="number" />
+            <input type="number" 
+             placeholder="600"
+             value={carfilters.enginecc.Gt !== null && carfilters.enginecc.Gt}
+             onChange={(e) => {
+               e.target.value >= 0 &&
+                 setCarfilters((prev) => ({
+                   ...prev,
+                   enginecc: { ...prev.enginecc, Gt: parseInt(e.target.value) },
+                 }));
+             }}
+            /> <span>to</span>
+             <input type="number"
+             placeholder="6000"
+             value={carfilters.enginecc.Lt !== null && carfilters.enginecc.Lt}
+             onChange={(e) => {
+               e.target.value >= 0 &&
+                 setCarfilters((prev) => ({
+                   ...prev,
+                   enginecc: { ...prev.enginecc, Lt: parseInt(e.target.value) },
+                 }));
+             }}
+            />
           </div>
           <div className="range_line">
             <ReactSlider
               className="horizontal-slider"
               thumbClassName="example-thumb"
               trackClassName="example-track"
-              defaultValue={[0, 100]}
+              defaultValue={[600, 6000]}
+              min={600}
+              max={6000}
               ariaLabel={["Lower thumb", "Upper thumb"]}
               ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
               onChange={(props, state) => {
-                console.log(...props);
-                // console.log(props[0])
-                // console.log(props[1])
+               
+                if (props[0] == 600) {
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: { ...prev.enginecc, Gt: null },
+                  }));
+                }
+                if (props[1] == 6000) {
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: { ...prev.enginecc, Lt: null },
+                  }));
+                }
+                if (props[0] != 600) {
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: { ...prev.enginecc, Gt: props[0] },
+                  }));
+                }
+                if (props[1] != 6000) {
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: { ...prev.enginecc, Lt: props[1] },
+                  }));
+                }
               }}
               pearling
               minDistance={0}
@@ -860,8 +1008,14 @@ console.log(carfilters)
           <div>
             <label htmlFor="location">Assembly</label>
             <div className="related_filters">
-              <span>Local</span>
-              <span>Imported</span>
+              <span
+              className={carfilters.Assembly.includes('Local') ? 'selected_filter':''}
+              onClick={()=>{add_del_btn_filters('Assembly','Local')}}
+              >Local</span>
+              <span
+               className={carfilters.Assembly.includes('Imported') ? 'selected_filter':''}
+               onClick={()=>{add_del_btn_filters('Assembly','Imported')}}
+              >Imported</span>
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -890,6 +1044,10 @@ console.log(carfilters)
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
+        </div>
+        <div className="input_field apply_filter_btns">
+          <button>Reset</button>
+          <button onClick={applyfilters}>Apply</button>
         </div>
       </div>
 

@@ -23,9 +23,9 @@ const carSchema = new mongoose.Schema(
       required:[true, 'Car brand is required'],
     },
     modelyear: {
-      type:String,
+      type:Number,
       required:false,
-      default:""
+      default:null
     },
     Registered_In: {
         type: String,

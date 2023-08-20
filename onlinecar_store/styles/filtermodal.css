@@ -174,3 +174,24 @@ cursor: pointer;
     margin-left:auto
 
 }
+ .related_filters .selected_filter{
+    border: 2px solid #213974 !important;
+    /* color: #f1f1f1; */
+}
+.filtermodal .apply_filter_btns{
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+display: flex;
+justify-content: center;
+}
+.filtermodal .apply_filter_btns button{
+width: 40%;
+border-radius: 5px;
+border: 1px solid #213974;
+margin: 5px;
+}
+.filtermodal .apply_filter_btns button:nth-child(2){
+    background-color: #1841aa;
+    color: #f1f1f1;
+}
