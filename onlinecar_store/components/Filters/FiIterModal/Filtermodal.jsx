@@ -4,31 +4,8 @@ import Optionsmodal from "@/components/Modals/custom models/Optionsmodal/Options
 import ReactSlider from "react-slider";
 import { useRouter } from "next/router";
 
-
-const Filtermodal = ({getfilters}) => {
-
+const Filtermodal = ({ getfilters, description }) => {
   const router = useRouter();
-  useEffect(()=>{
-    let filters = router.query.filters
-      
-    if(filters){ 
-    let queryobj = JSON.parse(filters)
-    // let parsequery= queryString.parse(quer)
-    let appliedfilters={};
-    Object.entries(queryobj)
-    .map(([key, value]) => {
-       if(typeof value === "string"){
-        appliedfilters[key] = JSON.parse(value)
-      }else{
-        appliedfilters[key] = (value)
-      }
-    }) 
-    console.log(appliedfilters)
-  }
- 
-    // console.log(queryobj)
-   
-  },[])
 
   const [showcolors, setShowcolors] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,16 +14,21 @@ const Filtermodal = ({getfilters}) => {
     parseInt(new Date().getFullYear())
   );
   const [trustedcars, setTrustedcars] = useState([
-    {v:"Certified",field:'certified'} ,
-    {v:"Inspected",field:'inspected'} ,
-    {v:"Auction Sheet Verified",field:'auction_sheet'} ,
-    {v:"Managed_by_Carselection",field:'managed_by'} ,
+    { v: "Certified", field: "certified" },
+    { v: "Inspected", field: "inspected" },
+    { v: "Auction Sheet Verified", field: "auction_sheet" },
+    { v: "Managed_by_Carselection", field: "managed_by" },
   ]);
-  const [fueltype, setFueltype] = useState(["Petrol", "Diesel", "Hybrid", "Electric", "CNG", "LPG"]);
+  const [fueltype, setFueltype] = useState([
+    "Petrol",
+    "Diesel",
+    "Hybrid",
+    "Electric",
+    "CNG",
+    "LPG",
+  ]);
 
   // const [finalfilters, setFinalfilters] = useState({});
-
-
 
   //closing and opening modal /////////////////////////////////////////////////////////////////////////////////
   const handleOpenModal = useCallback((value) => {
@@ -79,6 +61,151 @@ const Filtermodal = ({getfilters}) => {
   };
 
   const [carfilters, setCarfilters] = useState(initialState);
+
+  useEffect(() => {
+    let filters = router.query.filters;
+
+    let appliedfilters = {};
+    if (filters) {
+      try {
+        let queryobj = JSON.parse(filters);
+
+        Object.entries(queryobj).map(([key, value]) => {
+          if (typeof value === "string") {
+            appliedfilters[key] = JSON.parse(value);
+          } else {
+            appliedfilters[key] = value;
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // showing applied filters ....to user
+    Object.entries(appliedfilters).map(([key, value]) => {
+      Object.entries(carfilters).map(([key2, value2]) => {
+        if (key2 == key) {
+          if (Array.isArray(value)) {
+            setCarfilters((prev) => ({ ...prev, [key2]: value }));
+          } else if (typeof value == "object") {
+            const inkey = Object.keys(value);
+            const inkey2 = Object.keys(value2);
+            if (inkey.length > 1) {
+              if (inkey[0] == "$gt") {
+                setCarfilters((prev) => ({
+                  ...prev,
+                  [key2]: { ...prev[key2], [inkey2[0]]: value[inkey[0]] },
+                }));
+              }
+              if (inkey[1] == "$lt") {
+                setCarfilters((prev) => ({
+                  ...prev,
+                  [key2]: { ...prev[key2], [inkey2[1]]: value[inkey[1]] },
+                }));
+              }
+            } else {
+              if (inkey[0] == "$gt") {
+                setCarfilters((prev) => ({
+                  ...prev,
+                  [key2]: { ...prev[key2], [inkey2[0]]: value[inkey[0]] },
+                }));
+              } else if (inkey[0] == "$lt") {
+                setCarfilters((prev) => ({
+                  ...prev,
+                  [key2]: { ...prev[key2], [inkey2[1]]: value[inkey[0]] },
+                }));
+              }
+            }
+          } else if (typeof value == "boolean") {
+            setCarfilters((prev) => ({ ...prev, [key2]: value }));
+          }
+          //  console.log(typeof value)
+          // console.log(value2,value)
+        }
+      });
+      // console.log(initialState)
+    });
+    //  console.log(appliedfilters)
+
+    // generating discription etc from applied filters
+    let fitersstr = "Used Cars for Sale in Pakistan";
+    if (Object.keys(appliedfilters).length > 0) {
+      let color = appliedfilters.color ? appliedfilters.color : null;
+      let brand = appliedfilters.brand ? appliedfilters.brand : "Cars";
+      let model = appliedfilters.model ? appliedfilters.model : null;
+      let varients = appliedfilters.variant_name
+        ? appliedfilters.variant_name
+        : null;
+      let enginetype = appliedfilters.enginetype
+        ? ` ${appliedfilters.enginetype}`
+        : null;
+      let transmission = appliedfilters.transmission
+        ? appliedfilters.transmission
+        : null;
+      let Assembly = appliedfilters.Assembly
+        ? ` ${appliedfilters.Assembly}`
+        : null;
+      let enginecc = null;
+      if (appliedfilters.enginecc) {
+        // console.log(appliedfilters.enginecc)
+        if (Object.keys(appliedfilters.enginecc).length > 1) {
+          enginecc = ` from ${appliedfilters.enginecc.$gt}cc to ${appliedfilters.enginecc.$lt}cc`;
+        }
+        if (Object.keys(appliedfilters.enginecc).length == 1) {
+          enginecc = ` under ${appliedfilters.enginecc.$lt}cc`;
+        }
+      }
+      let year = null;
+      if (appliedfilters.modelyear) {
+        // console.log(appliedfilters.enginecc)
+        if (Object.keys(appliedfilters.modelyear).length > 1) {
+          year = ` from ${appliedfilters.modelyear.$gt} to ${appliedfilters.modelyear.$lt}`;
+        }
+        if (
+          Object.keys(appliedfilters.modelyear).length == 1 &&
+          Object.keys(appliedfilters.modelyear).includes("$lt")
+        ) {
+          year = ` before ${appliedfilters.modelyear.$lt}`;
+        }
+      }
+      let location = appliedfilters.city ? appliedfilters.city : "Pakistan";
+      let area = appliedfilters.area ? `in ${appliedfilters.area}` : null;
+      let certified = appliedfilters.certified ? `Certified` : null;
+      let sheet = appliedfilters.auction_sheet
+        ? `Auction Sheet Verified Cars`
+        : null;
+
+      // let year = appliedfilters.Assembly ? appliedfilters.Assembly :'';
+
+      fitersstr = `${color && color} ${brand} ${model && model} ${
+        varients && varients
+      } ${
+        transmission
+          ? transmission
+          : Assembly
+          ? Assembly
+          : enginetype
+          ? enginetype
+          : enginecc && enginecc
+      } ${certified && certified} ${sheet && sheet} ${
+        year && year
+      } for sale in ${location} ${area && area}`;
+      //  console.log(fitersstr)
+      let trimed = fitersstr.split(" ");
+      // console.log(trimed)
+      let newdescription = trimed.filter((v) => {
+        return v != "null";
+      });
+      //  console.log(newdescription.join(' '))
+      description(newdescription.join(" "));
+    } else {
+      description(fitersstr);
+    }
+    // console.log(queryobj)
+  }, []);
+
+  // console.log(carfilters)
 
   const getfromoptionsmodal = useCallback(
     async (values) => {
@@ -163,24 +290,23 @@ const Filtermodal = ({getfilters}) => {
     }
   };
 
-  const add_trusted_filter=(field)=>{
+  const add_trusted_filter = (field) => {
     const key = field;
     // console.log(carfilters[key])
-   
-    if(carfilters[key] == false || carfilters[key] == null){
-      setCarfilters((prevcarfilters) => ({
-              ...prevcarfilters,
-              [key]: true,
-            }));
-    }
-    if(carfilters[key] == true ){
-      setCarfilters((prevcarfilters) => ({
-              ...prevcarfilters,
-              [key]: null,
-            }));
-    }
 
-  }
+    if (carfilters[key] == false || carfilters[key] == null) {
+      setCarfilters((prevcarfilters) => ({
+        ...prevcarfilters,
+        [key]: true,
+      }));
+    }
+    if (carfilters[key] == true) {
+      setCarfilters((prevcarfilters) => ({
+        ...prevcarfilters,
+        [key]: null,
+      }));
+    }
+  };
 
   const add_del_btn_filters = (field, v) => {
     const key = field;
@@ -195,7 +321,7 @@ const Filtermodal = ({getfilters}) => {
       } else {
         setCarfilters((prevcarfilters) => ({
           ...prevcarfilters,
-          [key]:[...prevcarfilters[key], v],
+          [key]: [...prevcarfilters[key], v],
         }));
       }
     }
@@ -258,75 +384,86 @@ const Filtermodal = ({getfilters}) => {
       }
     }
   }, [carfilters.price, carfilters.Mileage]);
-  // console.log(GT);
-  // console.log(carfilters.Mileage);
-  // console.log(LT);
-  // console.log(carfilters)
 
+  let Finalfilters = {};
 
-  let Finalfilters={};
   // apllying filters////////////////////////////////////////////////////////////////////////////////
-  const applyfilters=async()=>{
-
+  const applyfilters = async () => {
     for (const key in carfilters) {
       if (Array.isArray(carfilters[key])) {
         // console.log(carfilters[key])
-        if(carfilters[key].length > 0){   
-             Finalfilters[key] = carfilters[key];
-            }
-      }
-      if(!(Array.isArray(carfilters[key])) && typeof carfilters[key] != 'boolean'){
-
-        if(carfilters[key] !== true && carfilters[key] !== false  && carfilters[key] !== null){
-          let rangeobj={};
-          let parentkey = carfilters[key];
-          const inkey = Object.keys(parentkey);
-          
-          if(inkey[0]){
-            if(parentkey[inkey[0]] != null ) {
-              if((parentkey[inkey[0]] > 0)){
-                rangeobj.$gt = parentkey[inkey[0]];
-              }
-          }  
-         }
-          if(inkey[1]){
-            if(parentkey[inkey[1]] != null ) {
-              if((parentkey[inkey[1]] > 0)){
-                rangeobj.$lt = parentkey[inkey[1]];
-              }   
-          }  
-         }
-         if(parentkey[inkey[0]] == null && parentkey[inkey[1]] == null ){
-         
-         }else{
-          Finalfilters[key] = rangeobj;
-         }
-         
-
-        // }
+        if (carfilters[key].length > 0) {
+          Finalfilters[key] = carfilters[key];
         }
       }
-      if(carfilters[key] == true){
+      if (
+        !Array.isArray(carfilters[key]) &&
+        typeof carfilters[key] != "boolean"
+      ) {
+        if (
+          carfilters[key] !== true &&
+          carfilters[key] !== false &&
+          carfilters[key] !== null
+        ) {
+          let rangeobj = {};
+          let parentkey = carfilters[key];
+          const inkey = Object.keys(parentkey);
+
+          if (inkey[0]) {
+            if (parentkey[inkey[0]] != null) {
+              if (parentkey[inkey[0]] > 0) {
+                rangeobj.$gt = parentkey[inkey[0]];
+              }
+            }
+          }
+          if (inkey[1]) {
+            if (parentkey[inkey[1]] != null) {
+              if (parentkey[inkey[1]] > 0) {
+                rangeobj.$lt = parentkey[inkey[1]];
+              }
+            }
+          }
+          if (parentkey[inkey[0]] == null && parentkey[inkey[1]] == null) {
+          } else {
+            Finalfilters[key] = rangeobj;
+          }
+
+          // }
+        }
+      }
+      if (carfilters[key] == true) {
         Finalfilters[key] = carfilters[key];
       }
-      
     }
     // console.log(Finalfilters)
-    if(Object.keys(Finalfilters).length > 0){
-      await getfilters(Finalfilters)
+    if (Object.keys(Finalfilters).length > 0) {
+      await getfilters(Finalfilters);
     }
-      
-  }
-  
- 
+  };
+
+  const resetfilters = () => {
+    setCarfilters(initialState);
+    let filters = router.query.filters;
+    if (filters) {
+      getfilters(Finalfilters);
+    }
+  };
 
   return (
     <>
       <div className="filtermodal">
         <div className="head_banner">
+          <span>
+            <i
+              onClick={() => {
+                document.getElementById("filters").style.display = "none";
+              }}
+              className="bx bx-chevron-down back_arrow"
+            ></i>
+          </span>
           <p>Refine your search</p>
         </div>
-        <div className="head_banner apllied_filters"></div>
+        {/* <div className="head_banner apllied_filters"></div> */}
 
         <div className="input_field">
           <i className="bx bxs-car"></i>
@@ -834,8 +971,8 @@ const Filtermodal = ({getfilters}) => {
                 return (
                   <>
                     <span
-                    className={carfilters[obj.field] ? 'selected_filter' : ''}
-                    // style={{border:`${carfilters[v] ? '1px solid blue' : ''}`}}
+                      className={carfilters[obj.field] ? "selected_filter" : ""}
+                      // style={{border:`${carfilters[v] ? '1px solid blue' : ''}`}}
                       key={index}
                       onClick={() => {
                         add_trusted_filter(obj.field);
@@ -846,10 +983,8 @@ const Filtermodal = ({getfilters}) => {
                   </>
                 );
               })}
-     
             </div>
           </div>
-         
         </div>
 
         <div className="input_field">
@@ -858,14 +993,30 @@ const Filtermodal = ({getfilters}) => {
             <label htmlFor="location">Transmission</label>
             <div className="related_filters">
               <span
-              className={carfilters.transmission.includes('Automatic') ? 'selected_filter':''}
-              onClick={()=>{add_del_btn_filters('transmission','Automatic')}}
-              >Automatic</span>
+                className={
+                  carfilters.transmission.includes("Automatic")
+                    ? "selected_filter"
+                    : ""
+                }
+                onClick={() => {
+                  add_del_btn_filters("transmission", "Automatic");
+                }}
+              >
+                Automatic
+              </span>
 
               <span
-              className={carfilters.transmission.includes('Manual') ? 'selected_filter':''}
-              onClick={()=>{add_del_btn_filters('transmission','Manual')}}
-              >Manual</span>
+                className={
+                  carfilters.transmission.includes("Manual")
+                    ? "selected_filter"
+                    : ""
+                }
+                onClick={() => {
+                  add_del_btn_filters("transmission", "Manual");
+                }}
+              >
+                Manual
+              </span>
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -882,11 +1033,17 @@ const Filtermodal = ({getfilters}) => {
               {colors.map((Obj, index) => {
                 return (
                   <>
-                    <span 
-                    className={carfilters.color.includes(Obj.colorname) ? 'selected_filter':''}
+                    <span
+                      className={
+                        carfilters.color.includes(Obj.colorname)
+                          ? "selected_filter"
+                          : ""
+                      }
                       style={{ display: "flex", alignItems: "center" }}
                       key={index}
-                      onClick={()=>{add_del_btn_filters('color',Obj.colorname)}}
+                      onClick={() => {
+                        add_del_btn_filters("color", Obj.colorname);
+                      }}
                     >
                       <div
                         className="color_span"
@@ -915,15 +1072,25 @@ const Filtermodal = ({getfilters}) => {
           <div>
             <label htmlFor="location">Fuel Type</label>
             <div className="related_filters">
-            {fueltype.map((v,index)=>{
-              return(<>
-              <span 
-               className={carfilters.enginetype.includes(v) ? 'selected_filter':''}
-               key={index}
-              onClick={()=>{add_del_btn_filters('enginetype',v)}}
-              >{v}</span>
-              </>)
-            })}
+              {fueltype.map((v, index) => {
+                return (
+                  <>
+                    <span
+                      className={
+                        carfilters.enginetype.includes(v)
+                          ? "selected_filter"
+                          : ""
+                      }
+                      key={index}
+                      onClick={() => {
+                        add_del_btn_filters("enginetype", v);
+                      }}
+                    >
+                      {v}
+                    </span>
+                  </>
+                );
+              })}
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -937,27 +1104,36 @@ const Filtermodal = ({getfilters}) => {
             </div>
           </div>
           <div className="range_inputs">
-            <input type="number" 
-             placeholder="600"
-             value={carfilters.enginecc.Gt !== null && carfilters.enginecc.Gt}
-             onChange={(e) => {
-               e.target.value >= 0 &&
-                 setCarfilters((prev) => ({
-                   ...prev,
-                   enginecc: { ...prev.enginecc, Gt: parseInt(e.target.value) },
-                 }));
-             }}
-            /> <span>to</span>
-             <input type="number"
-             placeholder="6000"
-             value={carfilters.enginecc.Lt !== null && carfilters.enginecc.Lt}
-             onChange={(e) => {
-               e.target.value >= 0 &&
-                 setCarfilters((prev) => ({
-                   ...prev,
-                   enginecc: { ...prev.enginecc, Lt: parseInt(e.target.value) },
-                 }));
-             }}
+            <input
+              type="number"
+              placeholder="600"
+              value={carfilters.enginecc.Gt !== null && carfilters.enginecc.Gt}
+              onChange={(e) => {
+                e.target.value >= 0 &&
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: {
+                      ...prev.enginecc,
+                      Gt: parseInt(e.target.value),
+                    },
+                  }));
+              }}
+            />{" "}
+            <span>to</span>
+            <input
+              type="number"
+              placeholder="6000"
+              value={carfilters.enginecc.Lt !== null && carfilters.enginecc.Lt}
+              onChange={(e) => {
+                e.target.value >= 0 &&
+                  setCarfilters((prev) => ({
+                    ...prev,
+                    enginecc: {
+                      ...prev.enginecc,
+                      Lt: parseInt(e.target.value),
+                    },
+                  }));
+              }}
             />
           </div>
           <div className="range_line">
@@ -971,7 +1147,6 @@ const Filtermodal = ({getfilters}) => {
               ariaLabel={["Lower thumb", "Upper thumb"]}
               ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
               onChange={(props, state) => {
-               
                 if (props[0] == 600) {
                   setCarfilters((prev) => ({
                     ...prev,
@@ -1009,13 +1184,27 @@ const Filtermodal = ({getfilters}) => {
             <label htmlFor="location">Assembly</label>
             <div className="related_filters">
               <span
-              className={carfilters.Assembly.includes('Local') ? 'selected_filter':''}
-              onClick={()=>{add_del_btn_filters('Assembly','Local')}}
-              >Local</span>
+                className={
+                  carfilters.Assembly.includes("Local") ? "selected_filter" : ""
+                }
+                onClick={() => {
+                  add_del_btn_filters("Assembly", "Local");
+                }}
+              >
+                Local
+              </span>
               <span
-               className={carfilters.Assembly.includes('Imported') ? 'selected_filter':''}
-               onClick={()=>{add_del_btn_filters('Assembly','Imported')}}
-              >Imported</span>
+                className={
+                  carfilters.Assembly.includes("Imported")
+                    ? "selected_filter"
+                    : ""
+                }
+                onClick={() => {
+                  add_del_btn_filters("Assembly", "Imported");
+                }}
+              >
+                Imported
+              </span>
             </div>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}
@@ -1046,7 +1235,7 @@ const Filtermodal = ({getfilters}) => {
           {/* <i className="bx bx-chevron-down"></i> */}
         </div>
         <div className="input_field apply_filter_btns">
-          <button>Reset</button>
+          <button onClick={resetfilters}>Reset</button>
           <button onClick={applyfilters}>Apply</button>
         </div>
       </div>

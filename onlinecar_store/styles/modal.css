@@ -19,7 +19,8 @@
   .modal-content {
     background-color: #fff;
     padding: 20px;
-    margin: 20px;
+    margin-top: 50px;
+  
     box-shadow: 1px 1px 35px 0px #8b8b8b;
     max-width: 400px;
   }
@@ -60,4 +61,13 @@
     .input_field .features_div .single_feature{
  width: 50% !important;
  }
+  }
+
+  @media screen and (max-width:770px) {
+    .modal{
+      align-items: end;
+    }
+    .modal-content{
+      margin: 20px;
+    }
   }

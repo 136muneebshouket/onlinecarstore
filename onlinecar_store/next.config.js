@@ -20,6 +20,7 @@ const nextConfig = {
     EMAIL_USER: "jakayla.toy@ethereal.email",
     EMAIl_PASS: "4Z97DRrRTBEfKyU7vJ",
     EMAIl_FROM: "jakayla.toy@ethereal.email",
+     Host:" http://localhost:3000"
 
   },
 };

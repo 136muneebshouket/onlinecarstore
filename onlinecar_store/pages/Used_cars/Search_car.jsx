@@ -1,11 +1,13 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Filtermodal from "@/components/Filters/FiIterModal/Filtermodal";
+import Head from "next/head";
+// import getServerSideProps from './filtercarfunc'
 
+import Filtermodal from "@/components/Filters/FiIterModal/Filtermodal";
 
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
@@ -14,17 +16,19 @@ const FullLoader = dynamic(
   }
 );
 
-const Search_car = ({carrdata}) => {
+const Search_car = ({   carrdata,   loadiing }) => {
   const router = useRouter();
-   var [loading, setLoading] = useState(false);
-  // console.log(cardata)
+
   // console.log(carrdata)
-  
-  // const [cardata, setCardata] = useState([
+  const [filtersheading, setFiltersheading] = useState({})
+  const [filterslength, setFilterslength] = useState(0)
+  // const [carrdata, setCarrdata] = useState([
   //   {
+  //     id:'12345678976543',
   //     images_url: ["/images/postad-img.png"],
   //     brand: "Audi",
-  //     variant_name: "A3",
+  //     model: "A3",
+  //     variant_name: "e-tron",
   //     modelyear: "2021",
   //     city: "Lahore",
   //     Mileage: 100000,
@@ -34,9 +38,11 @@ const Search_car = ({carrdata}) => {
   //     price: 1200000,
   //   },
   //   {
+  //     id:'12345678976543',
   //     images_url: ["/images/postad-img.png"],
   //     brand: "Audi",
-  //     variant_name: "A3",
+  //     model: "A3",
+  //     variant_name: "e-tron",
   //     modelyear: "2021",
   //     city: "Lahore",
   //     Mileage: 100000,
@@ -46,9 +52,11 @@ const Search_car = ({carrdata}) => {
   //     price: 1200000,
   //   },
   //   {
+  //     id:'12345678976543',
   //     images_url: ["/images/postad-img.png"],
   //     brand: "Audi",
-  //     variant_name: "A3",
+  //     model: "A3",
+  //     variant_name: "e-tron",
   //     modelyear: "2021",
   //     city: "Lahore",
   //     Mileage: 100000,
@@ -57,160 +65,174 @@ const Search_car = ({carrdata}) => {
   //     enginetype: "Petrol",
   //     price: 1200000,
   //   },
-  //   {
-  //     images_url: ["/images/postad-img.png"],
-  //     brand: "Audi",
-  //     variant_name: "A3",
-  //     modelyear: "2021",
-  //     city: "Lahore",
-  //     Mileage: 100000,
-  //     enginecc: 1300,
-  //     transmission: "Automatic",
-  //     enginetype: "Petrol",
-  //     price: 1200000,
-  //   },
+ 
+
+    
   // ]);
 
-  const getfilters = useCallback((filters) => {
+
+
+  const getfilters = useCallback(async(filters) => {
     // console.log(filters)
-    if(filters){
+    if (filters) {
       // passfilters = filters;
+  
       const flattenedFilters = {};
-     Object.entries(filters)
-      .map(([key, value]) => {
-         if(Array.isArray(value)){
+      Object.entries(filters).map(([key, value]) => {
+        if (Array.isArray(value)) {
           flattenedFilters[key] = value;
-        }else if(typeof value === "object"){
-          flattenedFilters[key] = JSON.stringify(value)
-        }
-        else{
+        } else if (typeof value === "object") {
+          if(Object.keys(value).length > 0){
+            flattenedFilters[key] = JSON.stringify(value);
+          }
+        } else {
           flattenedFilters[key] = value;
         }
-      })
-      // console.log(flattenedFilters)
-
+      });
+     
+     if(Object.keys(flattenedFilters).length > 0){
+      // console.log(Object.keys(flattenedFilters).length)
+      // setFilterslength(Object.keys(flattenedFilters).length)
       const filtersString = JSON.stringify(flattenedFilters)
-
-      // console.log(filtersString)
       router.replace({
-        // pathname: router.pathname, // Keep the current pathname
-        // query: `filters=${filtersString}`, // Pass the filters as query parameters
         query: `filters=${filtersString}`, // Pass the filters as query parameters
       });
-      // const queryStrin = '?age=30&name=John%20Doe';
-  
+     }else{
+      router.replace({
+        query: ``, // Pass the filters as query parameters
+      });
+     }
     }
-    
   }, []);
 
-  // const getcars = async () => {
-  //   setLoading(true);
-  //   await axios
-  //     .get(`/api/getcarswithfilters`)
-  //     .then((res) => {
-  //       console.log(res?.data);
-  //       setCardata(res?.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err?.response?.data);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getcars();
-  // }, []);
-  // console.log(cardata);
-
-  // };
-
+  useEffect(()=>{
+    let filters = router.query.filters;
+    if(filters){
+      let queryobj = JSON.parse(filters);
+      setFilterslength(Object.keys(queryobj).length)
+    }
+  },[])
+  
+  // console.log( typeof filtersheading)
+  const showfilters=()=>{
+    document.getElementById('filters').style.display = 'block';
+  }
+// console.log(filterslength)
+ 
   return (
     <>
+    <Head>
+    <title>{filtersheading.toString()}</title>
+        <meta name="description" content="Generated by create next app" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
       <div className="main_searchcar">
+      <div className="filters_sort_section">
+          <button onClick={showfilters}><i className='bx bx-filter-alt'></i><span>Filters</span>{filterslength > 0 ? <span className="length_icon">{filterslength}</span>:<></>}</button>
+          </div>
         <div className="head">
-          <h2>Used cars for sale in pakistan</h2>
+          <h1>{filtersheading.toString()}</h1>
         </div>
         <div className="cars_and_filters">
-          <div className="filters">
-            <Filtermodal getfilters={getfilters} />
+          <div className="filters" id="filters">
+            <Filtermodal getfilters={getfilters} description={setFiltersheading} />
           </div>
           <div className="cars">
-            {carrdata.map((obj,i) => {
-              return (
-                <>
-                  <Link className="singlecar_link" href="#">
-                    <div
-                    key={i}
-                      className="singlecar"
-                      style={{
-                        border: "1px solid black",
-                        padding: "3px",
-                        display: "flex",
-                      }}
-                    >
-                      <div className="car_img">
-                        <Image
-                          src={obj.images_url[0]}
-                          width={200}
-                          height={200}
-                          alt="loading"
-                        />
+        {carrdata.map((obj, i) => {
+          return (
+            <>
+              {/* <Link className="singlecar_link" href="#"> */}
+                <div
+                  key={i}
+                  className="singlecar"
+                  style={{
+                    border: '1px solid rgb(216, 216, 216)',
+                    padding: "3px",
+                    display: "flex",
+                    boxShadow:'0 0 11px rgba(0,0,0,0.1)'
+                  }}
+                >
+                  <div className="car_img">
+                    <Image
+                      src={obj.images_url[0]}
+                      width={200}
+                      height={200}
+                      alt="loading"
+                    />
+                  </div>
+                  <div className="car_info">
+                    <div className="car_content">
+                      <Link href={(`car/${obj.brand.replaceAll(" ",'-')}-${obj.model.replaceAll(" ",'-')}-${obj.modelyear}-${obj._id}`).toLowerCase()} target="_blank">
+                      <h3>
+                        {obj.brand}{" "}{obj.model}{" "}{obj.variant_name && obj.variant_name}{" "} 
+                        {obj.modelyear}
+                      </h3>
+                      </Link>
+                      <p className="price_mbv"><strong>PKR:{obj.price}</strong></p>
+                     
+                      <p>{obj.city}</p>
+                      <div>
+                      <span>{obj.Mileage}km</span>
+                      <span>{obj.enginecc}cc</span>
+                      <span>{obj.transmission}</span>
+                      <span>{obj.enginetype}</span>
                       </div>
-                      <div className="car_info">
-                        <div className="car_content">
-                          <h3>
-                            {obj.brand} {obj.variant_name && obj.variant_name}{" "}
-                            {obj.modelyear}
-                          </h3>
-                          <p>{obj.city}</p>
-                          <span>{obj.Mileage}km</span>
-                          <span>{obj.enginecc}cc</span>
-                          <span>{obj.transmission}</span>
-                          <span>{obj.enginetype}</span>
-                        </div>
-                        <div className="car_price_section">
-                          <div className="car_price_fav">
-                            <h3>{obj.price}</h3>
-                            <i className="bx bx-heart"></i>
-                          </div>
-                          <div className="phone_num">
-                            <button>Show Phone No.</button>
-                          </div>
-                        </div>
+                      
+                    </div>
+                    <div className="car_price_section">
+                      <div className="car_price_fav">
+                        <h3>{obj.price}</h3>
+                        <i className="bx bx-heart"></i>
+                      </div>
+                      <div className="phone_num">
+                        <button>Show Phone No.</button>
                       </div>
                     </div>
-                  </Link>
-                </>
-              );
-            })}
-          </div>
+                  </div>
+                </div>
+              {/* </Link> */}
+            </>
+          );
+        })}
+        {carrdata.length == 0 && (
+          <>
+            <h2>No car with these filters..</h2>
+          </>
+        )}
+        {loadiing ? <FullLoader /> : <></>}
+      </div>
         </div>
       </div>
-      {loading ? <FullLoader /> : <></>}
+      {/* {loadiing ? <FullLoader /> : <></>} */}
     </>
   );
 };
 
+
 export async function getServerSideProps({ params, query }) {
+  const res = await axios.get(
+    `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters}`
+  );
+  const carrdata = res.data.data;
+  let loadingg = false;
+  if (carrdata) {
+    loadingg = false;
+  }
   
- const res= await axios.get(`http://localhost:3000/api/getcarswithfilters/?filters=${query.filters}`)
- const carrdata = res.data.data;
- 
-  // const pages =Math.ceil(json.count/12);
-// console.log(carrdata)
+  // console.log(carrdata)
 
   return {
     props: {
       carrdata,
-    
+      loadiing: loadingg,
       // total:pages,
       // cardata,
       // pagenum:params.page
     },
-  //   revalidate: 300
-  }
+    //   revalidate: 300
+  };
 }
 
+
 export default Search_car;
+// ${obj.brand.replaceAll(" ",'-')}-${obj.model.replaceAll(" ",'-')}-${obj.modelyear}

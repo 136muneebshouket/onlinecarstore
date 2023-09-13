@@ -4,7 +4,7 @@ import NavBar from '@/components/Navbar'
 
 import dynamic from 'next/dynamic'
 
-const Homepage = dynamic(() => import('./Home/Homepage'), {
+const Homepage = dynamic(() => import('./home/Homepage'), {
   loading: () => <p>Loading...</p>,
 })
 

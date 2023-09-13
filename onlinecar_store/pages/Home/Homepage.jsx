@@ -25,7 +25,7 @@ const Home = () => {
 
             </div>
             <div className="advance_searchbtn">
-            <Link  href="/Used_cars/Search_car">
+            <Link  href="/used_cars/Search_car">
                 Advance Search &gt;
                 </Link>
             </div>

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
       try {
         const { filters } = req.query;
-        console.log(filters);
+        // console.log(filters);
 
         const appliedfilters = {};
         try {
@@ -25,14 +25,15 @@ export default async function handler(req, res) {
             });
           }
         } catch (error) {
-          console.log(error + '28')
+          console.log(error + 'json parse error')
         }
         
 
-        console.log(appliedfilters);
+        // console.log(appliedfilters);
 
         const selectedfields = {
           brand: 1,
+          model:1,
           variant_name: 1,
           modelyear: 1,
           city: 1,
@@ -49,7 +50,7 @@ export default async function handler(req, res) {
         const result = await cardataschema.find(appliedfilters, selectedfields);
 
         // Process the query results
-        console.log(result); // This will contain documents with only the selected fields and the first element of the images array
+        // console.log(result); // This will contain documents with only the selected fields and the first element of the images array
         if (result) {
           res.status(200).json({
             success: true,

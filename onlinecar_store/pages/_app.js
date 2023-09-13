@@ -14,6 +14,8 @@ import '@/styles/show_img_modal.css'
 import '@/styles/searchcar.css'
 import '@/styles/filtermodal.css'
 import '@/styles/doublerange.css'
+import '@/styles/singlecarpage.css'
+import '@/styles/Other_profilepages.css'
 
 import Head from 'next/head'
 

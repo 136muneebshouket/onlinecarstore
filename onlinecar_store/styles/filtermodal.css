@@ -36,7 +36,7 @@ font-weight: 500;
     /* display: none; */
    
 }
-.filtermodal .bx-chevron-down{
+.filtermodal label .bx-chevron-down{
     font-size: 25px !important;
     font-weight: 900;
     position: absolute;
@@ -190,6 +190,7 @@ width: 40%;
 border-radius: 5px;
 border: 1px solid #213974;
 margin: 5px;
+padding: 4px;
 }
 .filtermodal .apply_filter_btns button:nth-child(2){
     background-color: #1841aa;

@@ -75,7 +75,10 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">Task Board</Link>
+                      <Link href="/users/My_Ads">My ads</Link>
+                    </li>
+                    <li>
+                      <Link href="/users/My_Saved_Ads">My Saved Ads</Link>
                     </li>
                     <li>
                       <Link href="/">Setting</Link>
@@ -94,10 +97,10 @@ const NavBar = () => {
             ) : (
               <>
                 <div>
-                  <Link href="/Authentication/Signup" className="username">
+                  <Link href="/authentication/Signup" className="username">
                     Sign up
                   </Link>
-                  <Link href="/Authentication/Login" className="username">
+                  <Link href="/authentication/Login" className="username">
                     Sign in
                   </Link>
                 </div>
@@ -175,7 +178,7 @@ const NavBar = () => {
                 </Link>
               </li>
 
-              <Link className="postaddlink" href="/Used_cars/Sell">
+              <Link className="postaddlink" href="/used_cars/Sell">
                 <p>Post an add</p>
               </Link>
             </ul>
@@ -197,7 +200,7 @@ const NavBar = () => {
                 }
                 if (arrowDown.current.contains(event.target)) {
                   setProfileDropDown(!profileDropDown);
-                  console.log("im clicked");
+                  // console.log("im clicked");
                 }
               }}
             >

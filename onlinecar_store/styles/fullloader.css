@@ -15,16 +15,16 @@
 }
 
 .fullLoader i{
-    font-size: 20vw;
-    color: rgb(250, 25, 44);
+    font-size: 15vw;
+    color: #213974;
     border-radius: 50px;
 }
 
 .fullLoader i{
-    -webkit-animation: rotating 2s linear infinite;
-	        animation: rotating 2s linear infinite;
+    -webkit-animation: rotating 2s ease-out infinite;
+	        animation: rotating 2s ease-out infinite;
 } 
- /* @keyframes rotating {
+ @keyframes rotating {
     from{
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -33,4 +33,4 @@
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
-} */
+}
