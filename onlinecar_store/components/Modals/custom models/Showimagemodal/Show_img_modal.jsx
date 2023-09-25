@@ -19,7 +19,7 @@ const Show_img_modal = ({ onClose, selectedimg,delimages }) => {
           ></i>
         </div>
         <div className="imginmodal">
-          <Image src={selectedimg.imgurl} alt="loading" width={10} height={10} />
+          <img src={selectedimg.imgurl} alt="loading" width={10} height={10} loading="lazy" />
         </div>
         <div>
           <button onClick={()=>{delimages(selectedimg.index)}}>Delete image</button>

@@ -12,6 +12,7 @@
     
     backdrop-filter: blur(5.1px);
     -webkit-backdrop-filter: blur(5.1px);
+    z-index: 100;
 }
 
 .fullLoader i{

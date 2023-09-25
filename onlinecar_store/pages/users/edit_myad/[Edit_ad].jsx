@@ -7,7 +7,8 @@ import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
+import { useRouter } from "next/router";
+import uploadimages from "@/config/cloudinary/cloudinaryimagesupdate";
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
@@ -23,13 +24,11 @@ const FullLoader = dynamic(
   }
 );
 
-const Post_ad = () => {
+
+const Edit_ad = () => {
+  const router = useRouter();
+
   const { data: sessionData } = useSession();
-  
-  const axiosConfig = {
-    maxContentLength: 100000000, // 100MB
-  };
-  const axiosInstance = axios.create(axiosConfig);
 
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -43,11 +42,13 @@ const Post_ad = () => {
   });
   const [modalvalue, setModalvalue] = useState("");
   const [imagestoshow, setImagestoshow] = useState([]);
-  const [Cloudimages, setCloudimages] = useState([]);
+  const [oldimages, setOldimages] = useState([]);
+  // const [Cloudimages, setCloudimages] = useState([]);
 
+  // console.log(imagestoshow);
   const [errors, setErrors] = useState(false);
-  const [phoneerr, setPhoneerr] = useState(false);
   const [dberrors, setDberrors] = useState([]);
+  const [phoneerr, setPhoneerr] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -79,15 +80,47 @@ const Post_ad = () => {
   const [carobj, setCarobj] = useState(initialState);
 
   useEffect(() => {
+    setLoading(true);
+
+    const pageurl = window.location.pathname.split("/");
+    const ad_id = pageurl[pageurl.length - 1];
     let userid = sessionData?.user._id;
 
-    setCarobj((prevCarobj) => {
-      return {
-        ...prevCarobj,
-        ...{ seller_id: userid },
-      };
-    });
-  }, [imagestoshow]);
+    let param = {
+      ad_id: ad_id,
+      user_id: userid,
+    };
+    if (ad_id && userid) {
+      get_ad();
+    }
+    async function get_ad() {
+      await axios
+        .get(`/api/update_add/get_my_ad`, { params: param })
+        .then((res) => {
+          if (res.status == 200) {
+            // console.log(res.data.data);
+            res.data.data.user_id = userid;
+            // console.log(res.data.data.images_url)
+            let images = res.data.data.images_url;
+            let arr = images.map((v) => {
+              return {
+                img_id: v.img_id,
+                url: v.img_url,
+              };
+            });
+            setImagestoshow(arr);
+            setOldimages(arr);
+            setCarobj(res.data.data);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err.message);
+          setLoading(false);
+        });
+    }
+  }, []);
+  // console.log(imagestoshow)
 
   const resetState = () => {
     setCarobj(initialState);
@@ -242,7 +275,6 @@ const Post_ad = () => {
   };
 
   // function for deleting selected images///////////////////////////////////////////////////////////////////////////
-
   const delimages = async (imgindex) => {
     const filteredimages = imagestoshow.filter((obj, index) => {
       if (index !== imgindex) {
@@ -269,21 +301,26 @@ const Post_ad = () => {
           key !== "duration" &&
           key !== "Secondary_no" &&
           key !== "seller_id" &&
-          key !== "model"
+          key !== "model" &&
+          key !== "certified" &&
+          key !== "inspected" &&
+          key !== "auction_sheet" &&
+          key !== "managed_by"
         ) {
           err_values.push(key);
         }
       }
     });
     if (err_values.length > 0) {
+      console.log(err_values);
       await setErrors(true);
       let elementindex = 0;
       scroll();
-      function scroll() {
+      async function scroll() {
         const element = document.getElementById(err_values[elementindex]);
         if (element == null) {
           elementindex += 1;
-          scroll();
+           scroll();
           return;
         }
 
@@ -320,120 +357,87 @@ const Post_ad = () => {
     }
   };
 
-  // function for uploading to cloudinary
+ async function process_imges(){
+    let imagesto_delete = oldimages.map((imgs) => {
+      if (!imagestoshow.includes(imgs)) {
+        return imgs.img_id;
+      }
+    }).filter((x) => x != undefined);;
+    if (imagesto_delete.length > 0) {
+      carobj.images_to_del = imagesto_delete;
+    }
+    const imgs_to_uplod = imagestoshow.map((imgs) => {
+      if (!oldimages.includes(imgs)) {
+        // return {filename: imgs.file.name , url: imgs.url};
+        let obj={filename: imgs.file.name , url: imgs.url}
+        return obj;
+      }
+    }).filter((x) => x != undefined);
+    if (imgs_to_uplod.length > 0) {
+      carobj.imgs_to_uplod = imgs_to_uplod;
+    }
+    delete carobj.images_url;
+  }
 
-  // const uploadimages=async(carid)=>{
-  // console.log(imagestoshow[0].file)
-  // //for uploading to cloudinary
-
-  //     const uploadData = new FormData();
-
-  //     for (let i = 0; i < imagestoshow.length; i++) {
-  //       uploadData.append('file',imagestoshow[i].file);
-  //         uploadData.append("upload_preset", process.env.APP_PRESET_NAME);
-  //       uploadData.append("cloud_name", process.env.APP_CLOUD_NAME);
-
-  //       try {
-  //        await axios.post(`https://api.cloudinary.com/v1_1/${process.env.APP_CLOUD_NAME}/image/upload`,uploadData).then((res)=>{
-  //           // console.log(res.data.secure_url);
-  //          Cloudimages.push(res.data.secure_url)
-
-  //           }).catch((err)=>{
-  //               console.error(err)
-  //           })
-  //         // Process the uploaded image URLs here, e.g., save them to your state or send them to the server.
-  //       } catch (error) {
-  //         console.error('Upload failed:', error);
-  //         continue;
-  //       }
-  //     }
-
-  //       // if(Cloudimages.length == imagestoshow.length ){
-  //       if(Cloudimages.length > 0 ){
-  //         let images={
-  //           carid,
-  //           Cloudimages
-  //         }
-  //         await axios
-  //         .post(`/api/uploadcar/uploadimages`, images)
-  //         .then(async (res) => {
-
-  //           if (res.status == 201) {
-  //             // setError(res?.data);
-  //             console.log(res?.data)
-  //
-  //             // resetState();
-  //             // resettextarea();
-  //           //  await uploadimages(res?.data.car_id)
-  //           setLoading(false)
-  //           }
-  //         })
-  //         .catch((err) => {
-  //          console.log(err?.response?.data)
-  //         }).finally(()=>{
-  //           setLoading(false)
-  //         });
-
-  //       }
-
-  //     // console.log(Cloudimages)
-  // }
-
-  // console.log(Cloudimages)
-  // console.log(Cloudimages)
-  // console.log(imagestoshow)
 
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
     await geterrors();
-    console.log(err_values.length);
-    console.log(errors, phoneerr);
-
+    // console.log(err_values.length);
+    // console.log(errors, phoneerr);
+    
     if (err_values.length == 0 && errors == false && phoneerr == false) {
-      console.log("done");
+      // console.log("done");
       setLoading(true);
-
-      const imgsto_load = imagestoshow.map((img)=>{
-        //  delete img.file;
-         let obj = {url:img.url,name:img.file.name}
-         return obj;
-        })
-        console.log(carobj)
-          let cardata={
-            carobj,
-            imgsto_load
-          }
-      await axiosInstance
-        .post(`/api/uploadcar/postmy_ad`, cardata)
+      await process_imges()
+       console.log(carobj)
+       console.log(imagestoshow)
+      //  setLoading(false)
+      await axios
+        .post(`/api/update_add/edit_myadd`, carobj)
         .then(async (res) => {
-          if (res.status == 201) {
+          if (res.status == 201 ) {
             // setError(res?.data);
             console.log(res?.data);
-            // let retun = await uploadimages(res?.data.car_id, imagestoshow, []);
-            // retun
-            //   .then((res) => {
+            // if(res?.data.car_id){
+            //   let retun = await uploadimages(res?.data.car_id, imagestoshow, oldimages);
+            //   retun.then((res) => {
             //     console.log(res);
-            //     setDberrors([...dberrors, ...res]);
-            //   })
-            //   .catch((err) => console.err(err));
-           resetState();
-           resettextarea();
-            setLoading(false);
+            //     setDberrors([...dberrors,...res])
+            //   }).catch(err=>console.err(err));
+            // }else{
+            //   setDberrors([...dberrors,'carId not recieved'])
+            // }
+             
+            // resetState();
+            // resettextarea();
           }
+          setLoading(false)
         })
         .catch((err) => {
-          console.log(err?.response?.data);
-          setLoading(false);
+          console.error(err?.response?.data);
+          // setDberrors([...dberrors,err?.response?.data])
+          setLoading(false)
+        }).finally(()=>{
+          setLoading(false)
+          // console.log(dberrors)
         })
-        .finally(() => {
-          setLoading(false);
-        });
+       
     }
   };
   // console.log(carobj);
   // console.log(imagestoshow);
+  // console.log(oldimages);
   // console.log(regex.test(carobj.Phone_no));
+  // function img_uploads() {
+  //   let retun = uploadimages('650a3b29cceb83b8442e4dea', imagestoshow, oldimages);
+  //   retun.then((res) => {
+  //     console.log(res);
+  //     // setDberrors([...dberrors,...res])
+  //   }).catch(err=>console.err(err));
+  //   // console.log(retun)
+  // }
 
   return (
     <>
@@ -454,26 +458,7 @@ const Post_ad = () => {
             <span>Post</span>
           </div>
         </div>
-        <div className="uploadpage_banner">
-          <div className="banner_title">
-            <h1>Sell your Car With 3 Easy & Simple Steps!</h1>
-            <p>It's free and takes less than a minute</p>
-          </div>
-          <div className="banner_icons">
-            <div className="icons">
-              <i className="bx bxs-car"></i>
-              <p> Enter Your Car Information </p>
-            </div>
-            <div className="icons">
-              <i className="bx bxs-car"></i>
-              <p> Enter Your Car Information </p>
-            </div>
-            <div className="icons">
-              <i className="bx bxs-car"></i>
-              <p> Enter Your Car Information </p>
-            </div>
-          </div>
-        </div>
+
         <div className="postad_formsection">
           <div className="car_info">
             <div className="form_section">
@@ -729,7 +714,7 @@ const Post_ad = () => {
                     <h2>Upload Photos</h2>
                   </div>
                   <div className="upload_img_input">
-                    {errors && imagestoshow.length < 10 ? (
+                    {errors && imagestoshow.length < 1 ? (
                       <span className="errorspan">
                         Upload at least 10 images
                       </span>
@@ -1091,6 +1076,7 @@ const Post_ad = () => {
                   <button type="submit">Submit & Continue</button>
                 </div>
               </form>
+              {/* <button onClick={img_uploads}>btn</button> */}
             </div>
           </div>
         </div>
@@ -1111,9 +1097,10 @@ const Post_ad = () => {
           delimages={delimages}
         />
       )}
+       
       {loading ? <FullLoader /> : <></>}
     </>
   );
 };
 
-export default Post_ad;
+export default Edit_ad;

@@ -32,7 +32,7 @@ const Sell = () => {
               <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
            
-            <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
+            <Link href="/used_cars/sell/Post_ad"> <button> post an add</button></Link>
             
             
             </div>
@@ -47,7 +47,7 @@ const Sell = () => {
               <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li>
               <li><i className='bx bx-check'></i> <span>Post your Ad for Free in 3 Easy Steps</span></li> 
             </ul>
-            <Link href="/Used_cars/Sell/Post_ad"> <button> post an add</button></Link>
+            <Link href="/used_cars/sell/Post_ad"> <button> post an add</button></Link>
             </div>
             
           </div>

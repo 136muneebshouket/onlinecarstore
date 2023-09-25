@@ -1,5 +1,5 @@
-import cardataschema from "../../../models/cardataschema";
-import dbConnect from "../../../config/dbConnect";
+import cardataschema from "../../../../models/cardataschema";
+import dbConnect from "../../../../config/dbConnect";
 
 export default async function handler(req, res) {
   dbConnect();
@@ -9,10 +9,19 @@ export default async function handler(req, res) {
 
       try {
         // console.log(req.query)
-        const id =req.query.id
+        const {ad_id,user_id} =req.query
+
+        const rejectedfields = {
+         seller_id:0,
+         createdAt:0,
+         updatedAt:0,
+         __v:0
+        };
+        // console.log(ad_id)
+        // console.log(user_id)
         // console.log(id)
         // // Perform the query with the specified projection
-        const result = await cardataschema.findOne({_id:id });
+        const result = await cardataschema.findOne({_id:ad_id,seller_id:user_id },rejectedfields);
         
         if(!result){
           res.status(404).json({
@@ -31,7 +40,7 @@ export default async function handler(req, res) {
           });
         }
       } catch (err) {
-        res.status(400).json({
+        res.status(500).json({
           success: false,
           message: err,
         });

@@ -85,10 +85,6 @@ const carSchema = new mongoose.Schema(
       type: String,
       default:''
     },
-    Phone_no: {
-      type: Number,
-      required:[true, 'Phone_no is required'],
-    },
     Secondary_no: {
       type: Number,
       required:false,
@@ -96,7 +92,7 @@ const carSchema = new mongoose.Schema(
     images_url: {
       type: Array,
         default: [],
-        required:false
+        required:true
     },
     certified: {
       type: Boolean,

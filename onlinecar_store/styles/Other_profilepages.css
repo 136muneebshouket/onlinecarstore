@@ -9,63 +9,87 @@
 .main_others .links_section {
     display: flex;
     margin-bottom: 40px;
-     background-color: #fff;
+    background-color: #fff;
 }
-.main_others .links_section >div{
+
+.main_others .links_section>div {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.links_section .links ,.main_ads_section .ads_links_section .links{
+
+.links_section .links,
+.main_ads_section .ads_links_section .links {
     width: 100%;
     text-align: center;
     padding: 8px 5px;
     border: 1px solid #e5e5e5;
     font-size: 14px;
     color: rgb(57 57 57);
-     background-color: #fff;
-     cursor: pointer;
-     text-decoration: none;
-     display: inline-block;
+    background-color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 
 .main_ads_section .ads_links_section {
-  margin-bottom: 20px;
-  display: flex;
+    margin-bottom: 20px;
+    display: flex;
 }
 
-.main_ads_section > div{
+.main_ads_section>div {
     background-color: #fff;
 }
+
 .my_Ads_section {
     text-align: center;
     padding: 10px;
 }
 
-.my_Ads_section h5{
-margin: 20px;
+.my_Ads_section h5 {
+    margin: 20px;
 }
 
+.my_Ads_section .edit_or_del_btns {
+    text-align: end;
+}
+
+.my_Ads_section .edit_or_del_btns button {
+    border: none;
+    padding: 3px 20px;
+    color: #ffffff;
+    font-size: 15px;
+    margin: 2px 7px;
+    text-decoration: none;
+}
+.my_Ads_section .edit_or_del_btns button a{
+    color: #fff;
+    text-decoration: none;
+}
 @media only screen and (max-width:770px) {
-    .main_others{
+    .main_others {
         margin-top: 0px;
         width: auto;
         padding: 5px;
     }
-    .main_others .links_section{
+
+    .main_others .links_section {
         flex-direction: column;
     }
-    .my_Ads_section .car_img{
+
+    .my_Ads_section .car_img {
         width: 185px !important;
         height: 120px;
     }
-    .my_Ads_section .singlecar{
+
+    .my_Ads_section .singlecar {
         /* margin-bottom: 5px; */
         margin: 0px 0px 5px 0px;
     }
-    .my_Ads_section{
+
+    .my_Ads_section {
         padding: 5px;
     }
-   
+
 }

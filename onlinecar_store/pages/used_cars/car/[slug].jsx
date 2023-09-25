@@ -14,10 +14,11 @@ const slug = ({  carrdata }) => {
   useEffect(() => {
     if (carrdata) {
       setFeatures(carrdata.carfeatures)
-      setImages(carrdata.images_url)
+
+      setImages(carrdata.images_url.map((x) => {delete x.img_id; return x.img_url } ))
     }
   }, [carrdata]);
-
+// console.log(images)
   // const [features, setFeatures] = useState([
   //   "ABS",
   //   "Air Bags",
@@ -73,8 +74,8 @@ const slug = ({  carrdata }) => {
       }
     }
   };
- 
 
+// console.log(images[index])
   return (
     <>
       <div className="singlecar_page">
@@ -88,11 +89,12 @@ const slug = ({  carrdata }) => {
                 <span style={{ color: "#223C7A" }}>{carrdata.city}</span>
               </div>
               <div className="img_section">
-                <Image
+                <img
                   src={images[index]}
                   alt="loading"
-                  width={100}
-                  height={100}
+                  loading="lazy"
+                  // width={100}
+                  // height={100}
                 />
                 <i
                   onClick={() => {
@@ -199,9 +201,9 @@ const slug = ({  carrdata }) => {
 
 export async function getServerSideProps({ params, query }) {
 let pageurl = params.slug.split('-')
-  let sugid = pageurl[pageurl.length - 1]
+  let slugid = pageurl[pageurl.length - 1]
   const res = await axios.get(
-    `${process.env.Host}/api/Singlecardata/?id=${sugid}`
+    `${process.env.Host}/api/Singlecardata/?id=${slugid}`
   );
 
   const carrdata = res.data.data;

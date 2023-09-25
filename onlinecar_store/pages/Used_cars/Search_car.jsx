@@ -154,7 +154,7 @@ const Search_car = ({   carrdata,   loadiing }) => {
                 >
                   <div className="car_img">
                     <Image
-                      src={obj.images_url[0]}
+                      src={obj.images_url[0].img_url ? obj.images_url[0].img_url :obj.images_url[0]}
                       width={200}
                       height={200}
                       alt="loading"

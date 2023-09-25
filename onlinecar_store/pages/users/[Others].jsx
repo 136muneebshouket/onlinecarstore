@@ -11,7 +11,7 @@ const Others = () => {
     // const path= router.pathname;
     const pageurl= window.location.pathname.split('/');
     const path = pageurl[pageurl.length - 1]
-    console.log(path)
+    // console.log(path)
     setChildcomponent(path)
   },[])
 
