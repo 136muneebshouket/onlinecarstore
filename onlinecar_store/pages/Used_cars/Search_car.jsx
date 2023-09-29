@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import price_converter from "@/components/processing_functions/Price_calculator";
 // import getServerSideProps from './filtercarfunc'
 
 import Filtermodal from "@/components/Filters/FiIterModal/Filtermodal";
@@ -12,7 +13,7 @@ import Filtermodal from "@/components/Filters/FiIterModal/Filtermodal";
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => <div className="loder"><h2>Loading...</h2></div>,
   }
 );
 
@@ -158,11 +159,12 @@ const Search_car = ({   carrdata,   loadiing }) => {
                       width={200}
                       height={200}
                       alt="loading"
+                      
                     />
                   </div>
                   <div className="car_info">
                     <div className="car_content">
-                      <Link href={(`car/${obj.brand.replaceAll(" ",'-')}-${obj.model.replaceAll(" ",'-')}-${obj.modelyear}-${obj._id}`).toLowerCase()} target="_blank">
+                      <Link href={(`car/${obj.brand.replaceAll(" ",'-')}-${obj.model.replaceAll(" ",'-')}-${obj.modelyear}-${obj._id}`).toLowerCase()} >
                       <h3>
                         {obj.brand}{" "}{obj.model}{" "}{obj.variant_name && obj.variant_name}{" "} 
                         {obj.modelyear}
@@ -172,7 +174,7 @@ const Search_car = ({   carrdata,   loadiing }) => {
                      
                       <p>{obj.city}</p>
                       <div>
-                      <span>{obj.Mileage}km</span>
+                      <span>{price_converter(obj.Mileage)} km</span>
                       <span>{obj.enginecc}cc</span>
                       <span>{obj.transmission}</span>
                       <span>{obj.enginetype}</span>
@@ -181,7 +183,7 @@ const Search_car = ({   carrdata,   loadiing }) => {
                     </div>
                     <div className="car_price_section">
                       <div className="car_price_fav">
-                        <h3>{obj.price}</h3>
+                        <h3>{price_converter(obj.price)}</h3>
                         <i className="bx bx-heart"></i>
                       </div>
                       <div className="phone_num">

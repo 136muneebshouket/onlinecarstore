@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 
 const UserSchema = new mongoose.Schema(
   {
-    full_name:{
+    name:{
       type:String,
       required:[true, 'Fullname field is required'],
     },
@@ -24,6 +24,11 @@ const UserSchema = new mongoose.Schema(
       type:String,
       required:false,
       default:""
+    },
+    auth_type: {
+      type:String,
+      required:false,
+      default:"Next_auth"
     },
     resetToken: {
       type:String,

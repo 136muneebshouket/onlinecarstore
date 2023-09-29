@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import Sellerdetails from "./Sellerdetails/Sellerdetails";
 import Reporting_add from "./reporting_add/Reporting_add";
+import price_converter from "@/components/processing_functions/Price_calculator";
 
 const slug = ({  carrdata }) => {
   // const [car, setCar] = useState({});
@@ -112,6 +113,7 @@ const slug = ({  carrdata }) => {
                 ></i>
         
               </div>
+              <h2 style={{ color: "#076d00",padding:'10px' }}>PKR: {price_converter(carrdata.price)}</h2>
             </div>
             <div className="car_specs">
               <div className="single_spec">

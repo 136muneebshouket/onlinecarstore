@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-
+import React,{useEffect, useState} from 'react'
+import { car_features } from '@/components/processing_functions/features_generations';
 const FeaturesModal = ({carrdata}) => {
 
     const features = [
@@ -32,8 +32,16 @@ const FeaturesModal = ({carrdata}) => {
         "Steering Switches",
         "USB and Auxillary Cable",
       ]
-
-      const [featurearr, setFeaturearr] = useState([]);
+      // const [realfeatures, setRealfeatures] = useState(car_features);
+      const [featurearr, setFeaturearr] = useState(car_features);
+      useEffect(()=>{
+        // if(car_features?.length > 0){
+          setFeaturearr(car_features)
+          console.log(car_features)
+        // }
+      },[car_features])
+      // if()
+      
 
       const addfeature = (value) => {
         if (featurearr.includes(value)) {
@@ -49,7 +57,7 @@ const FeaturesModal = ({carrdata}) => {
         }
       };
       
-// console.log(featurearr)
+
 
   return (
     <>
@@ -59,10 +67,11 @@ const FeaturesModal = ({carrdata}) => {
                       <label htmlFor="">Features</label>
                       <div style={{display:'flex',flexDirection:'unset' }}
                       className='features_div'>
+                       
                         {features.map((v,index)=>{
                          return<>
                          <div key={index} className='single_feature' style={{display:'flex' ,flexDirection:'row',alignItems:'center', width:'30%'}}>
-                         <input style={{width:'15px', height:'15px',margin:'10px 7px'}} type="checkbox" id="fetchere" name="vehicle1" onClick={()=>{addfeature(v)}} />
+                         <input style={{width:'15px', height:'15px',margin:'10px 7px'}}  type="checkbox" id="fetchere" name="vehicle1" onClick={()=>{addfeature(v)}} checked={car_features.includes(v) ? true : false}/>
                          <label >{v}</label>
                          </div>
                          </>

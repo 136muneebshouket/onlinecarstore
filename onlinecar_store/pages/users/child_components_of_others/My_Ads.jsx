@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
-
+import price_converter from "@/components/processing_functions/Price_calculator";
 const Del_ad_modal = dynamic(
   () => import("@/components/Modals/delete_ad_modal/Delete_ad_modal"),
   {
@@ -16,7 +16,7 @@ const Del_ad_modal = dynamic(
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => <div className="loder"><h2>Loading...</h2></div>,
   }
 );
 
@@ -90,6 +90,7 @@ const My_Ads = () => {
                           width={200}
                           height={200}
                           alt="loading"
+                          
                         />
                       </div>
                       <div className="car_info">
@@ -104,7 +105,7 @@ const My_Ads = () => {
                             )}-${obj.model.replaceAll(" ", "-")}-${
                               obj.modelyear
                             }-${obj._id}`.toLowerCase()}
-                            target="_blank"
+                            // target="_blank"
                           >
                             <h3>
                               {obj.brand} {obj.model}{" "}
@@ -113,12 +114,12 @@ const My_Ads = () => {
                             </h3>
                           </Link>
                           <p className="price_mbv">
-                            <strong>PKR:{obj.price}</strong>
+                            <strong>PKR:{price_converter(obj.price)}</strong>
                           </p>
 
                           <p>{obj.city}</p>
                           <div>
-                            <span>{obj.Mileage}km</span>
+                            <span>{price_converter(obj.Mileage)} km</span>
                             <span>{obj.enginecc}cc</span>
                             <span>{obj.transmission}</span>
                             <span>{obj.enginetype}</span>
@@ -126,7 +127,7 @@ const My_Ads = () => {
                         </div>
                         <div className="car_price_section">
                           <div className="car_price_fav">
-                            <h3>{obj.price}</h3>
+                            <h3>{price_converter(obj.price)}</h3>
                             {/* <i className="bx bx-heart"></i> */}
                           </div>
                           {/* <div className="phone_num">
@@ -166,9 +167,6 @@ const My_Ads = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           car={carprops}
-          // car_title={`${obj.brand} ${obj.model}
-          //             ${obj.variant_name && obj.variant_name}
-          //            ${obj.modelyear}`}
         />
       )}
     </>

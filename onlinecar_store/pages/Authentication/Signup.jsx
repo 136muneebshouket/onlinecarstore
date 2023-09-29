@@ -8,7 +8,7 @@ import Link from "next/link";
 import dynamic from 'next/dynamic'
 
 const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 
 const Register = () => {
@@ -69,7 +69,7 @@ const Register = () => {
        setLoading(true);
     e.preventDefault();
     let loginobj = {
-      full_name,
+      name:full_name,
       // username,
       password,
       email,

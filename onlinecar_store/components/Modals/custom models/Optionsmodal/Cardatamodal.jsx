@@ -1,12 +1,17 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { arrayOfyears, carData } from "@/components/carsdata/arrays";
-// import cardata from '../../../carsdata/cardata.json'
-// import from "@/components/carsdata/arrays";
+import { arrayOfyears } from "@/components/carsdata/arrays";
+import final_carsdata from '../../../carsdata/final_carsdata'
+import {feature_generation} from "@/components/processing_functions/features_generations";
+
 
 const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
+
+// const cardata = JSON.parse(final_carsdata)  
+// console.log(final_carsdata)
+
   const [model_year, setModel_year] = useState(null);
   const [modelyears, setModelyears] = useState(arrayOfyears);
-  const [carsoptions, setCarsoptions] = useState(carData);
+  const [carsoptions, setCarsoptions] = useState(final_carsdata);
   const [searchval, setSearchval] = useState("");
   const [varients, setVarients] = useState([]);
   // const [brandmatch, setBrandmatch] = useState(false);
@@ -17,7 +22,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
   //  console.log('im rendering')
   const filter = useMemo(() => {
     // if (searchval !== "") {
-    const filteredCarData = carData.filter((brand) => {
+    const filteredCarData = final_carsdata.filter((brand) => {
       const brandName = brand.name.toLowerCase();
       const modelNames = brand.models.map((model) => model.name.toLowerCase());
 
@@ -79,6 +84,8 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
     cardata_obj.enginetype = enginetype.trim();
     setCardata_obj(cardata_obj);
     await carrdata(cardata_obj);
+    // console.log(obj.Features)
+    obj.Features && feature_generation(obj.Features)
     onClose();
   };
   // console.log(varients)

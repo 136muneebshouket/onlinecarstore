@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
+import Google_icon from "../z_icons/Google_icon";
 // import ForgetpasswordModal from "@/components/Modals/ForgetpasswordModal";
 // import FullLoader from "@/components/Modals/Loader/fullLoader";
 import { useRouter } from "next/router";
@@ -9,7 +10,7 @@ import dynamic from 'next/dynamic'
 // import "./Login.css"
 
 const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 const ForgetpasswordModal = dynamic(() => import('../../components/Modals/ForgetpasswordModal'), {
   loading: () => <p>Loading...</p>
@@ -165,6 +166,11 @@ const Login = () => {
                 </button>
               </form>
             </div>
+            <div className="google_btn" onClick={()=>{signIn('google')}}>
+              <span>Sign In with Google</span>
+              <button ><Google_icon/></button>
+            </div>
+            
           </div>
         </div>
         {/* <p className="errorPara">{error}</p> */}

@@ -1,13 +1,17 @@
-import React, { useReducer, useState, useRef } from "react";
+
+import React, { useReducer, useState, useRef, useEffect } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Logo from "@/pages/z_icons/Logo";
 import Link from "next/link";
+// import {google_auth} from "../components/processing_functions/auth_func";
 // import Image from "next/image";
 
 import { useSession, signOut } from "next-auth/react";
+import axios from "axios";
 
 const NavBar = () => {
   const { data: sessionData } = useSession();
+  // console.log(sessionData)
   const isLoggedIn = sessionData?.user;
 
   const [profileDropDown, setProfileDropDown] = useState(false);
@@ -20,17 +24,17 @@ const NavBar = () => {
   var profileDrop = useRef();
   var arrowDown = useRef();
   // console.log(profileDropDown);
-
-  const logout=async()=>{
-  // let logout = await signOut();
-  // if(logout){
-  //   if(isLoggedIn == true){
-  //     console.log(isLoggedIn)
-  //     logout();
+  // console.log(sessionData?.user)
+  // useEffect(()=>{
+    
+  //   async function func(){
+  //     if(sessionData?.user){
+  //       await google_auth(sessionData?.user)
+  //     }
   //   }
-  // }
-  console.log('logout"')
-  }
+  //   func()
+
+  // },[sessionData?.user])
 
   return (
     <>
@@ -44,7 +48,7 @@ const NavBar = () => {
                   className="arrowDown"
                 >
                   <div className="username">
-                    Welcome {sessionData?.user?.full_name}
+                    Welcome {sessionData?.user?.name}
                   </div>
                   <i
                     style={{
@@ -66,7 +70,7 @@ const NavBar = () => {
                   <ul>
                     <li>
                       <Link
-                        href={`/users/profile/${sessionData?.user?.full_name.replace(
+                        href={`/users/profile/${sessionData?.user?.name.replace(
                           /\s/g,
                           ""
                         )}`}

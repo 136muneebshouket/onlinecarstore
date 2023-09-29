@@ -194,24 +194,24 @@
     position: absolute;
     cursor: pointer;
     top: 38%;
-    font-size: 120px;
+    font-size: 80px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 87px;
+    width: 60px;
+    height: 60px;
     color: rgb(255, 255, 255);
     font-weight: 100;
     background-color: rgb(0 0 0 / 25%);
 }
 
 .left_arrow {
-    left: 9px;
+    left: 0px;
 }
 
 .right_arrow {
-    right: 9px;
+    right: 0px;
 }
 
 .singlecar_page .img_section .bx-chevron-down:before {}

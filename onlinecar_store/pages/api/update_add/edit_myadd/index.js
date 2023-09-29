@@ -1,6 +1,6 @@
 import cardataschema from "../../../../models/cardataschema";
 import dbConnect from "../../../../config/dbConnect";
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 const ImageKit = require("imagekit");
 // const  Cloudinary  = require("next-cloudinary");
 
@@ -10,9 +10,9 @@ const ImageKit = require("imagekit");
 //   api_secret: process.env.APP_SECRET_KEY,
 // });
 const imageKit = new ImageKit({
-  publicKey: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
-  privateKey: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
-  urlEndpoint: "https://ik.imagekit.io/lxtg60t67",
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
 });
 
 export default async function handler(req, res) {
@@ -68,8 +68,8 @@ export default async function handler(req, res) {
                   }
                 }
               );
-            } catch (err) {
-              console.log(err + "err");
+            } catch (error) {
+              console.log(error + "err");
               let back = err(400, "error in imgkit deleting", false);
               if (back) {
                 return;
@@ -120,7 +120,7 @@ export default async function handler(req, res) {
             }
           }
 
-          console.log(doc);
+          // console.log(doc);
           let updated = await doc.save();
           // const user = await cardataschema.findByIdAndUpdate({id : });
           if (updated) {

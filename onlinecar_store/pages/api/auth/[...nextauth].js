@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import GoogleProvider from "next-auth/providers/google";
+import { google_auth } from "./auth_func"
 
 import User from '../../../models/user'
 import bcrypt from 'bcrypt'
@@ -12,6 +13,11 @@ export default NextAuth({
     strategy: "jwt",
   },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
+
     CredentialsProvider({
       async authorize(credentials, req) {
         dbConnect();
@@ -34,7 +40,7 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {
+  callbacks: {    
     jwt: async ({ token, user }) => {
       user && (token.user = user);
 
@@ -42,15 +48,17 @@ export default NextAuth({
     },
     session: async ({ session, token }) => {
       session.user = token.user;
-      
+  
       // delete password from session
       delete session?.user?.password;
-      console.log(session)
+      await google_auth(session?.user)
+
+      // console.log(session)
       return session;
     },
   },
   pages: {
-    signIn: "/Authentication/Login",
+    signIn: "/authentication/Login",
   },
   secret: process.env.NEXTAUTH_SECRET,
 });

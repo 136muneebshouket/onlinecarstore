@@ -17,19 +17,22 @@ const nextConfig = {
     // EMAIl_FROM: "mirxa136@gmail.com",
     EMAIL_HOST: "'smtp.ethereal.email',",
     EMAIL_PORT: 587,
-
     EMAIL_USER: "jakayla.toy@ethereal.email",
     EMAIl_PASS: "4Z97DRrRTBEfKyU7vJ",
     EMAIl_FROM: "jakayla.toy@ethereal.email",
+    // APP_PRESET_NAME:"muneeb",
+    // APP_CLOUD_NAME:"dgyh5n01r",
+    // APP_CLOUD_API_KEY:'319433391283272',
+    // APP_SECRET_KEY:'r3aoC0X_ruUgq-rNqpEkPje_gsk',
+    PUBLIC_KEY: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
+    PRIVATEKEY: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
+    URLENDPOINT: "https://ik.imagekit.io/lxtg60t67",
 
-    APP_PRESET_NAME:"muneeb",
-    APP_CLOUD_NAME:"dgyh5n01r",
-    APP_CLOUD_API_KEY:'319433391283272',
-    APP_SECRET_KEY:'r3aoC0X_ruUgq-rNqpEkPje_gsk',
 
 
      Host:"http://localhost:3000",
-
+     GOOGLE_CLIENT_ID:'181411319845-4n9oh7qvmujl7790mh65r7vcf85qa6p8.apps.googleusercontent.com',
+     GOOGLE_CLIENT_SECRET:'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'
 
   },
  

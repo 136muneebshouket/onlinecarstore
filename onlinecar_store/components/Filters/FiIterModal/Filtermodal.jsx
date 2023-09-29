@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import colors from "@/components/carsdata/colors";
 import Optionsmodal from "@/components/Modals/custom models/Optionsmodal/Optionsmodal";
+import price_converter from "@/components/processing_functions/Price_calculator";
 import ReactSlider from "react-slider";
 import { useRouter } from "next/router";
 
@@ -339,49 +340,17 @@ const Filtermodal = ({ getfilters, description }) => {
 
   useEffect(() => {
     if (carfilters.price.Gt) {
-      if (carfilters.price.Gt >= 10000000) {
-        setGT(`${carfilters.price.Gt / 10000000} crore`);
-      } else if (carfilters.price.Gt >= 100000) {
-        setGT(`${carfilters.price.Gt / 100000} lakh`);
-      } else if (carfilters.price.Gt >= 1000) {
-        setGT(`${carfilters.price.Gt / 1000} thousand`);
-      } else {
-        setGT(carfilters.price.Gt);
-      }
+      setGT(price_converter(carfilters.price.Gt));
     }
     if (carfilters.price.Lt) {
-      if (carfilters.price.Lt >= 10000000) {
-        setLT(`${carfilters.price.Lt / 10000000} crore`);
-      } else if (carfilters.price.Lt >= 100000) {
-        setLT(`${carfilters.price.Lt / 100000} lakh`);
-      } else if (carfilters.price.Lt >= 1000) {
-        setLT(`${carfilters.price.Lt / 1000} thousand`);
-      } else {
-        setLT(carfilters.price.Lt);
-      }
+      setLT(price_converter(carfilters.price.Lt));
     }
 
     if (carfilters.Mileage.Gt) {
-      if (carfilters.Mileage.Gt >= 10000000) {
-        setmilageGT(`${carfilters.Mileage.Gt / 10000000} crore`);
-      } else if (carfilters.Mileage.Gt >= 100000) {
-        setmilageGT(`${carfilters.Mileage.Gt / 100000} lakh`);
-      } else if (carfilters.Mileage.Gt >= 1000) {
-        setmilageGT(`${carfilters.Mileage.Gt / 1000} thousand`);
-      } else {
-        setmilageGT(carfilters.Mileage.Gt);
-      }
+      setmilageGT(price_converter(carfilters.Mileage.Gt));
     }
     if (carfilters.Mileage.Lt) {
-      if (carfilters.Mileage.Lt >= 10000000) {
-        setmilageLT(`${carfilters.Mileage.Lt / 10000000} crore`);
-      } else if (carfilters.Mileage.Lt >= 100000) {
-        setmilageLT(`${carfilters.Mileage.Lt / 100000} lakh`);
-      } else if (carfilters.Mileage.Lt >= 1000) {
-        setmilageLT(`${carfilters.Mileage.Lt / 1000} thousand`);
-      } else {
-        setmilageLT(carfilters.Mileage.Lt);
-      }
+      setmilageLT(price_converter(carfilters.Mileage.Lt));
     }
   }, [carfilters.price, carfilters.Mileage]);
 

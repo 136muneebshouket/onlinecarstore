@@ -6,7 +6,7 @@ import axios from "axios";
 import dynamic from 'next/dynamic'
 
 const FullLoader = dynamic(() => import('./Loader/FullLoader'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 
 const Modal = ({ isOpen, onClose }) => {

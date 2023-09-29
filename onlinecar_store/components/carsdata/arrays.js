@@ -3133,4 +3133,4 @@ const arrayOfyears = [
   1940,
 ];
 
-export { carData, arrayOfyears}
+export { arrayOfyears}

@@ -29,7 +29,7 @@ import dynamic from 'next/dynamic'
 //   loading: () => <p>Loading...</p>,
 // })
 const FullLoader = dynamic(() => import('../components/Modals/Loader/fullLoader'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 
 

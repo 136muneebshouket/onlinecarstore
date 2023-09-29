@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 
 const Error_handling = new mongoose.Schema(
   {
-     cloudinary_deleting_erors:{
+     cloud_imgs_delete_erors:{
       type:Array,
       default:[],
       required:false

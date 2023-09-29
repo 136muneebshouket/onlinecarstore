@@ -3,6 +3,8 @@ import axios from "axios";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Show_img_modal";
 import FeaturesModal from "@/components/Modals/custom models/featuresmodal/FeaturesModal";
+import Response_modal from "@/components/Modals/response_modal/Response_modal";
+import price_converter from "@/components/processing_functions/Price_calculator";
 import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -20,7 +22,7 @@ const OptionsModal = dynamic(
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => <div className="loder"><h2>Loading...</h2></div>,
   }
 );
 
@@ -47,7 +49,11 @@ const Edit_ad = () => {
 
   // console.log(imagestoshow);
   const [errors, setErrors] = useState(false);
-  const [dberrors, setDberrors] = useState([]);
+  const [dberrors, setDberrors] = useState({
+    msg: "",
+    success: null,
+  });
+
   const [phoneerr, setPhoneerr] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -71,10 +77,10 @@ const Edit_ad = () => {
     transmission: "",
     Assembly: "",
     carfeatures: [],
-    Phone_no: null,
+    Phone_no: '',
     variant_name: "",
     duration: "",
-    Secondary_no: null,
+    Secondary_no: '',
   };
 
   const [carobj, setCarobj] = useState(initialState);
@@ -409,14 +415,15 @@ const Edit_ad = () => {
             // }else{
             //   setDberrors([...dberrors,'carId not recieved'])
             // }
-             
-            // resetState();
-            // resettextarea();
+            setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            resetState();
+            resettextarea();
           }
           setLoading(false)
         })
         .catch((err) => {
           console.error(err?.response?.data);
+          setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
           // setDberrors([...dberrors,err?.response?.data])
           setLoading(false)
         }).finally(()=>{
@@ -652,6 +659,7 @@ const Edit_ad = () => {
                       ) : (
                         ""
                       )}
+                      {carobj.price? <span>Pkr: {price_converter(carobj.price)}</span>:<></>}
                       {carobj.price < 10000 || carobj.price > 100000000000 ? (
                         carobj.price !== null && (
                           <span className="errorspan">
@@ -742,7 +750,7 @@ const Edit_ad = () => {
                     </div>
                     <div
                       className="uploaded_images"
-                      style={{ display: "flex", flexWrap: "wrap" }}
+                      style={{ display: "flex", flexWrap: "wrap",justifyContent:'center'}}
                     >
                       {imagestoshow.map((image, index) =>
                         image.url ? (
@@ -974,10 +982,10 @@ const Edit_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Phone_no: parseInt(e.target.value) },
+                              ...{ Phone_no: (e.target.value) },
                             };
                           });
-                          var isValidPhoneNo = /^03\d{2}[ -]?\d{7}$/.test(
+                          var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(
                             e.target.value
                           );
                           if (!isValidPhoneNo) {
@@ -1028,10 +1036,10 @@ const Edit_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Secondary_no: parseInt(e.target.value) },
+                              ...{ Secondary_no: (e.target.value) },
                             };
                           });
-                          var isValidPhoneNo = /^03\d{2}[ -]?\d{7}$/.test(
+                          var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(
                             e.target.value
                           );
                           if (!isValidPhoneNo) {
@@ -1097,7 +1105,12 @@ const Edit_ad = () => {
           delimages={delimages}
         />
       )}
-       
+        {dberrors.success != null && (
+        <Response_modal
+          onClose={()=>{setDberrors({...dberrors,msg:'',success:null})}}
+          res={dberrors}
+        />
+      )}
       {loading ? <FullLoader /> : <></>}
     </>
   );

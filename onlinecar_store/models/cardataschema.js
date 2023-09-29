@@ -73,7 +73,7 @@ const carSchema = new mongoose.Schema(
       required:[true, 'car features are required'],
     },
     Phone_no: {
-        type: Number,
+        type: String,
       required:[true, 'Phone number is required'],
     },
     variant_name: {
@@ -86,7 +86,7 @@ const carSchema = new mongoose.Schema(
       default:''
     },
     Secondary_no: {
-      type: Number,
+      type: String,
       required:false,
     },
     images_url: {

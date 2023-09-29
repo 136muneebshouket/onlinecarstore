@@ -1,13 +1,20 @@
+import { get } from "mongoose";
 import dbConnect from "../../../config/dbConnect";
 import cardataschema from "../../../models/cardataschema";
 import errors_handle from "../../../models/errors_handle";
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 // const  Cloudinary  = require("next-cloudinary");
+const ImageKit = require("imagekit");
 
-cloudinary.config({
-  cloud_name: process.env.APP_CLOUD_NAME,
-  api_key: process.env.APP_CLOUD_API_KEY,
-  api_secret: process.env.APP_SECRET_KEY,
+// cloudinary.config({
+//   cloud_name: process.env.APP_CLOUD_NAME,
+//   api_key: process.env.APP_CLOUD_API_KEY,
+//   api_secret: process.env.APP_SECRET_KEY,
+// });
+const imageKit = new ImageKit({
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
 });
 
 export default async function handler(req, res) {
@@ -18,7 +25,7 @@ export default async function handler(req, res) {
         const { ad_id } = req.query;
         // console.log(ad_id)
         if (!ad_id) {
-          let back = err(400, "id not provided", false);
+          let back = err(400, "Ad_Id not provided try reloading page", false);
           if (back) {
             return;
           }
@@ -34,68 +41,57 @@ export default async function handler(req, res) {
           let images_to_del = doc.images_url;
           if (images_to_del.length > 0) {
             try {
-              var public_ids = images_to_del.map(
-                (img) =>
-                  `my-project-images/${img.split("/").pop().split(".")[0]}`
-              );
-              await cloudinary.api.delete_resources(
+              const public_ids = images_to_del.map((img) => {
+                delete img.url;
+                return img.img_id;
+              });
+              console.log(public_ids)
+
+              await imageKit.bulkDeleteFiles(
                 public_ids,
-                { invalidate: true },
-                async function (error, result) {
-                  if (result) {
-                    console.log(result);
-                  } else if (error) {
-                    try {
-                      await errors_handle.updateOne(
-                        {},
-                        { $push: { cloudinary_deleting_erors: public_ids } }
-                      );
-                    } catch (error) {
-                      console.log(error);
+                function (error, result) {
+                  if (error) {
+                    console.log(error);
+                    let back = err(400, "error in imgkit deleting", false);
+                    if (back) {
+                      return;
                     }
                   }
                 }
               );
             } catch (error) {
-              try {
-                await errors_handle.updateOne(
-                  {},
-                  { $push: { cloudinary_deleting_erors: public_ids } }
-                );
-              } catch (error) {
-                console.log(error);
+              console.log(error + "err");
+              let back = err(400, "error in imgkit deleting", false);
+              if (back) {
+                return;
               }
             }
           }
-          try {
-           let deleted_ad = await cardataschema.findByIdAndDelete(doc._id)        
-                if (!deleted_ad) {
-                  let back =  err(417, err +"can't delete ad", false);
-                  if (back) {
-                    return;
-                  }
-                }
-                if (deleted_ad) {
-                  let back =  err(200, "deleted ad", true);
-                  if (back) {
-                    return;
-                  }
-                }
-            
-          } catch (error) {
-            let back = err(417, error + "can't delete ad", false);
+          // console.log("i run ");
+          let deleted_ad = await cardataschema.findByIdAndDelete(doc._id);
+          if (!deleted_ad) {
+            let back = err(417, err + "cannot delete ad", false);
+            if (back) {
+              return;
+            }
+          }
+          if (deleted_ad) {
+            let back = err(200, "your Ad is deleted", true);
             if (back) {
               return;
             }
           }
         }
+        // let getback = false;
         function err(status, message, success) {
+          // getback = true
           res.status(status).json({
             success: success,
             message: message,
           });
           return true;
         }
+
         // res.status(417).json({
         //   success: false,
         //   message: err.message || "something went wrong",

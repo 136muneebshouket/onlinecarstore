@@ -118,3 +118,27 @@ form .showpass_icon {
   cursor: pointer;
   font-style: normal;
 }
+.google_btn{
+  margin-top: 30px;
+  color: rgb(37 97 177);
+  width: 70%;
+  margin: auto;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 30px;
+  border: 1px solid rgba(47, 125, 228, 1);
+  transition: .2s;
+}
+.google_btn:hover{
+  background: rgba(47, 125, 228, 1);
+  color: white;
+}
+.google_btn button{
+  background-color: #fff;
+  border-radius: 50%;
+  border: none;
+  width:40px;
+  height:40px;
+  padding: 0;
+  margin: 5px 10px;
+}

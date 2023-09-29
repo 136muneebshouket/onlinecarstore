@@ -5,12 +5,10 @@ import dbConnect from "../../../../config/dbConnect";
 const ImageKit = require("imagekit");
 
 const imageKit = new ImageKit({
-  publicKey: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
-  privateKey: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
-  urlEndpoint: "https://ik.imagekit.io/lxtg60t67",
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
 });
-
-
 
 export default async function handler(req, res) {
   dbConnect();

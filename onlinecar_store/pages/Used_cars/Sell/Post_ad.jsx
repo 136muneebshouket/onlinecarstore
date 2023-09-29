@@ -8,6 +8,9 @@ import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
+import Response_modal from "@/components/Modals/response_modal/Response_modal";
+import price_converter from "@/components/processing_functions/Price_calculator";
+import { set } from "mongoose";
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
@@ -19,13 +22,13 @@ const OptionsModal = dynamic(
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => <div className="loder"><h2>Loading...</h2></div>,
   }
 );
 
 const Post_ad = () => {
   const { data: sessionData } = useSession();
-  
+
   const axiosConfig = {
     maxContentLength: 100000000, // 100MB
   };
@@ -47,7 +50,12 @@ const Post_ad = () => {
 
   const [errors, setErrors] = useState(false);
   const [phoneerr, setPhoneerr] = useState(false);
-  const [dberrors, setDberrors] = useState([]);
+  // const [response, setResponse] = useState(true);
+
+  const [dberrors, setDberrors] = useState({
+    msg: "",
+    success: null,
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -70,10 +78,10 @@ const Post_ad = () => {
     transmission: "",
     Assembly: "",
     carfeatures: [],
-    Phone_no: null,
+    Phone_no: '',
     variant_name: "",
     duration: "",
-    Secondary_no: null,
+    Secondary_no: '',
   };
 
   const [carobj, setCarobj] = useState(initialState);
@@ -394,36 +402,42 @@ const Post_ad = () => {
       console.log("done");
       setLoading(true);
 
-      const imgsto_load = imagestoshow.map((img)=>{
+      const imgsto_load = imagestoshow.map((img) => {
         //  delete img.file;
-         let obj = {url:img.url,name:img.file.name}
-         return obj;
-        })
-        console.log(carobj)
-          let cardata={
-            carobj,
-            imgsto_load
-          }
+        let obj = { url: img.url, name: img.file.name };
+        return obj;
+      });
+      console.log(carobj);
+      let cardata = {
+        carobj,
+        imgsto_load,
+      };
       await axiosInstance
         .post(`/api/uploadcar/postmy_ad`, cardata)
         .then(async (res) => {
           if (res.status == 201) {
             // setError(res?.data);
             console.log(res?.data);
+
             // let retun = await uploadimages(res?.data.car_id, imagestoshow, []);
             // retun
             //   .then((res) => {
             //     console.log(res);
-            //     setDberrors([...dberrors, ...res]);
+
             //   })
             //   .catch((err) => console.err(err));
-           resetState();
-           resettextarea();
+            resetState();
+            resettextarea();
             setLoading(false);
+            // setResponse(true)
+            setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            
           }
         })
         .catch((err) => {
-          console.log(err?.response?.data);
+          // console.log(err?.response?.data);
+          // setResponse(true)
+          setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
           setLoading(false);
         })
         .finally(() => {
@@ -667,6 +681,7 @@ const Post_ad = () => {
                       ) : (
                         ""
                       )}
+                      {carobj.price? <span>Pkr: {price_converter(carobj.price)}</span>:<></>}
                       {carobj.price < 10000 || carobj.price > 100000000000 ? (
                         carobj.price !== null && (
                           <span className="errorspan">
@@ -989,10 +1004,10 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Phone_no: parseInt(e.target.value) },
+                              ...{ Phone_no: (e.target.value) },
                             };
                           });
-                          var isValidPhoneNo = /^03\d{2}[ -]?\d{7}$/.test(
+                          var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(
                             e.target.value
                           );
                           if (!isValidPhoneNo) {
@@ -1043,10 +1058,10 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Secondary_no: parseInt(e.target.value) },
+                              ...{ Secondary_no: (e.target.value) },
                             };
                           });
-                          var isValidPhoneNo = /^03\d{2}[ -]?\d{7}$/.test(
+                          var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(
                             e.target.value
                           );
                           if (!isValidPhoneNo) {
@@ -1109,6 +1124,12 @@ const Post_ad = () => {
           onClose={setIsimgModalOpen}
           selectedimg={selectedImageUrl}
           delimages={delimages}
+        />
+      )}
+      {dberrors.success != null && (
+        <Response_modal
+          onClose={()=>{setDberrors({...dberrors,msg:'',success:null})}}
+          res={dberrors}
         />
       )}
       {loading ? <FullLoader /> : <></>}
