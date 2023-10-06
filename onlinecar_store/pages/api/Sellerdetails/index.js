@@ -9,16 +9,17 @@ export default async function handler(req, res) {
 
       try {
        
-        const id =req.query.sellerid
+        const seller_email =req.query.sellerid
         
         // // Perform the query with the specified projection
         const selectedfields = {
-            full_name:1,
+            name:1,
             createdAt:1,
-            avatar:1
+            avatar:1,
+            _id:0
           };
 
-        const result = await usersdata.findOne({_id:id },selectedfields);
+        const result = await usersdata.findOne({email:seller_email },selectedfields);
 
        
         if (result) {

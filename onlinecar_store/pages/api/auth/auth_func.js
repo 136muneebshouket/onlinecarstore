@@ -9,12 +9,12 @@ async function google_auth(session) {
   if (session) {
     const user = await User.findOne({
       email: session.email,
-      auth_type: "google_auth",
+      // auth_type: "google_auth",
     });
     // console.log(user)
     if(user){   
       console.log("user exist");
-      return;
+      return user._id;
     }
     if (!user) {
       let obj = {
@@ -27,6 +27,7 @@ async function google_auth(session) {
         let usercreated = await User.create(obj);
         if (usercreated) {
           console.log("usercreated");
+          return usercreated._id;
         }
       } catch (error) {
         console.log(error);

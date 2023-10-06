@@ -1,5 +1,6 @@
 import { get } from "mongoose";
 import dbConnect from "../../../config/dbConnect";
+import userschema from "../../../models/user";
 import cardataschema from "../../../models/cardataschema";
 import errors_handle from "../../../models/errors_handle";
 // const cloudinary = require("cloudinary").v2;
@@ -22,15 +23,31 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "DELETE":
       try {
-        const { ad_id } = req.query;
+        const { ad_id ,user_id} = req.query;
         // console.log(ad_id)
+        if(!user_id){
+          let back = err(400, "user_Id not provided try reloading page", false);
+          if (back) {
+            return;
+          }
+        }
+        if(user_id){
+            let user_exist = await userschema.findOne({_id:user_id})
+            if(!user_exist ){
+              let back = err(400, "user not exist try reloading page", false);
+              if (back) {
+                return;
+              }
+            }
+        }
+       
         if (!ad_id) {
           let back = err(400, "Ad_Id not provided try reloading page", false);
           if (back) {
             return;
           }
         }
-        let doc = await cardataschema.findOne({ _id: ad_id });
+        let doc = await cardataschema.findOne({ _id: ad_id, seller_id:user_id });
         if (!doc) {
           let back = err(404, "car not found", false);
           if (back) {
@@ -45,7 +62,7 @@ export default async function handler(req, res) {
                 delete img.url;
                 return img.img_id;
               });
-              console.log(public_ids)
+              // console.log(public_ids)
 
               await imageKit.bulkDeleteFiles(
                 public_ids,

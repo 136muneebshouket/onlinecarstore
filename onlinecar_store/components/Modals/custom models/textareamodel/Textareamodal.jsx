@@ -5,8 +5,12 @@ import React, {
   useImperativeHandle,
 } from "react";
 import suggestionarray from "./suggestionarray";
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
 
 const Textareamodal = forwardRef((props, ref) => {
+  // const {message} = useContext(Context);
+  // console.log(message)
   const [showbtns, setShowbtns] = useState("textarea_btns");
   const [suggetion, setSuggetion] = useState(suggestionarray);
 

@@ -1,5 +1,6 @@
 import cardataschema from "../../../models/cardataschema";
 import dbConnect from "../../../config/dbConnect";
+import userschema from "../../../models/user";
 
 export default async function handler(req, res) {
   dbConnect();
@@ -13,6 +14,7 @@ export default async function handler(req, res) {
         // console.log(id)
         // // Perform the query with the specified projection
         const result = await cardataschema.findOne({_id:id });
+
         
         if(!result){
           res.status(404).json({
@@ -23,6 +25,11 @@ export default async function handler(req, res) {
         }
        
         if (result) {
+          const user_email = await userschema.findOne({_id: result.seller_id },{email:1});
+          // console.log(user_email.email)
+          if(user_email){
+            result.seller_id = user_email.email;
+          }
             // console.log(result)
             res.status(200).json({
             success: true,

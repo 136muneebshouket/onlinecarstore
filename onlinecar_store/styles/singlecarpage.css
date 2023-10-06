@@ -22,11 +22,19 @@
     padding: 20px;
 
 }
+.singlecar_page .img_section{
+    display: flex;
+    overflow: hidden;
+    object-fit: contain;
+}
 
 .singlecar_page .img_section img {
+   object-fit: contain;
     width: 100%;
     height: auto;
-    transition: 1s;
+    transition: .4s;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .singlecar_page .car_section .car_specs {

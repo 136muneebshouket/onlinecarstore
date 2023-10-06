@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import FullLoader from "@/components/Modals/Loader/fullLoader";
 import dynamic from 'next/dynamic'
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
 
 const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
   loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 const Resetpasswordpage = () => {
 
+  const { message, setMessage } = useContext(Context);
 
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -34,11 +37,13 @@ const Resetpasswordpage = () => {
       .then((res) => {
        
         setDone(res.data.message);
+        setMessage({success:true,msg:res.data.message}); 
         
       })
       .catch((err) => {
         console.log(err.response.data.message);
         setDone(err.response.data.message);
+        setMessage({success:false,msg:err.response.data.message}); 
       }).finally(()=>{
         setLoading(false);
       });

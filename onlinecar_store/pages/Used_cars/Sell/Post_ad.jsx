@@ -7,10 +7,13 @@ import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
+// import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
 import Response_modal from "@/components/Modals/response_modal/Response_modal";
 import price_converter from "@/components/processing_functions/Price_calculator";
-import { set } from "mongoose";
+import { generate_err } from "@/components/processing_functions/errors_gen";
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
+
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
@@ -27,6 +30,7 @@ const FullLoader = dynamic(
 );
 
 const Post_ad = () => {
+  const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
 
   const axiosConfig = {
@@ -52,10 +56,10 @@ const Post_ad = () => {
   const [phoneerr, setPhoneerr] = useState(false);
   // const [response, setResponse] = useState(true);
 
-  const [dberrors, setDberrors] = useState({
-    msg: "",
-    success: null,
-  });
+  // const [dberrors, setDberrors] = useState({
+  //   msg: "",
+  //   success: null,
+  // });
 
   const [loading, setLoading] = useState(false);
 
@@ -157,7 +161,7 @@ const Post_ad = () => {
       });
     }
     if (Array.isArray(values)) {
-      console.log(values);
+      // console.log(values);
       setCarobj((prevCarobj) => {
         return {
           ...prevCarobj,
@@ -200,9 +204,9 @@ const Post_ad = () => {
   const handleImagePicked = async (event) => {
     setLoading(true);
     const files = event.target.files;
-    if (files.length > 10 || imagestoshow.length >= 10) {
+    if (files.length > 20 || imagestoshow.length >= 20) {
       setLoading(false);
-      alert("Maximum 10 images are allowed");
+      setMessage({success:false,msg:'Maximum 20 images are allowed'});   
       return;
     }
 
@@ -216,7 +220,7 @@ const Post_ad = () => {
         // Check if the size of the current image exceeds the limit (4MB)
         if (file.size > 4 * 1024 * 1024) {
           setLoading(false);
-          alert("Image size should not exceed 4MB. Upload your Images again");
+          setMessage({success:false,msg:'Image size should not exceed 4MB. Upload your Images again'});  
           continue;
         }
 
@@ -407,7 +411,7 @@ const Post_ad = () => {
         let obj = { url: img.url, name: img.file.name };
         return obj;
       });
-      console.log(carobj);
+      // console.log(carobj);
       let cardata = {
         carobj,
         imgsto_load,
@@ -430,14 +434,16 @@ const Post_ad = () => {
             resettextarea();
             setLoading(false);
             // setResponse(true)
-            setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            setMessage({success:true,msg:res?.data.message});   
             
           }
         })
         .catch((err) => {
           // console.log(err?.response?.data);
           // setResponse(true)
-          setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
+          // setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
+          setMessage({success:false,msg:err?.response?.data.message});
           setLoading(false);
         })
         .finally(() => {
@@ -1106,6 +1112,7 @@ const Post_ad = () => {
                   <button type="submit">Submit & Continue</button>
                 </div>
               </form>
+              {/* <button onClick={()=>{setMessage(Math.floor(Math.random() * 100));}}>send</button> */}
             </div>
           </div>
         </div>
@@ -1126,12 +1133,12 @@ const Post_ad = () => {
           delimages={delimages}
         />
       )}
-      {dberrors.success != null && (
+      {/* {dberrors.success != null && (
         <Response_modal
           onClose={()=>{setDberrors({...dberrors,msg:'',success:null})}}
           res={dberrors}
         />
-      )}
+      )} */}
       {loading ? <FullLoader /> : <></>}
     </>
   );

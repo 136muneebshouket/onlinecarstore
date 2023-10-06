@@ -22,8 +22,10 @@ const FullLoader = dynamic(
 
 const My_Ads = () => {
   const { data: sessionData } = useSession();
+  let user_email = sessionData?.user.email;
 
   const [carrdata, setCarrdata] = useState([]);
+  // const [refresh, setRefresh] = useState(true);
   const [carprops, setCarprops] = useState();
   const [loadiing, setLoadiing] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -38,28 +40,30 @@ const My_Ads = () => {
   };
 
   useEffect(() => {
-    let userid = sessionData?.user._id;
-    if (userid) {
-      getuser_ads();
-    }
-    async function getuser_ads() {
+    if (user_email) {
       setLoadiing(true);
-
-      await axios
-        .get(`/api/user_ads/?userid=${userid}`)
-        .then((res) => {
-          // console.log(res.data.message);
-          setCarrdata(res.data.message);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        })
-        .finally(() => {
-          setLoadiing(false);
-        });
+      getuser_ads();  
     }
+    // console.log('hello')
   }, []);
 
+  async function getuser_ads() {
+    await axios
+      .get(`/api/user_ads/?user_email=${user_email}`)
+      .then((res) => {
+        // console.log(res.data.message);
+        setCarrdata(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => {
+        setLoadiing(false);
+      });
+     
+  }
+   
+ 
   return (
     <>
       <div className="main_ads_section">
@@ -167,6 +171,7 @@ const My_Ads = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           car={carprops}
+          refresh={getuser_ads}
         />
       )}
     </>

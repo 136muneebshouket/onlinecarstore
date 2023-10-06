@@ -11,6 +11,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import uploadimages from "@/config/cloudinary/cloudinaryimagesupdate";
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
@@ -29,7 +31,7 @@ const FullLoader = dynamic(
 
 const Edit_ad = () => {
   const router = useRouter();
-
+  const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
 
   const textareaRef = useRef(null);
@@ -231,9 +233,9 @@ const Edit_ad = () => {
   const handleImagePicked = async (event) => {
     setLoading(true);
     const files = event.target.files;
-    if (files.length > 10 || imagestoshow.length >= 10) {
+    if (files.length > 20 || imagestoshow.length >= 20) {
       setLoading(false);
-      alert("Maximum 10 images are allowed");
+      setMessage({success:false,msg:'Maximum 20 images are allowed'});   
       return;
     }
 
@@ -247,7 +249,8 @@ const Edit_ad = () => {
         // Check if the size of the current image exceeds the limit (4MB)
         if (file.size > 4 * 1024 * 1024) {
           setLoading(false);
-          alert("Image size should not exceed 4MB. Upload your Images again");
+          setMessage({success:false,msg:'Image size should not exceed 4MB. Upload your Images again'});  
+          // alert("Image size should not exceed 4MB. Upload your Images again");
           continue;
         }
 
@@ -415,7 +418,8 @@ const Edit_ad = () => {
             // }else{
             //   setDberrors([...dberrors,'carId not recieved'])
             // }
-            setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
+            setMessage({success:true,msg:res?.data.message}); 
             resetState();
             resettextarea();
           }
@@ -423,8 +427,8 @@ const Edit_ad = () => {
         })
         .catch((err) => {
           console.error(err?.response?.data);
-          setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
-          // setDberrors([...dberrors,err?.response?.data])
+          // setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
+          setMessage({success:false,msg:err?.response?.data.message}); 
           setLoading(false)
         }).finally(()=>{
           setLoading(false)
@@ -1105,12 +1109,12 @@ const Edit_ad = () => {
           delimages={delimages}
         />
       )}
-        {dberrors.success != null && (
+        {/* {dberrors.success != null && (
         <Response_modal
           onClose={()=>{setDberrors({...dberrors,msg:'',success:null})}}
           res={dberrors}
         />
-      )}
+      )} */}
       {loading ? <FullLoader /> : <></>}
     </>
   );

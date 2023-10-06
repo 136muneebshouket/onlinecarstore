@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose }) => {
     const protocol = window.location.protocol;
     const domain = window.location.href.split("/")[2];
 
-   
+    
     let emailobj = {
       email,
       protocol,

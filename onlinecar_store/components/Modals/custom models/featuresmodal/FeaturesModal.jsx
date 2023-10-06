@@ -1,7 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import { car_features } from '@/components/processing_functions/features_generations';
+import Context from '@/components/processing_functions/context';
+import { useContext } from "react";
+
+
 const FeaturesModal = ({carrdata}) => {
 
+  
     const features = [
         "ABS",
         "Air Bags",
@@ -37,7 +42,7 @@ const FeaturesModal = ({carrdata}) => {
       useEffect(()=>{
         // if(car_features?.length > 0){
           setFeaturearr(car_features)
-          console.log(car_features)
+          carrdata(car_features)
         // }
       },[car_features])
       // if()

@@ -3,6 +3,8 @@ import React, { useReducer, useState, useRef, useEffect } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Logo from "@/pages/z_icons/Logo";
 import Link from "next/link";
+import Context from "./processing_functions/context";
+import { useContext } from "react";
 // import {google_auth} from "../components/processing_functions/auth_func";
 // import Image from "next/image";
 
@@ -11,6 +13,7 @@ import axios from "axios";
 
 const NavBar = () => {
   const { data: sessionData } = useSession();
+ 
   // console.log(sessionData)
   const isLoggedIn = sessionData?.user;
 
@@ -122,7 +125,7 @@ const NavBar = () => {
           <div className="navLinks">
             <ul style={{ left: toggleNavBar ? "-12.5%" : "-105%" }}>
               <li>
-                <Link className="darkneon" href="/">
+                <Link className="darkneon" href="/used_cars/Search_car">
                   Used Cars
                 </Link>
               </li>

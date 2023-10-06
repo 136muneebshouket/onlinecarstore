@@ -14,6 +14,7 @@
     backdrop-filter: blur(2.1px);
     -webkit-backdrop-filter: blur(2.1px);
     transition: 1s;
+    z-index: 50;
   }
   
   .modal-content {
@@ -68,6 +69,6 @@
       align-items: end;
     }
     .modal-content{
-      margin: 20px;
+      margin: 10px;
     }
   }

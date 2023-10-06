@@ -23,8 +23,8 @@ const Sellerdetails = ({ sellerid }) => {
             setSellerdata((prev) => {
               return {
                 ...prev,
-                ...(sellerdetails.full_name && {
-                  name: sellerdetails.full_name,
+                ...(sellerdetails.name && {
+                  name: sellerdetails.name,
                 }),
                 ...(converteddate && { date: converteddate }),
                 ...(sellerdetails.avatar && { avatar: sellerdetails.avatar }),

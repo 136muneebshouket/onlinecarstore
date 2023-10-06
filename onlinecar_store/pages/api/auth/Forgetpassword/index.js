@@ -30,18 +30,11 @@ export default async function handler(req, res) {
       // const testAccount = await nodemailer.createTestAccount();
       // Send the password reset email to the user
       const transporter = nodemailer.createTransport({
-        // Configure the email service
-        // host: process.env.EMAIL_HOST,
-        // port: process.env.EMAIL_PORT,
-        // auth: {
-        //   user: process.env.EMAIL_USER,
-        //   pass: process.env.EMAIl_PASS,
-        // },
-        host: "smtp.gmail.com",
-        port: 587,
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
         auth: {
-          user: "muneeb.office136@gmail.com",
-          pass: "earrmqwgljbhkgas",
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIl_PASS,
         },
       });
       // const resetLink = `${req.protocol}://${req.get('host')}/api/forgetpassword/reset-password/${resetToken}`;
@@ -49,7 +42,7 @@ export default async function handler(req, res) {
       
       const mailOptions = {
         // from: process.env.EMAIL_FROM,
-        from: "muneeb.office136@gmail.com",
+        from: process.env.EMAIL_USER,
         to: email,
         subject: "Password Reset",
         html: `Please click <a href="${resetLink}">here</a> to reset your password.`,

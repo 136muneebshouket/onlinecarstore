@@ -6,34 +6,26 @@ import bcrypt from 'bcrypt'
 
 const UserSchema = new mongoose.Schema(
   {
-    name:{
-      type:String,
-      required:[true, 'Fullname field is required'],
-    },
+    email: {
+        type: String,
+        unique: [true, 'Email already exist'],
+        lowercase:[true, 'Email must be lowercase'],
+        required: [true, 'Email is required'],
+        minlength: 4,
+        maxlength: 265
+      },
     password: {
       type: String,
       required: [true, 'Password is required'],
+      minlength: 1,
+      maxlength: 265
     },
-    email: {
-      type: String,
-      unique: [true, 'Email must be lowercase'],
-      lowercase:[true, 'Email must be lowercase'],
-      required: [true, 'Email is required'],
-    },
-    avatar:{
+    phone:{
       type:String,
-      required:false,
-      default:""
-    },
-    auth_type: {
-      type:String,
-      required:false,
-      default:"Next_auth"
-    },
-    role: {
-      type:String,
-      required:false,
-      default:"user"
+      required:true,
+      default:"",
+      minlength: 11,
+      maxlength: 11
     },
     resetToken: {
       type:String,
@@ -45,8 +37,6 @@ const UserSchema = new mongoose.Schema(
       required:false,
      
     }
-    
-    
   },
   { timestamps: true }
 );
@@ -58,5 +48,5 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-export default mongoose.models.users || mongoose.model("users", UserSchema);
+export default mongoose.models.admin || mongoose.model("admin", UserSchema);
 // module.exports = mongoose.model("user", UserSchema);

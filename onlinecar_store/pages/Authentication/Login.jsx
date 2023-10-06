@@ -3,23 +3,38 @@ import { signIn } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
 import Google_icon from "../z_icons/Google_icon";
+import { useSession } from "next-auth/react";
 // import ForgetpasswordModal from "@/components/Modals/ForgetpasswordModal";
 // import FullLoader from "@/components/Modals/Loader/fullLoader";
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
 import { useRouter } from "next/router";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 // import "./Login.css"
 
-const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
-  loading: () => <div className="loder"><h2>Loading...</h2></div>,
-})
-const ForgetpasswordModal = dynamic(() => import('../../components/Modals/ForgetpasswordModal'), {
-  loading: () => <p>Loading...</p>
-})
-
-
+const FullLoader = dynamic(
+  () => import("@/components/Modals/Loader/fullLoader"),
+  {
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
+  }
+);
+const ForgetpasswordModal = dynamic(
+  () => import("../../components/Modals/ForgetpasswordModal"),
+  {
+    loading: () => <p>Loading...</p>,
+  }
+);
 
 const Login = () => {
+
+
   const router = useRouter();
+  const { message, setMessage } = useContext(Context);
+  const { data: sessionData } = useSession();
 
   const [showpass, setShowpass] = useState(false);
 
@@ -42,6 +57,7 @@ const Login = () => {
       if (data.status == 200) {
         setErrorstatus(data.status);
         setError(data.error);
+        setMessage({success:true,msg:data.error}); 
         setEmail("");
         setPassword("");
         router.back();
@@ -50,13 +66,29 @@ const Login = () => {
         setLoading(false);
         setErrorstatus(data.status);
         setError(data.error);
+        setMessage({success:false,msg:data.error}); 
       }
     } catch (error) {
       setLoading(false);
       console.log(error);
       setError(error.response.data);
+      setMessage({success:false,msg:error.response.data}); 
     }
   };
+
+//  async function google_login(){ 
+//     try {
+//       await signIn("google");
+//     } catch (error) {
+//       console.log(error)
+//     }
+  
+//    let userid = sessionData?.user._id;
+//    if(userid){
+//     console.log(userid)
+//    }
+
+//   }
 
   // modal for forget password
   const [isModalOpen, setModalOpen] = useState(false);
@@ -110,7 +142,7 @@ const Login = () => {
                   Email
                 </label>
                 <input
-                style={{textTransform:'lowercase'}}
+                  style={{ textTransform: "lowercase" }}
                   type="email"
                   name="email"
                   placeholder="Type your valid Email"
@@ -166,18 +198,26 @@ const Login = () => {
                 </button>
               </form>
             </div>
-            <div className="google_btn" onClick={()=>{signIn('google')}}>
+            <div
+              className="google_btn"
+              onClick={ 
+              ()=>{signIn("google")}
+              }
+            >
               <span>Sign In with Google</span>
-              <button ><Google_icon/></button>
+              <button>
+                <Google_icon />
+              </button>
             </div>
-            
           </div>
         </div>
         {/* <p className="errorPara">{error}</p> */}
       </div>
       {/* modal for forget password */}
-      {isModalOpen && <ForgetpasswordModal isOpen={isModalOpen} onClose={handleCloseModal} />}
-     
+      {isModalOpen && (
+        <ForgetpasswordModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      )}
+
       {/* loader fullpage */}
       {loading ? <FullLoader /> : ""}
     </>

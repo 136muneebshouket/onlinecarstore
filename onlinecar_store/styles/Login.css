@@ -38,7 +38,7 @@ margin-top: 30px;
   font-size: 2.3em;
   justify-content: center;
   display: flex;
-  padding: 30px;
+  padding: 20px;
   transition: 0.5s ease-in-out;
 }
 /* .login .overlay form div{
@@ -53,12 +53,12 @@ margin-right: 0;
   /* padding-right: 7px; */
   display: flex;
   width: 23%;
-  left: 20%;
+  left: 15%;
   position: relative;
 }
 
 .login .overlay form input,.modal_innercontent form input{
-  width: 60%;
+  width: 70%;
   height: 10px;
   background: rgb(248, 248, 248);
   justify-content: center;

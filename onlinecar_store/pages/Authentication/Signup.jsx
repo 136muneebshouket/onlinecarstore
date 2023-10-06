@@ -4,6 +4,8 @@ import React, { useState } from "react";
 // import FullLoader from "@/components/Modals/Loader/fullLoader";
 import axios from "axios";
 import Link from "next/link";
+import Context from "@/components/processing_functions/context";
+import { useContext } from "react";
 
 import dynamic from 'next/dynamic'
 
@@ -13,6 +15,8 @@ const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader')
 
 const Register = () => {
 
+
+  const { message, setMessage } = useContext(Context);
   const [error, setError] = useState({
     success:true,
     message:''
@@ -26,44 +30,7 @@ const Register = () => {
   const [imagetoshow, setImagetoshow] = useState(null);
   // const [avatar, setAvatar] = useState("");
 
-  // const onImageChange = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     setImage(event.target.files[0]);
-  //     setImagetoshow(URL.createObjectURL(event.target.files[0]));
-  //   }
-  // };
 
-
-  // function for uploading avatar with the user data
-  // const login = async (e) => {
-  //   setLoading(true);
-  //   e.preventDefault();
-
-  //   if (image !== null) {
-  //     const data = new FormData();
-  //     data.append("file", image);
-  //     data.append("upload_preset", "muneeb");
-  //     data.append("cloud_name", "dgyh5n01r");
-  //     // console.log(data)
-  //     // console.log(image)
-
-  //     await axios
-  //       .post("https://api.cloudinary.com/v1_1/dgyh5n01r/image/upload", data)
-  //       .then((res) => {
-  //         console.log(res.data.secure_url);
-  //         setAvatar(res.data.secure_url);
-  //         setLoading(false);
-  //         upload(res.data.secure_url);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         setLoading(false);
-  //         return alert("error in uploading image");
-  //       });
-  //   } else {
-  //     upload(null);
-  //   }
-  // };
 
   const upload = async (e) => {
        setLoading(true);
@@ -84,6 +51,7 @@ const Register = () => {
         if (res.status == 201) {
           // setError(res?.data);
           setError({...error, success: res?.data.success , message: res?.data.message});
+          setMessage({success:true,msg:res?.data.message}); 
           setPassword("");
           setEmail("");
           setfull_name("");
@@ -92,6 +60,7 @@ const Register = () => {
       })
       .catch((err) => {
         setError({...error, success:err?.response?.data.success , message: err?.response?.data.message});
+        setMessage({success:false,msg:err?.response?.data.message}); 
         setLoading(false);
       }).finally(()=>{
         console.log(error)

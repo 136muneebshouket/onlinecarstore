@@ -7,19 +7,24 @@ import Sellerdetails from "./Sellerdetails/Sellerdetails";
 import Reporting_add from "./reporting_add/Reporting_add";
 import price_converter from "@/components/processing_functions/Price_calculator";
 
-const slug = ({  carrdata }) => {
+const slug = ({ carrdata }) => {
   // const [car, setCar] = useState({});
   const [features, setFeatures] = useState([]);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     if (carrdata) {
-      setFeatures(carrdata.carfeatures)
+      setFeatures(carrdata.carfeatures);
 
-      setImages(carrdata.images_url.map((x) => {delete x.img_id; return x.img_url } ))
+      setImages(
+        carrdata.images_url.map((x) => {
+          delete x.img_id;
+          return x.img_url;
+        })
+      );
     }
   }, [carrdata]);
-// console.log(images)
+  // console.log(images)
   // const [features, setFeatures] = useState([
   //   "ABS",
   //   "Air Bags",
@@ -63,7 +68,7 @@ const slug = ({  carrdata }) => {
 
   const slideimg = (slide) => {
     if (slide == "left") {
-      console.log("left");
+      // console.log("left");
       if (index > 0) {
         setIndex(index - 1);
       }
@@ -76,27 +81,38 @@ const slug = ({  carrdata }) => {
     }
   };
 
-// console.log(images[index])
+  // console.log(images[index])
   return (
     <>
       <div className="singlecar_page">
         <div className="inner_main">
           <div className="car_section">
             <div className="car_upper_section">
-              <div className="car_title" style={{ padding:'10px' }}>
+              <div className="car_title" style={{ padding: "10px" }}>
                 <h1 style={{ color: "#223C7A", marginBottom: "0px" }}>
-                  {carrdata.brand} {carrdata.model} {carrdata.modelyear}   
+                  {carrdata.brand} {carrdata.model} {carrdata.modelyear}
                 </h1>
                 <span style={{ color: "#223C7A" }}>{carrdata.city}</span>
               </div>
               <div className="img_section">
-                <img
-                  src={images[index]}
-                  alt="loading"
-                  loading="lazy"
-                  // width={100}
-                  // height={100}
-                />
+                {images.map((url) => {
+                  return (
+                    <>
+                      {/* <div style={{width:'100%'}}> */}
+                      <img
+                       style={{translate:`${-100 * index}%`}}
+                        src={url}
+                        alt="loading"
+                        loading="lazy"
+                        // width={100}
+                        // height={100}
+                      />
+                      {/* </div> */}
+                     
+                    </>
+                  );
+                })}
+
                 <i
                   onClick={() => {
                     slideimg("left");
@@ -111,9 +127,10 @@ const slug = ({  carrdata }) => {
                   style={{ transform: `rotate(270deg)` }}
                   className="bx bx-chevron-down right_arrow"
                 ></i>
-        
               </div>
-              <h2 style={{ color: "#076d00",padding:'10px' }}>PKR: {price_converter(carrdata.price)}</h2>
+              <h2 style={{ color: "#076d00", padding: "10px" }}>
+                PKR: {price_converter(carrdata.price)}
+              </h2>
             </div>
             <div className="car_specs">
               <div className="single_spec">
@@ -123,7 +140,7 @@ const slug = ({  carrdata }) => {
               <div className="single_spec">
                 <i className="bx bx-tachometer"></i>
                 <p>
-                {carrdata.modelyear} <span>km</span>
+                  {carrdata.modelyear} <span>km</span>
                 </p>
               </div>
               <div className="single_spec">
@@ -175,17 +192,15 @@ const slug = ({  carrdata }) => {
             </div>
             <div className="car_comments">
               <h2>Seller's Comments</h2>
-              <p>
-               {carrdata.comments}
-              </p>
+              <p>{carrdata.comments}</p>
               <p style={{ color: "#223C7A" }}>
                 Mention when calling Seller to get a good deal
               </p>
             </div>
           </div>
           <div className="seller_section">
-           <Sellerdetails sellerid={carrdata.seller_id}/>
-           <Reporting_add/>
+            <Sellerdetails sellerid={carrdata.seller_id} />
+            <Reporting_add />
           </div>
         </div>
         <div className="post_ad_link">
@@ -202,8 +217,8 @@ const slug = ({  carrdata }) => {
 };
 
 export async function getServerSideProps({ params, query }) {
-let pageurl = params.slug.split('-')
-  let slugid = pageurl[pageurl.length - 1]
+  let pageurl = params.slug.split("-");
+  let slugid = pageurl[pageurl.length - 1];
   const res = await axios.get(
     `${process.env.Host}/api/Singlecardata/?id=${slugid}`
   );
