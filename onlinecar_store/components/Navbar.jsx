@@ -1,4 +1,4 @@
-
+// "use client";
 import React, { useReducer, useState, useRef, useEffect } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Logo from "@/pages/z_icons/Logo";
@@ -213,8 +213,8 @@ const NavBar = () => {
             >
               <i
                 onClick={() => setToggleNavBar(!toggleNavBar)}
-                className="bx bx-menu"
-              ></i>
+                // className="bx bx-menu"
+              >{toggleNavBar ? <>&#x2716;</>:<>&#x2630;</>}</i>
             </OutsideClickHandler>
           </div>
         </nav>

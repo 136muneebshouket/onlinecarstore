@@ -16,6 +16,7 @@ import "@/styles/filtermodal.css";
 import "@/styles/doublerange.css";
 import "@/styles/singlecarpage.css";
 import "@/styles/Other_profilepages.css";
+import "@/styles/car_cards_sliders.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/response_modal/Response_modal";
@@ -29,6 +30,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 
 import dynamic from "next/dynamic";
+import { Nunito } from 'next/font/google'
+ 
+const inter = Nunito({ subsets: ['latin'], variable: '--font-inter' })
 
 // const Layout = dynamic(() => import('../components/Layout'), {
 //   loading: () => <p>Loading...</p>,
@@ -49,7 +53,7 @@ export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState();
  
- console.log(message)
+//  console.log(message)
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -72,11 +76,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+    <style jsx global>{`
+        html {
+          font-family: ${inter.style.fontFamily};
+        }
+      `}</style>
         <Context.Provider value={{message , setMessage}}>
-        <Layout>
+        <main className={inter.className}>
+        <Layout >
           {loading ? <FullLoader /> : <Component {...pageProps} />}
           {message && <Response_modal res={message} onClose={()=>{setMessage()}}/>}
         </Layout>
+        </main>
         </Context.Provider>
    
 

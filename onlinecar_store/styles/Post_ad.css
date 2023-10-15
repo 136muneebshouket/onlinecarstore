@@ -1,27 +1,33 @@
-.upload_ad_page{
+.upload_ad_page {
     margin: 0;
     padding: 0;
     width: 100%;
     height: auto;
 }
 
-.upload_ad_page h1,.upload_ad_page h2,.upload_ad_page label ,.upload_ad_page p{
+.upload_ad_page h1,
+.upload_ad_page h2,
+.upload_ad_page label,
+.upload_ad_page p {
     color: #333333;
 }
-.upload_ad_page h2{
+
+.upload_ad_page h2 {
     font-weight: 400;
 }
 
-.upload_ad_page .mobileview_nav{
-  background: #213974;;
-  
-  justify-content: space-between;
-  min-height: fit-content;
-  /* align-items: center; */
-  position: sticky;
-display: none;
+.upload_ad_page .mobileview_nav {
+    background: #213974;
+    ;
+
+    justify-content: space-between;
+    min-height: fit-content;
+    /* align-items: center; */
+    position: sticky;
+    display: none;
 }
-.upload_ad_page .mobileview_nav .nav_elem{
+
+.upload_ad_page .mobileview_nav .nav_elem {
     padding: 6px 20px;
     color: white;
     cursor: pointer;
@@ -29,15 +35,18 @@ display: none;
     justify-content: center;
     align-items: center;
 }
-.upload_ad_page .mobileview_nav .nav_elem span{
+
+.upload_ad_page .mobileview_nav .nav_elem span {
     font-size: large;
     font-weight: 400;
 }
-.upload_ad_page .mobileview_nav .nav_elem i{
+
+.upload_ad_page .mobileview_nav .nav_elem i {
     font-size: 40px;
     font-weight: 500;
 }
-.upload_ad_page .uploadpage_banner{
+
+.upload_ad_page .uploadpage_banner {
     width: 99%;
     height: auto;
     padding: 5px;
@@ -49,89 +58,109 @@ display: none;
     border: 1px solid rgb(197, 197, 197);
     margin: 20px 0px;
 }
-.upload_ad_page .uploadpage_banner .banner_title{
+
+.upload_ad_page .uploadpage_banner .banner_title {
     text-align: center;
     margin-bottom: 30px;
 }
-.upload_ad_page .uploadpage_banner .banner_title h1{
+
+.upload_ad_page .uploadpage_banner .banner_title h1 {
     color: #213974;
     margin-bottom: 3px;
 }
-.uploadpage_banner .banner_title p{
-margin: 0;
+
+.uploadpage_banner .banner_title p {
+    margin: 0;
 }
-.upload_ad_page .uploadpage_banner .banner_icons{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+
+.upload_ad_page .uploadpage_banner .banner_icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 
 }
-.upload_ad_page .uploadpage_banner .banner_icons .icons{
+
+.upload_ad_page .uploadpage_banner .banner_icons .icons {
     display: flex;
     align-items: center;
     margin: auto 10px;
 }
-.banner_icons .icons i{
+
+.banner_icons .icons i {
     font-size: xx-large;
     color: rgb(3, 104, 138) !important;
 }
-.upload_ad_page .uploadpage_banner .banner_icons .icons i,.banner_icons .icons p{
+
+.upload_ad_page .uploadpage_banner .banner_icons .icons i,
+.banner_icons .icons p {
     margin: auto 5px;
     color: rgb(68, 68, 68);
 }
 
-.postad_formsection{
-     width: 100%;
-     margin: 0;
-     display: flex;
-  justify-content: center;
+.postad_formsection {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
-.postad_formsection .car_info{
-display: flex;
-/* justify-content: center; */
-flex-direction: column;
-width: max(70vw, min(700px,90vw));
+
+.postad_formsection .car_info {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    width: max(70vw, min(700px, 90vw));
 }
-.postad_formsection .car_info .form_title{
+
+.postad_formsection .car_info .form_title {
     padding: 0px 30px;
-    margin:25px 0px 10px 0px;
+    margin: 25px 0px 10px 0px;
 
 }
-.car_info .form_section{
-display: flex;
-justify-content: center;
-flex-direction: column;
-}
-.car_info .form_section form{
-    display: flex;
-    flex-direction: column;
-   
-}
-.car_info .form_section form .upper_form_section,.form_section form .upload_img_section ,.form_section form .number_upload_section{
+
+.car_info .form_section {
     display: flex;
     justify-content: center;
     flex-direction: column;
-   
+}
+
+.car_info .form_section form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.car_info .form_section form .upper_form_section,
+.form_section form .upload_img_section,
+.form_section form .number_upload_section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
     padding-right: 20px;
     background: white;
     margin-bottom: 50px;
     padding-bottom: 30px;
-   
+
 }
-.upload_ad_page form .upper_form_section .input_field,.number_upload_section .input_field{
+
+.upload_ad_page form .upper_form_section .input_field,
+.number_upload_section .input_field {
     display: flex;
     align-items: start;
     margin: 10px;
     padding-left: 10%;
 }
+
 .upload_ad_page form .upper_form_section .input_field div,
-.number_upload_section .input_field div{
-display: flex;
-flex-direction: column;
-width: 50%;
+.number_upload_section .input_field div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 
 }
-.upper_form_section .input_alert,.number_upload_section .input_alert{
+
+.upper_form_section .input_alert,
+.number_upload_section .input_alert {
     width: 40% !important;
     display: flex !important;
     flex-direction: row !important;
@@ -139,71 +168,81 @@ width: 50%;
 }
 
 .upload_ad_page form .upper_form_section .input_field i,
-.number_upload_section .input_field i{
+.number_upload_section .input_field i {
     font-size: 28px;
     margin: 5px 15px 5px 20px;
-   
+
 }
-.upper_form_section .input_field .bxs-car,.bx-phone{
+
+.upper_form_section .input_field .bxs-car,
+.bx-phone {
     color: gray;
     background: #f1f1f1;
     padding: 8px;
     border-radius: 50%;
 }
+
 .upload_ad_page form .upper_form_section .input_field div label,
-.number_upload_section .input_field label{
+.number_upload_section .input_field label {
     font-size: calc(0.8vw + 5px);
     font-weight: 500;
     margin-bottom: 3px;
 }
-.upload_ad_page form .upper_form_section .input_field div label .resetbtn{
+
+.upload_ad_page form .upper_form_section .input_field div label .resetbtn {
     float: right;
     cursor: pointer;
     /* border: 1px solid rgb(0, 92, 145) !important; */
     width: 55px;
-  
+
     color: rgb(0, 92, 145);
     text-align: center;
- 
+
     height: 20px;
 }
+
 .upload_ad_page form .upper_form_section .input_field div select,
 .upper_form_section .input_field div input,
 .upper_form_section .input_field textarea,
 .number_upload_section .input_field input,
-.watsapp_field{
+.watsapp_field {
     height: 45px;
-    width: 100% ;
+    width: 100%;
     border-radius: 3px;
     border: 1px solid rgb(221 220 220);
     font-size: 14px;
     padding-left: 5px;
     color: #727171;
-    cursor:pointer;
+    cursor: pointer;
 }
-.upload_ad_page form .upper_form_section .input_field p,.bx-error-circle,
-.number_upload_section .input_field p{
+
+.upload_ad_page form .upper_form_section .input_field p,
+.bx-error-circle,
+.number_upload_section .input_field p {
     font-size: 14px;
     color: rgb(216, 1, 1);
     margin: 0;
-   
+
 }
-.upload_ad_page form .upper_form_section .input_field .discription_area{
-width: 90%;
-height: auto !important;
+
+.upload_ad_page form .upper_form_section .input_field .discription_area {
+    width: 90%;
+    height: auto !important;
 }
-.upper_form_section .input_field .discription_area textarea{
+
+.upper_form_section .input_field .discription_area textarea {
     width: 100% !important;
-    transition:.5s;
+    transition: .5s;
     min-height: 130px !important;
-    color: #333333!important;
+    color: #333333 !important;
     /* width: ; */
 }
 
-.form_section form .upload_img_section{
+.form_section form .upload_img_section {
     padding: 10px;
 }
-.form_section form .upload_img_section .upload_img_input{
+
+.form_section form .upload_img_section .upload_img_input {
     min-height: 300px;
     border: 2px solid rgb(0, 92, 145);
     border-style: dashed;
@@ -212,7 +251,8 @@ height: auto !important;
     align-items: center;
     flex-direction: column;
 }
-.form_section form .upload_img_section .upload_img_input .uploadimg_input{
+
+.form_section form .upload_img_section .upload_img_input .uploadimg_input {
     display: block;
     border: 1px solid;
     padding: 5px 20px;
@@ -220,30 +260,33 @@ height: auto !important;
     color: white;
     text-align: center;
     border-radius: 5px;
-   margin: 10px;
+    margin: 10px;
     cursor: pointer;
     width: fit-content;
     position: relative;
     height: -moz-fit-content;
     height: fit-content;
 }
-.upload_img_input .uploadimg_input::after{
+
+.upload_img_input .uploadimg_input::after {
     content: "(max-limit 5mb per Image)";
     position: absolute;
     bottom: -20px;
-     right: 0;
+    right: 0;
     font-size: small;
     width: 170px;
     color: #727171;
     text-align: end;
 }
-.form_section form .upload_img_section .upload_img_input .upload_input{
-display: flex;
-margin-bottom: 30px;
-margin-top: 30px;
+
+.form_section form .upload_img_section .upload_img_input .upload_input {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
 
 }
-.upload_img_input .upload_input .bx-image-add{
+
+.upload_img_input .upload_input .bx-image-add {
     font-size: 50px;
     color: #639aff;
     background: #edf4f7;
@@ -252,13 +295,15 @@ margin-top: 30px;
     border-radius: 50%;
     padding: 10px;
 }
-.upload_img_input .upload_alerts{
+
+.upload_img_input .upload_alerts {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    
+
 }
-.upload_img_input .upload_alerts div{
+
+.upload_img_input .upload_alerts div {
     display: flex;
     width: 50%;
     margin: 15px 0px;
@@ -267,7 +312,8 @@ margin-top: 30px;
     padding: 0px 30px;
     box-sizing: border-box;
 }
-.upload_img_input .upload_alerts div i{
+
+.upload_img_input .upload_alerts div i {
     color: #057c05;
     font-size: x-large;
     border: 2px solid green;
@@ -275,37 +321,43 @@ margin-top: 30px;
     height: fit-content;
     margin: 0px 5px;
 }
-.upload_img_input .upload_alerts div p{
+
+.upload_img_input .upload_alerts div p {
     color: #727171;
     font-size: small;
     margin: 0;
 }
-.upload_img_input .upload_alerts div p strong{
+
+.upload_img_input .upload_alerts div p strong {
     color: #333333;
 }
-.number_upload_section .watsapp_field{
+
+.number_upload_section .watsapp_field {
     width: 100% !important;
     flex-direction: row !important;
-   align-items: center;
+    align-items: center;
     border: none !important;
 }
+
 .watsapp_field .form-switch {
-position: relative;
-width: 100px !important;
-margin-left: 10%;
+    position: relative;
+    width: 100px !important;
+    margin-left: 10%;
 
 }
-.form-switch input{
-    border-radius: 20px !important;  
-    position: absolute; 
+
+.form-switch input {
+    border-radius: 20px !important;
+    position: absolute;
     right: 0;
     height: 35px !important;
     width: 65px !important;
     cursor: pointer;
     top: -7px;
 }
-.watsapp_field .bxl-whatsapp{
-    margin:0px 10px !important;
+
+.watsapp_field .bxl-whatsapp {
+    margin: 0px 10px !important;
     font-size: 30px !important;
     color: #ffffff !important;
     background-color: #018b01 !important;
@@ -314,32 +366,36 @@ margin-left: 10%;
     height: fit-content;
 
 }
-.watsapp_field p{
+
+.watsapp_field p {
     font-size: large !important;
     color: #333333 !important;
     margin: 0 !important;
 }
-.submit_section{
+
+.submit_section {
     display: flex;
     justify-content: center;
 }
 
- .submit_section button{
+.submit_section button {
     border: none;
     background: #018901;
     color: white;
     padding: 8px 20px;
     font-size: large;
-    margin:10px 10px 20px 10px;
+    margin: 10px 10px 20px 10px;
     text-align: center;
     border-radius: 5px;
 
 }
-.coverphototag{
+
+.coverphototag {
     position: relative;
     /* border: 1px solid greenyellow; */
 }
-.coverphototag::after{
+
+.coverphototag::after {
     content: 'cover photo';
     position: absolute;
     width: -moz-fit-content;
@@ -356,15 +412,16 @@ margin-left: 10%;
     right: 0;
     border-radius: 10px;
 }
-.errorspan{
+
+.errorspan {
     font-size: small;
     color: red;
     font-weight: 500;
 }
 
-@media only screen and (max-width: 1024px){
-    .postad_formsection .car_info{
-        width: 80vw ;
+@media only screen and (max-width: 1024px) {
+    .postad_formsection .car_info {
+        width: 80vw;
     }
 }
 
@@ -372,110 +429,142 @@ margin-left: 10%;
 
 
 @media only screen and (max-width: 770px) {
-    .upload_ad_page .uploadpage_banner{
+    .upload_ad_page .uploadpage_banner {
         display: none !important;
-        
+
     }
-    .mobileview_nav{
+
+    .mobileview_nav {
         display: flex !important;
     }
-    .postad_formsection .car_info{
+
+    .postad_formsection .car_info {
         width: 100% !important;
     }
-    .postad_formsection .car_info .form_title{
+
+    .postad_formsection .car_info .form_title {
         display: none !important;
     }
-    .upload_ad_page form .upper_form_section .input_field, .number_upload_section .input_field{
+
+    .upload_ad_page form .upper_form_section .input_field,
+    .number_upload_section .input_field {
         padding-left: 0px !important;
     }
-    .upload_ad_page form .upper_form_section .input_field i, .number_upload_section .input_field i{
-      
+
+    .upload_ad_page form .upper_form_section .input_field i,
+    .number_upload_section .input_field i {
+
         margin: 2px 5px 2px 2px !important;
-    font-size: 25px;
-    padding: 5px;
+        font-size: 25px;
+        padding: 5px;
     }
-    .upload_ad_page form .upper_form_section .input_field div.input_alert{
+
+    .upload_ad_page form .upper_form_section .input_field div.input_alert {
         display: none !important;
     }
-    .upload_ad_page form .upper_form_section .input_field div, .number_upload_section .input_field div{
-        width: 100% ;
+
+    .upload_ad_page form .upper_form_section .input_field div,
+    .number_upload_section .input_field div {
+        width: 100%;
         margin-left: 0px;
     }
+
     .upload_ad_page form .upper_form_section .input_field div select,
     .upper_form_section .input_field div input,
-     .upper_form_section .input_field textarea,
-      .number_upload_section .input_field input,
-       .watsapp_field{
+    .upper_form_section .input_field textarea,
+    .number_upload_section .input_field input,
+    .watsapp_field {
         border: none;
-        border-bottom:1px solid #bebebe !important;
+        border-bottom: 1px solid #bebebe !important;
         border-radius: unset !important;
-height: auto;
-padding: 3px;
-box-shadow: 0px 0px 5px 0px #dbdbdbb5 inset !important;
+        height: auto;
+        padding: 3px;
+        /* box-shadow: 0px 0px 5px 0px #dbdbdbb5 inset !important; */
+        background-color: #80808014;
     }
-    .upload_ad_page form .upper_form_section .input_field div label, .number_upload_section .input_field label{
+
+    .upload_ad_page form .upper_form_section .input_field div label,
+    .number_upload_section .input_field label {
         color: #333333;
         font-weight: 500;
         font-size: 14px;
         padding-left: 5px;
     }
-    .upper_form_section .input_field .discription_area textarea{
-     
+
+    .upper_form_section .input_field .discription_area textarea {
+
         height: 20px !important;
         margin-bottom: 3px;
     }
-    .upper_form_section .input_alert, .number_upload_section .input_alert{
+
+    .upper_form_section .input_alert,
+    .number_upload_section .input_alert {
         display: none !important;
     }
-    .car_info .form_section form .upper_form_section, .form_section form .upload_img_section, .form_section form .number_upload_section{
+
+    .car_info .form_section form .upper_form_section,
+    .form_section form .upload_img_section,
+    .form_section form .number_upload_section {
         margin-bottom: 0px;
         padding: 0px;
     }
-    .form_section form .upload_img_section .upload_img_input{
+
+    .form_section form .upload_img_section .upload_img_input {
         margin: 10px;
         min-height: 130px !important;
         justify-content: center;
         align-items: center;
     }
-    .form_section form .upload_img_section .upload_img_input .upload_input{
+
+    .form_section form .upload_img_section .upload_img_input .upload_input {
         margin-bottom: 20px;
     }
-    .upload_img_input .upload_alerts{
+
+    .upload_img_input .upload_alerts {
         display: none;
     }
-    .upload_img_input .upload_input .bx-image-add{
+
+    .upload_img_input .upload_input .bx-image-add {
         padding: 5px;
         font-size: 35px;
         margin-right: 20px;
     }
-    .form_section form .upload_img_section .upload_img_input .uploadimg_input{
-margin: 0;
-    }
-    .form_section form .upload_img_section{
-        order: 1;
-        
-    }
-    .form_section form .upper_form_section{
-        order: 2;
-    }
-    .form_section form .number_upload_section{
-        order: 3;
-    }
-    .submit_section{
-        order: 4; 
+
+    .form_section form .upload_img_section .upload_img_input .uploadimg_input {
+        margin: 0;
     }
 
-    
-    .number_upload_section .watsapp_field{
+    .form_section form .upload_img_section {
+        order: 1;
+
+    }
+
+    .form_section form .upper_form_section {
+        order: 2;
+    }
+
+    .form_section form .number_upload_section {
+        order: 3;
+    }
+
+    .submit_section {
+        order: 4;
+    }
+
+
+    .number_upload_section .watsapp_field {
         justify-content: center;
     }
-    .watsapp_field .form-switch{
+
+    .watsapp_field .form-switch {
         width: 50% !important;
     }
-    .watsapp_field .form-switch input{
-   border-radius: 20px !important;
+
+    .watsapp_field .form-switch input {
+        border-radius: 20px !important;
     }
-    .watsapp_field p{
+
+    .watsapp_field p {
         font-size: medium !important;
     }
 }

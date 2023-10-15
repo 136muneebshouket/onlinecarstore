@@ -13,6 +13,9 @@
     display: flex;
     flex-direction: row;
 }
+.singlecar_page .car_section h1{
+    font-size: max(19px,2.2vw);
+}
 
 .singlecar_page .car_section {
     width: 70%;
@@ -112,8 +115,9 @@
     font-size: 14px;
 }
 
-.singlecar_page .car_section h2 {
+.singlecar_page .car_section .car_upper_section h2 {
     margin-bottom: 20px;
+    display: none;
 }
 
 .singlecar_page .car_section .car_comments p {
@@ -137,7 +141,8 @@
 .seller_details .seller_name {
     display: flex;
     margin: 20px;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .seller_details .seller_name img {
@@ -265,5 +270,11 @@
 
     .seller_section {
         margin: 5px;
+    }
+    .seller_section .contact_dtals{
+        display: none;
+    }
+    .singlecar_page .car_section h2{
+        display: block;
     }
 }

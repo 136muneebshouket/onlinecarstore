@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import dateFormat, { masks } from "dateformat";
 
 const Sellerdetails = ({ sellerid }) => {
@@ -67,4 +67,4 @@ const Sellerdetails = ({ sellerid }) => {
   );
 };
 
-export default Sellerdetails;
+export default memo(Sellerdetails);

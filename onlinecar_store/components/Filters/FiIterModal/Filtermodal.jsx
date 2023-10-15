@@ -430,7 +430,7 @@ const Filtermodal = ({ getfilters, description }) => {
               className="bx bx-chevron-down back_arrow"
             ></i>
           </span>
-          <p>Refine your search</p>
+          <p style={{color:'white'}}>Refine your search</p>
         </div>
         {/* <div className="head_banner apllied_filters"></div> */}
 

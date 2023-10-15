@@ -1,12 +1,18 @@
 import Head from 'next/head'
 import NavBar from '@/components/Navbar'
 // import  from './Home/Homepage'
+import { Montserrat } from 'next/font/google'
 
 import dynamic from 'next/dynamic'
+
 
 const Homepage = dynamic(() => import('./home/Homepage'), {
   loading: () => <p>Loading...</p>,
 })
+
+// const inter = Montserrat({
+//   variable: '--font-monteserrat',
+// })
 
 
 export default function Home() {

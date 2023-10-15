@@ -4,10 +4,20 @@ import axios from "axios";
 
 import Link from "next/link";
 import Sellerdetails from "./Sellerdetails/Sellerdetails";
+import Contact_details from "./price_and_phone/Contact_details";
 import Reporting_add from "./reporting_add/Reporting_add";
+import dynamic from "next/dynamic";
+
 import price_converter from "@/components/processing_functions/Price_calculator";
 
-const slug = ({ carrdata }) => {
+const FullLoader = dynamic(
+  () => import("@/components/Modals/Loader/FullLoader"),
+  {
+    loading: () => <div className="loder"><h2>Loading...</h2></div>,
+  }
+);
+
+const slug = ({ carrdata,loadiing }) => {
   // const [car, setCar] = useState({});
   const [features, setFeatures] = useState([]);
   const [images, setImages] = useState([]);
@@ -89,23 +99,26 @@ const slug = ({ carrdata }) => {
           <div className="car_section">
             <div className="car_upper_section">
               <div className="car_title" style={{ padding: "10px" }}>
-                <h1 style={{ color: "#223C7A", marginBottom: "0px" }}>
-                  {carrdata.brand} {carrdata.model} {carrdata.modelyear}
+                <h1 style={{ color: "#223C7A", marginBottom: "5px" }}>
+                  {carrdata.brand} {carrdata.model} {carrdata.variant_name} {carrdata.modelyear}
                 </h1>
-                <span style={{ color: "#223C7A" }}>{carrdata.city}</span>
+                <span style={{ color: "#223C7A" }}><i className='bx bxs-location-plus'></i>&nbsp;{carrdata.city}</span>
               </div>
               <div className="img_section">
-                {images.map((url) => {
+                {images.map((url,i) => {
                   return (
                     <>
                       {/* <div style={{width:'100%'}}> */}
-                      <img
+                      <Image
+                       key={i}
                        style={{translate:`${-100 * index}%`}}
                         src={url}
                         alt="loading"
                         loading="lazy"
-                        // width={100}
-                        // height={100}
+                        width={100}
+                        height={100}
+                        unoptimized={true}
+                        priority={false}
                       />
                       {/* </div> */}
                      
@@ -128,8 +141,8 @@ const slug = ({ carrdata }) => {
                   className="bx bx-chevron-down right_arrow"
                 ></i>
               </div>
-              <h2 style={{ color: "#076d00", padding: "10px" }}>
-                PKR: {price_converter(carrdata.price)}
+              <h2 style={{color:'#223C7A', padding: "10px" , fontFamily:'monospace'}}>
+              PKR: {price_converter(carrdata.price)} 
               </h2>
             </div>
             <div className="car_specs">
@@ -181,10 +194,10 @@ const slug = ({ carrdata }) => {
             <div className="car_features">
               <h2>Car features</h2>
               <div className="features">
-                {features.map((v, index) => {
+                {features.map((v, i) => {
                   return (
                     <>
-                      <p key={index}>{v}</p>
+                      <p key={i}>{v}</p>
                     </>
                   );
                 })}
@@ -199,6 +212,7 @@ const slug = ({ carrdata }) => {
             </div>
           </div>
           <div className="seller_section">
+          <Contact_details className='contact_dtals' price={carrdata.price} phone={carrdata.Phone_no}/>
             <Sellerdetails sellerid={carrdata.seller_id} />
             <Reporting_add />
           </div>
@@ -212,6 +226,9 @@ const slug = ({ carrdata }) => {
           <Link href="#">Sell Your Car</Link>
         </div>
       </div>
+      {
+        loadiing ? <FullLoader/>:<></>
+      }
     </>
   );
 };

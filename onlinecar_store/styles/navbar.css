@@ -90,6 +90,7 @@
 
 .NavBar .uppernav .profile .profileDropDown ul li a .bx{
     margin-right: 10px;
+
 }
 .NavBar .uppernav .profile .username{
     font-size: 15px;
@@ -156,6 +157,13 @@
     height: 100%;
     /* padding-right: 100px; */
   }
+  .NavBar nav .navLinks div i{
+    color: white;
+    font-size: x-large;
+    cursor: pointer;
+    transition: .2s;
+    display: none;
+  }
   
   .NavBar nav .navLinks>ul {
     display: flex;
@@ -175,7 +183,11 @@
     transition: .5s;
     text-shadow: var(--darkneon);
   }
-  
+  .NavBar nav .navLinks ul li i{
+    font-size: x-large;
+    font-weight: 500;
+    color: white;
+  }
   .NavBar nav .navLinks>ul>li,
   .services_one {
     position: relative;
@@ -249,14 +261,14 @@
     width: 50%;
   } */
   
-  .NavBar nav .navLinks>ul>li>a .bx-menu{
+  /* .NavBar nav .navLinks>ul>li>a .bx-menu{
     margin: 0px 3px 0px 7px;
     transition: .5s;
   
     font-size: large;
     font-weight: 800;
   }
-  
+   */
   
   .NavBar nav .navLinks>ul>li>a .fa-phone {
     color: var(--orange);
@@ -370,6 +382,8 @@
       }
       .NavBar .uppernav{
         margin-bottom: 0px;
+        margin: 0;
+       
       }
       .NavBar .uppernav .profile{
         padding: 2px 10px;
@@ -388,6 +402,9 @@
     }
   
     .NavBar nav .navLinks>ul>li>a .bx-menu{
+      display: block;
+    }
+    .NavBar nav .navLinks div i{
       display: block;
     }
   

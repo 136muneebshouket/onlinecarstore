@@ -94,6 +94,11 @@ const carSchema = new mongoose.Schema(
         default: [],
         required:true
     },
+    featured: {
+      type: Boolean,
+      required:false,
+      default:false
+    },
     certified: {
       type: Boolean,
       required:false,
@@ -114,6 +119,10 @@ const carSchema = new mongoose.Schema(
       required:false,
       default:false
     },
+    overall_incpection_rating:{
+      type : Number,
+      required:false
+    }
    
   },
   { timestamps: true }

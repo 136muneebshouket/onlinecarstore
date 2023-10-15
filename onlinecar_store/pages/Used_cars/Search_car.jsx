@@ -109,7 +109,9 @@ const Search_car = ({   carrdata,   loadiing }) => {
   useEffect(()=>{
     let filters = router.query.filters;
     if(filters){
+      // console.log(filters)
       let queryobj = JSON.parse(filters);
+    
       setFilterslength(Object.keys(queryobj).length)
     }
   },[])
@@ -159,7 +161,6 @@ const Search_car = ({   carrdata,   loadiing }) => {
                       width={200}
                       height={200}
                       alt="loading"
-                      
                     />
                   </div>
                   <div className="car_info">
@@ -174,7 +175,7 @@ const Search_car = ({   carrdata,   loadiing }) => {
                      
                       <p>{obj.city}</p>
                       <div>
-                      <span>{price_converter(obj.Mileage)} km</span>
+                      <span>{obj.Mileage} km</span>
                       <span>{obj.enginecc}cc</span>
                       <span>{obj.transmission}</span>
                       <span>{obj.enginetype}</span>

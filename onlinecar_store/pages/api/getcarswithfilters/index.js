@@ -41,6 +41,12 @@ export default async function handler(req, res) {
           enginetype: 1,
           enginecc: 1,
           transmission: 1,
+          featured: 1,
+          certified: 1,
+          inspected: 1,
+          auction_sheet: 1,
+          managed_by: 1,
+          overall_incpection_rating: 1,
           price: 1,
           images_url: { $slice: 1 }, // Limit the images array to the first element only
           _id: 1, // Exclude the "_id" field from the results
