@@ -55,6 +55,7 @@ export default async function handler(req, res) {
           }
         }
         if (doc) {
+          let imgs_deleted = false;
           let images_to_del = doc.images_url;
           if (images_to_del.length > 0) {
             try {
@@ -64,40 +65,39 @@ export default async function handler(req, res) {
               });
               // console.log(public_ids)
 
-              await imageKit.bulkDeleteFiles(
-                public_ids,
-                function (error, result) {
-                  if (error) {
-                    console.log(error);
-                    let back = err(400, "error in imgkit deleting", false);
-                    if (back) {
-                      return;
-                    }
-                  }
-                }
-              );
+              let deleteimgs = await imageKit.bulkDeleteFiles(public_ids);
+              if(deleteimgs){
+                imgs_deleted = true
+              }
             } catch (error) {
               console.log(error + "err");
               let back = err(400, "error in imgkit deleting", false);
               if (back) {
                 return;
               }
+              return
             }
           }
-          // console.log("i run ");
-          let deleted_ad = await cardataschema.findByIdAndDelete(doc._id);
-          if (!deleted_ad) {
-            let back = err(417, err + "cannot delete ad", false);
-            if (back) {
-              return;
+          if(imgs_deleted == false){
+            let back = err(502,"Image deletion failed from imgkit",false);
+            if(back){return;}
+          }         
+          if(imgs_deleted == true){
+            let deleted_ad = await cardataschema.findByIdAndDelete(doc._id);
+            if (!deleted_ad) {
+              let back = err(417, err + "cannot delete ad", false);
+              if (back) {
+                return;
+              }
+            }
+            if (deleted_ad) {
+              let back = err(200, "your Ad is deleted", true);
+              if (back) {
+                return;
+              }
             }
           }
-          if (deleted_ad) {
-            let back = err(200, "your Ad is deleted", true);
-            if (back) {
-              return;
-            }
-          }
+          
         }
         // let getback = false;
         function err(status, message, success) {

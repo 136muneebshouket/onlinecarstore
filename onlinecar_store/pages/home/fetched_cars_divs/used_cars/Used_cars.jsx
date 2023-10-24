@@ -1,87 +1,110 @@
-import React, { useState } from "react";
+// import React, { useState ,useEffect} from "react";
 import Link from "next/link";
+import axios from "axios";
 import price_converter from "@/components/processing_functions/Price_calculator";
 import Image from "next/image";
+import { useEffect,useState } from "react";
 
 const Used_cars = () => {
-  const [carrdata, setCarrdata] = useState([
-    {
-      id: "12345678976543",
-      images_url: ["/images/samplecar.webp"],
-      brand: "Audi",
-      model: "A3",
-      variant_name: "e-tron",
-      modelyear: "2021",
-      city: "Lahore",
-      Mileage: 100000,
-      enginecc: 1300,
-      transmission: "Automatic",
-      enginetype: "Petrol",
-      price: 1200000,
-    },
-    {
-      id: "12345678976543",
-      images_url: ["/images/samplecar.webp"],
-      brand: "Audi",
-      model: "A3",
-      variant_name: "e-tron",
-      modelyear: "2021",
-      city: "Lahore",
-      Mileage: 100000,
-      enginecc: 1300,
-      transmission: "Automatic",
-      enginetype: "Petrol",
-      price: 1200000,
-    },
-    {
-      id: "12345678976543",
-      images_url: ["/images/samplecar.webp"],
-      brand: "Audi",
-      model: "A3",
-      variant_name: "e-tron",
-      modelyear: "2021",
-      city: "Lahore",
-      Mileage: 100000,
-      enginecc: 1300,
-      transmission: "Automatic",
-      enginetype: "Petrol",
-      price: 1200000,
-    },
-    {
-      id: "12345678976543",
-      images_url: ["/images/samplecar.webp"],
-      brand: "Audi",
-      model: "A3",
-      variant_name: "e-tron",
-      modelyear: "2021",
-      city: "Lahore",
-      Mileage: 100000,
-      enginecc: 1300,
-      transmission: "Automatic",
-      enginetype: "Petrol",
-      price: 1200000,
-    },
-    {
-      id: "12345678976543",
-      images_url: ["/images/samplecar.webp"],
-      brand: "Audi",
-      model: "A3",
-      variant_name: "e-tron",
-      modelyear: "2021",
-      city: "Lahore",
-      Mileage: 100000,
-      enginecc: 1300,
-      transmission: "Automatic",
-      enginetype: "Petrol",
-      price: 1200000,
-    },
+// console.log(carsdata)
+  const [carsdata, setCarsdata] = useState([])
+
+
+  // const [cardata, setCarrdata] = useState([
+  //   // {
+  //   //   id: "12345678976543",
+  //   //   images_url: ["/images/samplecar.webp"],
+  //   //   brand: "Audi",
+  //   //   model: "A3",
+  //   //   variant_name: "e-tron",
+  //   //   modelyear: "2021",
+  //   //   city: "Lahore",
+  //   //   Mileage: 100000,
+  //   //   enginecc: 1300,
+  //   //   transmission: "Automatic",
+  //   //   enginetype: "Petrol",
+  //   //   price: 1200000,
+  //   // },
+  //   // {
+  //   //   id: "12345678976543",
+  //   //   images_url: ["/images/samplecar.webp"],
+  //   //   brand: "Audi",
+  //   //   model: "A3",
+  //   //   variant_name: "e-tron",
+  //   //   modelyear: "2021",
+  //   //   city: "Lahore",
+  //   //   Mileage: 100000,
+  //   //   enginecc: 1300,
+  //   //   transmission: "Automatic",
+  //   //   enginetype: "Petrol",
+  //   //   price: 1200000,
+  //   // },
+  //   // {
+  //   //   id: "12345678976543",
+  //   //   images_url: ["/images/samplecar.webp"],
+  //   //   brand: "Audi",
+  //   //   model: "A3",
+  //   //   variant_name: "e-tron",
+  //   //   modelyear: "2021",
+  //   //   city: "Lahore",
+  //   //   Mileage: 100000,
+  //   //   enginecc: 1300,
+  //   //   transmission: "Automatic",
+  //   //   enginetype: "Petrol",
+  //   //   price: 1200000,
+  //   // },
+  //   // {
+  //   //   id: "12345678976543",
+  //   //   images_url: ["/images/samplecar.webp"],
+  //   //   brand: "Audi",
+  //   //   model: "A3",
+  //   //   variant_name: "e-tron",
+  //   //   modelyear: "2021",
+  //   //   city: "Lahore",
+  //   //   Mileage: 100000,
+  //   //   enginecc: 1300,
+  //   //   transmission: "Automatic",
+  //   //   enginetype: "Petrol",
+  //   //   price: 1200000,
+  //   // },
+  //   // {
+  //   //   id: "12345678976543",
+  //   //   images_url: ["/images/samplecar.webp"],
+  //   //   brand: "Audi",
+  //   //   model: "A3",
+  //   //   variant_name: "e-tron",
+  //   //   modelyear: "2021",
+  //   //   city: "Lahore",
+  //   //   Mileage: 100000,
+  //   //   enginecc: 1300,
+  //   //   transmission: "Automatic",
+  //   //   enginetype: "Petrol",
+  //   //   price: 1200000,
+  //   // },
    
-  ]);
+  // ]);
+
+
+  async function getdata(){
+    try {
+      const res = await axios.get(
+        `${process.env.Host}/api/getcarswithfilters/?limit=6`
+      );
+      const carrdata = res.data.data;
+      setCarsdata(carrdata)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(()=>{
+    getdata()
+  },[])
 
   return (
     <>
       <div className="car_cars_sliders">
-        {carrdata.map((obj, i) => {
+        {carsdata?.map((obj, i) => {
           return (
             <>
               {/* <Link className="singlecar_link" href="#"> */}
@@ -115,7 +138,7 @@ const Used_cars = () => {
                       {/* </Link> */}
 
                       <p className="price_mbv">
-                        <strong>PKR:{obj.price}</strong>
+                        <strong>PKR:{price_converter(obj.price)}</strong>
                       </p>
 
                       <p>{obj.city}</p>
@@ -131,35 +154,35 @@ const Used_cars = () => {
             </>
           );
         })}
-        {carrdata.length == 0 && (
+        {carsdata?.length == 0 && (
           <>
-            <h2>No car with these filters..</h2>
+            <h2>No cars yet ....</h2>
+           
           </>
         )}
       </div>
+      {/* <button onClick={()=>{getdata()}}>get please</button> */}
     </>
   );
 };
 
-// export async function getServerSideProps({}) {
+// export async function getServerSideProps() {
+//   console.log('get server child')
 //   const res = await axios.get(
-//     `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters}`
+//     `${process.env.Host}/api/getcarswithfilters?limit=6`
 //   );
-//   const carrdata = res.data.data;
+//   const carsdata = res.data.data;
 //   let loadingg = false;
-//   if (carrdata) {
+//   if (carsdata) {
 //     loadingg = false;
 //   }
 
-//   // console.log(carrdata)
+//   console.log(carsdata)
 
 //   return {
 //     props: {
-//       carrdata,
+//       carsdata,
 //       loadiing: loadingg,
-//       // total:pages,
-//       // cardata,
-//       // pagenum:params.page
 //     },
 //     //   revalidate: 300
 //   };

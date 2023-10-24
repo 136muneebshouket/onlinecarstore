@@ -38,7 +38,7 @@
     padding: 5px 10px;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 30%);
     border-radius: .30rem;
-    transition:all .4s ease-in;
+    transition:all .2s ease-in;
 }
 
 
@@ -212,7 +212,7 @@
   }
   
   
-  .NavBar nav .navLinks>ul>li>a {
+  .NavBar nav .navLinks>ul>li a {
     padding: 3px;
     position: relative;
     font-weight: 400;
@@ -295,13 +295,7 @@
     overflow-x: hidden;
   }
   
-  .NavBar nav .navLinks>ul>li:hover .dropDownList {
-    opacity: 1;
-    top: 100%;
-    visibility: visible;
-    z-index: 999;
-  
-  }
+
   
   .NavBar nav .navLinks>ul>li:hover .dropDownList li a::after {
     background: transparent;
@@ -361,6 +355,10 @@
   
     }
   }
+  .NavBar nav .navLinks li .bx-chevron-down  {
+    color: black;
+    display: none;
+    }
   
   /* @media (max-width:972px) {
     .NavBar .logo img {
@@ -410,8 +408,9 @@
   
     .NavBar nav .navLinks ul li a {
       color: black;
-      font-size: 15px;
-  
+      font-size: 19px;
+      padding-bottom:5px ;
+      width: -webkit-fill-available;
     }
   
     .NavBar nav .navLinks .dropDownList li {
@@ -433,32 +432,31 @@
     }
   
     .NavBar nav .navLinks>ul {
-        width: 200px;
+        width: 290px;
     position: absolute;
     top: 100%;
     flex-direction: column;
-    padding: 10px calc(10px + 1.5vw);
-    background-color: hsla(0, 0%, 100%, .95);
-    transition: .8s ease;
+    padding: 10px calc(0px + 1.2vw);
+    background-color: hsla(0, 0%, 100%);
+    transition: .4s ease;
     z-index: 100;
     height: 90vh;
     border: 1px solid;
+    overflow: scroll;
    
     }
   
     .NavBar nav .navLinks>ul>li {
+      flex-direction: column;
       margin: 0;
       justify-content: flex-start;
     border-bottom: 1px solid #999999;
     padding-bottom: 0px !important;
+    align-items: flex-start;
     }
   
-    .NavBar nav .navLinks>ul>li>a {
-      display: flex;
-      justify-content: space-between;
-      font-size: 16px;
-      font-weight: 500;
-    }
+    /* .NavBar nav .navLinks>ul>li>a {
+    } */
   
     .dropDownList {
       z-index: 22;
@@ -498,18 +496,24 @@
       left: 0;
       margin: 0px;
     }
-  
-    .NavBar nav .navLinks .bx-menu {
+    .NavBar nav .navLinks li .bx-chevron-down{
       display: block;
-      font-size: 30px;
-      color: #e6e6e6;
-      font-weight: 800;
-      margin: 0px;
+       /* position: absolute; */
+       /* right: 0px;
+       top: -1%; */
+       /* margin: 5px; */
+       font-size: xx-large;
     }
+    
   
     .NavBar nav .navLinks .loginBtnItem {
       display: flex;
       justify-content: flex-end;
+    }
+    .NavBar nav .navLinks>ul a.postaddlink{
+      margin: 10px;
+      width: -webkit-fill-available;
+      padding: 5px 0px;
     }
   
   }

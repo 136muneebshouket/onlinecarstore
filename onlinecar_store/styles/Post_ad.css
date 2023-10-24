@@ -269,7 +269,7 @@
 }
 
 .upload_img_input .uploadimg_input::after {
-    content: "(max-limit 5mb per Image)";
+    content: "(max-limit 4mb per Image)";
     position: absolute;
     bottom: -20px;
     right: 0;

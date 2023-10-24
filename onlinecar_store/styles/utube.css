@@ -1,0 +1,107 @@
+.utubeupload .input_label label {
+    display: block;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.utubeupload .input_label {
+    padding: 10px;
+    width: min(700px, 95vw);
+    margin: auto;
+}
+
+.utubeupload .input_label input {
+    width: -webkit-fill-available;
+}
+
+.utubeupload .upload_btn {
+    width: -webkit-fill-available;
+    border: none;
+    background-color: rgb(0, 102, 51);
+    padding: 10px;
+    color: white;
+    font-weight: 400;
+}
+
+.main_videos .videos_header {
+    background-color: #223C7A;
+    padding: 20px 0px;
+}
+
+.main_videos .videos_header h1 {
+    color: white;
+}
+
+.main_videos .container {
+    width: max(80vw, min(700px, 99vw));
+    margin: auto;
+}
+
+.main_videos .search_bar {
+    display: flex;
+}
+
+.main_videos .container input {
+    margin: 3px;
+    flex-grow: 8;
+    height: 40px;
+}
+
+.main_videos .container button {
+    padding: 0px 15px;
+    border: none;
+    background: #45b34f;
+    color: white;
+    /* height: 40px; */
+    font-size: larger;
+    flex-grow: 2;
+    margin: 3px;
+}
+
+.component_container {
+    margin: 30px 0px;
+}
+
+.component_container .flex_cntaner_ifrmes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.component_container .flex_cntaner_ifrmes .card {
+    margin: 5px;
+    width: max(24vw, min(200px, 43vw));
+    /* height: max(22vw, min(200px, 40vw)); */
+    box-shadow: 0px 0px 9px 0px #c1c1c1;
+}
+
+.component_container .flex_cntaner_ifrmes .card a {
+    text-decoration: none;
+}
+
+.component_container .flex_cntaner_ifrmes .img_div {
+    height: max(100px, 15vw);
+    position: relative;
+}
+.component_container .flex_cntaner_ifrmes .img_div span.play_icon{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-size: medium;
+    color: aliceblue;
+    background: black;
+    padding: 10px 13px;
+    border-radius: 50%;
+}
+.component_container .flex_cntaner_ifrmes img {
+    width: -webkit-fill-available;
+    object-fit: cover;
+    height: 100%;
+}
+.component_container .flex_cntaner_ifrmes p{
+    font-size: max(14px,1.5vw);
+    margin: 6px 4px;
+    color: rgb(45, 45, 45);
+    line-height: 20px;
+}

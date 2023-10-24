@@ -1,10 +1,12 @@
-// "use client";
+"use client";
 import React, { useReducer, useState, useRef, useEffect } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import Logo from "@/pages/z_icons/Logo";
 import Link from "next/link";
+
 import Context from "./processing_functions/context";
 import { useContext } from "react";
+import Usedcar_dropdown from "./stylecomponents/Usedcar_dropdown";
 // import {google_auth} from "../components/processing_functions/auth_func";
 // import Image from "next/image";
 
@@ -18,6 +20,7 @@ const NavBar = () => {
   const isLoggedIn = sessionData?.user;
 
   const [profileDropDown, setProfileDropDown] = useState(false);
+  const [usedcardropdown, setUsedcardropdown] = useState(false);
 
   const [toggleNavBar, setToggleNavBar] = useState(false);
   const [toggleul, setToggleul] = useState(false);
@@ -123,11 +126,15 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="navLinks">
-            <ul style={{ left: toggleNavBar ? "-12.5%" : "-105%" }}>
+            <ul style={{ left: toggleNavBar ? "-12.5%" : "-130%" }}>
               <li>
+                <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
                 <Link className="darkneon" href="/used_cars/Search_car">
                   Used Cars
                 </Link>
+                <span><i ref={dropDownRef2} onClick={()=>{setUsedcardropdown(!usedcardropdown)}}  className="bx bx-chevron-down"></i></span>
+                </div>     
+                <Usedcar_dropdown toggle={usedcardropdown}/>  
               </li>
               {/* <li className='services_one'>
                 <Link href="">services
@@ -174,14 +181,15 @@ const NavBar = () => {
                  
                 </ul>
               </li> */}
+              
               <li>
-                <Link className="darkneon" href="/">
-                  New Cars
+                <Link className="darkneon" href="/videos/Videos">
+                  Videos
                 </Link>
               </li>
               <li>
                 <Link className="darkneon" href="/">
-                  Bikes
+                  Blogs
                 </Link>
               </li>
 

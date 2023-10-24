@@ -123,10 +123,14 @@ const My_Ads = () => {
 
                           <p>{obj.city}</p>
                           <div>
-                            <span>{price_converter(obj.Mileage)} km</span>
+                            <span>{obj.Mileage} km</span>
                             <span>{obj.enginecc}cc</span>
-                            <span>{obj.transmission}</span>
-                            <span>{obj.enginetype}</span>
+                            <span className="hide_in_mbv">
+                              {obj.transmission}
+                            </span>
+                            <span className="hide_in_mbv">
+                              {obj.enginetype}
+                            </span>
                           </div>
                         </div>
                         <div className="car_price_section">

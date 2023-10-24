@@ -213,7 +213,7 @@ const slug = ({ carrdata,loadiing }) => {
           </div>
           <div className="seller_section">
           <Contact_details className='contact_dtals' price={carrdata.price} phone={carrdata.Phone_no}/>
-            <Sellerdetails sellerid={carrdata.seller_id} />
+            <Sellerdetails sellerid={carrdata.seller_email} />
             <Reporting_add />
           </div>
         </div>

@@ -10,6 +10,10 @@ export default async function handler(req, res) {
       try {
         const { filters } = req.query;
         // console.log(filters);
+        var limit = req.query.limit || 12
+        var page = req.query.page || 1
+        var skip = (limit * (page - 1))
+        // console.log(limit)
 
         const appliedfilters = {};
         try {
@@ -53,14 +57,17 @@ export default async function handler(req, res) {
         };
 
         // Perform the query with the specified projection
-        const result = await cardataschema.find(appliedfilters, selectedfields);
+        const result = await cardataschema.find(appliedfilters, selectedfields)
+        .limit(limit).skip(skip).sort({createdAt:-1});
+        const count = await cardataschema.find(appliedfilters).count()
 
         // Process the query results
-        // console.log(result); // This will contain documents with only the selected fields and the first element of the images array
+        // console.log(count); // This will contain documents with only the selected fields and the first element of the images array
         if (result) {
           res.status(200).json({
             success: true,
             data: result,
+            count: count,
             message: "done",
           });
         }

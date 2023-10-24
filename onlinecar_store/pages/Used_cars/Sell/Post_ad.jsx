@@ -77,6 +77,8 @@ const Post_ad = () => {
     price: null,
     comments: "",
     enginetype: "",
+    body_type: "",
+    slug: "slug",
     model: "",
     enginecc: null,
     transmission: "",
@@ -129,6 +131,7 @@ const Post_ad = () => {
           ...{ enginecc: values.enginecc },
           ...{ transmission: values.transmission },
           ...{ enginetype: values.enginetype },
+          ...{ body_type: values.bodytype },
           ...{ duration: values.duration },
         };
       });
@@ -161,7 +164,7 @@ const Post_ad = () => {
       });
     }
     if (Array.isArray(values)) {
-      // console.log(values);
+      console.log(values);
       setCarobj((prevCarobj) => {
         return {
           ...prevCarobj,
@@ -750,9 +753,9 @@ const Post_ad = () => {
                     <h2>Upload Photos</h2>
                   </div>
                   <div className="upload_img_input">
-                    {errors && imagestoshow.length < 10 ? (
+                    {errors && imagestoshow.length < 1 ? (
                       <span className="errorspan">
-                        Upload at least 10 images
+                        Upload at least 1 images
                       </span>
                     ) : (
                       ""
@@ -967,6 +970,54 @@ const Post_ad = () => {
                           <option value="Imported">Imported</option>
                         </select>
                         {errors && carobj.Assembly == "" ? (
+                          <span className="errorspan">
+                            Please fill out this input
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                    <div className="input_field">
+                      <i className="bx bxs-car"></i>
+                      <div>
+                        <label>Body Type</label>
+                        <select
+                          name=""
+                          id="body_type"
+                          value={carobj.body_type && carobj.body_type}
+                          onChange={(e) => {
+                            setCarobj((prevCarobj) => {
+                              return {
+                                ...prevCarobj,
+                                ...{ body_type: e.target.value },
+                              };
+                            });
+                          }}
+                        >
+                          <option value="">Body Type</option>
+                          <option value="Sedan">Sedan</option>
+                          <option value="Hatchback">Hatchback</option>
+                          <option value="SUV">SUV</option>
+                          <option value="Crossover">Crossover</option>
+                          <option value="Mini Van">Mini Van</option>
+                          <option value="Double Cabin">Double Cabin</option>
+                          <option value="MPV">MPV</option>
+                          <option value="Compact SUV">Compact SUV</option>
+                          <option value="Micro Van">Micro Van</option>
+                          <option value="Pick Up">Pick Up</option>
+                          <option value="Station Wagon">Station Wagon</option>
+                          <option value="Coupe">Coupe</option>
+                          <option value="Truck">Truck</option>
+                          <option value="High Roof">High Roof</option>
+                          <option value="Convertible">Convertible</option>
+                          <option value="Single Cabin">Single Cabin</option>
+                          <option value="Off-Road Vehicles">Off-Road Vehicles</option>
+                          <option value="Mini Vehicles">Mini Vehicles</option>
+                          <option value="Compact hatchback">Compact hatchback</option>
+                          <option value="Subcompact hatchback">Subcompact hatchback</option>
+                        </select>
+                        {errors && carobj.body_type == "" ? (
                           <span className="errorspan">
                             Please fill out this input
                           </span>

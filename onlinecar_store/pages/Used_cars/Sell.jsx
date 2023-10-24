@@ -241,7 +241,6 @@ const Sell = () => {
               <div className="cards overflow">
                 <div className="card succes">
                   <iframe
-                 
                     height="200"
                     src="https://www.youtube.com/embed/HJ66Z9xHQFQ"
                     title="Mansoor Ali khan Sell Car Testimonial"

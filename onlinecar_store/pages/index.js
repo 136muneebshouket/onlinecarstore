@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import NavBar from '@/components/Navbar'
+// import NavBar from '@/components/Navbar'
+// import Used_cars from './home/fetched_cars_divs/used_cars/Used_cars.server'
 // import  from './Home/Homepage'
 import { Montserrat } from 'next/font/google'
 
@@ -25,7 +26,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+    {/* <NavBar/> */}
     <Homepage/>
+    {/* <Used_cars/> */}
+
     </>
   )
 }

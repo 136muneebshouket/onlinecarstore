@@ -21,7 +21,7 @@ const Reset_admin = dynamic(
   }
 );
 
-const Forget_password = ({ isOpen, onClose }) => {
+const Forget_password = ({ isOpen, onClose,Open_reset_modal }) => {
   if (!isOpen) {
     return null;
   }
@@ -89,6 +89,8 @@ const Forget_password = ({ isOpen, onClose }) => {
         setCode('')
         setEmail_sent(false)
         setLoading(false);
+        Open_reset_modal(true);
+        onClose()
       
       })
       .catch((err) => {

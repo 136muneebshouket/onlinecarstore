@@ -1,6 +1,7 @@
 import cardataschema from "../../../models/cardataschema";
 import dbConnect from "../../../config/dbConnect";
 import userschema from "../../../models/user";
+import mongoose, { model } from "mongoose";
 
 export default async function handler(req, res) {
   dbConnect();
@@ -26,11 +27,11 @@ export default async function handler(req, res) {
        
         if (result) {
           const user_email = await userschema.findOne({_id: result.seller_id },{email:1});
-          // console.log(user_email.email)
-          if(user_email){
-            result.seller_id = user_email.email;
+          result.seller_id = new mongoose.Types.ObjectId('553fed247701')
+          if(user_email){ 
+            result.seller_email = user_email.email;
           }
-            // console.log(result)
+            // console.log(obj)
             res.status(200).json({
             success: true,
             data: result,

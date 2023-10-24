@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
 import Layout from "@/Components/Layout";
+import NavBar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "@/styles/navbar.css";
 import "@/styles/Login.css";
 import "@/styles/profile.css";
@@ -17,6 +19,10 @@ import "@/styles/doublerange.css";
 import "@/styles/singlecarpage.css";
 import "@/styles/Other_profilepages.css";
 import "@/styles/car_cards_sliders.css";
+import "@/styles/admin_page.css";
+import "@/styles/utube.css";
+import "@/styles/usedcar_drpdown.css";
+import "@/styles/footer.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/response_modal/Response_modal";
@@ -84,8 +90,10 @@ export default function App({ Component, pageProps }) {
         <Context.Provider value={{message , setMessage}}>
         <main className={inter.className}>
         <Layout >
+          <NavBar/>
           {loading ? <FullLoader /> : <Component {...pageProps} />}
           {message && <Response_modal res={message} onClose={()=>{setMessage()}}/>}
+          <Footer/>
         </Layout>
         </main>
         </Context.Provider>

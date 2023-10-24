@@ -8,15 +8,18 @@
 .car_cars_sliders a{
     text-decoration: none;
     margin: 5px ;
+    /* max-width: 250px; */
+    height: fit-content;
 }
 .car_cars_sliders .car_content h3,.car_cars_sliders .car_content h2,.car_cars_sliders .car_content p,.car_cars_sliders .car_content span{
     text-decoration: none !important; 
+    font-size: max(14px ,1.2vw);
   
 }
 .car_cars_sliders .singlecar{
     display: flex;
     flex-direction: column;
-    min-width: max(210px,21vw);
+    width: max(210px,20vw);
     /* margin: 5px 10px; */
     border-radius: 10px;
     border: 1px solid rgb(214, 214, 214);
@@ -32,8 +35,8 @@
     display: inline-block;
 } */
 .car_content div > span{
-    display: inline-block !important;
-    font-size: small;
+    display: inline-block ;
+    font-size: max(14px,1.1vw);
     padding: 0px 5px;
     color: #434343;
 }

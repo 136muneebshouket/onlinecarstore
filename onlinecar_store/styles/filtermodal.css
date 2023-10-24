@@ -46,7 +46,7 @@ font-weight: 500;
 .filtermodal .input_field label{
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
 }
 .filtermodal .input_field .bxs-car,.bx-phone{
     color: gray;
@@ -123,6 +123,17 @@ margin: 2px;
     background: #ededed;
     margin: 3px 3px;
     border: 1px solid #cccccc;
+}
+.filtermodal .input_field .bodytype_icons{
+width: min-content;
+/* border: 1px solid; */
+height: 80px;
+}
+.filtermodal .input_field .bodytype_icons span{
+    position: relative;
+    bottom: 10px;
+    margin: auto;
+    white-space: nowrap;
 }
 .filtermodal .input_field .related_filters span:hover{
     border: 1px solid #213974;

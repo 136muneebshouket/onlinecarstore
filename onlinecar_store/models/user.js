@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      unique: [true, 'Email must be lowercase'],
+      unique: [true, 'Email already exist'],
       lowercase:[true, 'Email must be lowercase'],
       required: [true, 'Email is required'],
     },

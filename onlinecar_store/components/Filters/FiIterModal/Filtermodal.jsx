@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import colors from "@/components/carsdata/colors";
+import { bodyTypeArray } from "../Options-sliders/optionsarray";
 import Optionsmodal from "@/components/Modals/custom models/Optionsmodal/Optionsmodal";
 import price_converter from "@/components/processing_functions/Price_calculator";
 import ReactSlider from "react-slider";
@@ -9,6 +10,7 @@ const Filtermodal = ({ getfilters, description }) => {
   const router = useRouter();
 
   const [showcolors, setShowcolors] = useState(false);
+  const [showbodytypes, setShowbodytypes] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalvalue, setModalvalue] = useState("");
   const [currentyear, setCurrentyear] = useState(
@@ -50,6 +52,7 @@ const Filtermodal = ({ getfilters, description }) => {
     Mileage: { Gt: null, Lt: null },
     price: { Gt: null, Lt: null },
     enginetype: [],
+    body_type:[],
     model: [],
     enginecc: { Gt: null, Lt: null },
     transmission: [],
@@ -62,7 +65,7 @@ const Filtermodal = ({ getfilters, description }) => {
   };
 
   const [carfilters, setCarfilters] = useState(initialState);
-
+//  console.log(carfilters)
   useEffect(() => {
     let filters = router.query.filters;
 
@@ -997,7 +1000,7 @@ const Filtermodal = ({ getfilters, description }) => {
             <label htmlFor="location">Body Color</label>
             <div
               className="related_filters filter_colorsoption"
-              style={{ maxHeight: `${showcolors ? "1000px" : "100px"}` }}
+              style={{ maxHeight: `${showcolors ? "900px" : "100px"}` }}
             >
               {colors.map((Obj, index) => {
                 return (
@@ -1030,7 +1033,52 @@ const Filtermodal = ({ getfilters, description }) => {
               }}
               className="see_morebtn"
             >
-              see more &rArr;
+              {showcolors ? 'show less' : 'see more'} &rArr;
+            </span>
+          </div>
+          {/* <i className="bx bx-chevron-down"></i> */}
+        </div>
+        <div className="input_field ">
+          <i className="bx bxs-car"></i>
+          <div>
+            <label htmlFor="location">Body Type</label>
+            <div
+              className="related_filters filter_colorsoption"
+              style={{ maxHeight: `${showbodytypes ? "1760px" : "100px"}` }}
+            >
+              {bodyTypeArray.map((Obj, index) => {
+                return (
+                  <>
+                    <div
+                      className={`bodytype_icons ${
+                        carfilters.body_type.includes(Obj.name)
+                          ? "selected_filter"
+                          : ""
+                      }`}
+                      
+                      key={index}
+                      onClick={() => {
+                        add_del_btn_filters("body_type", Obj.name);
+                      }}
+                    >
+                      <img src={`/images/icons_imgs/${Obj.img}`} alt="loading"
+                       
+                        style={{width:'100px'}}
+                      />
+                      <span>{Obj.name}</span>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+            <span
+              onClick={() => {
+                
+                setShowbodytypes(!showbodytypes);
+              }}
+              className="see_morebtn"
+            >
+              {showbodytypes ? 'show less' : 'see more'} &rArr;
             </span>
           </div>
           {/* <i className="bx bx-chevron-down"></i> */}

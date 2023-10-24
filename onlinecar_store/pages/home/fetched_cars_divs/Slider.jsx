@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { bodyTypeArray, carBrands, cities, carModels,carPrices } from "./optionsarray";
+import { bodyTypeArray, carBrands, cities, carModels,carPrices } from "../../../components/Filters/Options-sliders/optionsarray";
 import Link from "next/link";
 
 const Slider = ({ filterby }) => {

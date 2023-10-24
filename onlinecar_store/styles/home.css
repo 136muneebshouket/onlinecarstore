@@ -1,4 +1,7 @@
-.home_main {}
+.home_main {
+  
+    
+}
 
 .home_main .home_header {
     width: 100%;
@@ -6,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, rgb(0 28 69) 30%, rgb(3 65 157) 100%)
+    background: linear-gradient(180deg, rgb(0 28 69) 30%, rgb(3 65 157) 100%);
 }
 
 .home_main .home_header .header_title {

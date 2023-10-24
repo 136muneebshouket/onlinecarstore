@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Response_modal from "@/components/Modals/response_modal/Response_modal";
-
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import axios from "axios";
 
@@ -36,6 +36,7 @@ const Forget_password = dynamic(
 );
 
 const Login = () => {
+  const router = useRouter()
   const [dberrors, setDberrors] = useState({
     msg: "",
     success: null,
@@ -45,7 +46,7 @@ const Login = () => {
   const [showpass, setShowpass] = useState(false);
   const [email, setEmail] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [Open_reset_modal, setOpen_reset_modal] = useState(false);
+  const [Open_reset_modal, setOpen_reset_modal] = useState(false);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -74,6 +75,7 @@ const Login = () => {
         }
         setEmail("");
         setPassword("");
+        router.replace('dashboard/Dashboard')
       })
       .catch((err) => {
         console.log(err);
@@ -175,11 +177,11 @@ const Login = () => {
       )}
 
       {isModalOpen && (
-        <Forget_password isOpen={isModalOpen} onClose={handleCloseModal}  />
+        <Forget_password isOpen={isModalOpen} onClose={handleCloseModal} Open_reset_modal={setOpen_reset_modal} />
       )}
-      {/* {Open_reset_modal && (
+      {Open_reset_modal && (
         <Reset_admin isOpen={Open_reset_modal} onClose={()=>{setOpen_reset_modal(false)}} />
-      )} */}
+      )}
 
       {loading ? <FullLoader /> : <></>}
     </>

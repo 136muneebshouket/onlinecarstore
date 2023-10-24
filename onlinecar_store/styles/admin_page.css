@@ -1,0 +1,24 @@
+
+.admin_dashboard{
+    z-index: 90;
+    position: relative;
+    background-color: rgb(236, 236, 236);
+}
+.admin_nav{
+    position: sticky;
+    top: 0px;
+}
+.admin_nav li{
+    list-style: none;
+}
+.admin_nav button{
+    display: block;
+    padding: 10px 20px;
+    color: rgb(0, 63, 126);
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 2px;
+    border: none;
+}

@@ -1,0 +1,97 @@
+.NavBar .usedcar_dropdown{
+    background-color: white;
+    position: absolute;
+    overflow: hidden;
+    visibility: hidden;
+    height: fit-content;
+    top: 100%;
+    left: -500%;
+    opacity: 0;
+    transition: .4s;
+    display: flex;
+    border: 1px solid rgb(194, 194, 194);
+    border-bottom: 4px solid #BD1414;
+}
+
+.NavBar nav .navLinks>ul>li:hover .usedcar_dropdown{
+    opacity: 1;
+    visibility: visible;  
+  }
+  .usedcar_dropdown .first_div{
+    padding: 10px 0px;
+    border-right: 1px solid rgb(194, 194, 194);
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* align-content: space-between; */
+    justify-content: space-evenly;
+  }
+  .usedcar_dropdown .first_div .option{
+   display: flex;
+   text-decoration: none;
+   margin: 5px 10px;
+   /* text-align: center; */
+   color: rgb(85, 85, 85);
+  }
+  .usedcar_dropdown .first_div .option div{
+    margin-bottom: 12px;
+    margin-right: 15px;
+  }
+  .usedcar_dropdown .first_div .option:hover p,
+  .usedcar_dropdown .first_div .option:hover i,
+  .usedcar_dropdown .first_div .option:hover span
+  {
+    color: rgb(0, 82, 158);
+  }
+  .usedcar_dropdown .first_div .option i{
+    font-size: xx-larger;
+    font-weight: 800;
+    display: block;
+    color: rgb(82, 82, 82);
+    margin: 0px 10px;
+  }
+  .usedcar_dropdown .first_div .option p{
+    font-size: max(17px, 1.2vw);
+    margin-bottom: 4px;
+    font-weight: 600;
+    width: -webkit-fill-available;
+  }
+  .usedcar_dropdown .first_div .option span{
+   font-size: smaller;
+   color: rgb(48, 48, 48);
+  }
+  .usedcar_dropdown .first_div h5{
+    margin: 10px 20px;
+  }
+
+  @media screen and (max-width:770px) {
+    .NavBar .usedcar_dropdown{
+     position: static;
+     flex-direction: column;
+     z-index: 10;
+     width: -webkit-fill-available;
+     margin-top: 5px;
+     border: none;
+     opacity: 1;
+     visibility: visible;
+     height: 0;
+    } 
+    .NavBar .usedcar_dropdown .option{
+        padding: 0;
+        margin: 10px;
+        border-bottom: 1px solid rgb(194, 194, 194);
+    }
+    .NavBar .usedcar_dropdown .option i,
+    .NavBar .usedcar_dropdown span{
+        display: none;
+    }
+    .usedcar_dropdown .first_div .option div{
+        margin-bottom: 0;
+    }
+    .usedcar_dropdown .first_div{
+        padding: 0;
+    }
+    .usedcar_dropdown .first_div h5{
+        display: none;
+    }
+  }

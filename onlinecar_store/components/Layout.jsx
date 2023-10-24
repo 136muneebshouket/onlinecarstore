@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
     
       <SessionProvider>
       {/* <Message_data.Provider value={{ message, setMessage }}> */}
-          <NavBar></NavBar>
+          {/* <NavBar></NavBar> */}
           {children}
           {/* </Message_data.Provider> */}
       </SessionProvider>

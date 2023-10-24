@@ -67,6 +67,14 @@ export default async function handler(req, res) {
               }
               if (imgs.length > 0) {
                 carsaved.images_url = imgs;
+              }
+                carsaved.slug = `${carsaved.brand.replaceAll(
+                  " ",
+                  "-"
+                )}-${carsaved.model.replaceAll(" ", "-")}-${
+                  carsaved.modelyear
+                }-for-sale-in-${carsaved.city.replaceAll(" ", "-")}-${carsaved._id}`.toLowerCase();
+
                 let imgs_stored_indb = await carsaved.save();
                 if (!imgs_stored_indb) {
                   let back = err(417, "imgs not saved", false);
@@ -80,15 +88,15 @@ export default async function handler(req, res) {
                     return;
                   }
                 }
-              } else {
-                let deleted_ad = await cardataschema.findByIdAndDelete(carsaved._id)
+              // } else {
+              //   let deleted_ad = await cardataschema.findByIdAndDelete(carsaved._id)
                 
-                  let back = err(417, "imges not saved in imgkit", false);
-                  if (back) {
-                    return;
-                  }
+              //     let back = err(417, "imges not saved in imgkit", false);
+              //     if (back) {
+              //       return;
+              //     }
                      
-              }
+              // }
             } else {
               let back = err(201, "succesfully saved", true);
               if (back) {

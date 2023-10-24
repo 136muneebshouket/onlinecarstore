@@ -50,6 +50,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
     enginecc: null,
     transmission: "",
     enginetype: "",
+    bodytype: "",
   });
 
   // adding barnd  and model
@@ -82,6 +83,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
     cardata_obj.enginecc = parseInt(enginecc.split("c")[0]);
     cardata_obj.transmission = transmission.trim();
     cardata_obj.enginetype = enginetype.trim();
+    cardata_obj.bodytype = obj.Bodytype;
     setCardata_obj(cardata_obj);
     await carrdata(cardata_obj);
     // console.log(obj.Features)
