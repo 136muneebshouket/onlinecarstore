@@ -11,8 +11,8 @@ import price_converter from "@/components/processing_functions/Price_calculator"
 import Favourites from "@/components/favourites_component/Favourites";
 
 import Filtermodal from "@/components/Filters/FiIterModal/Filtermodal";
-import Context from "@/components/processing_functions/context";
-import { useContext } from "react";
+// import Context from "@/components/processing_functions/context";
+// import { useContext } from "react";
 
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),

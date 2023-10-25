@@ -10,10 +10,11 @@ import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+// import FullLoader from "@/components/Modals/Loader/FullLoader";
 // import "./Login.css"
 
 const FullLoader = dynamic(
-  () => import("@/components/Modals/Loader/fullLoader"),
+  () => import("@/components/Modals/Loader/FullLoader"),
   {
     loading: () => (
       <div className="loder">

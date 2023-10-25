@@ -5,10 +5,10 @@ import { SessionProvider } from "next-auth/react";
 
 import dynamic from "next/dynamic";
 
-const NavBar = dynamic(() => import("./Navbar"), {
-  loading: () => <p>Loading...</p>,
-});
-import { resobj } from "./processing_functions/errors_gen";
+// const NavBar = dynamic(() => import("./Navbar"), {
+//   loading: () => <p>Loading...</p>,
+// });
+// import { resobj } from "./processing_functions/errors_gen";
 import { useEffect,useState } from "react";
 import { createContext } from "react";
 

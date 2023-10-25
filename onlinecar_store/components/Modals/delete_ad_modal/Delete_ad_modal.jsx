@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 // import OutsideClickHandler from "react-outside-click-handler";
 // import FullLoader from "./Loader/FullLoader";
-import Response_modal from "../response_modal/Response_modal";
+// import Response_modal from "../response_modal/Response_modal";
 import { useRouter } from 'next/router';
 import axios from "axios";
 import dynamic from "next/dynamic";

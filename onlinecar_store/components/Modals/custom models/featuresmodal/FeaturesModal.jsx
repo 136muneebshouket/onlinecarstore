@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { car_features } from "@/components/processing_functions/features_generations";
-import Context from "@/components/processing_functions/context";
+// import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 
 const FeaturesModal = ({ carrdata }) => {

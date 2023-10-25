@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Slider from "./fetched_cars_divs/Slider";
-import Used_cars from "./fetched_cars_divs/used_cars/Used_cars";
+import Slider from "@/components/fetched_cars_divs/Slider";
+import Used_cars from "@/components/fetched_cars_divs/used_cars/Used_cars";
 // import Usedcarchild from "@/components/carschildcomponents/Usedcarchild.server";
 
 const Home = () => {

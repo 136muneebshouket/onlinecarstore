@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import Response_modal from "@/components/Modals/response_modal/Response_modal";
 
-const FullLoader = dynamic(() => import("../Loader/FullLoader"), {
+const FullLoader = dynamic(() => import("@/components/Modals/Loader/FullLoader"), {
   loading: () => (
     <div className="loder">
       <h2>Loading...</h2>

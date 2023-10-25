@@ -1,3 +1,14 @@
+// {
+//   "compilerOptions": {
+//       "baseUrl": ".",
+//       "paths": {
+//           "@/components/*": ["components/*"],
+//           "@/styles/*": ["styles/*"],
+//           "@/config/*": ["config/*"],
+//           "@/models/*": ["models/*"],
+//       }
+//   }
+// }
 {
   "compilerOptions": {
     "paths": {

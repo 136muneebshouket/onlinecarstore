@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
-import Layout from "@/Components/Layout";
-import NavBar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Layout from "../components/Layout";
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "@/styles/navbar.css";
 import "@/styles/Login.css";
 import "@/styles/profile.css";

@@ -3,14 +3,14 @@ import axios from "axios";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Show_img_modal";
 import FeaturesModal from "@/components/Modals/custom models/featuresmodal/FeaturesModal";
-import Response_modal from "@/components/Modals/response_modal/Response_modal";
+// import Response_modal from "@/components/Modals/response_modal/Response_modal";
 import price_converter from "@/components/processing_functions/Price_calculator";
 import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import uploadimages from "@/config/cloudinary/cloudinaryimagesupdate";
+// import uploadimages from "@/config/cloudinary/cloudinaryimagesupdate";
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 

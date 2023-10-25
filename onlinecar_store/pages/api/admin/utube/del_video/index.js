@@ -1,4 +1,4 @@
-import admin_schema from "@/models/admin_schema";
+// import admin_schema from "@/models/admin_schema";
 import dbConnect from "@/config/dbConnect";
 
 export default async function handler(req, res) {

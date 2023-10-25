@@ -8,9 +8,9 @@ import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 // import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
-import Response_modal from "@/components/Modals/response_modal/Response_modal";
+// import Response_modal from "@/components/Modals/response_modal/Response_modal";
 import price_converter from "@/components/processing_functions/Price_calculator";
-import { generate_err } from "@/components/processing_functions/errors_gen";
+// import { generate_err } from "@/components/processing_functions/errors_gen";
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 

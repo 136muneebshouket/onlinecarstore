@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 import dynamic from 'next/dynamic'
 
-const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
+const FullLoader = dynamic(() => import('@/components/Modals/Loader/FullLoader'), {
   loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 

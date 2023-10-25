@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 
-const FullLoader = dynamic(() => import('@/components/Modals/Loader/fullLoader'), {
+const FullLoader = dynamic(() => import('@/components/Modals/Loader/FullLoader'), {
   loading: () => <div className="loder"><h2>Loading...</h2></div>,
 })
 const Resetpasswordpage = () => {

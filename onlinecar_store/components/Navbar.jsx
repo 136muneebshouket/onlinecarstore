@@ -1,7 +1,7 @@
 "use client";
 import React, { useReducer, useState, useRef, useEffect } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
-import Logo from "@/pages/z_icons/Logo";
+import Logo from "../pages/z_icons/Logo";
 import Link from "next/link";
 
 import Context from "./processing_functions/context";
@@ -85,13 +85,13 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/users/My_Ads">My ads</Link>
+                      <Link href="/users/user_dashboard/Others/?My_Ads">My ads</Link>
                     </li>
                     <li>
-                      <Link href="/users/My_Saved_Ads">My Saved Ads</Link>
+                      <Link href="/users/user_dashboard/Others/?My_Saved_Ads">My Saved Ads</Link>
                     </li>
                     <li>
-                      <Link href="/">Setting</Link>
+                      <Link href="#">Setting</Link>
                     </li>
                     <li>
                       <a

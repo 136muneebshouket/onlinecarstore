@@ -72,7 +72,7 @@ export default NextAuth({
       }
      
 
-      console.log(session)
+      // console.log(session)
       return session;
     },
   },
