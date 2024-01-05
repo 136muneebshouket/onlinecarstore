@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         var skip = (limit * (page - 1))
         // console.log(limit)
 
-        const appliedfilters = {};
+        const appliedfilters = { active:true };
         try {
           if (filters) {
             let queryobj = JSON.parse(filters);
@@ -52,13 +52,14 @@ export default async function handler(req, res) {
           managed_by: 1,
           overall_incpection_rating: 1,
           price: 1,
+          pending: 1,
           images_url: { $slice: 1 }, // Limit the images array to the first element only
           _id: 1, // Exclude the "_id" field from the results
         };
 
         // Perform the query with the specified projection
         const result = await cardataschema.find(appliedfilters, selectedfields)
-        .limit(limit).skip(skip).sort({createdAt:-1});
+        .limit(limit).skip(skip).sort({pending:-1,createdAt:-1});
         const count = await cardataschema.find(appliedfilters).count()
 
         // Process the query results

@@ -23,9 +23,12 @@ import "@/styles/admin_page.css";
 import "@/styles/utube.css";
 import "@/styles/usedcar_drpdown.css";
 import "@/styles/footer.css";
+import "@/styles/Inspection_page.css";
+import "@/styles/admin_inspection.css";
+import "@/styles/Slots.css";
 
 import Head from "next/head";
-import Response_modal from "@/components/Modals/response_modal/Response_modal";
+import Response_modal from "@/components/Modals/respnse_modal/Response_modal";
 import { resobj } from "@/components/processing_functions/errors_gen";
 import Context from "@/components/processing_functions/context";
 // import { Message_data } from "@/Components/Layout";
@@ -44,7 +47,7 @@ const inter = Nunito({ subsets: ['latin'], variable: '--font-inter' })
 //   loading: () => <p>Loading...</p>,
 // })
 const FullLoader = dynamic(
-  () => import("../components/Modals/Loader/fullLoader"),
+  () => import("../components/Modals/Loader/FullLoader"),
   {
     loading: () => (
       <div className="loder">

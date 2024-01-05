@@ -16,7 +16,7 @@ export default async function handler(req, res) {
           }
         }
         if (admin_token) {
-          const checkadmin = await admin_schema.findOne({
+          const checkadmin = await admin_schema.countDocuments({
             resetToken: admin_token,
           });
           if (!checkadmin) {

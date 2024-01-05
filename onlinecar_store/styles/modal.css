@@ -14,7 +14,7 @@
     backdrop-filter: blur(2.1px);
     -webkit-backdrop-filter: blur(2.1px);
     transition: 1s;
-    z-index: 100;
+    z-index: 1000;
   }
   
   .modal-content {
@@ -23,13 +23,13 @@
     margin-top: 50px;
   
     box-shadow: 1px 1px 35px 0px #8b8b8b;
-    max-width: 400px;
+    max-width: 500px;
   }
   
   .modal-close {
  
     display: flex;
-    color: rgb(255, 43, 43);
+    color: rgb(239 0 0);
     font-size: 50px;
     font-weight: 600;
   
@@ -64,9 +64,43 @@
  }
   }
 
+  .progress_sec{
+    width: 330px;
+    
+    background-color: white;
+    padding: 10px;
+  }
+  .progress_bar{
+    padding: 1px;
+    margin: 30px 0px;
+    /* width: 300px; */
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid green;
+    overflow: hidden;
+  }
+  .progress{
+    background: green;
+    transition: .5s;
+    border-radius: 10px;
+  }
+  .modal-content {
+    animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  @keyframes scale-in-center {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
   @media screen and (max-width:770px) {
     .modal{
-      align-items: end;
+      align-items: flex-end;
     }
     .modal-content{
       margin: 10px;

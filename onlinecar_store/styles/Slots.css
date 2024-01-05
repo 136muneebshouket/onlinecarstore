@@ -1,0 +1,30 @@
+.Slots .ad_slot{
+    margin: 10px ;
+    text-align: center;
+    padding: 5px ;
+}
+.Slots .ad_slot button{
+    background-color: green;
+    color: white;
+    font-size: large;
+    font-weight: 400;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    margin: 0px 10px ;
+}
+.Slots .ad_slot  input{
+    margin: 0px 10px ;
+    padding: 10px;
+    border: none;
+}
+.slots_lists{
+    display: flex;
+    background-color: white;
+}
+.slots_lists > div{
+    border: 1px solid rgb(216, 216, 216);
+    padding: 5px ;
+    width: 33%;
+    margin: 1px ;
+}

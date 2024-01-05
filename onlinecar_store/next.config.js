@@ -49,7 +49,8 @@ const nextConfig = {
     ];
   
     return config;
-  }
+  },
+
  
 };
 

@@ -135,6 +135,20 @@ const carSchema = new mongoose.Schema(
       default: 'slug',
       required:true
     },
+    pending: {
+      type: Number,
+      default: 0,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      required:false
+    },
+    reject_reasons: {
+      type: Array,
+      default: [],
+      required:false
+    },
     featured: {
       type: Boolean,
       required:false,

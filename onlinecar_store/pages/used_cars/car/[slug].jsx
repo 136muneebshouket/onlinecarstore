@@ -3,9 +3,9 @@ import Image from "next/image";
 import axios from "axios";
 
 import Link from "next/link";
-import Sellerdetails from "./Sellerdetails/Sellerdetails";
+import Sellerdetails from "./Sellerdetails_box/Sellerdetails";
 import Contact_details from "./price_and_phone/Contact_details";
-import Reporting_add from "./reporting_add/Reporting_add";
+import Reporting_add from "./report_add/Reporting_add";
 import dynamic from "next/dynamic";
 
 import price_converter from "@/components/processing_functions/Price_calculator";
@@ -20,6 +20,7 @@ const FullLoader = dynamic(
 const slug = ({ carrdata,loadiing }) => {
   // const [car, setCar] = useState({});
   const [features, setFeatures] = useState([]);
+  const [loading, setLoading] = useState(loadiing);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -94,13 +95,16 @@ const slug = ({ carrdata,loadiing }) => {
   // console.log(images[index])
   return (
     <>
+    {
+        loading ? <FullLoader/>:<></>
+      }
       <div className="singlecar_page">
         <div className="inner_main">
           <div className="car_section">
             <div className="car_upper_section">
               <div className="car_title" style={{ padding: "10px" }}>
                 <h1 style={{ color: "#223C7A", marginBottom: "5px" }}>
-                  {carrdata.brand} {carrdata.model} {carrdata.variant_name} {carrdata.modelyear}
+                  {carrdata?.brand} {carrdata?.model} {carrdata?.variant_name} {carrdata?.modelyear}
                 </h1>
                 <span style={{ color: "#223C7A" }}><i className='bx bxs-location-plus'></i>&nbsp;{carrdata.city}</span>
               </div>
@@ -153,7 +157,7 @@ const slug = ({ carrdata,loadiing }) => {
               <div className="single_spec">
                 <i className="bx bx-tachometer"></i>
                 <p>
-                  {carrdata.modelyear} <span>km</span>
+                  {carrdata.Mileage} <span>km</span>
                 </p>
               </div>
               <div className="single_spec">
@@ -166,8 +170,8 @@ const slug = ({ carrdata,loadiing }) => {
               </div>
             </div>
 
-            <div className="car_incepection">car_incepection</div>
-
+            {/* <div className="car_incepection">car_incepection</div> */}
+            <h2>Specifications</h2>
             <div className="car_details">
               <div className="single_detail">
                 <span>Registered In</span>
@@ -214,7 +218,7 @@ const slug = ({ carrdata,loadiing }) => {
           <div className="seller_section">
           <Contact_details className='contact_dtals' price={carrdata.price} phone={carrdata.Phone_no}/>
             <Sellerdetails sellerid={carrdata.seller_email} />
-            <Reporting_add />
+            <Reporting_add selleremail={carrdata.seller_email} ad_id={carrdata._id} type={'car'} />
           </div>
         </div>
         <div className="post_ad_link">
@@ -226,27 +230,29 @@ const slug = ({ carrdata,loadiing }) => {
           <Link href="#">Sell Your Car</Link>
         </div>
       </div>
-      {
-        loadiing ? <FullLoader/>:<></>
-      }
+      
     </>
   );
 };
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params, query,res }) {
   let pageurl = params.slug.split("-");
   let slugid = pageurl[pageurl.length - 1];
-  const res = await axios.get(
+  const resp = await axios.get(
     `${process.env.Host}/api/Singlecardata/?id=${slugid}`
   );
 
-  const carrdata = res.data.data;
+  const carrdata = resp.data.data;
   let loadingg = false;
   if (carrdata) {
     loadingg = false;
   }
   // console.log(carrdata)
 
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
   return {
     props: {
       carrdata,

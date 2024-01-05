@@ -22,7 +22,7 @@ const Sell = () => {
           <div className="header_cards">
             <div className="card">
               <div>
-                <h2>Post your Ad on PakWheels</h2>
+                <h2>Post your Ad on Carselection</h2>
                 <Image
                   src="/images/postad-img.png"
                   alt="loading"
@@ -52,7 +52,7 @@ const Sell = () => {
             </div>
             <div className="card">
               <div>
-                <h2>Post your Ad on PakWheels</h2>
+                <h2>Post your Ad on Carselection</h2>
                 <Image
                   src="/images/postad-img.png"
                   alt="loading"
@@ -85,33 +85,41 @@ const Sell = () => {
         <div className="body">
           <div className="container">
             <div className="divs">
-              <h2>Why Sell Your Car On PakWheels?</h2>
+              <h2>Why Sell Your Car On Carselection?</h2>
               <div className="cards">
                 <div className="card">
-                <img
+                <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/number-one-d6bd6d78a4fdfe2d5185bcaae6cce48e.svg"
-                    alt=""
+                    alt="loading"
+                  width={200}
+                  height={200}
                   />
                   <p>automotive marketplace</p>
                 </div>
                 <div className="card">
-                  <img
+                  <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/number-one-d6bd6d78a4fdfe2d5185bcaae6cce48e.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>5 lac+ visitors daily</p>
                 </div>
                 <div className="card">
-                  <img
+                  <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/number-one-d6bd6d78a4fdfe2d5185bcaae6cce48e.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>3 million+ cars sold</p>
                 </div>
                 <div className="card">
-                  <img
+                  <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/number-one-d6bd6d78a4fdfe2d5185bcaae6cce48e.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>80% cars sold within 48 hours</p>
                 </div>
@@ -123,17 +131,21 @@ const Sell = () => {
               <h2>3 Simple Steps To Sell Your Car</h2>
               <div className="cards">
                 <div className="card steps">
-                  <img
+                  <Image
                     src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/sign-up-icon-d8e07682bbdee4b4f3c8983608f60b48.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <h3>Sign up</h3>
-                  <p>Register yourself on PakWheels.com to post an ad.</p>
+                  <p>Register yourself on Carselection.com to post an ad.</p>
                 </div>
                 <div className="card steps">
-                  <img
+                  <Image
                     src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/sign-up-icon-d8e07682bbdee4b4f3c8983608f60b48.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />{" "}
                   <h3>Sign up</h3>
                   <p>
@@ -142,9 +154,11 @@ const Sell = () => {
                   </p>
                 </div>
                 <div className="card steps">
-                  <img
+                  <Image
                     src="https://wsa4.pakwheels.com/assets/product/why-pw-icons/sign-up-icon-d8e07682bbdee4b4f3c8983608f60b48.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />{" "}
                
                   <h3>Get Instant Offers</h3>
@@ -160,9 +174,11 @@ const Sell = () => {
               <h2>3 Simple Steps To Sell Your Car</h2>
               <div className="cards upload_cars">
                 <div className="card q">
-                  <img
+                  <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/camera-icon-3d6be1bd26960de0f1a13359c9504c52.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <div>
                   <h3>Upload Good Quality Photos</h3>
@@ -175,9 +191,11 @@ const Sell = () => {
                  
                 </div>
                 <div className="card q">
-                  <img
+                <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/camera-icon-3d6be1bd26960de0f1a13359c9504c52.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <div>
                   <h3>Upload Good Quality Photos</h3>
@@ -190,9 +208,11 @@ const Sell = () => {
                  
                 </div>
                 <div className="card q">
-                  <img
+                  <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/camera-icon-3d6be1bd26960de0f1a13359c9504c52.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <div>
                   <h3>Upload Good Quality Photos</h3>
@@ -205,9 +225,11 @@ const Sell = () => {
                  
                 </div>
                 <div className="card q">
-                  <img
+                <Image
                     src="https://wsa1.pakwheels.com/assets/product/why-pw-icons/camera-icon-3d6be1bd26960de0f1a13359c9504c52.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <div>
                   <h3>Upload Good Quality Photos</h3>
@@ -228,7 +250,7 @@ const Sell = () => {
               </div>
               <p>
                 Note: In case you are short on time to follow these tips
-                yourself, then PakWheels Sell It For Me service is the right
+                yourself, then CarSelection Sell It For Me service is the right
                 choice for you. Our trained sales team takes full
                 responsibility, from posting your ad to ensuring that you get
                 the best offer.
@@ -281,9 +303,11 @@ const Sell = () => {
               <h2>Interesting Tips</h2>
               <div className="cards overflow">
                 <div className="card">
-                  <img
+                  <Image
                     src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>
                     Get your car repaired and fix any minor defects to increase
@@ -291,9 +315,11 @@ const Sell = () => {
                   </p>
                 </div>
                 <div className="card">
-                  <img
+                <Image
                     src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>
                     Set up a reasonable price as it will determine how long it
@@ -301,9 +327,11 @@ const Sell = () => {
                   </p>
                 </div>
                 <div className="card">
-                  <img
+                <Image
                     src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>
                     Beware of unrealistic offers and carry out safe transactions
@@ -311,12 +339,14 @@ const Sell = () => {
                   </p>
                 </div>
                 <div className="card">
-                  <img
+                <Image
                     src="https://wsa3.pakwheels.com/assets/product/why-pw-icons/tip-icon-4e7948fce88f053b4617071b89e3fff2.svg"
-                    alt=""
+                    alt="loading"
+                    width={200}
+                    height={200}
                   />
                   <p>
-                    Get your car inspected by PakWheels to get premium rates
+                    Get your car inspected by CarSelection to get premium rates
                   </p>
                 </div>
               </div>
@@ -378,7 +408,7 @@ const Sell = () => {
                     src="https://wsa3.pakwheels.com/assets/blog/advice-tips-5-8d33beb1925b750f4a8e4b906721b4db.png"
                     alt=""
                   />{" "}
-                  <h3>Here’s How You Can Contact PakWheels Services</h3>
+                  <h3>Here’s How You Can Contact CarSelection Services</h3>
                   <p>
                     So you have decided to sell your car online, but you are
                     thinking about how to create an effective ad that will make

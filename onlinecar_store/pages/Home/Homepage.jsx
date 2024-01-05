@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Slider from "@/components/fetched_cars_divs/Slider";
-import Used_cars from "@/components/fetched_cars_divs/used_cars/Used_cars";
+import Used_cars from "@/components/fetched_cars_divs/used_cars_homepage/Used_cars";
+import H_Videos from "@/components/Video_components/homepage_videos/H_Videos"; 
 // import Usedcarchild from "@/components/carschildcomponents/Usedcarchild.server";
 
 const Home = () => {
@@ -19,12 +21,13 @@ const Home = () => {
     <>
       <div className="home_main">
         <div className="home_header">
-          <div className="header_content">
+          <div className="grey_back"></div>
+          <div className="header_content" style={{position:'relative'}}>
             <div className="header_title">
               <h1>Find Used Cars in Pakistan</h1>
               <p>With thousands of cars, we have just the right one for you</p>
             </div>
-            <div className="home_search">
+            {/* <div className="home_search">
               <input
                 type="text"
                 name=""
@@ -40,7 +43,7 @@ const Home = () => {
               <div className="icon_search">
                 <i className="bx bx-search"></i>
               </div>
-            </div>
+            </div> */}
             <div className="advance_searchbtn">
               <Link href="/used_cars/Search_car">Advance Search &gt;</Link>
             </div>
@@ -131,14 +134,14 @@ const Home = () => {
               <div className="offers_divs">
                 <div>
                   <div className="offer">
-                    <img src="/images/car1.jpg" alt="loading" />
+                    <Image src="/images/car1.jpg" width={1000} height={1000} alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Sell it for me</p>
                     </div>
                   </div>
                   <div className="offer">
-                    <img src="/images/car1.jpg" alt="loading" />
+                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Car Incepection</p>
@@ -147,14 +150,14 @@ const Home = () => {
                 </div>
                 <div>
                   <div className="offer">
-                    <img src="/images/car1.jpg" alt="loading" />
+                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Partner Workshop</p>
                     </div>
                   </div>
                   <div className="offer">
-                    <img src="/images/car1.jpg" alt="loading" />
+                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Ownership transfer</p>
@@ -181,6 +184,12 @@ const Home = () => {
                   <Slider filterby={'Make'} />
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="browse_cars">
+            <div className="inner_container">
+              <h2>Our Videos</h2>
+              <H_Videos/>
             </div>
           </div>
         </div>

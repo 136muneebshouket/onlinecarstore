@@ -119,12 +119,12 @@ cursor: pointer;
     height: auto;
     border-radius: 50%;
     box-shadow: 0px 0px 13px 0px #808080a3;
-    margin-bottom: 10px;
+    margin: 10px;
   }
   
   .sellpage .card p {
     text-align: center;
-    margin-top: 0;
+    margin: 0;
   }
   
   .sellpage .steps {
@@ -137,9 +137,6 @@ cursor: pointer;
     box-shadow: none !important;
   }
   
-  .sellpage .background-grey {
-    /* background-color: lightgrey !important; */
-  }
   
   .sellpage .cards .q {
     background-color: white !important;
@@ -153,7 +150,7 @@ cursor: pointer;
   .sellpage .q img {
     border-radius: 0% !important;
     box-shadow: none !important;
-
+    margin: 0;
   }
     .sellpage .q h3{
         font-size: medium;
@@ -187,7 +184,7 @@ cursor: pointer;
   }
   .sellpage .cards .tips h3 , .tips p{
     text-align: left !important;
-    margin: 10px;
+    margin: 10px !important;
   }
 
   .sellpage .container .overflow::-webkit-scrollbar{

@@ -1,0 +1,71 @@
+.main_inspection .header_inspection{
+background-color: #BEC9D9;
+padding: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.header_inspection .formsection form h2{
+    font-size: max(25px,1.6vw);
+    text-align: center;
+    color: var(--bs-heading-color);
+}
+.header_inspection .img_div,.header_inspection .formsection{
+    width: 40%;
+    margin: 20px;
+}
+.header_inspection .img_div img{
+    width: 100%;
+    height: auto;
+}
+.header_inspection .formsection{
+  background-color: white;
+}
+.header_inspection .formsection form{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+
+}
+.header_inspection .formsection form button{
+    background-color: var(--redcode);
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+}
+.header_inspection .formsection form button:hover{
+    background-color: #872121;
+}
+.header_inspection .formsection form input,.header_inspection .formsection form button{
+    width: -webkit-fill-avaliable;
+    padding: 10px;
+    border: 1px solid rgb(218, 218, 218);
+    /* margin: 10px 0px; */
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: medium;
+}
+.header_inspection .formsection form .err_span{
+    font-size: small;
+    color: #d30000;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .main_inspection .header_inspection{
+        flex-direction: column-reverse;
+        padding: 10px;
+
+    }
+    .main_inspection .header_inspection > div{
+        width: -webkit-fill-available;
+        margin: 5px;
+    }
+    .header_inspection .img_div{
+    padding: 30px;
+    }
+}

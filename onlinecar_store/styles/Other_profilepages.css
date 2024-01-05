@@ -54,7 +54,49 @@
 .my_Ads_section .edit_or_del_btns {
     text-align: end;
 }
+.my_Ads_section .reject_reasons li{
+    text-align: left;
+    font-weight: 500;
+    padding: 5px 10px 5px 5px;
+    border-bottom: 1px solid #8080807a;
+    color: #434343;
+    color: var(--redcode);
+}
+.my_Ads_section .reject_reasons p{
+    font-weight: 500;
+    padding: 5px 10px 5px 10px;
+    color: #1b1b1b;
+    margin: 0px 0px 5px 10px;
+    color: var(--redcode);
+    border: 1px solid var(--redcode);
+    border-radius: 16px;
+    color: white;
+    background: var(--redcode)
+}
+.my_Ads_section .reject_reasons .head{
+    display: flex;
+    justify-content: space-between;
+    color: var(--redcode);
+}
+.my_Ads_section .reject_reasons .arrow{
+    cursor: pointer;
+    font-size: xxx-large;
+    transform: translate(0px, 0px);
+    height: 40px;
+    /* padding-top: 10px; */
 
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /* transform: rotate(90deg); */
+    transition: .3s;
+}
+.my_Ads_section .reject_reasons ol{
+    overflow: hidden;
+    margin: 0;
+    color: var(--redcode);
+    transition: .3s;
+}
 .my_Ads_section .edit_or_del_btns button {
     border: none;
     padding: 3px 20px;

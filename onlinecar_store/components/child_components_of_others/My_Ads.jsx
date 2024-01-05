@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import useSWR from "swr";
 
 import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import price_converter from "@/components/processing_functions/Price_calculator";
+
 const Del_ad_modal = dynamic(
-  () => import("@/components/Modals/delete_ad_modal/Delete_ad_modal"),
+  () => import("@/components/Modals/del_ad_modal/Delete_ad_modal"),
   {
     loading: () => <p>Loading...</p>,
   }
@@ -16,9 +18,15 @@ const Del_ad_modal = dynamic(
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <div className="loder"><h2>Loading...</h2></div>,
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
   }
 );
+
+const fetcher = (url) => axios.get(url).then((res) => res.data.message);
 
 const My_Ads = () => {
   const { data: sessionData } = useSession();
@@ -29,9 +37,12 @@ const My_Ads = () => {
   const [carprops, setCarprops] = useState();
   const [loadiing, setLoadiing] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [type, setType] = useState("active");
+  const [ad_type, setAd_Type] = useState("cars");
 
   const handleOpenModal = (cardataprops) => {
-    setCarprops(cardataprops)
+    setCarprops(cardataprops);
     setModalOpen(true);
   };
 
@@ -39,42 +50,78 @@ const My_Ads = () => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    if (user_email) {
-      setLoadiing(true);
-      getuser_ads();  
+  const { data, error, isLoading } = useSWR(
+    user_email ? `/api/user_ads/?user_email=${user_email}&type=${type}&ad_type=${ad_type}` : null,
+    fetcher
+  );
+
+  useMemo(() => {
+    // if (user_email) {
+    //   // setLoadiing(true);
+    //   getuser_ads();
+    // }
+    if (data) {
+      setCarrdata(data);
     }
     // console.log('hello')
-  }, []);
+  }, [data]);
+// console.log(carrdata)
+  // async function getuser_ads() {
+  //   await axios
+  //     .get(`/api/user_ads/?user_email=${user_email}`)
+  //     .then((res) => {
+  //       // console.log(res.data.message);
+  //       setCarrdata(res.data.message);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     })
+  //     .finally(() => {
+  //       setLoadiing(false);
+  //     });
 
-  async function getuser_ads() {
-    await axios
-      .get(`/api/user_ads/?user_email=${user_email}`)
-      .then((res) => {
-        // console.log(res.data.message);
-        setCarrdata(res.data.message);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      })
-      .finally(() => {
-        setLoadiing(false);
-      });
-     
-  }
-   
- 
+  // }
+
   return (
     <>
+      {isLoading && <FullLoader />}
+
       <div className="main_ads_section">
         <div className="ads_links_section">
-          <div className="links">Active</div>
-          <div className="links">Pending</div>
-          <div className="links">Removed</div>
+          <div
+            className="links"
+            onClick={() => {
+              setType("active");
+            }}
+          >
+            Active
+          </div>
+          <div
+            className="links"
+            onClick={() => {
+              setType("pending");
+            }}
+          >
+            Pending
+          </div>
+          <div
+            className="links"
+            onClick={() => {
+              setType("removed");
+            }}
+          >
+            Removed
+          </div>
         </div>
         <div className="my_Ads_section">
           <div className="cars" style={{ width: "100%" }}>
-            {carrdata.map((obj, i) => {
+            {error && <h5>Something Went Wrong</h5>}
+            {carrdata?.length == 0 && (
+              <>
+                <h5>No Active Ads</h5>
+              </>
+            )}
+            {carrdata?.map((obj, i) => {
               return (
                 <>
                   {/* <Link className="singlecar_link" href="#"> */}
@@ -90,48 +137,51 @@ const My_Ads = () => {
                     <div style={{ display: "flex" }}>
                       <div className="car_img">
                         <Image
-                          src={obj.images_url[0].img_url ? obj.images_url[0].img_url :obj.images_url[0]}
+                          src={
+                            obj.images_url[0].img_url
+                              ? obj.images_url[0].img_url
+                              : obj.images_url[0]
+                          }
                           width={200}
                           height={200}
                           alt="loading"
-                          
                         />
                       </div>
                       <div className="car_info">
-                        <div
-                          className="car_content"
-                          style={{ textAlign: "left" }}
-                        >
+                        <div style={{ textAlign: "left" }}>
                           <Link
+                            className="car_content"
                             href={`/used_cars/car/${obj.brand.replaceAll(
                               " ",
                               "-"
                             )}-${obj.model.replaceAll(" ", "-")}-${
                               obj.modelyear
                             }-${obj._id}`.toLowerCase()}
-                            // target="_blank"
+                            style={{ textDecoration: "none" }}
                           >
                             <h3>
                               {obj.brand} {obj.model}{" "}
                               {obj.variant_name && obj.variant_name}{" "}
                               {obj.modelyear}
                             </h3>
-                          </Link>
-                          <p className="price_mbv">
-                            <strong>PKR:{price_converter(obj.price)}</strong>
-                          </p>
 
-                          <p>{obj.city}</p>
-                          <div>
-                            <span>{obj.Mileage} km</span>
-                            <span>{obj.enginecc}cc</span>
-                            <span className="hide_in_mbv">
-                              {obj.transmission}
-                            </span>
-                            <span className="hide_in_mbv">
-                              {obj.enginetype}
-                            </span>
-                          </div>
+                            <p className="price_mbv">
+                              <strong>PKR:{price_converter(obj.price)}</strong>
+                            </p>
+
+                            <p>{obj.city}</p>
+                            <div>
+                              <span>{obj.Mileage} km</span>
+                              <span>{obj.enginecc}cc</span>
+                              <span className="hide_in_mbv">
+                                {obj.transmission}
+                              </span>
+                              <span className="hide_in_mbv">
+                                {obj.enginetype}
+                              </span>
+                            </div>
+                            {obj.pending == 0 ? <p className="pending_banner">Pending</p> : null}
+                          </Link>
                         </div>
                         <div className="car_price_section">
                           <div className="car_price_fav">
@@ -145,27 +195,55 @@ const My_Ads = () => {
                       </div>
                     </div>
                     <div className="edit_or_del_btns">
+                    <button style={{ background: "#3083d1" }}>
+                        {" "}
+                        <Link href={`/products/Inspection?ad_id=${obj._id}`}>Request Inspection</Link>
+                      </button>
                       <button style={{ background: "#3083d1" }}>
                         {" "}
                         <Link href={`/users/edit_myad/${obj._id}`}>Update</Link>
                       </button>
                       <button
                         style={{ background: "#b40000" }}
-                        onClick={()=>{handleOpenModal(obj)}}
+                        onClick={() => {
+                          handleOpenModal(obj);
+                        }}
                       >
                         Delete
                       </button>
                     </div>
+                    {obj.reject_reasons?.length > 0 ? (
+                      <div className="reject_reasons">
+                        <div className="head">
+                          <p>Reject Reasons</p>
+                          <i
+                            className="bx bx-chevron-down arrow"
+                            style={{
+                              transform: `rotate(${
+                                toggle ? "0deg" : "180deg"
+                              })`,
+                            }}
+                            onClick={() => {
+                              setToggle(!toggle);
+                            }}
+                          ></i>
+                          {/* <p className="" >&#8249;</p> */}
+                        </div>
+                        <ol style={{ height: `${toggle ? "auto" : "0"}` }}>
+                          {obj.reject_reasons.map((v) => {
+                            return (
+                              <>
+                                <li>{v}</li>
+                              </>
+                            );
+                          })}
+                        </ol>
+                      </div>
+                    ) : null}
                   </div>
                 </>
               );
             })}
-            {loadiing ? <FullLoader /> : <></>}
-            {carrdata.length == 0 && (
-              <>
-                <h5>No Active Ads</h5>
-              </>
-            )}
           </div>
           {/* <h5>No Active Ads</h5> */}
         </div>
@@ -175,7 +253,8 @@ const My_Ads = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           car={carprops}
-          refresh={getuser_ads}
+          ad_type={ad_type}
+          // refresh={getuser_ads}
         />
       )}
     </>

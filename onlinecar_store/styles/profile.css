@@ -104,7 +104,7 @@ max-width: 60%;
 }
 */
 .profile_form form .inputs .btn , .savechanges button{
-    background: #213974;
+    background: var(--redcode);
     color: white;
     border: none;
     padding: 10px 20px;

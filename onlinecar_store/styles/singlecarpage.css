@@ -51,15 +51,19 @@
 }
 
 .singlecar_page .car_section .single_spec {
-    padding: 10px 20px;
-    border: 1px solid rgb(191 191 191);
+    margin: 5px;
+    border: 1px solid rgb(230 230 230);
     text-align: center;
     width: 25%;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgb(230 230 230);
+
 }
 
 .singlecar_page .car_section .single_spec i {
     font-size: xx-large;
-    color: #223C7A;
+    color: var(--redcode);
     margin: 10px;
 }
 
@@ -76,7 +80,8 @@
 }
 
 .singlecar_page .car_section .car_details .single_detail {
-    border-bottom: 1px solid rgb(191 191 191);
+    border-bottom: 1px solid rgb(200 200 200);
+    box-shadow: 0px 0px 10px 0px rgb(230 230 230);
     padding: 12px 10px;
     display: flex;
     box-sizing: border-box;
@@ -90,7 +95,7 @@
 }
 
 .singlecar_page .car_section .car_details .single_detail span:first-child {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .singlecar_page .car_section .car_features {
@@ -157,7 +162,7 @@
 .seller_details .seller_name div p {
     font-size: smaller;
     margin: 0px 10px;
-    color: #223C7A;
+    color: var(--redcode);
     font-weight: 500;
 }
 
@@ -165,16 +170,14 @@
     font-size: x-large;
     margin: 0px 10px;
     color: whitesmoke;
-    background-color: #223C7A;
+    background-color: var(--redcode);
     border-radius: 50%;
     padding: 7px;
     font-weight: 300;
     margin-top: 10px;
 }
 
-.seller_details .seller_icons {
-    /* margin: 0px 0px; */
-}
+
 
 .singlecar_page .post_ad_link,
 .singlecar_page .post_ad_link p {
@@ -183,7 +186,7 @@
 }
 
 .singlecar_page .post_ad_link h3 {
-    color: #223C7A;
+    color: var(--redcode);
     margin-top: 10px;
 }
 
@@ -199,7 +202,9 @@
 
 .singlecar_page .img_section {
     position: relative;
-    border: 1px solid rgb(191 191 191);
+    /* border: 1px solid rgb(191 191 191); */
+    border: 1px solid rgb(230 230 230);
+    box-shadow: 0px 0px 10px 0px rgb(230 230 230);
 }
 
 .left_arrow,
@@ -227,17 +232,17 @@
     right: 0px;
 }
 
-.singlecar_page .img_section .bx-chevron-down:before {}
+
 
 
 
 .report_add_btn{
-    border: 1px solid #223C7A;
+    border: 1px solid var(--redcode);
     width: 100%;
     font-size: 15px;
     padding: 3px;
     font-weight: 500;
-    color: #223C7A;
+    color: var(--redcode);
 }
 
 
@@ -264,7 +269,7 @@
     }
 
     .singlecar_page .car_section .single_spec {
-        padding: 0;
+        padding: 5px;
         border: none;
     }
 
@@ -275,6 +280,6 @@
         display: none;
     }
     .singlecar_page .car_section h2{
-        display: block;
+        display: block !important;
     }
 }

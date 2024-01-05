@@ -2,7 +2,7 @@
     width: 100%;
     position: relative;
     height: auto;
-    background-color: #070617;
+    background-color: #283949;
   }
   .footer .contain{
     display: flex;
@@ -57,9 +57,7 @@
     -webkit-transition: .1s;
     -moz-transition: .1s;
   }
-  .footer .clearfix{
 
-  }
   .footer .clearfix .other_pages{
    display: flex;
    justify-content: center;

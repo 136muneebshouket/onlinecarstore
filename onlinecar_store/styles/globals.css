@@ -7,6 +7,12 @@ font-family: system-ui;
 background-color: #F2F3F3;
 }
 
+:root {
+  --redcode: brown;
+  --white: #ffffff;
+  --primarycolor:#283949;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 7px !important;
@@ -21,13 +27,13 @@ background-color: #F2F3F3;
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #233d7b; 
+    background: var(--redcode); 
     border-radius: 0px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background:  #233d7b; 
+    background:  var(--redcode); 
   }
 .main_container{
     display: flex;

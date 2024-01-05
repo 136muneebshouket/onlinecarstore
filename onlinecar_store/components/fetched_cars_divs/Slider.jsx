@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { bodyTypeArray, carBrands, cities, carModels,carPrices } from "../../../components/Filters/Options-sliders/optionsarray";
+import { bodyTypeArray, carBrands, cities, carModels,carPrices } from "@/components/Filters/Options-sliders/optionsarray";
 import Link from "next/link";
+import Image from "next/image";
 
 const Slider = ({ filterby }) => {
   const [array, setArray] = useState(bodyTypeArray);
@@ -53,7 +54,7 @@ const Slider = ({ filterby }) => {
                         <Link href={`${v.link ? v.link : `#`}`} key={_i} className="icons">
                           {(array.includes(...bodyTypeArray) ||
                             array.includes(...carBrands)) && (
-                            <img className="icon_img" src={`/images/icons_imgs/${v.img}`} alt="loading"/>
+                            <Image width={1000} height ={1000} className="icon_img" src={`/images/icons_imgs/${v.img}`} alt="loading"/>
                           )}
                           <p>{v.name ? v.name : v}</p>
                         </Link>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import Context from "./processing_functions/context";
 import { useContext } from "react";
 import Usedcar_dropdown from "./stylecomponents/Usedcar_dropdown";
+import Usedbike_dropdown from "./stylecomponents/Usedbike_dropdown";
 // import {google_auth} from "../components/processing_functions/auth_func";
 // import Image from "next/image";
 
@@ -18,9 +19,11 @@ const NavBar = () => {
  
   // console.log(sessionData)
   const isLoggedIn = sessionData?.user;
-
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(false)
   const [profileDropDown, setProfileDropDown] = useState(false);
   const [usedcardropdown, setUsedcardropdown] = useState(false);
+  const [usedbikedropdown, setUsedbikedropdown] = useState(false);
 
   const [toggleNavBar, setToggleNavBar] = useState(false);
   const [toggleul, setToggleul] = useState(false);
@@ -41,10 +44,27 @@ const NavBar = () => {
   //   func()
 
   // },[sessionData?.user])
+  const handleScroll = () => {
+    const currentScrollPos = window.scrollY
+
+    if(currentScrollPos > prevScrollPos){
+     setVisible(true)
+    }else{
+      setVisible(false)
+    }
+
+    setPrevScrollPos(currentScrollPos)
+}
+
+useEffect( () => {
+  window.addEventListener('scroll', handleScroll);
+
+  return () => window.removeEventListener('scroll', handleScroll)
+},[prevScrollPos])
 
   return (
     <>
-      <div className="NavBar">
+      <div className={`NavBar ${visible && 'NavBar_hide' }`} >
         <div className="uppernav">
           <div className="profile" ref={arrowDown}>
             {isLoggedIn ? (
@@ -136,54 +156,19 @@ const NavBar = () => {
                 </div>     
                 <Usedcar_dropdown toggle={usedcardropdown}/>  
               </li>
-              {/* <li className='services_one'>
-                <Link href="">services
-                <i  className="fa-solid fa-angle-down"></i>
+              <li>
+                <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
+                <Link className="darkneon" href="/used_bikes/Search_bikes">
+                  Bikes
                 </Link>
-                <ul className='dropDownList'>
-
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/image_converter/Imagecompressor' className='drop-downitem' >Image Compressor</Link></li>
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/image_converter/Webptojpg' className='drop-downitem' >Webp to Jpg</Link></li>
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/image_converter/Webptopng' className='drop-downitem' >Webp to Png</Link></li>
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/image_converter/jpgtowebp' className='drop-downitem' >Jpg to Webp</Link></li>
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/image_converter/Pngtowebp' className='drop-downitem' >Png to Webp</Link></li>
-                <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/QRcode/QRcodegenrator' className='drop-downitem' >  Qr Code Genrator</Link></li>
-                  
-                  <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/texttools/Texttools' className='drop-downitem' >  Text Tools</Link></li>
-                  <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/Unitconversion/Unitconvertion' className='drop-downitem' >  Unit converter</Link></li>
-                  <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/Converter/NumberConverterpage' className='drop-downitem' > Number Converter</Link></li>
-                  <li><Link style={{ color: '#161616', fontWeight:'500' }} href='/finance/Financecalculators' className='drop-downitem' >Finance converter</Link></li>
-                 
-                  
-
-                 
-
-                </ul>
-              </li> */}
-              {/* <li className='services_two'>
-                <Link ref={dropDownRef} onClick={() => setToggleul(!toggleul)} href="">What we Help
-                <i ref={dropDownRef2} className="fa-solid fa-angle-down"></i>
-                </Link>
-                <ul style={{ display: toggleul ? 'block' : 'none', overflowY: 'scroll', border: '1px solid',borderRadius:'4px' }} ref={dropDownRef3} className='dropDownList'>
-                <li ><Link href="/image_converter/Imagecompressor">Image Compressor</Link></li>
-                <li ><Link href="/image_converter/Webptojpg">Webp to Jpg</Link></li>
-                <li ><Link href="/image_converter/Webptopng">Webp to Png</Link></li>
-                <li ><Link href="/image_converter/jpgtowebp">Jpg to Webp</Link></li>
-                <li ><Link href="/image_converter/Pngtowebp">Png to Webp</Link></li>
-                <li ><Link href="/QRcode/QRcodegenrator"> Qr Code Genrator</Link></li>
-                <li ><Link href="/texttools/Texttools"> Text Tools</Link></li>
-                  <li ><Link href="/finance/Financecalculators">Finance converter</Link></li>
-                  
-                  <li ><Link href="/Unitconversion/Unitconvertion"> Unit converter</Link></li>
-                  
-                 
-                  <li ><Link href="/Converter/NumberConverterpage">Number Converter</Link></li>
-                 
-                </ul>
-              </li> */}
+                <span><i ref={dropDownRef3} onClick={()=>{setUsedbikedropdown(!usedbikedropdown)}}  className="bx bx-chevron-down"></i></span>
+                </div>     
+                <Usedbike_dropdown toggle={usedbikedropdown}/>  
+              </li>
+          
               
               <li>
-                <Link className="darkneon" href="/videos/Videos">
+                <Link className="darkneon" href="/videos_page/Videos">
                   Videos
                 </Link>
               </li>

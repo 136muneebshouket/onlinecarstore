@@ -1,5 +1,6 @@
 import cardataschema from "../../../../models/cardataschema";
 import dbConnect from "../../../../config/dbConnect";
+import usedbike_schema from "@/models/usedbike_schema";
 // const cloudinary = require("cloudinary").v2;
 const ImageKit = require("imagekit");
 // const  Cloudinary  = require("next-cloudinary");
@@ -15,6 +16,16 @@ const imageKit = new ImageKit({
   urlEndpoint: process.env.URLENDPOINT,
 });
 
+
+export const config = {
+  api: {
+    responseLimit: false,
+    bodyParser: {
+      sizeLimit: '100mb',
+    },
+  },
+}
+
 export default async function handler(req, res) {
   dbConnect();
   switch (req.method) {
@@ -22,20 +33,28 @@ export default async function handler(req, res) {
       try {
         let recieved_obj = req.body;
         // console.log(recieved_obj);
-        var { _id, user_id, images_to_del, imgs_to_uplod } = req.body;
-        // let carobj = {}
-        // console.log(images_to_del)
-        let doc = await cardataschema.findOne({ _id: _id, seller_id: user_id });
-
-        if (!doc) {
-          let back = err(404, "car not updated", false);
-          if (back) {
-            return;
-          }
+        var { _id, user_id, images_to_del, imgs_to_uplod ,total_imgs} = req.body.carobj;
+        if(total_imgs.length == 0){
+          throw new Error("PLease Upload Some images")
         }
+        if(!req.body.ad_type){
+          throw new Error("Ad type is not given")
+        }
+        let doc;
+        if(req.body.ad_type == 'bike'){
+          doc = await usedbike_schema.findOne({ _id: _id, seller_id: user_id });
+        }
+        if(req.body.ad_type == 'car'){
+          doc = await cardataschema.findOne({ _id: _id, seller_id: user_id });
+        }
+        
+        if (!doc) {
+          throw new Error(`${req.body.ad_type} not updated`)
+        } 
+        // console.log(doc)
 
         if (doc) {
-          Object.entries(recieved_obj).map(([key, value]) => {
+          Object.entries(recieved_obj.carobj).map(([key, value]) => {
             if (
               key != "_id" &&
               key != "createdAt" &&
@@ -61,19 +80,13 @@ export default async function handler(req, res) {
                 function (error, result) {
                   if (error) {
                     console.log(error);
-                    let back = err(400, "error in imgkit deleting", false);
-                    if (back) {
-                      return;
-                    }
+                    throw new Error("error in imgkit deleting")
                   }
                 }
               );
             } catch (error) {
               console.log(error + "err");
-              let back = err(400, "error in imgkit deleting", false);
-              if (back) {
-                return;
-              }
+              throw new Error("error in imgkit deleting");
             }
             const newimages_url = doc.images_url.filter((id) => {
               return !images_to_del.includes(id.img_id);
@@ -113,14 +126,14 @@ export default async function handler(req, res) {
                 doc.images_url.push(obj);
               }
             } else {
-              let back = err(400, "error in imgkit uploding", false);
-              if (back) {
-                return;
-              }
+              throw new Error("error in imgkit uploding");
             }
           }
 
           // console.log(doc);
+          doc.active = true;
+          doc.pending = 0;
+          doc.reject_reasons  = [];
           let updated = await doc.save();
           // const user = await cardataschema.findByIdAndUpdate({id : });
           if (updated) {
@@ -130,20 +143,10 @@ export default async function handler(req, res) {
               // car_id: doc._id,
             });
           } else {
-            let back = err(400, "car not updated", false);
-            if (back) {
-              return;
-            }
+            throw new Error(`${req.body.ad_type} not updated`);
           }
         }
 
-        function err(status, message, success) {
-          res.status(status).json({
-            success: success,
-            message: message,
-          });
-          return true;
-        }
         // res.status(200).json({
         //   success: true,
         //   message: "message",
@@ -173,7 +176,7 @@ export default async function handler(req, res) {
           // Handle other types of errors
           res.status(500).json({
             success: false,
-            message: "something went wrong",
+            message: err.message,
           });
         }
       }

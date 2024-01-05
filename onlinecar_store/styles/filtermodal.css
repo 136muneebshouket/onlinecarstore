@@ -3,7 +3,7 @@
     /* background-color: white; */
 }
 .filtermodal .head_banner {
-    background-color: #213974;
+    background-color: var(--redcode);
     color: white;
     padding: 10px;
     margin: 2px;
@@ -136,8 +136,8 @@ height: 80px;
     white-space: nowrap;
 }
 .filtermodal .input_field .related_filters span:hover{
-    border: 1px solid #213974;
-    color: #213974;
+    border: 1px solid var(--redcode);
+    color: var(--redcode);
     cursor: pointer;
     /* transform: scale(1.1); */
 }
@@ -153,8 +153,8 @@ width: 20px;
 }
 .filtermodal .input_field .see_morebtn{
 background-color: #ededed;
-color: #213974;
-border: 1px solid #213974;
+color: var(--redcode);
+border: 1px solid var(--redcode);
 padding: 0px 5px ;
 margin-bottom: 5px ;
 width: fit-content;
@@ -166,7 +166,7 @@ cursor: pointer;
     padding: 0px 5px;
     border: none;
     border-radius: 50%;
-    background: #213974;
+    background: var(--redcode);
     color: white;
     /* margin-left: 6px; */
     /* display: flex; */
@@ -175,7 +175,7 @@ cursor: pointer;
 .filtermodal .input_field .addbtn{
     font-size: larger;
     /* background: none !important; */
-    /* color: #213974; */
+    /* color: var(--redcode); */
     font-weight: 600;
     height: 24px;
     width: 24px;
@@ -186,24 +186,24 @@ cursor: pointer;
 
 }
  .related_filters .selected_filter{
-    border: 2px solid #213974 !important;
+    border: 2px solid var(--redcode) !important;
     /* color: #f1f1f1; */
 }
 .filtermodal .apply_filter_btns{
     position: sticky;
     bottom: 0;
-    z-index: 20;
 display: flex;
 justify-content: center;
+z-index: 2;
 }
 .filtermodal .apply_filter_btns button{
 width: 40%;
 border-radius: 5px;
-border: 1px solid #213974;
+border: 1px solid var(--redcode);
 margin: 5px;
 padding: 4px;
 }
 .filtermodal .apply_filter_btns button:nth-child(2){
-    background-color: #1841aa;
+    background-color: var(--redcode);
     color: #f1f1f1;
 }

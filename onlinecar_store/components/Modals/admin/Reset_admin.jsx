@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import Response_modal from "@/components/Modals/response_modal/Response_modal";
+import Response_modal from "@/components/Modals/respnse_modal/Response_modal";
 
 
 const FullLoader = dynamic(() => import("@/components/Modals/Loader/FullLoader"), {

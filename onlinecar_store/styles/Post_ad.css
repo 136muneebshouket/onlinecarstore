@@ -17,7 +17,7 @@
 }
 
 .upload_ad_page .mobileview_nav {
-    background: #213974;
+    background: var(--redcode);
     ;
 
     justify-content: space-between;
@@ -65,7 +65,7 @@
 }
 
 .upload_ad_page .uploadpage_banner .banner_title h1 {
-    color: #213974;
+    color: var(--redcode);
     margin-bottom: 3px;
 }
 
@@ -146,7 +146,7 @@
 .upload_ad_page form .upper_form_section .input_field,
 .number_upload_section .input_field {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     margin: 10px;
     padding-left: 10%;
 }

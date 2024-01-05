@@ -7,7 +7,7 @@ import { Montserrat } from 'next/font/google'
 import dynamic from 'next/dynamic'
 
 
-const Homepage = dynamic(() => import('./home/Homepage'), {
+const Homepage = dynamic(() => import('@/pages/home/Homepage'), {
   loading: () => <p>Loading...</p>,
 })
 

@@ -26,6 +26,10 @@ export default async function handler(req, res) {
         if (req.query.priority) {
             match.priority = req.query.priority
         }
+        if (req.query.videoId) {
+          // console.log(req.query.videoId)
+            match._id = req.query.videoId
+        }
 
         if (req.query.countOnly) {
             videos.count = await utube_schema.find().count()

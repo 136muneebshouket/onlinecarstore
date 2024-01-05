@@ -1,0 +1,89 @@
+
+.main_inspection{
+    width: -webkit-fill-available;
+}
+.sidebar_btn_div{
+    display: flex;
+    justify-content: flex-end;
+    background: white;
+    position: sticky;
+    top: 0;
+}
+.admin_inspection{
+    display: flex;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.admin_inspection  .sidebar{
+    width: 300px;
+    border: 1px solid;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .2s;
+    background-color: white;
+    transition: .2s;
+    overflow: hidden;
+}
+.inspection_req_main {
+    background-color: white;
+    margin-top: 20px;
+}
+.inspection_req_main .single_req{
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0px 0px 8px 0px rgb(199 199 199);
+    display: flex;
+    flex-wrap: wrap;
+}
+.inspection_req_main .single_req .field{
+    border: 1px solid #e3e3e3;
+    display: flex;
+    margin: 5px;
+    border-radius: 10px;
+    width: max(32%,300px);
+
+}
+.inspection_req_main .single_req .field label{
+    font-weight: 600;
+}
+.inspection_req_main .single_req .field label::after{
+    content: ':';
+}
+.inspection_req_main .single_req .field label,.inspection_req_main .single_req .field p{
+ margin: 0px 10px;
+}
+.inspection_req_main .single_req .buttons button{
+    margin: 10px ;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+    color: White;
+    font-weight: 600;
+    font-size: medium;
+}
+.change_req > div{
+margin: 10px;
+}
+
+.change_req > div label{
+    font-weight: 800;
+}
+.change_req > div label,.change_req > div input{
+margin: 0px 10px;
+}
+.change_req > div button{
+    float: right;
+    border: 1px solid #c5c5c5;
+    padding: 3px 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 9px 0px #c1c1c1;
+    background: #0a68b3;
+    color: white;
+}

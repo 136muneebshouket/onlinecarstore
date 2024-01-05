@@ -1,35 +1,55 @@
-.home_main {
-  
-    
-}
 
 .home_main .home_header {
+    position: relative;
     width: 100%;
-    height: max(30vw,230px);
+    height: max(29vw,230px);
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: linear-gradient(180deg, rgb(0 28 69) 30%, rgb(3 65 157) 100%);
+    align-items: flex-end;
+    /* background: linear-gradient(180deg, rgb(0 28 69) 30%, rgb(3 65 157) 100%); */
+    /* box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2); */
+    background-image: url('../public/images/Sell-My-Car-Dealership.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.home_main .grey_back{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+background: rgb(94,94,94);
+background: linear-gradient(180deg, rgba(94,94,94,0.22172619047619047) 50%, #000000ba 100%);
+height: 100%;
 }
 
 .home_main .home_header .header_title {
     text-align: center;
-    margin-bottom: 20px;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: var(--primarycolor);
+    border-radius:15px;
+    padding: 0px 7vw;
+    color: white;
+    border: 1px solid #c1c1c1;
 }
 
 .home_main .home_header .header_title h1 {
-    font-size: max(25px,4vw);
+    font-size: max(25px,3.6vw);
     line-height: normal;
-    font-weight: normal;
-    margin: 5px;
-    color: #fff;
+    font-weight: 800;
+    padding: 10px 0px 5px 0px;
+    margin: 0;
+    /* color: black */
+    
 }
 
 .home_main .home_header .header_title p {
     font-size: 18px;
     font-weight: 400;
-    margin: 5px;
-    color: #fff;
+    padding-bottom: 10px;
+    color: #fff !important;
+    margin: 0;
 }
 
 .home_main .home_header .home_search {
@@ -74,14 +94,20 @@
 
 .advance_searchbtn{
 text-align: center;
-padding: 30px 0px;
+padding: 10px 0px;
+margin-bottom: 20px;
 }
 .advance_searchbtn a{
     text-decoration: none;
-    color: #fff;
-    border: 1px solid white;
+    color: #ffffff;
+    border: 1px solid #c1c1c1;
     padding: 4px 14px;
-    font-size: smaller;
+    /* font-size: smaller; */
+    background: var(--primarycolor);
+    font-size: medium;
+    border-radius: 10px;
+    /* border: 1px solid #bfbfbf; */
+    font-weight: 600;
 }
 
 
@@ -134,7 +160,7 @@ padding: 40px;
 }
 .post_ad_sec .first_div a{
     border-radius: 5px;
-    background-color: rgb(189 20 20);
+    background-color: var(--redcode);
     border: none;
     text-align: center !important;
     margin: auto;
@@ -186,8 +212,9 @@ padding: 40px;
     text-decoration: none;
 }
 .options_icons .icons .icon_img{
-    width: max(70px,5vw);
+    width: max(60px,6vw);
     margin: auto;
+    height: auto;
 }
 .options_icons .icons >p{
     font-size: 15px !important;
@@ -212,7 +239,7 @@ padding: 40px;
 .offers_divs .offer div{
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .home_others .offerings .offers_divs .offer{
     width: auto;
@@ -225,6 +252,7 @@ padding: 40px;
 .offerings .offers_divs .offer img{
     width:90px;
     margin: 5px 10px;
+    height: auto;
 }
 .offers_divs .offer span{
   color: #b72025;

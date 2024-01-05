@@ -12,12 +12,12 @@
     
     backdrop-filter: blur(5.1px);
     -webkit-backdrop-filter: blur(5.1px);
-    z-index: 100;
+    z-index: 2000;
 }
 
 .fullLoader i{
     font-size: 15vw;
-    color: #213974;
+    color: var(--redcode);
     border-radius: 50px;
 }
 

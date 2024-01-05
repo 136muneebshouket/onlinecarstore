@@ -2,6 +2,7 @@ import { get } from "mongoose";
 import dbConnect from "../../../config/dbConnect";
 import userschema from "../../../models/user";
 import cardataschema from "../../../models/cardataschema";
+import usedbike_schema from "@/models/usedbike_schema";
 import errors_handle from "../../../models/errors_handle";
 // const cloudinary = require("cloudinary").v2;
 // const  Cloudinary  = require("next-cloudinary");
@@ -23,37 +24,33 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "DELETE":
       try {
-        const { ad_id ,user_id} = req.query;
+        const { ad_id ,user_id , ad_type } = req.query;
         // console.log(ad_id)
         if(!user_id){
-          let back = err(400, "user_Id not provided try reloading page", false);
-          if (back) {
-            return;
-          }
+          throw new Error('user_Id not provided try reloading page')
         }
         if(user_id){
-            let user_exist = await userschema.findOne({_id:user_id})
-            if(!user_exist ){
-              let back = err(400, "user not exist try reloading page", false);
-              if (back) {
-                return;
-              }
+            let user_exist = await userschema.countDocuments({_id:user_id})
+            if(!user_exist){
+              throw new Error('user not exist try reloading page or Login')
             }
         }
        
         if (!ad_id) {
-          let back = err(400, "Ad_Id not provided try reloading page", false);
-          if (back) {
-            return;
-          }
+          throw new Error('Ad_Id not provided try reloading page')
         }
-        let doc = await cardataschema.findOne({ _id: ad_id, seller_id:user_id });
+        let doc ;
+        if(ad_type == 'cars'){
+          doc = await cardataschema.findOne({ _id: ad_id, seller_id:user_id });
+        }
+        if(ad_type == 'bikes'){
+          doc = await usedbike_schema.findOne({ _id: ad_id, seller_id:user_id });
+        }
+        
         if (!doc) {
-          let back = err(404, "car not found", false);
-          if (back) {
-            return;
-          }
+          throw new Error('car not found')
         }
+        // console.log(doc)
         if (doc) {
           let imgs_deleted = false;
           let images_to_del = doc.images_url;
@@ -71,24 +68,17 @@ export default async function handler(req, res) {
               }
             } catch (error) {
               console.log(error + "err");
-              let back = err(400, "error in imgkit deleting", false);
-              if (back) {
-                return;
-              }
-              return
+              throw new Error('error in imgkit deleting')
+            
             }
           }
           if(imgs_deleted == false){
-            let back = err(502,"Image deletion failed from imgkit",false);
-            if(back){return;}
+            throw new Error('Image deletion failed from imgkit')
           }         
           if(imgs_deleted == true){
             let deleted_ad = await cardataschema.findByIdAndDelete(doc._id);
             if (!deleted_ad) {
-              let back = err(417, err + "cannot delete ad", false);
-              if (back) {
-                return;
-              }
+              throw new Error('cannot delete ad')
             }
             if (deleted_ad) {
               let back = err(200, "your Ad is deleted", true);
@@ -113,6 +103,7 @@ export default async function handler(req, res) {
         //   success: false,
         //   message: err.message || "something went wrong",
         // });
+
       } catch (err) {
         res.status(500).json({
           success: false,

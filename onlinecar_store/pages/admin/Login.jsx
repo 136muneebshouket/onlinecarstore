@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Response_modal from "@/components/Modals/response_modal/Response_modal";
+import Response_modal from "@/components/Modals/respnse_modal/Response_modal";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import axios from "axios";
@@ -75,7 +75,7 @@ const Login = () => {
         }
         setEmail("");
         setPassword("");
-        router.replace('dashboard/Dashboard')
+        router.replace('dashboard_page/Dashboard')
       })
       .catch((err) => {
         console.log(err);

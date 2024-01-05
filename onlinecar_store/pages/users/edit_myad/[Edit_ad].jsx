@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from "axios";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Show_img_modal";
-import FeaturesModal from "@/components/Modals/custom models/featuresmodal/FeaturesModal";
+import FeaturesModal from "@/components/Modals/custom models/feturesmodal/FeaturesModal";
 // import Response_modal from "@/components/Modals/response_modal/Response_modal";
 import price_converter from "@/components/processing_functions/Price_calculator";
 import { useSession, signOut } from "next-auth/react";
@@ -15,7 +15,7 @@ import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 
 const OptionsModal = dynamic(
-  () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
+  () => import("@/components/Modals/custom models/Option_modals/Optionsmodal"),
   {
     loading: () => <p>Loading...</p>,
   }
@@ -70,12 +70,12 @@ const Edit_ad = () => {
     modelyear: "",
     Registered_In: "",
     color: "",
-    Mileage: null,
-    price: null,
+    Mileage: '',
+    price: '',
     comments: "",
     enginetype: "",
     model: "",
-    enginecc: null,
+    enginecc: '',
     transmission: "",
     Assembly: "",
     carfeatures: [],
@@ -84,7 +84,7 @@ const Edit_ad = () => {
     duration: "",
     Secondary_no: '',
   };
-
+  
   const [carobj, setCarobj] = useState(initialState);
 
   useEffect(() => {
@@ -97,6 +97,7 @@ const Edit_ad = () => {
     let param = {
       ad_id: ad_id,
       user_id: userid,
+      ad_type:'car'
     };
     if (ad_id && userid) {
       get_ad();
@@ -190,7 +191,7 @@ const Edit_ad = () => {
       });
     }
     if (Array.isArray(values)) {
-      console.log(values);
+      // console.log(values);
       setCarobj((prevCarobj) => {
         return {
           ...prevCarobj,
@@ -200,7 +201,7 @@ const Edit_ad = () => {
     }
   }, []);
 
-  // console.log(carobj);
+  // console.log(carobj.carfeatures);
   // console.log(imagestoshow);
 
   //add text from text area///////////////////////////////////////////////////////////////////////////
@@ -296,12 +297,13 @@ const Edit_ad = () => {
 
   // function for getting errors
   var err_values = [];
+  // console.log(carobj)
 
   const geterrors = async () => {
     await Object.keys(carobj).forEach((key) => {
       const value = carobj[key];
 
-      if (value == "" || value == null || value.length < 0) {
+      if (value == "" || value == null || value.length < 0 || value == NaN) {
         // setErrors(true);
         if (
           !err_values.includes(key) &&
@@ -310,40 +312,50 @@ const Edit_ad = () => {
           key !== "duration" &&
           key !== "Secondary_no" &&
           key !== "seller_id" &&
-          key !== "model" &&
-          key !== "certified" &&
-          key !== "inspected" &&
-          key !== "auction_sheet" &&
-          key !== "managed_by"
+          key !== "model" 
         ) {
           err_values.push(key);
         }
       }
     });
+
+   
     if (err_values.length > 0) {
-      console.log(err_values);
+    
       await setErrors(true);
-      let elementindex = 0;
-      scroll();
-      async function scroll() {
-        const element = document.getElementById(err_values[elementindex]);
-        if (element == null) {
-          elementindex += 1;
-           scroll();
-          return;
+      // let elementindex = 0;
+      let element
+      // scroll();
+      // async function scroll() {
+        for(var val of err_values){
+          element = document.getElementById(val);
+          if(!element){
+            continue
+          }
+          if(element){
+            break
+          }
         }
+        
+        // if (element == null) {
+        //   elementindex += 1;
+        //    scroll();
+        //   return;
+        // }
 
-        // console.log(element);
-        const scrollOffset = -130; // Adjust the pixel value as needed
+        if(element){
+          const scrollOffset = -130; 
 
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY + scrollOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY + scrollOffset;
+  
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+       
+      
     } else if (err_values.length === 0) {
       await setErrors(false);
 
@@ -365,13 +377,14 @@ const Edit_ad = () => {
       }
     }
   };
-
+  // console.log(carobj)
  async function process_imges(){
     let imagesto_delete = oldimages.map((imgs) => {
       if (!imagestoshow.includes(imgs)) {
         return imgs.img_id;
       }
-    }).filter((x) => x != undefined);;
+    }).filter((x) => x != undefined);
+
     if (imagesto_delete.length > 0) {
       carobj.images_to_del = imagesto_delete;
     }
@@ -386,16 +399,19 @@ const Edit_ad = () => {
       carobj.imgs_to_uplod = imgs_to_uplod;
     }
     delete carobj.images_url;
+    // console.log(imagestoshow)
+    carobj.total_imgs = imagestoshow;
   }
 
-
+// console.log(carobj)
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
     await geterrors();
-    // console.log(err_values.length);
-    // console.log(errors, phoneerr);
-    
+    console.log(err_values);
+    console.log(errors, phoneerr);
+    // console.log(carobj)
+
     if (err_values.length == 0 && errors == false && phoneerr == false) {
       // console.log("done");
       setLoading(true);
@@ -437,7 +453,7 @@ const Edit_ad = () => {
        
     }
   };
-  // console.log(carobj);
+
   // console.log(imagestoshow);
   // console.log(oldimages);
   // console.log(regex.test(carobj.Phone_no));
@@ -605,7 +621,7 @@ const Edit_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              Mileage: parseInt(e.target.value),
+                              Mileage: (e.target.value),
                             };
                           });
                         }}
@@ -649,7 +665,7 @@ const Edit_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              price: parseInt(e.target.value),
+                              price: (e.target.value),
                             };
                           });
                         }}
@@ -877,7 +893,7 @@ const Edit_ad = () => {
                             setCarobj((prevCarobj) => {
                               return {
                                 ...prevCarobj,
-                                ...{ enginecc: parseInt(e.target.value) },
+                                ...{ enginecc: e.target.value },
                               };
                             });
                           }}
@@ -962,7 +978,7 @@ const Edit_ad = () => {
                       ) : (
                         ""
                       )}
-                      <FeaturesModal carrdata={getfromoptionsmodal} />
+                      <FeaturesModal carrdata={getfromoptionsmodal} carfeatures={carobj.carfeatures} />
                     </div>
                   </div>
                 ) : (

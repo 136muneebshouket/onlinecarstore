@@ -15,8 +15,6 @@ export default async function handler(req, res) {
         // console.log(id)
         // // Perform the query with the specified projection
         const result = await cardataschema.findOne({_id:id });
-
-        
         if(!result){
           res.status(404).json({
             success: false,

@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import axios from "axios";
 import Textareamodal from "@/components/Modals/custom models/textareamodel/Textareamodal";
 import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Show_img_modal";
-import FeaturesModal from "@/components/Modals/custom models/featuresmodal/FeaturesModal";
+import FeaturesModal from "@/components/Modals/custom models/feturesmodal/FeaturesModal";
 import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -12,11 +12,12 @@ import dynamic from "next/dynamic";
 import price_converter from "@/components/processing_functions/Price_calculator";
 // import { generate_err } from "@/components/processing_functions/errors_gen";
 import Context from "@/components/processing_functions/context";
+// import { totalwork } from "@/components/processing_functions/progress";
+
 import { useContext } from "react";
 
-
 const OptionsModal = dynamic(
-  () => import("@/components/Modals/custom models/Optionsmodal/Optionsmodal"),
+  () => import("@/components/Modals/custom models/Option_modals/Optionsmodal"),
   {
     loading: () => <p>Loading...</p>,
   }
@@ -25,11 +26,18 @@ const OptionsModal = dynamic(
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <div className="loder"><h2>Loading...</h2></div>,
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
   }
 );
 
 const Post_ad = () => {
+  //  let p = localStorage.getItem('p')
+  //  console.log(totalwork)
+
   const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
 
@@ -54,12 +62,16 @@ const Post_ad = () => {
 
   const [errors, setErrors] = useState(false);
   const [phoneerr, setPhoneerr] = useState(false);
-  // const [response, setResponse] = useState(true);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   // const [dberrors, setDberrors] = useState({
   //   msg: "",
   //   success: null,
   // });
+  //   console.log(uploadProgress)
+  // useEffect(()=>{
+  //   console.log(uploadProgress)
+  // },[uploadProgress])
 
   const [loading, setLoading] = useState(false);
 
@@ -84,10 +96,10 @@ const Post_ad = () => {
     transmission: "",
     Assembly: "",
     carfeatures: [],
-    Phone_no: '',
+    Phone_no: "",
     variant_name: "",
     duration: "",
-    Secondary_no: '',
+    Secondary_no: "",
   };
 
   const [carobj, setCarobj] = useState(initialState);
@@ -121,6 +133,7 @@ const Post_ad = () => {
   ////geting data from options modal//////////////////////////////////////////////////////////////////////
   const getfromoptionsmodal = useCallback((values) => {
     if (values.b) {
+      // console.log(values)
       setCarobj((prevCarobj) => {
         return {
           ...prevCarobj,
@@ -164,7 +177,7 @@ const Post_ad = () => {
       });
     }
     if (Array.isArray(values)) {
-      console.log(values);
+      // console.log(values);
       setCarobj((prevCarobj) => {
         return {
           ...prevCarobj,
@@ -209,7 +222,7 @@ const Post_ad = () => {
     const files = event.target.files;
     if (files.length > 20 || imagestoshow.length >= 20) {
       setLoading(false);
-      setMessage({success:false,msg:'Maximum 20 images are allowed'});   
+      setMessage({ success: false, msg: "Maximum 20 images are allowed" });
       return;
     }
 
@@ -223,7 +236,10 @@ const Post_ad = () => {
         // Check if the size of the current image exceeds the limit (4MB)
         if (file.size > 4 * 1024 * 1024) {
           setLoading(false);
-          setMessage({success:false,msg:'Image size should not exceed 4MB. Upload your Images again'});  
+          setMessage({
+            success: false,
+            msg: "Image size should not exceed 4MB. Upload your Images again",
+          });
           continue;
         }
 
@@ -335,94 +351,46 @@ const Post_ad = () => {
     }
   };
 
-  // function for uploading to cloudinary
-
-  // const uploadimages=async(carid)=>{
-  // console.log(imagestoshow[0].file)
-  // //for uploading to cloudinary
-
-  //     const uploadData = new FormData();
-
-  //     for (let i = 0; i < imagestoshow.length; i++) {
-  //       uploadData.append('file',imagestoshow[i].file);
-  //         uploadData.append("upload_preset", process.env.APP_PRESET_NAME);
-  //       uploadData.append("cloud_name", process.env.APP_CLOUD_NAME);
-
-  //       try {
-  //        await axios.post(`https://api.cloudinary.com/v1_1/${process.env.APP_CLOUD_NAME}/image/upload`,uploadData).then((res)=>{
-  //           // console.log(res.data.secure_url);
-  //          Cloudimages.push(res.data.secure_url)
-
-  //           }).catch((err)=>{
-  //               console.error(err)
-  //           })
-  //         // Process the uploaded image URLs here, e.g., save them to your state or send them to the server.
-  //       } catch (error) {
-  //         console.error('Upload failed:', error);
-  //         continue;
-  //       }
-  //     }
-
-  //       // if(Cloudimages.length == imagestoshow.length ){
-  //       if(Cloudimages.length > 0 ){
-  //         let images={
-  //           carid,
-  //           Cloudimages
-  //         }
-  //         await axios
-  //         .post(`/api/uploadcar/uploadimages`, images)
-  //         .then(async (res) => {
-
-  //           if (res.status == 201) {
-  //             // setError(res?.data);
-  //             console.log(res?.data)
-  //
-  //             // resetState();
-  //             // resettextarea();
-  //           //  await uploadimages(res?.data.car_id)
-  //           setLoading(false)
-  //           }
-  //         })
-  //         .catch((err) => {
-  //          console.log(err?.response?.data)
-  //         }).finally(()=>{
-  //           setLoading(false)
-  //         });
-
-  //       }
-
-  //     // console.log(Cloudimages)
-  // }
-
-  // console.log(Cloudimages)
-  // console.log(Cloudimages)
-  // console.log(imagestoshow)
-
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
+  
     await geterrors();
-    console.log(err_values.length);
-    console.log(errors, phoneerr);
+    // console.log(err_values.length);
+    // console.log(errors, phoneerr);
 
     if (err_values.length == 0 && errors == false && phoneerr == false) {
       console.log("done");
       setLoading(true);
-
+      // const formdataimgs = new FormData();
       const imgsto_load = imagestoshow.map((img) => {
         //  delete img.file;
         let obj = { url: img.url, name: img.file.name };
         return obj;
+        // formdataimgs.append("images", img.file);
       });
-      // console.log(carobj);
+
       let cardata = {
         carobj,
+        // formdataimgs
         imgsto_load,
       };
-      await axiosInstance
-        .post(`/api/uploadcar/postmy_ad`, cardata)
-        .then(async (res) => {
-          if (res.status == 201) {
+
+      const uploadPromise = axios.post(`/api/uploadcar/postmy_ad`, cardata);
+
+      // Start the interval for tracking progress
+      const progressTracker = setInterval(async () => {
+        await axios.get(`/api/uploadcar/postmy_ad`).then((res) => {
+          console.log(res.data); // Access progress information from response
+          setMessage({progress:res.data});
+        });
+      }, 1000);
+
+      // Wait for the upload to complete
+      await uploadPromise
+        .then((res) => {
+          console.log("Upload successful:", res.data); // Handle upload response
+           if (res.status == 201) {
             // setError(res?.data);
             console.log(res?.data);
 
@@ -438,26 +406,47 @@ const Post_ad = () => {
             setLoading(false);
             // setResponse(true)
             // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
-            setMessage({success:true,msg:res?.data.message});   
-            
+            setMessage({progress:null});
+            setMessage({success:true,msg:res?.data.message});
+
           }
         })
         .catch((err) => {
-          // console.log(err?.response?.data);
-          // setResponse(true)
-          // setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
-          setMessage({success:false,msg:err?.response?.data.message});
+          setMessage({progress:null});
+          console.error("Upload failed:", err);
+          setMessage({ success: false, msg: err?.response?.data.message });
           setLoading(false);
         })
         .finally(() => {
           setLoading(false);
         });
+     
+        clearInterval(progressTracker);
+      // await axios
+      //   .post(`/api/uploadcar/postmy_ad`, cardata)
+      //   .then(async (res) => {
+      //     console.log(res);
+
+      //    
+      //   })
+      //   .catch((err) => {
+      //     // console.log(err?.response?.data);
+      //     // setResponse(true)
+      //     // setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
+      //     setMessage({ success: false, msg: err?.response?.data.message });
+      //     setLoading(false);
+      //   })
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
     }
   };
-  // console.log(carobj);
+
+
+  // console.log(carobj.carfeatures);
   // console.log(imagestoshow);
   // console.log(regex.test(carobj.Phone_no));
-
+  // console.log(totalwork)
   return (
     <>
       <Head>
@@ -632,7 +621,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              Mileage: parseInt(e.target.value),
+                              Mileage: parseInt(e.target.value)|| null,
                             };
                           });
                         }}
@@ -676,7 +665,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              price: parseInt(e.target.value),
+                              price: parseInt(e.target.value)|| null,
                             };
                           });
                         }}
@@ -690,7 +679,11 @@ const Post_ad = () => {
                       ) : (
                         ""
                       )}
-                      {carobj.price? <span>Pkr: {price_converter(carobj.price)}</span>:<></>}
+                      {carobj.price ? (
+                        <span>Pkr: {price_converter(carobj.price)}</span>
+                      ) : (
+                        <></>
+                      )}
                       {carobj.price < 10000 || carobj.price > 100000000000 ? (
                         carobj.price !== null && (
                           <span className="errorspan">
@@ -904,7 +897,7 @@ const Post_ad = () => {
                             setCarobj((prevCarobj) => {
                               return {
                                 ...prevCarobj,
-                                ...{ enginecc: parseInt(e.target.value) },
+                                ...{ enginecc: parseInt(e.target.value) || null },
                               };
                             });
                           }}
@@ -1012,10 +1005,16 @@ const Post_ad = () => {
                           <option value="High Roof">High Roof</option>
                           <option value="Convertible">Convertible</option>
                           <option value="Single Cabin">Single Cabin</option>
-                          <option value="Off-Road Vehicles">Off-Road Vehicles</option>
+                          <option value="Off-Road Vehicles">
+                            Off-Road Vehicles
+                          </option>
                           <option value="Mini Vehicles">Mini Vehicles</option>
-                          <option value="Compact hatchback">Compact hatchback</option>
-                          <option value="Subcompact hatchback">Subcompact hatchback</option>
+                          <option value="Compact hatchback">
+                            Compact hatchback
+                          </option>
+                          <option value="Subcompact hatchback">
+                            Subcompact hatchback
+                          </option>
                         </select>
                         {errors && carobj.body_type == "" ? (
                           <span className="errorspan">
@@ -1061,7 +1060,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Phone_no: (e.target.value) },
+                              ...{ Phone_no: e.target.value },
                             };
                           });
                           var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(
@@ -1115,7 +1114,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              ...{ Secondary_no: (e.target.value) },
+                              ...{ Secondary_no: e.target.value },
                             };
                           });
                           var isValidPhoneNo = /^0\d{2}[ -]?\d{8}$/.test(

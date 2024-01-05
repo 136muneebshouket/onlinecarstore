@@ -3,21 +3,27 @@
     position: sticky;
     top: 0;
     z-index: 20;
-  
     border-radius: 0px !important;
     background-color: rgba(255, 255, 255);
     /* border-bottom:1px solid #c1c1c1; */
     display: flex;
     flex-direction: column;
-    background-color: rgb(0 28 69);
-    
+    background-color: #283949;
+    /* overflow: hidden; */
+    transition: .3s;
+    /* max-height: 200px; */
+  }
+  .NavBar_hide {
+    /* position: relative !important; */
+    top: -100px;
+    transition: .3s;
   }
   .NavBar .uppernav{
     display: flex;
-    justify-content: end;  
+    justify-content: flex-end;  
     border-bottom: 1px solid grey;
     margin: 0px 12%;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
   }
   .NavBar .uppernav .profile{
     padding:5px 10px;
@@ -226,7 +232,7 @@
     width: 135px;
     height: 40px;
     border-radius: 5px;
-    background-color: rgb(189 20 20);
+    background-color: var(--redcode);
     text-decoration: none;
     border: none;
     text-align: center !important;

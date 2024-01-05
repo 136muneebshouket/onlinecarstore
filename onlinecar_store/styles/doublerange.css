@@ -7,7 +7,7 @@
     background: rgb(204, 204, 204);
 }
 .example-track.example-track-1 {
-    background: #213974;
+    background: var(--redcode);
 }
 .example-track.example-track-2 {
     background: rgb(204, 204, 204);
@@ -30,6 +30,6 @@
     box-sizing: border-box;
 }
 .example-thumb.active{
-    border: 2px solid #213974;;
+    border: 2px solid var(--redcode);;
     outline: none;
 }

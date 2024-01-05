@@ -34,7 +34,7 @@ const My_fav_ads = () => {
       await axios
         .get(`/api/usercarts/?carts=${carts}`)
         .then((res) => {
-          console.log(res.data.payload);
+          // console.log(res.data.payload);
           setCarData(res.data.payload);
           setLoadiing(false);
         })
@@ -139,7 +139,7 @@ const My_fav_ads = () => {
           {}
           {cardata.length == 0 && (
             <>
-              <h5>No Active Ads</h5>
+              <h5>No Saved Ads</h5>
             </>
           )}
         </div>
