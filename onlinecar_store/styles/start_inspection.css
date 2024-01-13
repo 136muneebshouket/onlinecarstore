@@ -1,0 +1,136 @@
+.upload_main_img {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload_main_img .main_img {
+    width: min(700px, 90vw)
+}
+
+.upload_main_img .main_img img {
+    width: 100%;
+    height: auto;
+}
+
+.upload_main_img .main_img_input {
+    margin: 20px;
+}
+
+.upload_main_img .button_section button {
+    background-color: green;
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+}
+
+.car_basic_details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.car_basic_details .input_div {
+    margin: 10px;
+    width: max(300px, 40vw);
+}
+
+.car_basic_details .input_div label {
+    display: block;
+    font-weight: 600;
+}
+
+.car_basic_details .input_div input,
+select {
+    width: -webkit-fill-available;
+    padding: 5px;
+}
+
+.submit_btn {
+    text-align: center;
+}
+
+.submit_btn button {
+    background-color: green;
+    font-weight: 500;
+    color: white;
+    padding: 8px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px;
+
+}
+
+.Start_inspec .properties{
+    width: min(900px, 95vw);
+    border: 1px solid;
+    margin: auto;
+}
+.Start_inspec .properties .head h3{
+    background-color: rgb(53, 49, 49);
+    padding: 10px;
+    color: white;
+    margin: 0;
+}
+
+.property_head h5{
+    padding: 5px;
+    margin: 0;
+}
+
+.upload_equip .images_upload .map_imgs{
+    display: flex;
+    flex-wrap: wrap;
+}
+.upload_equip .upload_img_btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.upload_equip .property_head {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.upload_equip .property_head h4{
+    font-size: max(18px,2vw);
+    margin: 2px;
+}
+.upload_equip .property_head .edit_btn{
+    border: none;
+    height: fit-content;
+    padding: 0px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background: #005591;
+    color: white;
+}
+.upload_equip .property_head i{
+    font-size: xx-large;
+    margin: 0px 15px;
+    cursor: pointer;
+}
+.upload_equip .select_status{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+.upload_equip .select_status select{
+   width: 320px;
+   margin: auto;
+}
+.upload_equip .select_status label{
+    font-weight: bold;
+}
+.upload_equip{
+    margin: 5px;
+    background: white;
+    height: 35px;
+    overflow: hidden;
+    border: 1px solid grey;
+}

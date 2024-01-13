@@ -26,6 +26,7 @@ import "@/styles/footer.css";
 import "@/styles/Inspection_page.css";
 import "@/styles/admin_inspection.css";
 import "@/styles/Slots.css";
+import "@/styles/start_inspection.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";

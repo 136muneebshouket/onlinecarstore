@@ -67,8 +67,8 @@ const Ad_section = ({ single_ad_data ,reset}) => {
           <div className="car_upper_section">
             <div className="car_title" style={{ padding: "10px" }}>
               <h1 style={{ color: "#223C7A", marginBottom: "5px" }}>
-                {single_ad_data.brand} {single_ad_data.model}{" "}
-                {single_ad_data.variant_name} {single_ad_data.modelyear}
+                {single_ad_data?.brand} {single_ad_data?.model}{" "}
+                {single_ad_data?.variant_name} {single_ad_data?.modelyear}
               </h1>
               <span style={{ color: "#223C7A" }}>
                 <i className="bx bxs-location-plus"></i>&nbsp;

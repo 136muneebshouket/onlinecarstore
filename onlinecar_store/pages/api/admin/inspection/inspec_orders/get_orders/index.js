@@ -15,6 +15,9 @@ export default async function handler(req, res) {
             findobj.slot = req.query.slotdate
             selectedfields.slottime = 1
         }
+        if(req.query.accepted){
+            findobj.accepted = req.query.accepted;
+        }
         
        let find = await inspec_request.find(findobj,selectedfields)
        

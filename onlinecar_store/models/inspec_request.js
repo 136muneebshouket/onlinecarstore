@@ -87,6 +87,11 @@ const Error_handling = new mongoose.Schema(
         maxlength: [200,'too much user_id length'],
         required:[true, 'user_id id is required'],
       },
+      accepted: {
+        type:Boolean,
+        default:false,
+        // required:[true, 'user_id id is required'],
+      },
 
   },
   { timestamps: true }

@@ -15,11 +15,18 @@ const Inspect_requests = dynamic(() => import("./insp_requests/Inspect_requests"
     </div>
   ),
 });
+const Confirmed_inspec = dynamic(() => import("./confirmed_inspections/Confirmed_inspec"), {
+  loading: () => (
+    <div className="loder">
+      <h2>Loading...</h2>
+    </div>
+  ),
+});
 
 const Inspection_page = () => {
   const [sidebar, setSidebar] = useState(true);
   const [component, setComponent] = useState("");
-  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks',"Ad_Incpection"]);
+  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks']);
 
   // console.log(component)
   return (
@@ -59,6 +66,7 @@ const Inspection_page = () => {
         <div className="main_inspection">
           {component == "Slots" ? <Slots /> : null}
           {component == "Inspections Requests" ? <Inspect_requests /> : null}
+          {component == "Inspections tasks" ? <Confirmed_inspec /> : null}
         </div>
       </div>
     </>

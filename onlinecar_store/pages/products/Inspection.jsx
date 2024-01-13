@@ -165,16 +165,17 @@ const Inspection = () => {
     e.preventDefault();
     setshowerr(true);
     try {
-      Object.keys(inspection_obj).forEach((key) => {
+      for(var key in inspection_obj){
         let v = inspection_obj[key];
         if (!v) {
           if (key != "ad_id") {
-            throw new Error('there is some missing fields')
+            throw new Error(`${key} fields`)
           }
         }
-      });
+      };
     } catch (error) {
-      console.error(error)
+      // console.log(error.message)
+      setMessage({ success: false, msg:error.message});
       return ;
     }
     
@@ -209,7 +210,7 @@ const Inspection = () => {
             />
           </div>
           <div className="formsection">
-            <form>
+            <form onSubmit={order_inspection}>
               <h2>Shedule Carselection Car Incpection</h2>
               <input
                 type="text"
@@ -300,7 +301,9 @@ const Inspection = () => {
               <input
                 type="text"
                 name="phone_no"
-                pattern="[0-9]{11}"
+                pattern="[0]{1}[3]{1}[0-9]{9}"
+                maxLength={11}
+                title="Please match the requested format 0XXXXXXXXXX"
                 onChange={onchangehandler}
                 value={inspection_obj?.phone_no}
                 placeholder="Enter Your Phone"
@@ -314,7 +317,7 @@ const Inspection = () => {
                   }`}
               </span>
 
-              <button onClick={order_inspection} type="submit">
+              <button  type="submit">
                 Submit
               </button>
             </form>

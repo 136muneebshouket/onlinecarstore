@@ -776,7 +776,7 @@ const Post_ad = () => {
                       className="uploaded_images"
                       style={{ display: "flex", flexWrap: "wrap" }}
                     >
-                      {imagestoshow.map((image, index) =>
+                      {imagestoshow?.map((image, index) =>
                         image.url ? (
                           <div
                             key={index}

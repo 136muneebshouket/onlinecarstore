@@ -9,29 +9,29 @@ const carSchema = new mongoose.Schema(
     seller_id:{
       type:mongoose.Schema.Types.ObjectId,
       minlength: [1,'too less seller_id length'],
-      maxlength: [200,'too much seller_id length'],
+      maxlength: [500,'too much seller_id length'],
       required:[true, 'Seller id is required'],
     },
     seller_email:{
       type:String,
-      maxlength: [200,'too much seller_email length'],
+      maxlength: [500,'too much seller_email length'],
       required:false ,
       default:''
     },
     city: {
       type: String,
       minlength: [1,'too less city length'],
-      maxlength: [200,'too much city length'],
+      maxlength: [500,'too much city length'],
       required: [true, 'Location is required'],
     },
     area: {
       type: String,
-      maxlength: [200,'too much area length'],
+      maxlength: [500,'too much area length'],
       default:""
     },
     brand:{
       type:String,
-      maxlength: [200,'too much brand length'],
+      maxlength: [500,'too much brand length'],
       required:[true, 'Car brand is required'],
     },
     modelyear: {
@@ -43,12 +43,12 @@ const carSchema = new mongoose.Schema(
     },
     Registered_In: {
         type: String,
-        maxlength: [200,'too much Registered_In length'],
+        maxlength: [500,'too much Registered_In length'],
         required:[true, 'register location is required'],
       },
     color: {
       type:String,
-      maxlength: [200,'too much color length'],
+      maxlength: [500,'too much color length'],
       required:[true, 'Car color is required'],
     },
     Mileage: {
@@ -70,17 +70,17 @@ const carSchema = new mongoose.Schema(
     },
     enginetype: {
       type:String,
-      maxlength: [200,'too much enginetype'],
+      maxlength: [500,'too much enginetype'],
       required:[true, 'engine type is required'],
     },
     body_type: {
       type:String,
-      maxlength: [200,'too much bodytype'],
+      maxlength: [500,'too much bodytype'],
       required:[true, 'engine type is required'],
     },
     model: {
       type:String,
-      maxlength: [200,'too much model length'],
+      maxlength: [500,'too much model length'],
       required:[true, 'Car model is required'],
     },
     enginecc: {
@@ -91,12 +91,12 @@ const carSchema = new mongoose.Schema(
     },
     transmission: {
       type:String,
-      maxlength: [200,'too much transmission length'],
+      maxlength: [500,'too much transmission length'],
       required:[true, 'car transmission is required'],
     },
     Assembly: {
       type:String,
-      maxlength: [200,'too much Assembly length'],
+      maxlength: [500,'too much Assembly length'],
       required:[true, 'car Assembly is required'],
     },
     carfeatures: {
@@ -106,23 +106,23 @@ const carSchema = new mongoose.Schema(
     },
     Phone_no: {
         type: String,
-        maxlength: [200,'too much Phone_no length'],
+        maxlength: [500,'too much Phone_no length'],
         required:[true, 'Phone number is required'],
     },
     variant_name: {
         type: String,
-        maxlength: [200,'too much variant_name length'],
+        maxlength: [500,'too much variant_name length'],
         required:false,
         default:''
     },
     duration: {
       type: String,
-      maxlength: [200,'too much duration length'],
+      maxlength: [500,'too much duration length'],
       default:''
     },
     Secondary_no: {
       type: String,
-      maxlength: [200,'too much Secondary_no length'],
+      maxlength: [500,'too much Secondary_no length'],
       required:false,
     },
     images_url: {

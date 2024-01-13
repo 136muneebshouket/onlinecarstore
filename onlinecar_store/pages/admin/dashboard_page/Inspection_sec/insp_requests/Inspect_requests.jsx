@@ -19,7 +19,7 @@ const Inspect_requests = () => {
   }, []);
 
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/admin/inspection/inspec_orders/get_orders`,
+    `/api/admin/inspection/inspec_orders/get_orders?accepted=false`,
     fetcher
   );
   // if(data){
@@ -63,6 +63,25 @@ const Inspect_requests = () => {
     });
    }
 
+   async function accept_req(v){
+    let admin_token = JSON.parse(localStorage.getItem('admin_token'))
+    let obj ={
+      req_id:v._id,
+      admin_token
+    }
+    setMessage({ loader: true });
+    await axios.post(`/api/admin/inspection/inspec_orders/accept_order`, obj)
+    .then((res) => {
+      setMessage({ loader: false });
+      setMessage({ success: true, msg: res?.data.message });
+      mutate();
+    }).catch((err) => {
+      setMessage({ loader: false });
+      setMessage({ success: false, msg: err?.response?.data.message });
+    });
+   
+   }
+
 
 
   return (
@@ -72,7 +91,7 @@ const Inspect_requests = () => {
         <div className="request_sec">
           {isLoading ? <FullLoader /> : null}
           {error ? (
-            <h1 style={{ color: "rgb(175, 46, 36)" }}>Inspection requests</h1>
+          <h1 style={{ color: "rgb(175, 46, 36)" }}>Something went wrong</h1>
           ) : null}
 
           {data?.map((obj, index) => {
@@ -112,7 +131,9 @@ const Inspect_requests = () => {
                 <p>{obj?.phone_no}</p>
               </div>
               <div className="buttons">
-                <button  style={{ background: "#246524" }}>
+                <button   onClick={() => {
+                    accept_req(obj);
+                  }} style={{ background: "#246524" }}>
                   Accept Request
                 </button>
                 <button  onClick={() => {
