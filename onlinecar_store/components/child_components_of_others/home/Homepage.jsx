@@ -6,7 +6,7 @@ import Used_cars from "@/components/fetched_cars_divs/used_cars_homepage/Used_ca
 import H_Videos from "@/components/Video_components/homepage_videos/H_Videos"; 
 // import Usedcarchild from "@/components/carschildcomponents/Usedcarchild.server";
 
-const Home = () => {
+const Homepage = () => {
   const [option, setOption] = useState("Body Type");
   // console.log(option)
   const [optionsarr, setOptionsarr] = useState([
@@ -199,4 +199,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Homepage;

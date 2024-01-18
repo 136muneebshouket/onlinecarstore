@@ -3,7 +3,7 @@ import Head from 'next/head'
 // import Used_cars from './home/fetched_cars_divs/used_cars/Used_cars.server'
 // import  from './Home/Homepage'
 // import { Montserrat } from 'next/font/google'
-import Home from '@/components/child_components_of_others/home/Homepage'
+import Homepage from '@/components/child_components_of_others/home/Homepage'
 
 
 
