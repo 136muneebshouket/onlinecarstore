@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+// import Cardatamodal from "./Cardatamodal";
 import Cardatamodal from "./Cardatamodal";
 import Locationsmodal from "./Locationsmodal";
 import Colorsmodal from "./Colorsmodal";
@@ -11,15 +12,7 @@ import Inspection_dates from "../inspection_modals/inspect_dates/Inspection_date
 
 
 const Optionsmodal = ({ isOpen, onClose, modalvalue, carrdata ,filtercarmodal}) => {
-  if (!isOpen) {
-    return null;
-  }
-
-
-
-
-
-
+ 
 
 
 

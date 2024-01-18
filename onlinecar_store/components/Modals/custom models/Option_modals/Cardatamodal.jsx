@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import axios from "axios";
 import { arrayOfyears } from "@/components/carsdata/arrays";
-import final_carsdata from "../../../carsdata/carsdata17_01_24";
+// import final_carsdata from "../../../carsdata/carsdata17_01_24";
 import { feature_generation } from "@/components/processing_functions/features_generations";
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";

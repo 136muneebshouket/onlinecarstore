@@ -6,7 +6,15 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import Context from "@/components/processing_functions/context";
-import Optionsmodal from "@/components/Modals/custom models/Option_modals/Optionsmodal";
+
+const Optionsmodal = dynamic(() => import("@/components/Modals/custom models/Option_modals/Optionsmodal"), {
+  loading: () => (
+    <div className="loder">
+      <h2>Loading...</h2>
+    </div>
+  ),
+});
+// import Optionsmodal from "@/components/Modals/custom models/Option_modals/Optionsmodal";
 
 const Inspection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
