@@ -44,7 +44,7 @@ const Sell = () => {
                   </li>
                 </ul>
 
-                <Link href="/used_cars/sell/Post_ad">
+                <Link href="/used_cars/-/sell/Post_ad">
                   {" "}
                   <button> post an add</button>
                 </Link>
@@ -73,7 +73,7 @@ const Sell = () => {
                     <span>Post your Ad for Free in 3 Easy Steps</span>
                   </li>
                 </ul>
-                <Link href="/used_cars/sell/Post_ad">
+                <Link href="/used_cars/-/sell/Post_ad">
                   {" "}
                   <button> post an add</button>
                 </Link>
