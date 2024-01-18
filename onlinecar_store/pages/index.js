@@ -3,13 +3,11 @@ import Head from 'next/head'
 // import Used_cars from './home/fetched_cars_divs/used_cars/Used_cars.server'
 // import  from './Home/Homepage'
 import { Montserrat } from 'next/font/google'
-
+import Home from '@/components/child_components_of_others/home/Homepage'
 import dynamic from 'next/dynamic'
 
 
-const Homepage = dynamic(() => import('@/pages/home/Homepage'), {
-  loading: () => <p>Loading...</p>,
-})
+
 
 // const inter = Montserrat({
 //   variable: '--font-monteserrat',
