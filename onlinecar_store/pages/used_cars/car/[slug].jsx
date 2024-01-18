@@ -247,7 +247,7 @@ const slug = ({ carrdata, loadiing }) => {
             Post an ad for <span style={{ color: "#d10202" }}>FREE</span>{" "}
           </h3>
           <p>Sell it faster to thousands of buyers</p>
-          <Link href="/used_cars/Sell">Sell Your Car</Link>
+          <Link href="/used_cars/-/Sell">Sell Your Car</Link>
         </div>
       </div>
     </>

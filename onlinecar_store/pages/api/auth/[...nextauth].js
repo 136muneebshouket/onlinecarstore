@@ -77,7 +77,7 @@ export default NextAuth({
     },
   },
   pages: {
-    signIn: "/authentication/Login",
+    signIn: "/authentication/user-login/Login",
   },
   secret: process.env.NEXTAUTH_SECRET,
 });

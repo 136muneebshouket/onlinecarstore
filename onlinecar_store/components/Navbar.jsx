@@ -127,10 +127,10 @@ useEffect( () => {
             ) : (
               <>
                 <div>
-                  <Link href="/authentication/Signup" className="username">
+                  <Link href="/authentication/user-register/Signup" className="username">
                     Sign up
                   </Link>
-                  <Link href="/authentication/Login" className="username">
+                  <Link href="/authentication/user-login/Login" className="username">
                     Sign in
                   </Link>
                 </div>
@@ -178,7 +178,7 @@ useEffect( () => {
                 </Link>
               </li>
 
-              <Link className="postaddlink" href="/used_cars/Sell">
+              <Link className="postaddlink" href="/used_cars/-/Sell">
                 <p>Post an add</p>
               </Link>
             </ul>

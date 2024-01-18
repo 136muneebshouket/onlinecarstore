@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
-import Google_icon from "../z_icons/Google_icon";
+import Google_icon from "../../z_icons/Google_icon";
 import { useSession } from "next-auth/react";
 // import ForgetpasswordModal from "@/components/Modals/ForgetpasswordModal";
 // import FullLoader from "@/components/Modals/Loader/fullLoader";
@@ -24,7 +24,7 @@ const FullLoader = dynamic(
   }
 );
 const ForgetpasswordModal = dynamic(
-  () => import("../../components/Modals/ForgetpasswordModal"),
+  () => import("../../../components/Modals/ForgetpasswordModal"),
   {
     loading: () => <p>Loading...</p>,
   }
