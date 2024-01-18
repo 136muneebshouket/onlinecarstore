@@ -3,7 +3,7 @@ import Upload_equipment from "./Upload_equipment";
 
 const Body_frame = () => {
   const [equip_parent, setEquip_parent] = useState("body_frame");
-  const [options, setOptions] = useState(["Radiator Core Support"]);
+  const [options, setOptions] = useState(["Radiator Core Support","Right Strut Tower Apron"]);
 
   return (
     <>

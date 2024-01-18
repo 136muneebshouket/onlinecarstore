@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 const Youtube = dynamic(
-  () => import("./utube_sec/Youtube"),
+  () => import("@/components/Admin_components/utube_sec/Youtube"),
   {
     loading: () => (
       <div className="loder">
@@ -13,7 +13,7 @@ const Youtube = dynamic(
   }
 );
 const Approval = dynamic(
-  () => import("./Ads_approval_sec/Approval"),
+  () => import("@/components/Admin_components/Ads_approval_sec/Approval"),
   {
     loading: () => (
       <div className="loder">
@@ -23,7 +23,7 @@ const Approval = dynamic(
   }
 );
 const Inspection = dynamic(
-  () => import("./Inspection_sec/Inspection_page"),
+  () => import("@/components/Admin_components/Inspection_sec/Inspection_page"),
   {
     loading: () => (
       <div className="loder">

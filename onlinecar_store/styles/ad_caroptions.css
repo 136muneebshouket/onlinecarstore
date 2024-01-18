@@ -1,0 +1,77 @@
+
+.form_section {
+ width: min(700px,90vw);
+ margin: auto;
+}
+.ad_caroptions{
+    background-color: white;
+}
+
+.ad_caroptions .input_label{
+    display: flex;
+    flex-direction: column;
+}
+.ad_caroptions .input_label {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+    cursor: pointer;
+}
+.ad_caroptions .input_label input{
+    cursor: pointer;
+}
+.ad_caroptions .input_label label{
+font-weight: 600;
+}
+
+.ad_caroptions .features_sec{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.ad_car_option{
+    margin: auto;
+    border: none;
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    margin: 20px;
+
+}
+
+.ad_car_sec{
+    display: flex;
+    justify-content: center;
+}
+
+.cars_options_admin{
+    height: 200px;
+    overflow: auto;
+    border: 1px solid rgb(196, 196, 196);
+    margin-top:10px ;
+}
+.cars_options_admin > div{
+    border: 1px solid rgb(204, 204, 204);
+    margin: 5px;
+    border-radius: 5px;
+  
+}
+.ad_newoption{
+    margin: 5px;
+}
+.ad_newoption input{
+width: 75%;
+}
+.ad_newoption button{
+    width: 20%;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: green;
+    font-weight: 500;
+    padding:5px 0px ;
+}
+
+

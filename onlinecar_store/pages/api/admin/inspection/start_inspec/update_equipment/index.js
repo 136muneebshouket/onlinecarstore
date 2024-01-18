@@ -29,16 +29,18 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "POST":
       try {
+        // console.log(req.body)
+      
+        
         const {
-          equip_parent,
-          equip_name,
-          imagestoshow,
+          modalvalue,
           equip_status,
-          admin_token,
-          Ad_id,
+          imgs_to_upload,
+          imgs_to_del,
         } = req.body;
 
-        const { status, status_color, status_mark } = equip_status;
+        const { status, status_mark } = equip_status;
+        const { equip_parent, equip_name, Ad_id } = modalvalue;
         if (!equip_parent) {
           throw new Error("equipment is missing its parent part.");
         }
@@ -48,64 +50,74 @@ export default async function handler(req, res) {
         if (!equip_name) {
           throw new Error("equipment name is missing.");
         }
-        if (!status_mark || !status) {
+        if (!status) {
           throw new Error("equipment status or flag is missing.");
         }
-
-        const checkAdmin = await admin_schema.countDocuments({
-          resetToken: admin_token,
-        });
-        if (!checkAdmin) {
-          throw new Error(
-            "Admin credentials are missing please login again as admin"
-          );
-        }
+      
+       
+        // const checkAdmin = await admin_schema.countDocuments({
+        //   resetToken: admin_token,
+        // });
+        // if (!checkAdmin) {
+        //   throw new Error(
+        //     "Admin credentials are missing please login again as admin"
+        //   );
+        // }
         // find if equipment is already added
         let obj = {};
         if (equip_parent) {
-          obj.ad_id = Ad_id
+          obj.ad_id = Ad_id;
           obj[equip_parent] = { $elemMatch: { equip_name: equip_name } };
         }
         // console.log(obj)
-        let exist = await inspec_schema.countDocuments(obj);
+        let exist = await inspec_schema.findOne(obj);
         if (exist) {
-          // console.log(exist)
-          throw new Error("Already uploaded");
+          let newobj = {
+            equip_name,
+            equip_status : status,
+            status_mark,
+          };
+          let arr = exist[equip_parent];
+          let indexof_equip = arr.findIndex((v) => {
+            return v.equip_name == equip_name;
+          });
+          arr[indexof_equip] = newobj;
+          exist[equip_parent] = arr;
+          // console.log(exist);
+          let savedoc = await exist.save()
+          if(!savedoc) {
+             throw new Error("Cannot update");
+          }
         }
-        
-        let obj_to_store = {
-          equip_name,
-          equip_status: status,
-          status_mark
-        };
-
-        let obj_for_query = {};
-        if (equip_parent) {
-          obj_for_query[equip_parent] = obj_to_store;
-        }
-        let save = await inspec_schema.findOneAndUpdate(
-          { ad_id: Ad_id },
-          { $addToSet: obj_for_query }
-        );
-
-        if (!save) {
-          throw new Error("Something went wrong in saving equipment");
+       
+        if (imgs_to_del?.length > 0) {
+          try {
+           let deleted = await imageKit.bulkDeleteFiles(imgs_to_del);
+           let newarr =  exist.all_imgs.filter((v)=> {
+              if(!(imgs_to_del.includes(v.img_id))){
+               return v
+              }
+            })
+            exist.all_imgs=newarr
+            await exist.save();
+          } catch (error) {
+            throw new Error("error in imgkit deleting");
+          }
         }
 
-
-        let imgs_to_upload = [];
-        if (imagestoshow?.length > 0) {
-          for (const obj of imagestoshow) {
+        let imgs_to_uplod = [];
+        if (imgs_to_upload?.length > 0) {
+          for (const obj of imgs_to_upload) {
             const response = await imageKit.upload({
-              file: obj.url,
+              file: obj.img_url,
               fileName: obj.filename,
             });
             if (!response) {
               throw new Error("Error in uploading images");
             }
             if (response) {
-              if (response.fileId) { 
-                imgs_to_upload.push({
+              if (response.fileId) {
+                imgs_to_uplod.push({
                   img_flag:`${equip_parent}>${equip_name}`,
                   img_id: response.fileId,
                   img_url: response.url,
@@ -115,13 +127,12 @@ export default async function handler(req, res) {
           }
         }
 
-        if (imgs_to_upload.length > 0) {
-          for(let v of imgs_to_upload){
+        if (imgs_to_uplod?.length > 0) {
+          for(let v of imgs_to_uplod){
             await inspec_schema.findOneAndUpdate({ad_id: Ad_id },{ $addToSet:{ all_imgs : v  }})
           }
         }
 
-       
         res.status(200).json({
           success: true,
           message: "uploaded",

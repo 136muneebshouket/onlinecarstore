@@ -77,6 +77,7 @@ const Login = () => {
     }
   };
 
+
 //  async function google_login(){ 
 //     try {
 //       await signIn("google");
@@ -212,7 +213,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        {/* <p className="errorPara">{error}</p> */}
+   
       </div>
       {/* modal for forget password */}
       {isModalOpen && (

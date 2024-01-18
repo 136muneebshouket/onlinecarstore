@@ -3,9 +3,11 @@ import Image from "next/image";
 import axios from "axios";
 
 import Link from "next/link";
-import Sellerdetails from "./Sellerdetails_box/Sellerdetails";
-import Contact_details from "./price_and_phone/Contact_details";
-import Reporting_add from "./report_add/Reporting_add";
+import Sellerdetails from "@/components/child_components_of_others/slug_car_components/Sellerdetails_box/Sellerdetails";
+import Contact_details from "@/components/child_components_of_others/slug_car_components/price_and_phone/Contact_details";
+
+import Reporting_add from "@/components/child_components_of_others/slug_car_components/report_add/Reporting_add";
+
 import dynamic from "next/dynamic";
 
 import price_converter from "@/components/processing_functions/Price_calculator";
@@ -13,11 +15,15 @@ import price_converter from "@/components/processing_functions/Price_calculator"
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
   {
-    loading: () => <div className="loder"><h2>Loading...</h2></div>,
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
   }
 );
 
-const slug = ({ carrdata,loadiing }) => {
+const slug = ({ carrdata, loadiing }) => {
   // const [car, setCar] = useState({});
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(loadiing);
@@ -95,27 +101,28 @@ const slug = ({ carrdata,loadiing }) => {
   // console.log(images[index])
   return (
     <>
-    {
-        loading ? <FullLoader/>:<></>
-      }
+      {loading ? <FullLoader /> : <></>}
       <div className="singlecar_page">
         <div className="inner_main">
           <div className="car_section">
             <div className="car_upper_section">
               <div className="car_title" style={{ padding: "10px" }}>
                 <h1 style={{ color: "#223C7A", marginBottom: "5px" }}>
-                  {carrdata?.brand} {carrdata?.model} {carrdata?.variant_name} {carrdata?.modelyear}
+                  {carrdata?.brand} {carrdata?.model} {carrdata?.variant_name}{" "}
+                  {carrdata?.modelyear}
                 </h1>
-                <span style={{ color: "#223C7A" }}><i className='bx bxs-location-plus'></i>&nbsp;{carrdata.city}</span>
+                <span style={{ color: "#223C7A" }}>
+                  <i className="bx bxs-location-plus"></i>&nbsp;{carrdata.city}
+                </span>
               </div>
               <div className="img_section">
-                {images.map((url,i) => {
+                {images.map((url, i) => {
                   return (
                     <>
                       {/* <div style={{width:'100%'}}> */}
                       <Image
-                       key={i}
-                       style={{translate:`${-100 * index}%`}}
+                        key={i}
+                        style={{ translate: `${-100 * index}%` }}
                         src={url}
                         alt="loading"
                         loading="lazy"
@@ -125,7 +132,6 @@ const slug = ({ carrdata,loadiing }) => {
                         priority={false}
                       />
                       {/* </div> */}
-                     
                     </>
                   );
                 })}
@@ -145,8 +151,14 @@ const slug = ({ carrdata,loadiing }) => {
                   className="bx bx-chevron-down right_arrow"
                 ></i>
               </div>
-              <h2 style={{color:'#223C7A', padding: "10px" , fontFamily:'monospace'}}>
-              PKR: {price_converter(carrdata.price)} 
+              <h2
+                style={{
+                  color: "#223C7A",
+                  padding: "10px",
+                  fontFamily: "monospace",
+                }}
+              >
+                PKR: {price_converter(carrdata.price)}
               </h2>
             </div>
             <div className="car_specs">
@@ -216,9 +228,17 @@ const slug = ({ carrdata,loadiing }) => {
             </div>
           </div>
           <div className="seller_section">
-          <Contact_details className='contact_dtals' price={carrdata.price} phone={carrdata.Phone_no}/>
+            <Contact_details
+              className="contact_dtals"
+              price={carrdata.price}
+              phone={carrdata.Phone_no}
+            />
             <Sellerdetails sellerid={carrdata.seller_email} />
-            <Reporting_add selleremail={carrdata.seller_email} ad_id={carrdata._id} type={'car'} />
+            <Reporting_add
+              selleremail={carrdata.seller_email}
+              ad_id={carrdata._id}
+              type={"car"}
+            />
           </div>
         </div>
         <div className="post_ad_link">
@@ -227,15 +247,14 @@ const slug = ({ carrdata,loadiing }) => {
             Post an ad for <span style={{ color: "#d10202" }}>FREE</span>{" "}
           </h3>
           <p>Sell it faster to thousands of buyers</p>
-          <Link href="#">Sell Your Car</Link>
+          <Link href="/used_cars/Sell">Sell Your Car</Link>
         </div>
       </div>
-      
     </>
   );
 };
 
-export async function getServerSideProps({ params, query,res }) {
+export async function getServerSideProps({ params, query, res }) {
   let pageurl = params.slug.split("-");
   let slugid = pageurl[pageurl.length - 1];
   const resp = await axios.get(
@@ -250,9 +269,9 @@ export async function getServerSideProps({ params, query,res }) {
   // console.log(carrdata)
 
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
   return {
     props: {
       carrdata,

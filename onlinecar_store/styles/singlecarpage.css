@@ -23,6 +23,7 @@
     margin-right: 20px;
     background-color: white;
     padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgb(230 230 230);
 
 }
 .singlecar_page .img_section{
@@ -136,6 +137,7 @@
     background-color: white;
     padding: 20px;
     margin-bottom: 15px;
+    box-shadow: 0px 0px 10px 0px rgb(230 230 230);
 }
 
 .seller_details h5 {

@@ -22,11 +22,18 @@ const Confirmed_inspec = dynamic(() => import("./confirmed_inspections/Confirmed
     </div>
   ),
 });
+const Ad_caroptions = dynamic(() => import("../ad_options/Ad_caroptions/Ad_car_option"), {
+  loading: () => (
+    <div className="loder">
+      <h2>Loading...</h2>
+    </div>
+  ),
+});
 
 const Inspection_page = () => {
   const [sidebar, setSidebar] = useState(true);
   const [component, setComponent] = useState("");
-  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks']);
+  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks','Ad Cars Options']);
 
   // console.log(component)
   return (
@@ -67,6 +74,7 @@ const Inspection_page = () => {
           {component == "Slots" ? <Slots /> : null}
           {component == "Inspections Requests" ? <Inspect_requests /> : null}
           {component == "Inspections tasks" ? <Confirmed_inspec /> : null}
+          {component == "Ad Cars Options" ? <Ad_caroptions /> : null}
         </div>
       </div>
     </>

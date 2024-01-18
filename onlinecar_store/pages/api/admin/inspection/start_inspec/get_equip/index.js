@@ -18,7 +18,7 @@ export default async function handler(req, res) {
        if (equip_parent) {
          obj.ad_id = Ad_id
          obj[equip_parent] = { $elemMatch: { equip_name: equip_name } };
-         obj['all_imgs'] = { $elemMatch: { img_flag: `${equip_parent}>${equip_name}` } };
+        //  obj['all_imgs'] = { $elemMatch: { img_flag: `${equip_parent}>${equip_name}` } };
          selected_fields[`${equip_parent}`] = 1
          selected_fields["all_imgs"] = 1
          selected_fields['_id'] = 0
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         res.status(200).json({
             success: true,
             message: "Your slot has been received",
-            // payload:find
+            payload:obj_send
           });
 
         break;

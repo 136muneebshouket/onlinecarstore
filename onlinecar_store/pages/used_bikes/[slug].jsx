@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
-import Sellerdetails from "../used_cars/car/Sellerdetails_box/Sellerdetails";
-import Contact_details from "../used_cars/car/price_and_phone/Contact_details";
-import Reporting_add from "../used_cars/car/report_add/Reporting_add";
+import Sellerdetails from "@/components/child_components_of_others/slug_car_components/Sellerdetails_box/Sellerdetails";
+import Contact_details from "@/components/child_components_of_others/slug_car_components/price_and_phone/Contact_details";
+
+import Reporting_add from "@/components/child_components_of_others/slug_car_components/report_add/Reporting_add";
 
 import dynamic from "next/dynamic";
 import price_converter from "@/components/processing_functions/Price_calculator";
@@ -194,7 +195,7 @@ export async function getServerSideProps({ params, query,res }) {
     if (carrdata) {
       loadingg = false;
     }
-    console.log(carrdata)
+    // console.log(carrdata)
   
     res.setHeader(
       'Cache-Control',

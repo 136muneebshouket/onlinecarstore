@@ -54,7 +54,7 @@ export default async function handler(req, res) {
         if (doc) {
           let imgs_deleted = false;
           let images_to_del = doc.images_url;
-          if (images_to_del.length > 0) {
+          if (images_to_del?.length > 0) {
             try {
               const public_ids = images_to_del.map((img) => {
                 delete img.url;

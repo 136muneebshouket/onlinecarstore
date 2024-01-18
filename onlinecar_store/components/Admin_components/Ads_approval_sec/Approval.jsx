@@ -3,7 +3,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import axios from "axios";
 import Context from "@/components/processing_functions/context";
-import Ad_section from "../Ad_section";
+import Ad_section from "./Ad_sec/Ad_section";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
 

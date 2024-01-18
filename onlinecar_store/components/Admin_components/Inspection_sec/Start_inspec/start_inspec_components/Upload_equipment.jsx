@@ -10,7 +10,7 @@ import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Sho
 // import Update_equip_modal from "@/components/Modals/admin/inspection/Update_equip_modal";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import equip_status_arr from "./equipment_status";
+import equip_status_arr from "@/components/equipments_status/equipment_status";
 import axios from "axios";
 import dynamic from "next/dynamic";
 const Update_equip_modal = dynamic(
@@ -41,6 +41,7 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
   const [equip_status, setEquip_status] = useState({
     status: "",
     status_color: "",
+    status_mark: null,
   });
   const [toggle, setToggle] = useState(false);
 
@@ -125,12 +126,12 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
   };
 
   function select_status(e) {
-    let v = e.target.value.split("-");
+    let v = e.target.value.split("&");
     if (v[1] == "") {
-      setEquip_status({ ...equip_status, status: "", status_color: "" });
+      setEquip_status({ ...equip_status, status: "", status_color: "",status_mark:null });
       return;
     }
-    setEquip_status({ ...equip_status, status: v[0], status_color: v[1] });
+    setEquip_status({ ...equip_status, status: v[0], status_color: v[1], status_mark: Number(v[2]) });
   }
 
   //  console.log(equip_status)
@@ -255,7 +256,7 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
                   <>
                     <option
                       style={{ background: `${v.status_color}` }}
-                      value={`${v.status}-${v.status_color}`}
+                      value={`${v.status}&${v.status_color}&${v.status_marks}`}
                     >
                       {v.status}
                     </option>
