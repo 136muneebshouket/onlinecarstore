@@ -149,7 +149,7 @@ useEffect( () => {
             <ul style={{ left: toggleNavBar ? "-12.5%" : "-130%" }}>
               <li>
                 <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
-                <Link className="darkneon" href="/used_cars/Search_car">
+                <Link className="darkneon" href="/used_cars/Search-car">
                   Used Cars
                 </Link>
                 <span><i ref={dropDownRef2} onClick={()=>{setUsedcardropdown(!usedcardropdown)}}  className="bx bx-chevron-down"></i></span>
