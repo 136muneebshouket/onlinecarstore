@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 
       let interval = setInterval(() => {
         totalwork += progress;
-      }, 2000);
+      }, 1000);
 
       setTimeout(() => {
         clearInterval(interval);
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         if (back) {
           return;
         }
-      }, 16000);
+      }, (progress * 1000));
 
       function err(status, message, success, payload) {
         res.status(status).json({
