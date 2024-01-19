@@ -77,7 +77,7 @@ const Resetpasswordpage = () => {
                     }}
                     value={password}
                   />
-                  <div className="showpass_icon">
+                  <div className="showpass_icon" >
                     {showpass ? (
                       <i
                         onClick={() => {

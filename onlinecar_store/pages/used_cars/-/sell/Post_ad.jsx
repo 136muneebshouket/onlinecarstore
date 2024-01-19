@@ -404,6 +404,7 @@ const Post_ad = () => {
             resetState();
             resettextarea();
             setLoading(false);
+            setImagestoshow([])
             // setResponse(true)
             // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
             setMessage({progress:null});
@@ -441,6 +442,9 @@ const Post_ad = () => {
       //   });
     }
   };
+
+
+
 
 
   // console.log(carobj.carfeatures);
@@ -1162,7 +1166,7 @@ const Post_ad = () => {
                   <button type="submit">Submit & Continue</button>
                 </div>
               </form>
-              {/* <button onClick={()=>{setMessage(Math.floor(Math.random() * 100));}}>send</button> */}
+              {/* <button onClick={checkloader}>send</button> */}
             </div>
           </div>
         </div>

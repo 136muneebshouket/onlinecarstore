@@ -111,9 +111,6 @@ useEffect( () => {
                       <Link href="/users/user_dashboard/Others/?My_Saved_Ads">My Saved Ads</Link>
                     </li>
                     <li>
-                      <Link href="#">Setting</Link>
-                    </li>
-                    <li>
                       <a
                         href="#"
                         onClick={()=>{signOut()}}

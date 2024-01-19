@@ -44,7 +44,7 @@ const Videos = () => {
                 className="main_iframe"
                 src={data?.data[0]?.source}
                 title={`${data?.data[0]?.title}| CarSelection`}
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               ></iframe>

@@ -13,8 +13,9 @@
     display: flex;
     flex-direction: row;
 }
-.singlecar_page .car_section h1{
-    font-size: max(19px,2.2vw);
+
+.singlecar_page .car_section h1 {
+    font-size: max(19px, 2.2vw);
 }
 
 .singlecar_page .car_section {
@@ -26,14 +27,15 @@
     box-shadow: 0px 0px 10px 0px rgb(230 230 230);
 
 }
-.singlecar_page .img_section{
+
+.singlecar_page .img_section {
     display: flex;
     overflow: hidden;
     object-fit: contain;
 }
 
 .singlecar_page .img_section img {
-   object-fit: contain;
+    object-fit: contain;
     width: 100%;
     height: auto;
     transition: .4s;
@@ -238,16 +240,36 @@
 
 
 
-.report_add_btn{
+.report_add_btn {
     border: 1px solid var(--redcode);
     width: 100%;
     font-size: 15px;
     padding: 3px;
     font-weight: 500;
     color: var(--redcode);
+    background-color: white;
 }
 
+.Call_contact_bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 50;
+    margin: 10px;
+}
+.Call_contact_bar a > div{
+    margin: 10px;
+    padding: 10px 10px 5px 10px;
+    /* background: var(--primarycolor); */
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+ 
+}
 
+.Call_contact_bar a > div > i{
+    font-size: max(35px,3vw);
+}
 
 
 
@@ -278,10 +300,12 @@
     .seller_section {
         margin: 5px;
     }
-    .seller_section .contact_dtals{
+
+    .seller_section .contact_dtals {
         display: none;
     }
-    .singlecar_page .car_section h2{
+
+    .singlecar_page .car_section h2 {
         display: block !important;
     }
 }

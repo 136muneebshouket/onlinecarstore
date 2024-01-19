@@ -28,6 +28,7 @@ import "@/styles/admin_inspection.css";
 import "@/styles/Slots.css";
 import "@/styles/start_inspection.css";
 import "@/styles/ad_caroptions.css";
+import "@/styles/shake_animations.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";

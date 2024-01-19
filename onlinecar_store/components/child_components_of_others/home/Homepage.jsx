@@ -45,7 +45,7 @@ const Homepage = () => {
               </div>
             </div> */}
             <div className="advance_searchbtn">
-              <Link href="/used_cars/Search_car">Advance Search &gt;</Link>
+              <Link href="/used_cars/Search-car">Advance Search &gt;</Link>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Homepage = () => {
                       <span>&#10003;</span>Sell your car Fast at the Best Price
                     </li>
                   </ul>
-                  <Link href="/used_cars/Sell">Register Your Car</Link>
+                  <Link href="/used_cars/-/Sell">Register Your Car</Link>
                 </div>
                 <div className="first_div">
                   <h4>Try Carselection Sell It For Me</h4>

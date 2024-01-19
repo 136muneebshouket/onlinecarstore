@@ -11,6 +11,7 @@ import Reporting_add from "@/components/child_components_of_others/slug_car_comp
 import dynamic from "next/dynamic";
 
 import price_converter from "@/components/processing_functions/Price_calculator";
+import Call_contact from "@/components/child_components_of_others/slug_car_components/Call_contact_bar/Call_contact";
 
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
@@ -250,6 +251,8 @@ const slug = ({ carrdata, loadiing }) => {
           <Link href="/used_cars/-/Sell">Sell Your Car</Link>
         </div>
       </div>
+
+      <Call_contact phone={carrdata?.Phone_no}/>
     </>
   );
 };

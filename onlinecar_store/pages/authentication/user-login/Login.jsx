@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+
 // import FullLoader from "@/components/Modals/Loader/FullLoader";
 // import "./Login.css"
 
@@ -31,8 +32,6 @@ const ForgetpasswordModal = dynamic(
 );
 
 const Login = () => {
-
-
   const router = useRouter();
   const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
@@ -44,6 +43,8 @@ const Login = () => {
   const [errorstatus, setErrorstatus] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // console.log(sessionData.user._id)
 
   const login = async (e) => {
     setLoading(true);
@@ -58,7 +59,7 @@ const Login = () => {
       if (data.status == 200) {
         setErrorstatus(data.status);
         setError(data.error);
-        setMessage({success:true,msg:data.error}); 
+        setMessage({ success: true, msg: data.error });
         setEmail("");
         setPassword("");
         router.back();
@@ -67,30 +68,29 @@ const Login = () => {
         setLoading(false);
         setErrorstatus(data.status);
         setError(data.error);
-        setMessage({success:false,msg:data.error}); 
+        setMessage({ success: false, msg: data.error });
       }
     } catch (error) {
       setLoading(false);
       console.log(error);
       setError(error.response.data);
-      setMessage({success:false,msg:error.response.data}); 
+      setMessage({ success: false, msg: error.response.data });
     }
   };
 
+  //  async function google_login(){
+  //     try {
+  //       await signIn("google");
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
 
-//  async function google_login(){ 
-//     try {
-//       await signIn("google");
-//     } catch (error) {
-//       console.log(error)
-//     }
-  
-//    let userid = sessionData?.user._id;
-//    if(userid){
-//     console.log(userid)
-//    }
+  //    let userid = sessionData?.user._id;
+  //    if(userid){
+  //     console.log(userid)
+  //    }
 
-//   }
+  //   }
 
   // modal for forget password
   const [isModalOpen, setModalOpen] = useState(false);
@@ -110,110 +110,133 @@ const Login = () => {
           <label htmlFor="chk" className="Login_text" aria-hidden="true">
             User Login
           </label>
+          {sessionData?.user?._id ? (
+            <>
+              <div className="back_route" style={{height:'100%'}}>
+                <h2 style={{ textAlign: "center" }}>You are Logged In</h2>
 
-          <div className="login">
-            <div className="overlay">
-              <form onSubmit={login}>
-                <label htmlFor="chk" aria-hidden="true"></label>
-                <br />
-                <br />
-                {loading ? (
-                  <>
-                    <p
-                      style={{ background: "white", color: "red" }}
-                      className="errorPara"
-                    >
-                      Loading
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    {errorstatus !== 200 ? (
-                      <p style={{ color: "red" }} className="errorPara">
-                        {error}
-                      </p>
-                    ) : (
-                      <p style={{ color: "green" }} className="errorPara">
-                        {error}
-                      </p>
-                    )}
-                  </>
-                )}
-
-                <label className="inputlabels" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  style={{ textTransform: "lowercase" }}
-                  type="email"
-                  name="email"
-                  placeholder="Type your valid Email"
-                  required
-                  onChange={(e) => {
-                    setEmail(e.target.value);
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
                   }}
-                  value={email}
-                />
-                <label className="inputlabels" htmlFor="pswd">
-                  Password
-                </label>
-                <div style={{ position: "relative" }}>
+                >
+                  <button
+                   
+                    onClick={() => {
+                      router.push('/');
+                    }}
+                  >
+                    Home
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="login">
+              <div className="overlay">
+                <form onSubmit={login}>
+                  <label htmlFor="chk" aria-hidden="true"></label>
+                  <br />
+                  <br />
+                  {loading ? (
+                    <>
+                      <p
+                        style={{ background: "white", color: "red" }}
+                        className="errorPara"
+                      >
+                        Loading
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      {errorstatus !== 200 ? (
+                        <p style={{ color: "red" }} className="errorPara">
+                          {error}
+                        </p>
+                      ) : (
+                        <p style={{ color: "green" }} className="errorPara">
+                          {error}
+                        </p>
+                      )}
+                    </>
+                  )}
+
+                  <label className="inputlabels" htmlFor="email">
+                    Email
+                  </label>
                   <input
-                    type={showpass ? "text" : "password"}
-                    name="pswd"
-                    placeholder="Type your Password"
+                    style={{ textTransform: "lowercase" }}
+                    type="email"
+                    name="email"
+                    placeholder="Type your valid Email"
                     required
                     onChange={(e) => {
-                      setPassword(e.target.value);
+                      setEmail(e.target.value);
                     }}
-                    value={password}
+                    value={email}
                   />
-                  <div className="showpass_icon">
-                    {showpass ? (
-                      <i
-                        onClick={() => {
-                          setShowpass(!showpass);
-                        }}
-                        className="bx bx-show"
-                      ></i>
-                    ) : (
-                      <i
-                        onClick={() => {
-                          setShowpass(!showpass);
-                        }}
-                        className="bx bx-hide"
-                      ></i>
-                    )}
+                  <label className="inputlabels" htmlFor="pswd">
+                    Password
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type={showpass ? "text" : "password"}
+                      name="pswd"
+                      placeholder="Type your Password"
+                      required
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      value={password}
+                    />
+                    <div className="showpass_icon">
+                      {showpass ? (
+                        <i
+                          onClick={() => {
+                            setShowpass(!showpass);
+                          }}
+                          className="bx bx-show"
+                        ></i>
+                      ) : (
+                        <i
+                          onClick={() => {
+                            setShowpass(!showpass);
+                          }}
+                          className="bx bx-hide"
+                        ></i>
+                      )}
+                    </div>
+                    <i onClick={handleOpenModal} className="forget_password">
+                      forgetpassword ? &#129300;
+                    </i>
                   </div>
-                  <i onClick={handleOpenModal} className="forget_password">
-                    forgetpassword ? &#129300;
-                  </i>
-                </div>
 
-                <button
-                  type="submit"
-                  className="login-button"
-                  disabled={loading && "true"}
-                >
-                  {" "}
-                  {!loading ? "Submit" : "Processing..."}
+                  <button
+                    type="submit"
+                    className="login-button"
+                    disabled={loading && "true"}
+                  >
+                    {" "}
+                    {!loading ? "Submit" : "Processing..."}
+                  </button>
+                </form>
+              </div>
+              <div
+                className="google_btn"
+                onClick={() => {
+                  signIn("google");
+                }}
+              >
+                <span>Sign In with Google</span>
+                <button>
+                  <Google_icon />
                 </button>
-              </form>
+              </div>
             </div>
-            <div
-              className="google_btn"
-              onClick={ 
-              ()=>{signIn("google")}
-              }
-            >
-              <span>Sign In with Google</span>
-              <button>
-                <Google_icon />
-              </button>
-            </div>
-          </div>
+          )}
         </div>
-   
       </div>
       {/* modal for forget password */}
       {isModalOpen && (

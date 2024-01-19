@@ -14,6 +14,9 @@
     -webkit-backdrop-filter: blur(5.1px);
     z-index: 2000;
 }
+.progressbar{
+    z-index: 2500;
+}
 
 .fullLoader i{
     font-size: 15vw;

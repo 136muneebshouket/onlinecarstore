@@ -52,7 +52,7 @@ const Response = ({ isOpen, onClose, res,progress }) => {
      </div>}
       {res.progress && <>
 
-      <div className="modal">
+      <div className="modal progressbar">
         <div className="modal-content" style={{textAlign:'center'}}>
           <h2 style={{color:'#b10000'}}>Please dont leave the page</h2>
           <p className="progress_num" style={{fontSize:'xx-large',color:'green',marginBottom:'3px'}}>{res.progress}%</p>
