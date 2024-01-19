@@ -376,11 +376,11 @@ const Post_ad = () => {
         imgsto_load,
       };
 
-      const uploadPromise = axios.post(`/api/uploadcar/postmy_ad`, cardata);
+      const uploadPromise = axios.post(`/api/uploadcar/testing`, cardata);
 
       // Start the interval for tracking progress
       const progressTracker = setInterval(async () => {
-        await axios.get(`/api/uploadcar/postmy_ad`).then((res) => {
+        await axios.get(`/api/uploadcar/testing`).then((res) => {
           console.log(res.data); // Access progress information from response
           setMessage({progress:res.data});
         });
