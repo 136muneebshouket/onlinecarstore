@@ -1,60 +1,59 @@
 import cardataschema from "../../../../models/cardataschema";
 import UserModel from "../../../../models/user";
-import errors_handle from "@/models/errors_handle";
+// import errors_handle from "@/models/errors_handle";
 import dbConnect from "../../../../config/dbConnect";
 import { p_func } from "@/components/processing_functions/progress";
 // import formidable from "formidable";
 
-const ImageKit = require("imagekit");
-
-const imageKit = new ImageKit({
-  publicKey: process.env.PUBLIC_KEY,
-  privateKey: process.env.PRIVATEKEY,
-  urlEndpoint: process.env.URLENDPOINT,
-});
-
-export const config = {
-  api: {
-    responseLimit: false,
-    bodyParser: {
-      sizeLimit: "100mb",
-    },
-  },
-};
-
-let totalwork = 0;
 export default async function handler(req, res) {
   dbConnect();
   if (req.method === "POST") {
     try {
-      const { seller_id } = req.body.carobj;
-      // console.log(req.body);
-      const imgs_to_upload = req.body.imgsto_load;
-      // console.log(req.body.imgs_to_upload);
-      let progress = parseInt((100 / (imgs_to_upload.length + 1)).toFixed(0));
-      // console.log(progress)
+      let main_carobj = req.body.carobj;
+      const { seller_id } = main_carobj;
+      const check_user_exist = await UserModel.countDocuments({
+        _id: seller_id,
+      });
+      if (!check_user_exist) {
+        throw new Error("user not found");
+      }
 
-      let interval = setInterval(() => {
-        totalwork += progress;
-      }, 1000);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        let back = err(201, "succesfully saved", false, imgs_to_upload);
-        totalwork = 0
-        if (back) {
-          return;
+      if (check_user_exist) {
+        const carsaved = await cardataschema.create(main_carobj);
+        if (!carsaved) {
+          throw new Error("car not saved");
         }
-      }, (progress * 1000));
 
-      function err(status, message, success, payload) {
+        carsaved.slug = `${carsaved.brand.replaceAll(
+          " ",
+          "-"
+        )}-${carsaved.model.replaceAll(" ", "-")}-${
+          carsaved.modelyear
+        }-for-sale-in-${carsaved.city.replaceAll(" ", "-")}-${
+          carsaved._id
+        }`.toLowerCase();
+
+        let imgs_stored_indb = await carsaved.save();
+        if (!imgs_stored_indb) {
+          throw new Error("Error in uploading images");
+        }
+        if (imgs_stored_indb) {
+          let back = err(201, "succesfully saved", true , carsaved._id);
+          if (back) {
+            return;
+          }
+        }
+      }
+
+      function err(status, message, success ,Ad_id) {
         res.status(status).json({
           success: success,
           message: message,
-          payload: payload,
+          Ad_id: Ad_id,
         });
         return true;
       }
+
     } catch (err) {
       if (err.code === 11000) {
         const field = Object.keys(err.keyValue)[0]; // Get the field causing the uniqueness error
@@ -83,11 +82,5 @@ export default async function handler(req, res) {
         });
       }
     }
-  } else if (req.method === "GET") {
-    try {
-      res.json(totalwork);
-    } catch (error) {
-      res.json(err);
-    }
-  }
+  } 
 }

@@ -513,7 +513,7 @@ const Filter_bar_bikes = ({ getfilters, description }) => {
                 handleOpenModal("All_bikes");
               }}
             >
-              Car Make <i className="bx bx-chevron-down"></i>{" "}
+              Bike Make <i className="bx bx-chevron-down"></i>{" "}
             </label>
             <div className="related_filters">
               {carfilters.brand.length > 0 && (

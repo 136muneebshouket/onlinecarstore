@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       try {
         let recieved_obj = req.body;
         // console.log(recieved_obj);
-        var { _id, user_id, images_to_del, imgs_to_uplod ,total_imgs} = req.body.carobj;
+        var { _id, user_id, images_to_del ,total_imgs} = req.body.carobj;
         if(total_imgs.length == 0){
           throw new Error("PLease Upload Some images")
         }
@@ -93,42 +93,42 @@ export default async function handler(req, res) {
             });
             doc.images_url = newimages_url;
           }
-          if (imgs_to_uplod?.length > 0) {
-            const imgs = [];
-            for (const obj of imgs_to_uplod) {
-              try {
-                const file = obj.url;
-                const imgname = obj.filename;
-                const response = await imageKit.upload({
-                  file,
-                  fileName: imgname,
-                });
-                if (response) {
-                  console.log(response);
-                  if (response.fileId) {
-                    imgs.push({
-                      img_id: response.fileId,
-                      img_url: response.url,
-                    });
-                  }
-                }
-                if (!response) {
-                  console.log("error in uploding imgs");
-                  continue;
-                }
-              } catch (error) {
-                console.log(error);
-                continue;
-              }
-            }
-            if (imgs.length > 0) {
-              for (const obj of imgs) {
-                doc.images_url.push(obj);
-              }
-            } else {
-              throw new Error("error in imgkit uploding");
-            }
-          }
+          // if (imgs_to_uplod?.length > 0) {
+          //   const imgs = [];
+          //   for (const obj of imgs_to_uplod) {
+          //     try {
+          //       const file = obj.url;
+          //       const imgname = obj.filename;
+          //       const response = await imageKit.upload({
+          //         file,
+          //         fileName: imgname,
+          //       });
+          //       if (response) {
+          //         console.log(response);
+          //         if (response.fileId) {
+          //           imgs.push({
+          //             img_id: response.fileId,
+          //             img_url: response.url,
+          //           });
+          //         }
+          //       }
+          //       if (!response) {
+          //         console.log("error in uploding imgs");
+          //         continue;
+          //       }
+          //     } catch (error) {
+          //       console.log(error);
+          //       continue;
+          //     }
+          //   }
+          //   if (imgs.length > 0) {
+          //     for (const obj of imgs) {
+          //       doc.images_url.push(obj);
+          //     }
+          //   } else {
+          //     throw new Error("error in imgkit uploding");
+          //   }
+          // }
 
           // console.log(doc);
           doc.active = true;
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
             res.status(201).json({
               success: true,
               message: "updated successfully",
-              // car_id: doc._id,
+              car_id: doc._id,
             });
           } else {
             throw new Error(`${req.body.ad_type} not updated`);

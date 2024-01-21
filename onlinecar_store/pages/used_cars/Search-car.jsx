@@ -191,7 +191,7 @@ async function pagination(hint){
                 <>
                   {/* <Link className="singlecar_link" href="#"> */}
                   <div
-                    key={obj._id}
+                    key={obj?._id}
                     className="singlecar"
                     style={{
                       border: "1px solid rgb(216, 216, 216)",
@@ -203,9 +203,9 @@ async function pagination(hint){
                     <div className="car_img">
                       <Image
                         src={
-                          obj.images_url[0].img_url
-                            ? obj.images_url[0].img_url
-                            : obj.images_url[0]
+                          obj?.images_url[0]?.img_url
+                            ? obj?.images_url[0]?.img_url
+                            : obj?.images_url[0]
                         }
                         width={200}
                         height={200}
@@ -216,43 +216,43 @@ async function pagination(hint){
                       <div>
                         <Link
                             className="car_content"
-                          href={`car/${obj.brand.replaceAll(
+                          href={`car/${obj?.brand.replaceAll(
                             " ",
                             "-"
-                          )}-${obj.model.replaceAll(" ", "-")}-${
-                            obj.modelyear
-                          }-for-sale-in-${obj.city.replaceAll(" ", "-")}-${obj._id}`.toLowerCase()}
+                          )}-${obj?.model.replaceAll(" ", "-")}-${
+                            obj?.modelyear
+                          }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${obj?._id}`.toLowerCase()}
                         >
                           <h3>
-                            {obj.brand} {obj.model}{" "}
-                            {obj.variant_name && obj.variant_name}{" "}
-                            {obj.modelyear}
+                            {obj?.brand} {obj?.model}{" "}
+                            {obj?.variant_name && obj?.variant_name}{" "}
+                            {obj?.modelyear}
                           </h3>
 
                           <p className="price_mbv">
-                            <strong>PKR:{obj.price}</strong>
+                            <strong>PKR:{obj?.price}</strong>
                           </p>
 
-                          <p>{obj.city}</p>
+                          <p>{obj?.city}</p>
                           <div>
-                            <span>{obj.Mileage} km</span>
-                            <span>{obj.enginecc}cc</span>
+                            <span>{obj?.Mileage} km</span>
+                            <span>{obj?.enginecc}cc</span>
                             <span className="hide_in_mbv">
-                              {obj.transmission}
+                              {obj?.transmission}
                             </span>
                             <span className="hide_in_mbv">
-                              {obj.enginetype}
+                              {obj?.enginetype}
                             </span>
                           </div>
-                          {obj.pending == 0 ? <p className="pending_banner">Pending</p> : null}
+                          {obj?.pending == 0 ? <p className="pending_banner">Pending</p> : null}
                         </Link>
                       
                       </div>
 
                       <div className="car_price_section">
                         <div className="car_price_fav">
-                          <h3>{price_converter(obj.price)}</h3>
-                          <Favourites car_id={obj._id}/>
+                          <h3>{price_converter(obj?.price)}</h3>
+                          <Favourites car_id={obj?._id}/>
                         </div>
                         <div className="phone_num">
                           <button>Show Phone No.</button>
@@ -315,4 +315,4 @@ export async function getServerSideProps({ params, query ,res}) {
 }
 
 export default Search_car;
-// ${obj.brand.replaceAll(" ",'-')}-${obj.model.replaceAll(" ",'-')}-${obj.modelyear}
+// ${obj?.brand.replaceAll(" ",'-')}-${obj?.model.replaceAll(" ",'-')}-${obj?.modelyear}

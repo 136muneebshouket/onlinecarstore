@@ -28,6 +28,7 @@
   }
   .usedcar_dropdown .first_div:nth-child(3),.usedcar_dropdown .first_div:nth-child(4){
     padding: 10px 30px; 
+    text-align: center;
   }
   .usedcar_dropdown .first_div .option{
    display: flex;
@@ -61,7 +62,7 @@
   }
   .usedcar_dropdown .first_div .option span{
    font-size: smaller;
-   color: rgb(48, 48, 48);
+   color: rgb(111 111 111)
   }
   .usedcar_dropdown .first_div h5{
     margin: 10px 8px;

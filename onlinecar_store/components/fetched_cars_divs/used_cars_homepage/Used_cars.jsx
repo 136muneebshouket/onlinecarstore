@@ -138,20 +138,20 @@ const Used_cars = () => {
             <>
               {/* <Link className="singlecar_link" href="#"> */}
               <Link
-                href={`used_cars/car/${obj.brand.replaceAll(
+                href={`used_cars/car/${obj?.brand.replaceAll(
                   " ",
                   "-"
-                )}-${obj.model.replaceAll(" ", "-")}-${obj.modelyear}-${
-                  obj._id
+                )}-${obj?.model.replaceAll(" ", "-")}-${obj?.modelyear}-${
+                  obj?._id
                 }`.toLowerCase()}
               >
                 <div key={i} className="singlecar">
                   <div className="car_img">
                     <Image
                       src={
-                        obj.images_url[0].img_url
-                          ? obj.images_url[0].img_url
-                          : obj.images_url[0]
+                        obj?.images_url[0]?.img_url
+                          ? obj?.images_url[0]?.img_url
+                          : obj?.images_url[0]
                       }
                       width={200}
                       height={200}
@@ -161,20 +161,20 @@ const Used_cars = () => {
                   <div className="car_info">
                     <div className="car_content">
                       <h3>
-                        {obj.brand} {obj.model}{" "}
-                        {obj.variant_name && obj.variant_name} {obj.modelyear}
+                        {obj?.brand} {obj?.model}{" "}
+                        {obj?.variant_name && obj?.variant_name} {obj?.modelyear}
                       </h3>
                       {/* </Link> */}
 
                       <p className="price_mbv">
-                        <strong>PKR:{price_converter(obj.price)}</strong>
+                        <strong>PKR:{price_converter(obj?.price)}</strong>
                       </p>
 
-                      <p>{obj.city}</p>
+                      <p>{obj?.city}</p>
                       <div>
-                        <span>{obj.modelyear}</span>
-                        <span>{obj.Mileage} km</span>
-                        <span>{obj.enginetype}</span>
+                        <span>{obj?.modelyear}</span>
+                        <span>{obj?.Mileage} km</span>
+                        <span>{obj?.enginetype}</span>
                       </div>
                     </div>
                   </div>

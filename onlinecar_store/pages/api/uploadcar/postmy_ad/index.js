@@ -27,7 +27,9 @@ export default async function handler(req, res) {
   dbConnect();
   if (req.method === "POST") {
       try {
-        const { seller_id } = req.body.carobj;
+
+        let main_carobj = req.body.carobj;
+        const { seller_id } = main_carobj;
         // console.log(req.body);
         const imgs_to_upload = req.body.imgsto_load;
         // console.log(req.body.imgs_to_upload);
@@ -41,7 +43,7 @@ export default async function handler(req, res) {
         }
 
         if (check_user_exist) {
-          const carsaved = await cardataschema.create(req.body.carobj);
+          const carsaved = await cardataschema.create(main_carobj);
           if (!carsaved) {
             throw new Error("car not saved");
           }

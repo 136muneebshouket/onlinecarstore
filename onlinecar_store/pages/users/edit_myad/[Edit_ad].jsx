@@ -13,6 +13,13 @@ import { useRouter } from "next/router";
 // import uploadimages from "@/config/cloudinary/cloudinaryimagesupdate";
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
+import ImageKit from "imagekit";
+
+const imageKit = new ImageKit({
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
+});
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Option_modals/Optionsmodal"),
@@ -377,7 +384,8 @@ const Edit_ad = () => {
       }
     }
   };
-  // console.log(carobj)
+  
+
  async function process_imges(){
     let imagesto_delete = oldimages.map((imgs) => {
       if (!imagestoshow.includes(imgs)) {
@@ -403,43 +411,101 @@ const Edit_ad = () => {
     carobj.total_imgs = imagestoshow;
   }
 
+  async function upload_cloud_imgs(Ad_id, imagesto_upload) {
+    let progress = 0;
+    let progress_unit = parseInt(
+      (100 / (imagesto_upload.length + 1)).toFixed(0)
+    );
+    setMessage({ progress: 5 });
+    let Cloudimages = [];
+    for (const obj of imagesto_upload) {
+      try {
+        const file = obj.url;
+        const imgname = obj.filename;
+        const response = await imageKit.upload({
+          file,
+          fileName: imgname,
+        });
+        if (response) {
+          if (response.fileId) {
+            Cloudimages.push({
+              img_id: response.fileId,
+              img_url: response.url,
+            });
+            progress += progress_unit;
+            setMessage({ progress: progress });
+          }
+        }
+        if (!response) {
+          console.log("error in uploding imgs");
+          continue;
+        }
+      } catch (error) {
+        console.log(error);
+        continue;
+      }
+    }
+
+    if (Cloudimages.length > 0) {
+      let images = {
+        Ad_id,
+        Cloudimages,
+        ad_type :'car'
+      };
+      await axios
+        .post(`/api/uploadcar/uploadimages`, images)
+        .then(async (res) => {
+          if (res.status == 201) {
+            progress += progress_unit;
+            setMessage({ progress: progress });
+            setMessage({ success: true, msg: res?.data?.message });
+            setMessage({ progress: null });
+            resetState();
+            resettextarea();
+            setImagestoshow([]);
+            progress = 0;
+          }
+        })
+        .catch((err) => {
+          setMessage({ progress: null });
+          setMessage({ success: false, msg: err?.response?.data.message });
+          progress = 0;
+        });
+    } else {
+      setMessage({ progress: null });
+      setMessage({ success: false, msg: "Some error in uploading images" });
+      return false;
+    }
+  }
+
+
 // console.log(carobj)
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
     await geterrors();
-    console.log(err_values);
-    console.log(errors, phoneerr);
-    // console.log(carobj)
-
     if (err_values.length == 0 && errors == false && phoneerr == false) {
-      // console.log("done");
       setLoading(true);
       await process_imges()
-       console.log(carobj)
-       console.log(imagestoshow)
-      //  setLoading(false)
+
+      let obj ={
+        ad_type:'car',
+        carobj
+      }
       await axios
-        .post(`/api/update_add/edit_myadd`, carobj)
+        .post(`/api/update_add/edit_myadd`, obj)
         .then(async (res) => {
-          if (res.status == 201 ) {
-            // setError(res?.data);
-            console.log(res?.data);
-            // if(res?.data.car_id){
-            //   let retun = await uploadimages(res?.data.car_id, imagestoshow, oldimages);
-            //   retun.then((res) => {
-            //     console.log(res);
-            //     setDberrors([...dberrors,...res])
-            //   }).catch(err=>console.err(err));
-            // }else{
-            //   setDberrors([...dberrors,'carId not recieved'])
-            // }
-            // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
-            setMessage({success:true,msg:res?.data.message}); 
-            resetState();
-            resettextarea();
+          if (res.data.car_id) {
+            if(carobj?.imgs_to_uplod.length > 0){
+              let result = await upload_cloud_imgs(res.data.car_id, carobj?.imgs_to_uplod);
+            }else{
+              setMessage({success:true,msg:res?.data.message}); 
+              resetState();
+              resettextarea();
+              setImagestoshow([]);
+            }
           }
-          setLoading(false)
+          setLoading(false);
         })
         .catch((err) => {
           console.error(err?.response?.data);

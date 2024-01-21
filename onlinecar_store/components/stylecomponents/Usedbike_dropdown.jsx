@@ -11,11 +11,7 @@ const Usedbike_dropdown = ({toggle}) => {
                 <div> <p>Find Used Bikes For Sale</p>
                 <span>Search over 10k used Bikes</span></div>
             </Link>
-            <Link href={'#'} className="option">
-                <i>&#9906;</i>
-                <div> <p>Featured Used Bikes</p>
-                <span>Coming Soon</span></div>
-            </Link>
+           
             <Link href={'/used_bikes/sell/Post_ad'} className="option">
                 <i>&#9906;</i>
                 <div> <p>Sell Your Bike</p>
@@ -76,29 +72,20 @@ const Usedbike_dropdown = ({toggle}) => {
         </div> */}
         <div className="first_div">
             <h5 style={{whiteSpace:'nowrap'}}>Popular Models</h5>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Toyota"],"model":["Corolla"]}'} className="option">
-                 <p>Toyata Corolla</p>
+            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Honda"],"model":["CG%20125"]}'} className="option">
+                 <p>Honda CG 125</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["Civic"]}'} className="option">
-                 <p>Honda Civic</p>
+            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Honda"],"model":["CD%2070"]}'} className="option">
+                 <p>Honda CC 70</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
-                 <p>Honda City</p>
+            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Yamaha"],"model":["YBR%20125"]}'} className="option">
+                 <p>Yamaha YBR 125</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
-                 <p>Karachi</p>
+            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Suzuki"],"model":["GS%20150"]}'} className="option">
+                 <p>Suzuki GS 150</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Cultus"]}'} className="option">
-                 <p>Suzuki Cultus</p>
-            </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Mehran"]}'} className="option">
-                 <p>Suzuki Mehran</p>
-            </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Toyota"],"model":["Vitz"]}'} className="option">
-                 <p>Toyota Vitz</p>
-            </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Alto"]}'} className="option">
-                 <p>Suzuki Alto</p>
+            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Yamaha"],"model":["YBR%20125G"]}'} className="option">
+                 <p>Yamaha YBR 125G</p>
             </Link>
             
         </div>

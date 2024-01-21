@@ -7,7 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-// import uploadimages from "../../../config/cloudinary/cloudinaryimagesupdate";
+
 // import Response_modal from "@/components/Modals/response_modal/Response_modal";
 import price_converter from "@/components/processing_functions/Price_calculator";
 // import { generate_err } from "@/components/processing_functions/errors_gen";
@@ -15,6 +15,13 @@ import Context from "@/components/processing_functions/context";
 // import { totalwork } from "@/components/processing_functions/progress";
 
 import { useContext } from "react";
+import ImageKit from "imagekit";
+
+const imageKit = new ImageKit({
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
+});
 
 const OptionsModal = dynamic(
   () => import("@/components/Modals/custom models/Option_modals/Optionsmodal"),
@@ -33,6 +40,7 @@ const FullLoader = dynamic(
     ),
   }
 );
+
 
 const Post_ad = () => {
   //  let p = localStorage.getItem('p')
@@ -62,7 +70,8 @@ const Post_ad = () => {
 
   const [errors, setErrors] = useState(false);
   const [phoneerr, setPhoneerr] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  let initialobj = { isUploading: false, imgs: null, Ad_id: null };
+  const [img_upload, setImg_upload] = useState(initialobj);
 
   // const [dberrors, setDberrors] = useState({
   //   msg: "",
@@ -351,69 +360,104 @@ const Post_ad = () => {
     }
   };
 
+
+
+  async function upload_cloud_imgs(Ad_id, imagesto_upload) {
+    let progress = 0;
+    let progress_unit = parseInt(
+      (100 / (imagesto_upload.length + 1)).toFixed(0)
+    );
+    setMessage({ progress: 5 });
+    let Cloudimages = [];
+    for (const obj of imagesto_upload) {
+      try {
+        const file = obj.url;
+        const imgname = obj.filename;
+        const response = await imageKit.upload({
+          file,
+          fileName: imgname,
+        });
+        if (response) {
+          if (response.fileId) {
+            Cloudimages.push({
+              img_id: response.fileId,
+              img_url: response.url,
+            });
+            progress += progress_unit;
+            setMessage({ progress: progress });
+          }
+        }
+        if (!response) {
+          console.log("error in uploding imgs");
+          continue;
+        }
+      } catch (error) {
+        console.log(error);
+        continue;
+      }
+    }
+
+    if (Cloudimages.length > 0) {
+      let images = {
+        Ad_id,
+        Cloudimages,
+        ad_type :'car'
+      };
+      await axios
+        .post(`/api/uploadcar/uploadimages`, images)
+        .then(async (res) => {
+          if (res.status == 201) {
+            progress += progress_unit;
+            setMessage({ progress: progress });
+            setMessage({ success: true, msg: res?.data?.message });
+            setMessage({ progress: null });
+            resetState();
+            resettextarea();
+            setImagestoshow([]);
+            progress = 0;
+          }
+        })
+        .catch((err) => {
+          setMessage({ progress: null });
+          setMessage({ success: false, msg: err?.response?.data.message });
+          progress = 0;
+        });
+    } else {
+      setMessage({ progress: null });
+      setMessage({ success: false, msg: "Some error in uploading images" });
+      return false;
+    }
+  }
+
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
-  
+
     await geterrors();
     // console.log(err_values.length);
     // console.log(errors, phoneerr);
 
     if (err_values.length == 0 && errors == false && phoneerr == false) {
-      console.log("done");
       setLoading(true);
-      // const formdataimgs = new FormData();
       const imgsto_load = imagestoshow.map((img) => {
-        //  delete img.file;
-        let obj = { url: img.url, name: img.file.name };
+        let obj = { url: img.url, filename: img.file.name };
         return obj;
-        // formdataimgs.append("images", img.file);
       });
 
       let cardata = {
         carobj,
-        // formdataimgs
-        imgsto_load,
       };
 
-      const uploadPromise = axios.post(`/api/uploadcar/testing`, cardata);
-
-      // Start the interval for tracking progress
-      const progressTracker = setInterval(async () => {
-        await axios.get(`/api/uploadcar/testing`).then((res) => {
-          console.log(res.data); // Access progress information from response
-          setMessage({progress:res.data});
-        });
-      }, 1000);
-
-      // Wait for the upload to complete
-      await uploadPromise
-        .then((res) => {
-          console.log("Upload successful:", res.data); // Handle upload response
-           if (res.status == 201) {
-            // setError(res?.data);
-            console.log(res?.data);
-
-            // let retun = await uploadimages(res?.data.car_id, imagestoshow, []);
-            // retun
-            //   .then((res) => {
-            //     console.log(res);
-
-            //   })
-            //   .catch((err) => console.err(err));
-            resetState();
-            resettextarea();
-            setLoading(false);
-            setImagestoshow([])
-            // setResponse(true)
-            // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
-            setMessage({progress:null});
-            setMessage({success:true,msg:res?.data.message});
-
+      await axios
+        .post(`/api/uploadcar/postmy_ad_new`, cardata)
+        .then(async (res) => {
+          if (res.data.Ad_id) {
+            let result = await upload_cloud_imgs(res.data.Ad_id, imgsto_load);
           }
+          setLoading(false);
         })
         .catch((err) => {
-          setMessage({progress:null});
+          setMessage({ progress: null });
           console.error("Upload failed:", err);
           setMessage({ success: false, msg: err?.response?.data.message });
           setLoading(false);
@@ -421,31 +465,10 @@ const Post_ad = () => {
         .finally(() => {
           setLoading(false);
         });
-     
-        clearInterval(progressTracker);
-      // await axios
-      //   .post(`/api/uploadcar/postmy_ad`, cardata)
-      //   .then(async (res) => {
-      //     console.log(res);
 
-      //    
-      //   })
-      //   .catch((err) => {
-      //     // console.log(err?.response?.data);
-      //     // setResponse(true)
-      //     // setDberrors({ ...dberrors, msg: err?.response?.data.message, success: false });
-      //     setMessage({ success: false, msg: err?.response?.data.message });
-      //     setLoading(false);
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      // clearInterval(progressTracker);
     }
   };
-
-
-
-
 
   // console.log(carobj.carfeatures);
   // console.log(imagestoshow);
@@ -625,7 +648,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              Mileage: parseInt(e.target.value)|| null,
+                              Mileage: parseInt(e.target.value) || null,
                             };
                           });
                         }}
@@ -669,7 +692,7 @@ const Post_ad = () => {
                           setCarobj((prevCarobj) => {
                             return {
                               ...prevCarobj,
-                              price: parseInt(e.target.value)|| null,
+                              price: parseInt(e.target.value) || null,
                             };
                           });
                         }}
@@ -901,7 +924,9 @@ const Post_ad = () => {
                             setCarobj((prevCarobj) => {
                               return {
                                 ...prevCarobj,
-                                ...{ enginecc: parseInt(e.target.value) || null },
+                                ...{
+                                  enginecc: parseInt(e.target.value) || null,
+                                },
                               };
                             });
                           }}
@@ -1187,13 +1212,18 @@ const Post_ad = () => {
           delimages={delimages}
         />
       )}
-      {/* {dberrors.success != null && (
-        <Response_modal
-          onClose={()=>{setDberrors({...dberrors,msg:'',success:null})}}
-          res={dberrors}
-        />
-      )} */}
+
       {loading ? <FullLoader /> : <></>}
+      {/* {img_upload.isUploading ? (
+        <Imgkit_upload
+          imagesto_upload={img_upload.imgs}
+          Ad_id={img_upload.Ad_id}
+          done={() => {
+            setImg_upload(initialobj);
+            setLoading(false);
+          }}
+        />
+      ) : null} */}
     </>
   );
 };
