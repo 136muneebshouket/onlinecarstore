@@ -25,10 +25,8 @@ const FullLoader = dynamic(
   }
 );
 
-const Search_car = ({ carrdata, loadiing, total , pagenum}) => {
-
+const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
   const router = useRouter();
- 
 
   // console.log(carrdata)
   const [filtersheading, setFiltersheading] = useState({});
@@ -113,8 +111,6 @@ const Search_car = ({ carrdata, loadiing, total , pagenum}) => {
     }
   }, []);
 
-
-
   useEffect(() => {
     let filters = router.query.filters;
     if (filters) {
@@ -130,28 +126,31 @@ const Search_car = ({ carrdata, loadiing, total , pagenum}) => {
     document.getElementById("filters").style.display = "block";
   };
 
-async function pagination(hint){
-  let number = parseInt(pagenum)
-  if(hint == 'prev'){
-    if(pagenum != 1){
-     number = number - 1
-    }else{return}
-  }
-  if(hint == 'next'){
-    if(pagenum != total){
-     number = number + 1
-    }else{return}
-  }
+  async function pagination(hint) {
+    let number = parseInt(pagenum);
+    if (hint == "prev") {
+      if (pagenum != 1) {
+        number = number - 1;
+      } else {
+        return;
+      }
+    }
+    if (hint == "next") {
+      if (pagenum != total) {
+        number = number + 1;
+      } else {
+        return;
+      }
+    }
 
-  await router.push({
-    ...router,
-    query: {
-      ...router.query,
-      page: number,
-    },
-  });
-
-}
+    await router.push({
+      ...router,
+      query: {
+        ...router.query,
+        page: number,
+      },
+    });
+  }
 
   // console.log(filterslength)
 
@@ -187,6 +186,7 @@ async function pagination(hint){
           </div>
           <div className="cars">
             {carrdata?.map((obj, i) => {
+              // console.log(obj)
               return (
                 <>
                   {/* <Link className="singlecar_link" href="#"> */}
@@ -215,13 +215,15 @@ async function pagination(hint){
                     <div className="car_info">
                       <div>
                         <Link
-                            className="car_content"
+                          className="car_content"
                           href={`car/${obj?.brand.replaceAll(
                             " ",
                             "-"
                           )}-${obj?.model.replaceAll(" ", "-")}-${
                             obj?.modelyear
-                          }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${obj?._id}`.toLowerCase()}
+                          }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${
+                            obj?._id
+                          }`.toLowerCase()}
                         >
                           <h3>
                             {obj?.brand} {obj?.model}{" "}
@@ -234,7 +236,8 @@ async function pagination(hint){
                           </p>
 
                           <p>{obj?.city}</p>
-                          <div>
+
+                          <div style={{marginBottom:'5px'}}>
                             <span>{obj?.Mileage} km</span>
                             <span>{obj?.enginecc}cc</span>
                             <span className="hide_in_mbv">
@@ -244,15 +247,28 @@ async function pagination(hint){
                               {obj?.enginetype}
                             </span>
                           </div>
-                          {obj?.pending == 0 ? <p className="pending_banner">Pending</p> : null}
+                          {obj?.pending == 0 ? (
+                            <span className="pending_banner">Pending</span>
+                          ) : null}
+
+                          <div
+                            className="car_extras"
+                            style={{ display: "inline-block" }}
+                          >
+                            {obj?.overall_incpection_rating?.overall_rating ? (
+                            <span className="total_rating">
+                              {obj?.overall_incpection_rating?.overall_rating}
+                              /10
+                            </span>
+                            ) : null}
+                          </div>
                         </Link>
-                      
                       </div>
 
                       <div className="car_price_section">
                         <div className="car_price_fav">
                           <h3>{price_converter(obj?.price)}</h3>
-                          <Favourites car_id={obj?._id}/>
+                          <Favourites car_id={obj?._id} />
                         </div>
                         <div className="phone_num">
                           <button>Show Phone No.</button>
@@ -271,28 +287,43 @@ async function pagination(hint){
             )}
             <div className="pages_btns">
               <div className="page_numbers">
-                <span>Page</span><span>{pagenum}</span><span>of</span><span>{total}</span>
+                <span>Page</span>
+                <span>{pagenum}</span>
+                <span>of</span>
+                <span>{total}</span>
               </div>
               <div className="btns">
-                <button onClick={()=>{pagination('prev')}}>Previous</button>
-                <button onClick={()=>{pagination('next')}}>Next</button>
+                <button
+                  onClick={() => {
+                    pagination("prev");
+                  }}
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => {
+                    pagination("next");
+                  }}
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
+
       {/* {loadiing ? <FullLoader /> : <></>} */}
     </>
   );
 };
 
-export async function getServerSideProps({ params, query ,res}) {
+export async function getServerSideProps({ params, query, res }) {
   const resp = await axios.get(
     `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters}&limit=12&page=${query.page}`
   );
   const carrdata = resp.data.data;
-  const pages =  Math.ceil(resp.data.count / 12);;
+  const pages = Math.ceil(resp.data.count / 12);
   let loadingg = true;
   if (carrdata) {
     loadingg = false;
@@ -300,17 +331,17 @@ export async function getServerSideProps({ params, query ,res}) {
 
   // console.log(pages)
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
   return {
     props: {
       carrdata,
       loadiing: loadingg,
-      total:pages,
-      pagenum:query.page || 1
+      total: pages,
+      pagenum: query.page || 1,
     },
-      // revalidate: 300
+    // revalidate: 300
   };
 }
 

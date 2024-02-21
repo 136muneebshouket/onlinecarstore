@@ -9,10 +9,31 @@ export default async function handler(req, res) {
   try {
     switch (req.method) {
       case "GET":
-        let obj = {};
-        let find = await options.find(obj);
 
+      let {brand_key , model_key} = req.query;
+        let obj = {};
+        let selected_fields = {} 
+
+        // console.log( req.query)
+  
+        if(brand_key == 'ALL'){
+          selected_fields['name'] = 1;
+          selected_fields['_id'] = 0
+        }else if(brand_key != 'ALL' && brand_key != ''){
+          obj.name = brand_key;
+        }
+
+        let find = await options.find(obj,selected_fields);
+        
         let returnobj = find;
+
+        // if(brand_key != 'ALL' && brand_key != ''){
+        //  let models =  find[0].models.map((v)=>{
+        //     return { name : v.name }
+        //   })
+        //   returnobj = models
+        // }
+        // console.log(returnobj)
 
         // if (req.query.hint == "Make") {
         //  let filter =  find[0].main_arr.map((v) => {

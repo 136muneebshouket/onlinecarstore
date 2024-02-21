@@ -50,7 +50,7 @@ const Sell = () => {
                 </Link>
               </div>
             </div>
-            <div className="card">
+            {/* <div className="card">
               <div>
                 <h2>Post your Ad on Carselection</h2>
                 <Image
@@ -78,7 +78,7 @@ const Sell = () => {
                   <button> post an add</button>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="sellpage">
@@ -248,13 +248,7 @@ const Sell = () => {
               
                
               </div>
-              <p>
-                Note: In case you are short on time to follow these tips
-                yourself, then CarSelection Sell It For Me service is the right
-                choice for you. Our trained sales team takes full
-                responsibility, from posting your ad to ensuring that you get
-                the best offer.
-              </p>
+         
             </div>
           </div>
           <div className="container">

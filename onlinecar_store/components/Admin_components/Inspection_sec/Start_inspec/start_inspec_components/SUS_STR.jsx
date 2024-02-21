@@ -1,9 +1,27 @@
 import React, { useState } from "react";
 import Upload_equipment from "./Upload_equipment";
 
-const SUS_STR = () => {
+const SUS_STR = ({ exist, refresh }) => {
   const [equip_parent, setEquip_parent] = useState("susp_steering");
-  const [options, setOptions] = useState(["Steering Wheel Play"]);
+  const [options, setOptions] = useState([
+    "Steering Wheel Play",
+    "Right Ball Joint",
+    "Left Ball Joint",
+    "Right Z Links",
+    "Left Z Links",
+    "Right Tie Rod End",
+    "Left Tie Rod End",
+    "Front Right Boots",
+    "Front Left Boots",
+    "Front Right Bushes",
+    "Front Left Bushes",
+    "Front Right Shock",
+    "Front Left Shock",
+    "Rear Right Bushes",
+    "Rear Left Bushes",
+    "Rear Right Shock",
+    "Rear Left Shock",
+  ]);
 
   return (
     <>
@@ -13,10 +31,17 @@ const SUS_STR = () => {
         </div>
 
         {/* map here */}
-        {options.map((name) => {
+        {options.map((name,index) => {
           return (
             <>
-              <Upload_equipment equip_name={name} equip_parent={equip_parent} />
+              <div key={index}>
+                <Upload_equipment
+                  equip_name={name}
+                  equip_parent={equip_parent}
+                  uploded={exist}
+                  refresh={refresh}
+                />
+              </div>
             </>
           );
         })}

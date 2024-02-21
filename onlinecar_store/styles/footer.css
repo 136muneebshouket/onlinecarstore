@@ -125,3 +125,8 @@
       width: 100%;
     }
   }
+  @media (max-width:800px){
+    .footer{
+      padding-bottom:50px ;
+    }
+  }

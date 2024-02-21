@@ -92,7 +92,7 @@ const inspection_schema = new mongoose.Schema(
       default: [],
     },
 
-    body_frame: {
+    accident_checklist: {
       type: Array,
       default: [],
     },
@@ -133,6 +133,63 @@ const inspection_schema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    percentages:{
+      Extrior_conditions:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      accident_checklist:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      ETC:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      brakes:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      susp_steering:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      interior:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      Ac_heater:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      Electronics:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      Exterior:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+      Tyres:{
+        type:Number,
+        min: [0,'too less percentage'],
+        max: [100,'too much percentage'],
+      },
+    },
+    overall_rating:{
+      type:Number,
+      min: [0,'too less percentage'],
+      max: [100,'too much percentage'],
+    }
     
   },
   { timestamps: true }

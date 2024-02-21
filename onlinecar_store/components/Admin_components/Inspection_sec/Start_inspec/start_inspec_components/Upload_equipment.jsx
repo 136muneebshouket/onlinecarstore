@@ -10,7 +10,7 @@ import Show_img_modal from "@/components/Modals/custom models/Showimagemodal/Sho
 // import Update_equip_modal from "@/components/Modals/admin/inspection/Update_equip_modal";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import equip_status_arr from "@/components/equipments_status/equipment_status";
+import { equip_status_arr } from "@/components/equipments_status/equipment_status";
 import axios from "axios";
 import dynamic from "next/dynamic";
 const Update_equip_modal = dynamic(
@@ -24,7 +24,7 @@ const Update_equip_modal = dynamic(
   }
 );
 
-const Upload_equipment = ({ equip_name, equip_parent }) => {
+const Upload_equipment = ({ equip_name, equip_parent,uploded,refresh }) => {
   const { message, setMessage } = useContext(Context);
   const router = useRouter();
   const Ad_id = router.query.Ad_id;
@@ -154,6 +154,7 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
         setMessage({ success: true, msg: res?.data.message });
         setImagestoshow([]);
         setEquip_status({ ...equip_status, status: "", status_color: "" });
+        refresh()
       })
       .catch((err) => {
         setMessage({ loader: false });
@@ -165,7 +166,7 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
     <>
       <div
         className="upload_equip"
-        style={{ height: `${toggle ? "auto" : ""}` }}
+        style={{ height: `${toggle ? "auto" : ""}`,background:`${uploded?.includes(equip_name)? 'rgb(209 236 247)':''}` }}
       >
         <div className="property_head">
           <h4>{equip_name}</h4>
@@ -279,6 +280,7 @@ const Upload_equipment = ({ equip_name, equip_parent }) => {
           onClose={setIsimgModalOpen}
           selectedimg={selectedImageUrl}
           delimages={delimages}
+          no_coverphoto={true}
         />
       )}
       {isModalOpen && (

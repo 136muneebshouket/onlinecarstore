@@ -29,6 +29,8 @@ import "@/styles/Slots.css";
 import "@/styles/start_inspection.css";
 import "@/styles/ad_caroptions.css";
 import "@/styles/shake_animations.css";
+import "@/styles/client_Inspection_report.css";
+import "@/styles/ad_new_blog.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";
@@ -94,12 +96,16 @@ export default function App({ Component, pageProps }) {
         }
       `}</style>
         <Context.Provider value={{message , setMessage}}>
-        <main className={inter.className}>
+        <main 
+        className={inter.className}
+        >
         <Layout >
-          <NavBar/>
+         
           {loading ? <FullLoader /> : <Component {...pageProps} />}
           {message && <Response_modal res={message} onClose={()=>{setMessage()}}/>}
           <Footer/>
+          <NavBar/>
+          
         </Layout>
         </main>
         </Context.Provider>

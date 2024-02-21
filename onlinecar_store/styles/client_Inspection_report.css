@@ -1,0 +1,266 @@
+.main_client_inspec_report {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #F2F3F3;
+    overflow: scroll;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.main_client_inspec_report h1,
+.main_client_inspec_report h3 {
+    margin: 10px;
+}
+
+.main_client_inspec_report .inner_main {
+    width: max(74vw, min(700px, 95vw));
+    background-color: white;
+    margin-top: 20px;
+    padding: 25px;
+}
+
+.main_client_inspec_report .inner_main>div {
+    padding: 20px 0px;
+}
+
+.main_client_inspec_report .car_img_sec {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e8e5e5;
+}
+
+.main_client_inspec_report .car_img_sec .img_sec {
+    width: 50%;
+    height: auto;
+
+}
+
+.main_client_inspec_report .car_img_sec .img_sec img {
+    width: 100%;
+    height: auto;
+}
+
+.main_client_inspec_report .car_img_sec .rating_sec {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.CircularProgressbar {
+    width: 60% !important;
+    height: auto;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: var(--redcode) !important;
+    font-size: 14px !important;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: var(--redcode) !important;
+    ;
+}
+
+.CircularProgressbar .CircularProgressbar-trail,.CircularProgressbar .CircularProgressbar-path{
+    stroke-width: 3px  !important;
+}
+
+.main_client_inspec_report .main_details .details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.main_client_inspec_report .main_details .details .single_detail {
+    width: min(40%, 170px);
+    margin: 10px;
+    /* border: 1px solid; */
+}
+
+.details .single_detail p,
+.details .single_detail label {
+    font-size: max(14px, 1.1vw);
+}
+
+.details .single_detail label {
+    color: #7b8397;
+}
+
+.details .single_detail p {
+    color: black;
+}
+
+.main_client_inspec_report .comments {
+    border: 1px dashed var(--redcode);
+    ;
+    padding-top: 10px;
+}
+
+.main_client_inspec_report .comments p {
+    text-align: center;
+    color: var(--redcode);
+}
+
+.parts_ratings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.main_client_inspec_report .car_parts {
+    width: max(45%, 330px);
+    margin: 10px;
+}
+
+.main_client_inspec_report .car_parts span {
+    color: var(--para_color);
+    font-size: max(14px,1.2vw);
+    font-weight: 600;
+}
+
+.main_client_inspec_report .car_parts>div:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_client_inspec_report .range {
+    height: 6px;
+    /* border: 1px solid; */
+    border-radius: 5px;
+    background: #b1b1b17a;
+}
+
+.main_client_inspec_report .range>.inner_range {
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgb(19, 129, 255);
+}
+
+.main_client_inspec_report .body_frame .img_sec {
+    text-align: center;
+    position: relative;
+    width: min(600px, 90%);
+    margin: 40px auto;
+}
+
+.main_client_inspec_report .body_frame img {
+    width: min(600px, 100%);
+    margin: auto;
+}
+
+.main_client_inspec_report .body_frame .map_faults {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main_client_inspec_report .body_frame .map_faults p {
+    width: min(40%, 200px);
+    margin: 10px;
+    font-size: max(14px, 1.1vw);
+}
+
+.parts_details .head {
+    background-color: #6a6a6a;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.parts_details .head p {
+    color: white;
+    margin: 0px 10px;
+}
+
+.parts_details .head p:last-child {
+    cursor: pointer;
+}
+
+.map_equipments{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.parts_details .head>div {
+    display: flex;
+}
+
+.parts_details .single_equip {
+    display: flex;
+    width: max(50%);
+    /* border: 1px solid var(--border_color); */
+    border-bottom: 1px solid var(--border_color);
+    border-left: 1px solid var(--border_color);
+    border-right:1px solid var(--border_color);
+
+}
+
+.parts_details .single_equip>div {
+    padding: 10px;
+    width: -webkit-fill-available;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.parts_details .single_equip .status{
+    border-left: 1px dashed var(--border_color);
+}
+.parts_details .single_equip .status p{
+    font-weight: 600;
+    margin: 0;
+    font-size: max(14px,1.1vw);
+}
+.parts_details .single_equip .name p{
+    margin-bottom: 5px;
+    font-size: max(14px,1.1vw);
+}
+
+.parts_details .single_equip button {
+    border: 1px solid #c9c9c9;
+    padding: 3px 10px;
+    font-size: smaller;
+    border-radius: 5px;
+    color: rgb(0, 79, 170);
+    font-size: 13px;
+}
+
+.map_fault{
+    position: absolute;
+    cursor: pointer;
+}
+.map_fault span{
+    font-size: 13px;
+}
+
+
+
+
+@media screen and (max-width:600px) {
+    .main_client_inspec_report .inner_main {
+        padding: 0;
+    }
+    .map_equipments{
+      justify-content: center;
+    }
+    .parts_details .single_equip{
+        width: -webkit-fill-available;
+    }
+    .main_client_inspec_report .car_img_sec{
+        flex-direction: column;
+    }
+    .main_client_inspec_report .car_img_sec div{
+        width: -webkit-fill-available !important;
+    }
+    .main_client_inspec_report .car_img_sec div:nth-child(2){
+     margin-top: 30px;
+    }
+}

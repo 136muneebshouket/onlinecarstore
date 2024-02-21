@@ -182,6 +182,64 @@ const slug = ({ carrdata, loadiing }) => {
                 <p>{carrdata.transmission}</p>
               </div>
             </div>
+            {carrdata?.overall_incpection_rating?.overall_rating ? (
+              <div className="incepection_report_div">
+                <h3>Car Selection Inspection Report</h3>
+                <span>
+                  <b>Inspected Date:</b>  {new Date(carrdata?.overall_incpection_rating?.createdAt).toDateString()}
+                </span>
+                <div className="car_parts o_rating">
+                  <div>
+                    <span>Overall Rating</span> <span>{carrdata?.overall_incpection_rating?.overall_rating}/10</span>
+                  </div>
+                </div>
+                <div className="car_parts">
+                  <div>
+                    <span>Exterior & Body</span> <span>{carrdata?.overall_incpection_rating?.percentages?.Extrior_conditions}%</span>
+                  </div>
+                  <div className="range">
+                    <div style={{ width: `${carrdata?.overall_incpection_rating?.percentages?.Extrior_conditions}%` }} className="inner_range"></div>
+                  </div>
+                </div>
+                <div className="car_parts">
+                  <div>
+                    <span>Engine/Transmission/Clutch</span> <span>{carrdata?.overall_incpection_rating?.percentages?.ETC}%</span>
+                  </div>
+                  <div className="range">
+                    <div style={{ width: `${carrdata?.overall_incpection_rating?.percentages?.ETC}%` }} className="inner_range"></div>
+                  </div>
+                </div>
+                <div className="car_parts">
+                  <div>
+                    <span>Suspension/Steering</span> <span>{carrdata?.overall_incpection_rating?.percentages?.susp_steering}%</span>
+                  </div>
+                  <div className="range">
+                    <div style={{ width: `${carrdata?.overall_incpection_rating?.percentages?.susp_steering}%` }} className="inner_range"></div>
+                  </div>
+                </div>
+                <div className="car_parts">
+                  <div>
+                    <span>Interior</span> <span>{carrdata?.overall_incpection_rating?.percentages?.interior}%</span>
+                  </div>
+                  <div className="range">
+                    <div style={{ width: `${carrdata?.overall_incpection_rating?.percentages?.interior}%` }} className="inner_range"></div>
+                  </div>
+                </div>
+                <div className="car_parts">
+                  <div>
+                    <span>AC/Heater</span> <span>{carrdata?.overall_incpection_rating?.percentages?.Ac_heater}%</span>
+                  </div>
+                  <div className="range">
+                    <div style={{ width: `${carrdata?.overall_incpection_rating?.percentages?.Ac_heater}%` }} className="inner_range"></div>
+                  </div>
+                </div>
+                <div className="full_inspec_link">
+                  <Link href={`/Inspection-report/${carrdata?.overall_incpection_rating?._id}`} target="_blank">
+                    <button>View Full Inspection Report</button>
+                  </Link>
+                </div>
+              </div>
+            ) : null}
 
             {/* <div className="car_incepection">car_incepection</div> */}
             <h2>Specifications</h2>
@@ -252,7 +310,7 @@ const slug = ({ carrdata, loadiing }) => {
         </div>
       </div>
 
-      <Call_contact phone={carrdata?.Phone_no}/>
+      <Call_contact phone={carrdata?.Phone_no} />
     </>
   );
 };

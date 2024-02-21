@@ -48,9 +48,9 @@ const Slot_list = () => {
           <p className="ad_heading">Areas</p>
         </div> */}
       </div>
-      <div className="lists">
+      {/* <div className="lists">
         <h2>Slots</h2>
-      </div>
+      </div> */}
     </>
   );
 };

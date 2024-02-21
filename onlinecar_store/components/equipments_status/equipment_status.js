@@ -95,4 +95,133 @@ const equip_status_arr = [
 
 ];
 
-export default equip_status_arr;
+
+const dents_scratches_arr=[
+    {
+        type:'',
+        type_name:'Select Faults',
+        mark:0
+    },
+    {
+        type:'S',
+        type_name:'Small Scratch',
+        mark:-0.5
+    },
+    {
+        type:'S1',
+        type_name:'Big Scratch',
+        mark:-2
+    },
+    {
+        type:'D',
+        type_name:'Small Dent',
+        mark:-1
+    },
+    {
+        type:'D1',
+        type_name:'Big Dent',
+        mark:-2
+    },
+    {
+        type:'DD',
+        type_name:'Dry Dent',
+        mark:-1.5
+    },
+    {
+        type:'P',
+        type_name:'Painted',
+        mark:0
+    },
+    // {
+    //     type:'LP',
+    //     type_name:'Left Panel',
+    //     mark:-2
+    // },
+    // {
+    //     type:'RP',
+    //     type_name:'Right Panel',
+    //     mark:-2
+    // },
+    // {
+    //     type:'LCP',
+    //     type_name:'Left c Piller',
+    //     mark:-3
+    // },
+    // {
+    //     type:'LBP',
+    //     type_name:'Left b Piller',
+    //     mark:-3
+    // },
+    // {
+    //     type:'LAP',
+    //     type_name:'Left A Piller',
+    //     mark:-3
+    // },
+    // {
+    //     type:'LFF',
+    //     type_name:'Left Front Fender',
+    //     mark:-5
+    // },
+    // {
+    //     type:'LFD',
+    //     type_name:'Left Front Door',
+    //     mark:-5
+    // },
+    // {
+    //     type:'LRD',
+    //     type_name:'Left Rear Door',
+    //     mark:-5
+    // },
+    // {
+    //     type:'LBF',
+    //     type_name:'Left Back Fender',
+    //     mark:-5
+    // },
+    // {
+    //     type:'RCP',
+    //     type_name:'Right C Piller',
+    //     mark:-3
+    // },
+    // {
+    //     type:'RBP',
+    //     type_name:'Right B Piller',
+    //     mark:-3
+    // },
+    // {
+    //     type:'RAP',
+    //     type_name:'Right A Piller ',
+    //     mark:-3
+    // },
+    // {
+    //     type:'RFF',
+    //     type_name:'Right Front Fender',
+    //     mark:-5
+    // },
+    // {
+    //     type:'RFD',
+    //     type_name:'Right Front Door',
+    //     mark:-5
+    // },
+    // {
+    //     type:'RRD',
+    //     type_name:'Right Rear Door',
+    //     mark:-5
+    // },
+    // {
+    //     type:'RBF',
+    //     type_name:'Right Back Fender',
+    //     mark:-5
+    // },
+    // {
+    //     type:'RDM',
+    //     type_name:'Repaint Dicky',
+    //     mark:-10
+    // },
+    // {
+    //     type:'RBM',
+    //     type_name:'Repaint Bonet',
+    //     mark:-14
+    // },
+]
+
+export {equip_status_arr , dents_scratches_arr} ;

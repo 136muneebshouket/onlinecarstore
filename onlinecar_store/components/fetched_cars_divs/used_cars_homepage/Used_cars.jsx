@@ -171,11 +171,11 @@ const Used_cars = () => {
                       </p>
 
                       <p>{obj?.city}</p>
-                      <div>
+                      {/* <div>
                         <span>{obj?.modelyear}</span>
                         <span>{obj?.Mileage} km</span>
                         <span>{obj?.enginetype}</span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

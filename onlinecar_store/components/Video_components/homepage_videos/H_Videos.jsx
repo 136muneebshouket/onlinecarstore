@@ -7,8 +7,10 @@ import React, {
 } from "react";
 import Context from "@/components/processing_functions/context";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 import useSWR from "swr";
+
 
 const H_Videos = () => {
   const { message, setMessage } = useContext(Context);
@@ -66,7 +68,7 @@ const H_Videos = () => {
           <h2>Somethings wrong in Videos fetching</h2>
         </>
       )}
-      {videos.length > 0 && (
+      {videos?.length > 0 && (
         <>
           <div className="home_videos_sec">
             <div className="first_div">
@@ -82,6 +84,8 @@ const H_Videos = () => {
                         loading="lazy"
                         src={videos[0]?.image}
                         alt="loading"
+                        width={1000}
+                        height={1000}
                       />
                     </div>
                     <p>{videos[0]?.description}</p>
@@ -102,6 +106,8 @@ const H_Videos = () => {
                         loading="lazy"
                         src={videos[1]?.image}
                         alt="loading"
+                        width={1000}
+                        height={1000}
                       />
                     </div>
                     <p>{videos[1]?.description}</p>
@@ -120,6 +126,8 @@ const H_Videos = () => {
                         loading="lazy"
                         src={videos[2]?.image}
                         alt="loading"
+                        width={1000}
+                        height={1000}
                       />
                     </div>
                     <p>{videos[2]?.description}</p>

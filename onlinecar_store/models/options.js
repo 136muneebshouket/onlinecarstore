@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const car_options = new mongoose.Schema({
    
    
-    main_arr:{
-        type:Array,
+    name:{
+        type:String,
+    },
+    models:{
+        type: Array,
     }
    
 })

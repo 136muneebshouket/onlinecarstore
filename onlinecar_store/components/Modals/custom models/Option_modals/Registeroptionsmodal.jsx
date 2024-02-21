@@ -56,7 +56,7 @@ const Registeroptionsmodal = ({ onClose, carrdata }) => {
             setSearchval(e.target.value);
           }}
           placeholder="Type to refine search"
-          autoFocus
+          // autoFocus
         />
       </div>
       <p className="options_guide">City of Registration</p>

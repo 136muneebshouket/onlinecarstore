@@ -7,9 +7,9 @@ import useSWR from "swr";
 import axios from "axios";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
-const Confirm_inspec = () => {
+const Confirm_inspec = ({completed}) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/admin/inspection/inspec_orders/get_orders?accepted=true`,
+    `/api/admin/inspection/inspec_orders/get_orders?accepted=true&completed=${completed}`,
     fetcher
   );
 

@@ -531,7 +531,7 @@ const Edit_ad = () => {
   //   }).catch(err=>console.err(err));
   //   // console.log(retun)
   // }
-
+// console.log(carobj)
   return (
     <>
       <Head>

@@ -33,7 +33,7 @@ const Ad_caroptions = dynamic(() => import("../ad_options/Ad_caroptions/Ad_car_o
 const Inspection_page = () => {
   const [sidebar, setSidebar] = useState(true);
   const [component, setComponent] = useState("");
-  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks','Ad Cars Options']);
+  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks','Completed inspections','Ad Cars Options']);
 
   // console.log(component)
   return (
@@ -73,7 +73,8 @@ const Inspection_page = () => {
         <div className="main_inspection">
           {component == "Slots" ? <Slots /> : null}
           {component == "Inspections Requests" ? <Inspect_requests /> : null}
-          {component == "Inspections tasks" ? <Confirmed_inspec /> : null}
+          {component == "Inspections tasks" ? <Confirmed_inspec completed={false}/> : null}
+          {component == "Completed inspections" ? <Confirmed_inspec completed={true}/> : null}
           {component == "Ad Cars Options" ? <Ad_caroptions /> : null}
         </div>
       </div>

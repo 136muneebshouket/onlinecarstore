@@ -45,7 +45,7 @@ const Homepage = () => {
               </div>
             </div> */}
             <div className="advance_searchbtn">
-              <Link href="/used_cars/Search-car">Advance Search &gt;</Link>
+              <Link href="/used_cars/Search-car">Advance Search <i class='bx bx-search-alt-2'></i> </Link>
             </div>
           </div>
         </div>
@@ -140,6 +140,15 @@ const Homepage = () => {
                       <p>Sell it for me</p>
                     </div>
                   </div>
+                  {/* <div className="offer">
+                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
+                    <div>
+                      <span>Carselection</span>
+                      <p>Car Incepection</p>
+                    </div>
+                  </div> */}
+                </div>
+                <div>
                   <div className="offer">
                     <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
@@ -147,22 +156,13 @@ const Homepage = () => {
                       <p>Car Incepection</p>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <div className="offer">
-                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
-                    <div>
-                      <span>Carselection</span>
-                      <p>Partner Workshop</p>
-                    </div>
-                  </div>
-                  <div className="offer">
+                  {/* <div className="offer">
                     <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Ownership transfer</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

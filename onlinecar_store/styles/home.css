@@ -97,17 +97,25 @@ text-align: center;
 padding: 10px 0px;
 margin-bottom: 20px;
 }
+.advance_searchbtn a i{
+    font-size: 20px;
+    margin: 5px;
+}
 .advance_searchbtn a{
     text-decoration: none;
     color: #ffffff;
     border: 1px solid #c1c1c1;
-    padding: 4px 14px;
+    padding: 0px 14px;
     /* font-size: smaller; */
     background: var(--primarycolor);
     font-size: medium;
     border-radius: 10px;
     /* border: 1px solid #bfbfbf; */
-    font-weight: 600;
+    /* font-weight: 600; */
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    align-items: center;
 }
 
 
@@ -116,7 +124,6 @@ margin-bottom: 20px;
     width: max(75vw, min(700px,90vw));
     margin: auto;
     padding: 40px 0px;
-  
 }
 
 .home_main .inner_container h2{
@@ -248,6 +255,7 @@ padding: 40px;
     margin: 10px;
     padding: 10px;
     flex-wrap: wrap;
+    border-radius: 10px;
 }
 .offerings .offers_divs .offer img{
     width:90px;

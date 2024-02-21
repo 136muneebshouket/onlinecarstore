@@ -1,6 +1,7 @@
 import cardataschema from "../../../models/cardataschema";
 import dbConnect from "../../../config/dbConnect";
 import userschema from "../../../models/user";
+import inspec_schema from "@/models/inspec_schema";
 import mongoose, { model } from "mongoose";
 
 export default async function handler(req, res) {
@@ -14,7 +15,7 @@ export default async function handler(req, res) {
         const id =req.query.id
         // console.log(id)
         // // Perform the query with the specified projection
-        const result = await cardataschema.findOne({_id:id });
+        const result = await cardataschema.findOne({_id:id }).populate("overall_incpection_rating", "overall_rating percentages createdAt");
         if(!result){
           res.status(404).json({
             success: false,

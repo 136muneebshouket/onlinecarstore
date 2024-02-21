@@ -35,8 +35,6 @@ export default async function handler(req, res) {
           obj_send.imgs = imgs
         //   throw new Error("Already uploaded");
         }
-        // console.log(obj_send)
-    //    let find = await slots_schema.find({})
 
         res.status(200).json({
             success: true,

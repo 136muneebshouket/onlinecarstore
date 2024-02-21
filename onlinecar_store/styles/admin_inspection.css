@@ -21,7 +21,7 @@
 
 .admin_inspection  .sidebar{
     width: 300px;
-    border: 1px solid;
+    border: 1px solid rgba(200,200,200);
     /* padding: 10px; */
     display: flex;
     flex-direction: column;

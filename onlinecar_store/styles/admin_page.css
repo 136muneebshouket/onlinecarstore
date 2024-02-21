@@ -14,6 +14,7 @@
     position: sticky;
     top: 0px;
     border: 1px solid rgba(200, 200, 200);
+    z-index: 100;
 }
 .admin_nav li{
     list-style: none;
@@ -37,9 +38,9 @@
     padding:0px 15px;
 }
 .sidebar_btn span{
-    font-size: 25px;
+    font-size: 22px;
     display: inline-block;
-    height: 40px;
+    height: 35px;
 }
 .approval_ads_sec{
     /* width: min(700px, 95vw); */
@@ -97,5 +98,48 @@ transition: .2s;
  font-weight: 500;
  color: white;
 }
+.nav_ul_admin{
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    transition: .2s;
+}
 
+.nav_links{
+    position: relative;
 
+}
+.nav_links .hamburger{
+    /* float: right; */
+    display: inline-block;
+    font-size: larger;
+    font-weight: 600;
+    margin: 10px;
+    display: none;
+    color: rgb(0, 63, 126)
+}
+@media screen and (max-width:800px) {
+    .nav_links{
+        position: relative;
+        text-align: right;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .nav_links .hamburger{
+     display: block;
+    }
+    .nav_ul_admin{
+     position: absolute;
+     right: -100%;
+     top: 50px;
+     flex-direction: column;
+     height: 90vh;
+     background-color: white;
+     padding: 10px;
+     justify-content: unset;
+     border-left: 1px solid rgba(200, 200, 200) ;
+    }
+    
+}

@@ -120,6 +120,7 @@ font-weight: 500;
     padding-left: 5px;
     padding-bottom: 5px;
     width: 98%;
+    font-size: max(14px,1.2vw);
 }
 
 .reportad_btn{

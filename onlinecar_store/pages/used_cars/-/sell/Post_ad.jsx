@@ -155,6 +155,7 @@ const Post_ad = () => {
           ...{ enginetype: values.enginetype },
           ...{ body_type: values.bodytype },
           ...{ duration: values.duration },
+          ...{ Assembly: values.Assembly },
         };
       });
     }
@@ -292,6 +293,19 @@ const Post_ad = () => {
     setImagestoshow(filteredimages);
     setIsimgModalOpen(false);
   };
+  // change in index///////////////////////////////////////////////////////////////////////////////////////
+  function setcoverphoto(i){
+    let newarr = [...imagestoshow]
+    newarr.unshift(imagestoshow[i])
+    newarr.splice(i+1,1)
+    setImagestoshow(newarr)
+    setIsimgModalOpen(false);
+  }
+
+
+
+
+  
 
   // function for getting errors
   var err_values = [];
@@ -447,7 +461,7 @@ const Post_ad = () => {
       let cardata = {
         carobj,
       };
-
+      // console.log(cardata)
       await axios
         .post(`/api/uploadcar/postmy_ad_new`, cardata)
         .then(async (res) => {
@@ -470,7 +484,7 @@ const Post_ad = () => {
     }
   };
 
-  // console.log(carobj.carfeatures);
+  // console.log(carobj);
   // console.log(imagestoshow);
   // console.log(regex.test(carobj.Phone_no));
   // console.log(totalwork)
@@ -893,6 +907,7 @@ const Post_ad = () => {
                               };
                             });
                           }}
+                          // placeholder='Engine type'
                         >
                           <option value="">Engine Type</option>
                           <option value="Petrol">Petrol</option>
@@ -914,11 +929,11 @@ const Post_ad = () => {
                     <div className="input_field">
                       <i className="bx bxs-car"></i>
                       <div>
-                        <label>Engine Capacity * (cc)</label>
+                        <label>Engine Capacity * (cc) / Battery Capacity * (kWh) </label>
                         <input
                           id="enginecc"
                           type="number"
-                          placeholder="Engine Capacity (cc)"
+                          placeholder="Engine Capacity * (cc) / Battery Capacity * (kWh) "
                           value={carobj.enginecc ? carobj.enginecc : ""}
                           onChange={(e) => {
                             setCarobj((prevCarobj) => {
@@ -931,7 +946,7 @@ const Post_ad = () => {
                             });
                           }}
                         />
-                        {errors && carobj.enginecc == null ? (
+                        {errors && (!carobj.enginecc) ? (
                           <span className="errorspan">
                             Please fill out this input
                           </span>
@@ -1210,6 +1225,8 @@ const Post_ad = () => {
           onClose={setIsimgModalOpen}
           selectedimg={selectedImageUrl}
           delimages={delimages}
+          setcoverphoto={setcoverphoto}
+          no_coverphoto={false}
         />
       )}
 

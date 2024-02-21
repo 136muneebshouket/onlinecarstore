@@ -11,7 +11,17 @@ background-color: #F2F3F3;
   --redcode: brown;
   --white: #ffffff;
   --primarycolor:#283949;
+  --para_color:#434343;
+  --border_color:#e8e5e5
 }
+
+/* @font-face {
+  font-family: nunito;
+  src: url(../public/fonts/static/Nunito-Regular.ttf);
+}
+html{
+  font-family: nunito !important;
+} */
 
 /* width */
 ::-webkit-scrollbar {
@@ -48,6 +58,10 @@ h2,h3,h4,p{
 p{
   color: #434343;
 }
+main{
+  margin-top: 85px;
+  padding-top: 1px;
+}
 @media only screen and (max-width:770px) {
     h2{
         font-size: 20px !important;
@@ -57,4 +71,9 @@ p{
     h5{
         font-size: 12px !important;
     }
+}
+@media (max-width:800px) {
+  main{
+    margin-top: 0;
+  }
 }

@@ -65,11 +65,7 @@ const Error_handling = new mongoose.Schema(
         maxlength: [200,'too username length'],
         required:[true, 'email is required'],
       },
-      email: {
-        type:String,
-        maxlength: [200,'too email length'],
-        required:[true, 'email is required'],
-      },
+     
       phone_no: {
         type:String,
         maxlength: [200,'too phone_no length'],
@@ -92,7 +88,11 @@ const Error_handling = new mongoose.Schema(
         default:false,
         // required:[true, 'user_id id is required'],
       },
-
+      completed: {
+        type:Boolean,
+        default:false,
+        // required:[true, 'user_id id is required'],
+      },
   },
   { timestamps: true }
 );

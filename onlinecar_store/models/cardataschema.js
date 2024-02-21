@@ -165,11 +165,8 @@ const carSchema = new mongoose.Schema(
       default:false
     },
     overall_incpection_rating:{
-      type : Number,
-      min: 0,
-      max: 10,
-      default:0,
-      required:false
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'inspec_reports'
     },
     auction_sheet: {
       type: Boolean,

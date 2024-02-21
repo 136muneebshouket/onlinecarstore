@@ -54,6 +54,7 @@ const Check_ad = ({}) => {
       }
     }
   };
+  // console.log(error)
 
   return (
     <>
@@ -62,7 +63,11 @@ const Check_ad = ({}) => {
         {isLoading ? <FullLoader /> : null}
         {error ? (
           <>
-            <h1 style={{ color: "red" }}>Something went wrong</h1>
+            {error?.response.status == 404 ? (
+              <h1 style={{ color: "red" }}>Ad not present</h1>
+            ) : (
+              <h1 style={{ color: "red" }}>Something went wrong</h1>
+            )}
           </>
         ) : null}
         <div className="singlecar_page">
@@ -184,9 +189,15 @@ const Check_ad = ({}) => {
             </div>
           </div>
         </div>
-        <div className="reject_approve" style={{ display: "flex" ,justifyContent:'center'}}>
-          <Link href={`Start_inspection?Ad_id=${data?._id}`}>
-            <button className="approve_btn" style={{ background: "#006d00" ,width:'100%'}}>
+        <div
+          className="reject_approve"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Link href={`Start_inspection?Ad_id=${Ad_id}`}>
+            <button
+              className="approve_btn"
+              style={{ background: "#006d00", width: "100%" }}
+            >
               Start Inspection
             </button>
           </Link>

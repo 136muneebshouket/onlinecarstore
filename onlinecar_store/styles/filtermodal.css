@@ -163,7 +163,7 @@ font-weight: 500;
 cursor: pointer;
 }
 .filtermodal .input_field .small_btns{
-    padding: 0px 5px;
+    padding: 0px 6px;
     border: none;
     border-radius: 50%;
     background: var(--redcode);
@@ -180,7 +180,7 @@ cursor: pointer;
     height: 24px;
     width: 24px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     /* margin: auto; */
     margin-left:auto
 

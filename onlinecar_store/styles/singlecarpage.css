@@ -252,7 +252,7 @@
 
 .Call_contact_bar {
     position: fixed;
-    bottom: 0;
+    bottom: 70px;
     right: 0;
     z-index: 50;
     margin: 10px;
@@ -270,7 +270,53 @@
 .Call_contact_bar a > div > i{
     font-size: max(35px,3vw);
 }
+.incepection_report_div{
+    padding: 20px;
+    background-color: #e8f0ff;
+    margin-bottom: 20px;
+}
 
+.incepection_report_div .car_parts{
+    margin: 25px 0px;
+}
+.incepection_report_div .o_rating{
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+.incepection_report_div .o_rating span{
+    font-weight: 600;
+}
+
+.incepection_report_div .car_parts > div:first-child{
+display: flex;
+justify-content: space-between;
+}
+.incepection_report_div .range{
+    height: 6px;
+    /* border: 1px solid; */
+    border-radius: 5px;
+    background: #b1b1b17a;
+}
+.incepection_report_div .range > .inner_range{
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgb(19, 129, 255);
+}
+.incepection_report_div > span{
+    font-size: smaller;
+    color: #494848;
+}
+.incepection_report_div .full_inspec_link button{
+  border: none;
+  padding: 10px 20px;
+  background-color: var(--redcode);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 5px ;
+  width: -webkit-fill-available;
+}
 
 
 @media only screen and (max-width:770px) {

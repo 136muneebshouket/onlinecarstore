@@ -11,12 +11,23 @@ export default async function handler(req, res) {
       case "GET":
         let findobj ={}
         let selectedfields={}
+        // let entries = 
+        // if(!(req.query.slotdate)){
+        //   throw new Error('please provide query')
+        // }
+        // console.log(req.query.completed)
         if(req.query.slotdate){
             findobj.slot = req.query.slotdate
             selectedfields.slottime = 1
         }
         if(req.query.accepted){
             findobj.accepted = req.query.accepted;
+        }
+        if(req.query.completed){
+            findobj.completed = req.query.completed;
+        }
+        if(Object.entries(findobj).length < 1){
+          throw new Error('please provide query')
         }
         
        let find = await inspec_request.find(findobj,selectedfields)

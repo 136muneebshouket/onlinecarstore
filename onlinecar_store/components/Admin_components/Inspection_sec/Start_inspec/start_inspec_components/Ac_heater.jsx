@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import Upload_equipment from "./Upload_equipment";
 
-const Ac_heater = () => {
+const Ac_heater = ({ exist, refresh }) => {
   const [equip_parent, setEquip_parent] = useState("Ac_heater");
-  const [options, setOptions] = useState(["AC Fitted"]);
+  const [options, setOptions] = useState([
+    "AC Fitted",
+    "AC Operational",
+    "Blower",
+    "Cooling",
+    "Heating",
+  ]);
 
   return (
     <>
@@ -13,10 +19,17 @@ const Ac_heater = () => {
         </div>
 
         {/* map here */}
-        {options.map((name) => {
+        {options.map((name, index) => {
           return (
             <>
-              <Upload_equipment equip_name={name} equip_parent={equip_parent} />
+              <div key={index}>
+                <Upload_equipment
+                  equip_name={name}
+                  equip_parent={equip_parent}
+                  uploded={exist}
+                  refresh={refresh}
+                />
+              </div>
             </>
           );
         })}

@@ -33,29 +33,48 @@ const Inspection = dynamic(
   }
 );
 
+const Ad_new_blog = dynamic(
+  () => import("@/components/Admin_components/admin_blogs/add_blogs/Ad_new_blog"),
+  {
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
+  }
+);
+
 const Dashboard = () => {
     
   const [component, setComponent] = useState('utube');
+  const [navtoggle, setNavtoggle] = useState(false);
   return (
     <>
     {/* <h1>dashboard</h1> */}
     <div className="admin_dashboard">
       <nav className="admin_nav" style={{background:'white'}}>
-        <div className="nav_links">
-          <ul style={{display:'flex', justifyContent:'space-evenly',margin:'0',padding:'0'}} >
+        <div className="nav_links" style={{overflow:`${navtoggle ? 'visible' : 'hidden'}`}}>
+        <span className="hamburger" onClick={()=>{setNavtoggle(!navtoggle)}}>&#x2630;</span>
+          <ul className="nav_ul_admin" style={{right:`${navtoggle ? '0' : '-100%'}`}} >
+          
             <li >
-              <button  className="darkneon" onClick={()=>{setComponent('utube')}}>
+              <button  className="darkneon" onClick={()=>{setComponent('utube'); setNavtoggle(false) }}>
                 U tube
               </button>
             </li>
             <li>
-              <button className="darkneon"  onClick={()=>{setComponent('Incpection')}}>
+              <button className="darkneon"  onClick={()=>{setComponent('Incpection'); setNavtoggle(false)}}>
               Incpection
               </button>
             </li>
             <li>
-              <button className="darkneon"  onClick={()=>{setComponent('Ads_approve')}}>
+              <button className="darkneon"  onClick={()=>{setComponent('Ads_approve'); setNavtoggle(false)}}>
               Ads_Approve
+              </button>
+            </li>
+            <li>
+              <button className="darkneon"  onClick={()=>{setComponent('Add new blog'); setNavtoggle(false)}}>
+              Add new blog
               </button>
             </li>
           
@@ -66,6 +85,7 @@ const Dashboard = () => {
         {(component == 'utube') && <Youtube/>}
         {(component == 'Incpection') && <Inspection/>}
         {(component == 'Ads_approve') && <Approval/>}
+        {(component == 'Add new blog') && <Ad_new_blog/>}
       </main>
       </div>
     </>

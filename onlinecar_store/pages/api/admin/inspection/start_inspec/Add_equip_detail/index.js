@@ -48,8 +48,12 @@ export default async function handler(req, res) {
         if (!equip_name) {
           throw new Error("equipment name is missing.");
         }
-        if (!status_mark || !status) {
-          throw new Error("equipment status or flag is missing.");
+        // console.log(status_mark == null)
+        if(isNaN(status_mark)){
+          throw new Error("equipment marks is missing.");
+        }
+        if (!status) {
+          throw new Error("equipment status is missing.");
         }
 
         const checkAdmin = await admin_schema.countDocuments({

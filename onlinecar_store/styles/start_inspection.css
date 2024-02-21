@@ -95,11 +95,12 @@ select {
 .upload_equip .property_head {
 display: flex;
 justify-content: space-between;
-align-items: center;
+align-items: baseline;
+margin-bottom: 20px;
 }
 .upload_equip .property_head h4{
-    font-size: max(18px,2vw);
-    margin: 2px;
+    font-size: max(18px,1.5vw);
+    margin: 6px;
 }
 .upload_equip .property_head .edit_btn{
     border: none;
@@ -130,7 +131,68 @@ align-items: center;
 .upload_equip{
     margin: 5px;
     background: white;
-    height: 35px;
+    height: 55px;
     overflow: hidden;
     border: 1px solid grey;
+}
+
+
+.car_inspec_img .img_div{
+   display: flex;
+   justify-content: center;
+   margin: auto;
+   margin-bottom: 30px;
+   width: fit-content;
+   position: relative;
+}
+.car_inspec_img .img_div img{
+    width: 100%;
+    height: auto;
+}
+.car_inspec_img .img_link{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.cars_faults{
+    width: min(700px,95vw);
+    margin: auto;
+    margin-bottom: 20px;
+}
+.faults_flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.faults_flex p{
+    width: min(330px,95%);
+    margin: 5px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+}
+
+.final_upload_btn {
+    display: flex;
+    justify-content: center;
+}
+
+.final_upload_btn button{
+    margin: auto;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+}
+
+.parts_repaint_icon{
+    position: absolute;
+    border: none;
+    font-size: 11px;
+    background: black;
+    color: white;
+    border-radius: 10px;
 }
