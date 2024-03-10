@@ -234,7 +234,7 @@ const slug = ({ carrdata, loadiing }) => {
                   </div>
                 </div>
                 <div className="full_inspec_link">
-                  <Link href={`/Inspection-report/${carrdata?.overall_incpection_rating?._id}`} target="_blank">
+                  <Link href={`/inspection-report/${carrdata?.overall_incpection_rating?._id}`} target="_blank">
                     <button>View Full Inspection Report</button>
                   </Link>
                 </div>
@@ -306,7 +306,7 @@ const slug = ({ carrdata, loadiing }) => {
             Post an ad for <span style={{ color: "#d10202" }}>FREE</span>{" "}
           </h3>
           <p>Sell it faster to thousands of buyers</p>
-          <Link href="/used_cars/-/Sell">Sell Your Car</Link>
+          <Link href="/used-cars/-/sell">Sell Your Car</Link>
         </div>
       </div>
 

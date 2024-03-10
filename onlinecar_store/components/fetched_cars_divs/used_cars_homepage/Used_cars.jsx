@@ -138,7 +138,7 @@ const Used_cars = () => {
             <>
               {/* <Link className="singlecar_link" href="#"> */}
               <Link
-                href={`used_cars/car/${obj?.brand.replaceAll(
+                href={`used-cars/car/${obj?.brand.replaceAll(
                   " ",
                   "-"
                 )}-${obj?.model.replaceAll(" ", "-")}-${obj?.modelyear}-${

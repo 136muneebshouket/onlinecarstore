@@ -6,7 +6,7 @@ const Usedcar_dropdown = ({toggle}) => {
     <>
       <div style={{height:`${toggle ? 'auto': ''}`}} className="usedcar_dropdown">
         <div className="first_div">
-            <Link href={'/used_cars/Search_car'} className="option">
+            <Link href={'used-bikes/search-bikes'} className="option">
                 <i>&#9906;</i>
                 <div> <p>Find Used Cars For Sale</p>
                 <span>Search over 10k used cars</span></div>
@@ -16,7 +16,7 @@ const Usedcar_dropdown = ({toggle}) => {
                 <div> <p>Featured Used Cars</p>
                 <span>Coming Soon</span></div>
             </Link>
-            <Link href={'/used_cars/Sell'} className="option">
+            <Link href={'/used-cars/sell'} className="option">
                 <i>&#9906;</i>
                 <div> <p>Sell Your Car</p>
                 <span>Post Ad and Sell Your Car</span></div>
@@ -52,56 +52,56 @@ const Usedcar_dropdown = ({toggle}) => {
         </div>
         <div className="first_div">
             <h5 style={{whiteSpace:'nowrap'}}>Popular Cities</h5>
-            <Link href={'/used_cars/Search_car?filters={"city":["Karachi"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Karachi"]}'} className="option">
                  <p>Karachi</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Lahore"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Lahore"]}'} className="option">
                  <p>Lahore</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Islamabad"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Islamabad"]}'} className="option">
                  <p>Islamabad</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Rawalpindi"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Rawalpindi"]}'} className="option">
                  <p>Rawalpindi</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Peshawar"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Peshawar"]}'} className="option">
                  <p>Peshawar</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["22Faisalabad"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["22Faisalabad"]}'} className="option">
                  <p>Faisalabad</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Multan"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Multan"]}'} className="option">
                  <p>Multan</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"city":["Gujranwala"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"city":["Gujranwala"]}'} className="option">
                  <p>Gujranwala</p>
             </Link>
             
         </div>
         <div className="first_div">
             <h5 style={{whiteSpace:'nowrap'}}>Popular Models</h5>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Toyota"],"model":["Corolla"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Toyota"],"model":["Corolla"]}'} className="option">
                  <p>Toyata Corolla</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["Civic"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Honda"],"model":["Civic"]}'} className="option">
                  <p>Honda Civic</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
                  <p>Honda City</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Honda"],"model":["City"]}'} className="option">
                  <p>Karachi</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Cultus"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Suzuki"],"model":["Cultus"]}'} className="option">
                  <p>Suzuki Cultus</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Mehran"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Suzuki"],"model":["Mehran"]}'} className="option">
                  <p>Suzuki Mehran</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Toyota"],"model":["Vitz"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Toyota"],"model":["Vitz"]}'} className="option">
                  <p>Toyota Vitz</p>
             </Link>
-            <Link href={'/used_cars/Search_car?filters={"brand":["Suzuki"],"model":["Alto"]}'} className="option">
+            <Link href={'used-cars/search-car?filters={"brand":["Suzuki"],"model":["Alto"]}'} className="option">
                  <p>Suzuki Alto</p>
             </Link>
             

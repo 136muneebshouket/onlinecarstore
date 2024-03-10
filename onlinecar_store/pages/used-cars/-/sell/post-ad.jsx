@@ -518,12 +518,12 @@ const Post_ad = () => {
               <p> Enter Your Car Information </p>
             </div>
             <div className="icons">
-              <i className="bx bxs-car"></i>
-              <p> Enter Your Car Information </p>
+            <i class='bx bx-images'></i>
+              <p> Upload Photos</p>
             </div>
             <div className="icons">
-              <i className="bx bxs-car"></i>
-              <p> Enter Your Car Information </p>
+            <i class='bx bxs-purchase-tag'></i>
+              <p> Enter Your Car Price</p>
             </div>
           </div>
         </div>

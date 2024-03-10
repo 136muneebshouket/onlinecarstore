@@ -29,7 +29,6 @@ const nextConfig = {
     URLENDPOINT: "https://ik.imagekit.io/lxtg60t67",
 
 
-
      Host:"https://car-selection.vercel.app/",
     // Host:"http://localhost:3000",
      GOOGLE_CLIENT_ID:'181411319845-4n9oh7qvmujl7790mh65r7vcf85qa6p8.apps.googleusercontent.com',

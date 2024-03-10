@@ -21,7 +21,7 @@
   }
   .usedcar_dropdown .first_div{
     padding:10px;
-    border-right: 1px solid rgb(200, 200, 200);
+    border-right: 1px solid rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -83,7 +83,7 @@
     .NavBar .usedcar_dropdown .option{
         padding: 0;
         margin: 10px;
-        border-bottom: 1px solid rgb(194, 194, 194);
+        border-bottom:  1px solid rgb(218 218 218);
     }
     .NavBar .usedcar_dropdown .option i,
     .NavBar .usedcar_dropdown span{

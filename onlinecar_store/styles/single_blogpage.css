@@ -1,0 +1,221 @@
+
+/* Blog Component CSS */
+.single-blog-page {
+  margin: auto;
+    width:  max(80vw, min(700px, 95vw));
+}
+
+.single-blog-page div.featureimg {
+    margin: 10px auto 0px;
+    background: yellow;
+    box-shadow: 0px 0px 13px 0px #80808045;
+}
+
+.single-blog-page div.featureimg img {
+    width: 100%;
+    height: auto;
+}
+
+.single-blog-page .content_section{
+
+}
+/* After Image Line */
+.single-blog-page div.hr {
+    margin: 2rem auto 1rem;
+    width: 90%;
+}
+.single-blog-page div.hr hr {
+    color: #ffebcd;
+}
+
+
+/* Main Heading CSS */
+.single-blog-page div.heading { text-transform: capitalize; }
+
+.single-blog-page div.heading h1 { 
+    margin-left: 0.5rem;
+    font-weight: 500; 
+    color: var(--redcode);
+}
+
+
+/* Author Details CSS */
+.single-blog-page div.details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-blog-page div.author {
+    font-size: .8rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* .single-blog-page div.author img { border-radius: 50%; } */
+.single-blog-page .details i{
+  font-size: max(15px,2vw);
+  margin: 0px 5px;
+  color: var(--redcode);
+}
+.single-blog-page .details span{
+  font-size: max(14px,1.3vw);
+  color: var(--para_color);
+  margin-left: 5px;
+}
+.single-blog-page div.views span{
+    color: var(--redcode);
+    font-size: max(15px,2vw);
+}
+.single-blog-page div.views {
+    font-size: 0.85rem;
+    padding: 10px;
+    border-radius: 4rem;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+}
+
+
+.single-blog-page div.content { margin: 1.25rem 0.5rem;
+    padding: max(10px, 1.2vw);
+background-color: white;
+box-shadow: 0px 0px 13px 0px #80808045;
+ }
+.single-blog-page div.content 
+/* Comment or Reply Section CSS */
+.single-blog-page .comments {  margin:3rem 5px;}
+
+.single-blog-page .comments h3 { margin-block: 0.5rem 1rem;
+color: var(--redcode);}
+
+
+.single-blog-page .comments{
+    /* margin-bottom: 20px; */
+    margin: 0px 10px ;
+    margin-bottom: 20px;
+}
+.single-blog-page .comments input ,.single-blog-page .comments textarea{
+   padding: 15px !important; 
+   background-color: rgb(255, 255, 255) !important;
+   color: var(--para_color);
+   border: none;
+   box-shadow: 0px 0px 13px 0px #80808045;
+}
+
+.single-blog-page .comments .commentinp {
+    height: 7rem;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.single-blog-page .comments .commentform {
+    display: flex;
+    gap: 1.5rem;
+    margin: 10px 0px;
+}
+.single-blog-page .comments input {
+    width: 50%;
+    /* margin-inline: 2%; */
+    box-sizing: border-box;
+    display: inline;
+    /* margin-block: 1rem; */
+}
+
+.single-blog-page .comments .commentbtn {
+    font-weight: 500;
+    background-color: var(--redcode);
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 10px  16px;
+    border: none;
+
+}
+
+
+@media screen and (max-width:964px ) {
+    .single-blog-page {
+        width: 80%;
+    }
+    
+    .right {
+        width: 20%;
+    }
+    
+}
+@media screen and (max-width:964px ) {
+    .blog {
+        padding:1rem ;
+    }
+    .single-blog-page {
+        width: 100%;
+    }
+    
+    .right {
+        display: none;
+    }
+    
+}
+@media screen and (max-width:662px ) {
+    .single-blog-page div.featureimg {
+        height: 50vh;
+    }
+}
+
+@media screen and (max-width:568px ) {
+    .single-blog-page div.featureimg {
+        height: 45vh;
+    }
+
+    .single-blog-page .comments .commentform {
+        flex-direction: column;
+        gap: 0;
+    }
+    .single-blog-page .comments input {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .single-blog-page .comments .commentbtn {
+        padding: 0px 8px;
+        line-height: 2.5;
+    }    
+}
+
+@media screen and (max-width:460px ) {
+    .single-blog-page div.featureimg {
+        height: 40vh;
+    }
+    
+    .single-blog-page div.heading { margin-bottom: 1rem;}
+    .single-blog-page div.heading h1 {
+        font-size: 1.75rem;
+    }
+    .single-blog-page div.details { flex-direction: column;}
+    
+    .single-blog-page div.views {
+        padding: 6px;
+        margin-top: 1rem;
+        width: max-content;
+        margin-right: 0.75rem;
+    }
+
+    .single-blog-page .comments .commentbtn {
+        padding: 0px 8px;
+        line-height: 2.5;
+    }    
+}
+
+@media screen and (max-width:400px ) {
+
+    .single-blog-page div.featureimg {
+        height: auto;
+    }
+
+}

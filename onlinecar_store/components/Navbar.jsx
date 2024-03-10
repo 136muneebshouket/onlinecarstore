@@ -68,26 +68,24 @@ const NavBar = () => {
       <div className={`NavBar ${visible && "NavBar_hide"}`}>
         <div className="uppernav">
           <div className="profile" ref={arrowDown}>
+            {/* {isLoggedIn ? (
+              <> */}
+            <div
+              // onClick={() => setProfileDropDown(!profileDropDown)}
+              className="arrowDown"
+            >
+              <div className="username">Welcome {sessionData?.user?.name}</div>
+              <i
+                style={{
+                  transform: `rotate(${profileDropDown ? "180deg" : "0deg"})`,
+                }}
+                className="bx bx-chevron-down"
+              ></i>
+            </div>
+
+            {/* Profile Click DropDown */}
             {isLoggedIn ? (
               <>
-                <div
-                  // onClick={() => setProfileDropDown(!profileDropDown)}
-                  className="arrowDown"
-                >
-                  <div className="username">
-                    Welcome {sessionData?.user?.name}
-                  </div>
-                  <i
-                    style={{
-                      transform: `rotate(${
-                        profileDropDown ? "180deg" : "0deg"
-                      })`,
-                    }}
-                    className="bx bx-chevron-down"
-                  ></i>
-                </div>
-
-                {/* Profile Click DropDown */}
                 <div
                   ref={profileDrop}
                   className={`profileDropDown ${
@@ -130,7 +128,40 @@ const NavBar = () => {
               </>
             ) : (
               <>
-                <div>
+                <div
+                  ref={profileDrop}
+                  className={`profileDropDown ${
+                    profileDropDown ? "active" : ""
+                  }`}
+                >
+                  <ul>
+                    <li>
+                      <Link
+                        href="/authentication/user-register/Signup"
+                        className="username"
+                      >
+                        Sign up
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/authentication/user-login/Login"
+                        className="username"
+                      >
+                        Sign in
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                <div></div>
+              </>
+            )}
+
+            {isLoggedIn ? (
+              <></>
+            ) : (
+              <>
+                <div className="signup_desktop">
                   <Link
                     href="/authentication/user-register/Signup"
                     className="username"
@@ -165,7 +196,7 @@ const NavBar = () => {
                     width: "100%",
                   }}
                 >
-                  <Link className="darkneon" href="/used_cars/Search-car">
+                  <Link className="darkneon" href="/used-cars/search-car">
                     Used Cars
                   </Link>
                   <span>
@@ -188,7 +219,7 @@ const NavBar = () => {
                     width: "100%",
                   }}
                 >
-                  <Link className="darkneon" href="/used_bikes/Search_bikes">
+                  <Link className="darkneon" href="/used-bikes/search-bikes">
                     Bikes
                   </Link>
                   <span>
@@ -210,12 +241,12 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <Link className="darkneon" href="/">
+                <Link className="darkneon" href="/blog">
                   Blogs
                 </Link>
               </li>
 
-              <Link className="postaddlink" href="/used_cars/-/Sell">
+              <Link className="postaddlink" href="/used-cars/-/sell">
                 <p>Post an add</p>
               </Link>
             </ul>
@@ -230,19 +261,18 @@ const NavBar = () => {
                   </div>
                 </Link>
 
-                <Link href={"/used_cars/Search-car"}>
+                <Link href={"/used-cars/search-car"}>
                   <div className="link">
                     <i class="bx bxs-car"></i>
                     <p>cars</p>
                   </div>
                 </Link>
-
               </div>
 
-              <Link href={"/used_cars/-/Sell"}>
-              <div className="link center_link">
-                <p>Sell</p>
-              </div>
+              <Link href={"/used-cars/-/Sell"}>
+                <div className="link center_link">
+                  <p>Sell</p>
+                </div>
               </Link>
 
               <div>

@@ -18,7 +18,7 @@ const Others = () => {
   },[])
 
   const Childcomponent = dynamic(
-    () => import(`@/components/child_components_of_others/${childcomponent}`),
+    () => import(`@/components/child_components_of_others/user/${childcomponent}`),
     {
       loading: () => <p>Loading...</p>,
     }

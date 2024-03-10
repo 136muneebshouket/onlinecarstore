@@ -165,7 +165,7 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
       <div className="main_searchcar">
         <div className="filters_sort_section">
           <button onClick={showfilters}>
-            <i className="bx bx-filter-alt"></i>
+            <i class="bx bxs-filter-alt"></i>
             <span>Filters</span>
             {filterslength > 0 ? (
               <span className="length_icon">{filterslength}</span>
@@ -191,91 +191,98 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                 <>
                   {/* <Link className="singlecar_link" href="#"> */}
                   <div
-                    key={obj?._id}
-                    className="singlecar"
                     style={{
+                      background: "white",
                       border: "1px solid rgb(216, 216, 216)",
-                      padding: "3px",
-                      display: "flex",
                       boxShadow: "0 0 11px rgba(0,0,0,0.1)",
+                      margin: "3px 0px",
+                      padding:'5px 0px'
                     }}
                   >
-                    <div className="car_img">
-                      <Image
-                        src={
-                          obj?.images_url[0]?.img_url
-                            ? obj?.images_url[0]?.img_url
-                            : obj?.images_url[0]
-                        }
-                        width={200}
-                        height={200}
-                        alt="loading"
-                      />
-                    </div>
-                    <div className="car_info">
-                      <div>
-                        <Link
-                          className="car_content"
-                          href={`car/${obj?.brand.replaceAll(
-                            " ",
-                            "-"
-                          )}-${obj?.model.replaceAll(" ", "-")}-${
-                            obj?.modelyear
-                          }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${
-                            obj?._id
-                          }`.toLowerCase()}
-                        >
-                          <h3>
-                            {obj?.brand} {obj?.model}{" "}
-                            {obj?.variant_name && obj?.variant_name}{" "}
-                            {obj?.modelyear}
-                          </h3>
-
-                          <p className="price_mbv">
-                            <strong>PKR:{obj?.price}</strong>
-                          </p>
-
-                          <p>{obj?.city}</p>
-
-                          <div style={{marginBottom:'5px'}}>
-                            <span>{obj?.Mileage} km</span>
-                            <span>{obj?.enginecc}cc</span>
-                            <span className="hide_in_mbv">
-                              {obj?.transmission}
-                            </span>
-                            <span className="hide_in_mbv">
-                              {obj?.enginetype}
-                            </span>
-                          </div>
-                          {obj?.pending == 0 ? (
-                            <span className="pending_banner">Pending</span>
-                          ) : null}
-
-                          <div
-                            className="car_extras"
-                            style={{ display: "inline-block" }}
+                    <div
+                      key={obj?._id}
+                      className="singlecar"
+                      style={{
+                        
+                        display: "flex",
+                      }}
+                    >
+                      <div className="car_img">
+                        <Image
+                          src={
+                            obj?.images_url[0]?.img_url
+                              ? obj?.images_url[0]?.img_url
+                              : obj?.images_url[0]
+                          }
+                          width={200}
+                          height={200}
+                          alt="loading"
+                        />
+                      </div>
+                      <div className="car_info">
+                        <div>
+                          <Link
+                            className="car_content"
+                            href={`car/${obj?.brand.replaceAll(
+                              " ",
+                              "-"
+                            )}-${obj?.model.replaceAll(" ", "-")}-${
+                              obj?.modelyear
+                            }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${
+                              obj?._id
+                            }`.toLowerCase()}
                           >
-                            {obj?.overall_incpection_rating?.overall_rating ? (
-                            <span className="total_rating">
-                              {obj?.overall_incpection_rating?.overall_rating}
-                              /10
-                            </span>
-                            ) : null}
-                          </div>
-                        </Link>
-                      </div>
+                            <h3>
+                              {obj?.brand} {obj?.model}{" "}
+                              {obj?.variant_name && obj?.variant_name}{" "}
+                              {obj?.modelyear}
+                            </h3>
 
-                      <div className="car_price_section">
-                        <div className="car_price_fav">
-                          <h3>{price_converter(obj?.price)}</h3>
-                          <Favourites car_id={obj?._id} />
+                            <p className="price_mbv">
+                              <strong>PKR:{obj?.price}</strong>
+                            </p>
+
+                            <p>{obj?.city}</p>
+
+                            <div style={{ marginBottom: "5px" }}>
+                              <span>{obj?.Mileage} km</span>
+                              <span>{obj?.enginecc}cc</span>
+                              <span className="hide_in_mbv">
+                                {obj?.transmission}
+                              </span>
+                              <span className="hide_in_mbv">
+                                {obj?.enginetype}
+                              </span>
+                            </div>
+                          </Link>
                         </div>
-                        <div className="phone_num">
-                          <button>Show Phone No.</button>
+
+                        <div className="car_price_section">
+                          <div className="car_price_fav">
+                            <h3>{price_converter(obj?.price)}</h3>
+                            <Favourites car_id={obj?._id} />
+                          </div>
+                          <div className="phone_num">
+                            <button>Show Phone No.</button>
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="extra_details">
+                      {obj?.pending == 0 ? (
+                        <span className="pending_banner">Pending</span>
+                      ) : null}
+                      
+                        {obj?.overall_incpection_rating?.overall_rating ? (
+                          <span className="total_rating">
+                            {obj?.overall_incpection_rating?.overall_rating}
+                            /10
+                          </span>
+                        ) : null}
+                    
                     </div>
                   </div>
+
                   {/* </Link> */}
                 </>
               );
@@ -320,7 +327,7 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
 
 export async function getServerSideProps({ params, query, res }) {
   const resp = await axios.get(
-    `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters}&limit=12&page=${query.page}`
+    `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters ? query.filters:''}&limit=12&page=${query.page ? query.page :''}&text=${query.text ? query.text : ''}`
   );
   const carrdata = resp.data.data;
   const pages = Math.ceil(resp.data.count / 12);

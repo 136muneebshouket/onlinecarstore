@@ -7,7 +7,7 @@
     margin: 10px 5px;
     padding: 20px;
     background: white;
-    max-width: 700px;
+    max-width: 900px;
     margin: auto;
 }
 .form_blog .form_input {
@@ -20,4 +20,34 @@
 }
 .form_blog .form_input label{
     font-weight: 600;
+}
+
+.blogs_btn{
+    display: flex;
+    justify-content: center;
+}
+.blogs_btn button{
+    margin: 20px;
+    border: none;
+    padding: 10px 20px ;
+    border-radius: 10px ;
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+    background-color: green;
+}
+
+.blog_img_uplod{
+    display: flex;
+    justify-content: center;
+}
+
+.blog_img_uplod img{
+  width: 60%;
+  height: auto;
+  margin: auto;
+}
+
+.blog_content{
+    margin: 20px 0px;
 }

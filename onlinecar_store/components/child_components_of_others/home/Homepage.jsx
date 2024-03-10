@@ -4,6 +4,8 @@ import Image from "next/image";
 import Slider from "@/components/fetched_cars_divs/Slider";
 import Used_cars from "@/components/fetched_cars_divs/used_cars_homepage/Used_cars";
 import H_Videos from "@/components/Video_components/homepage_videos/H_Videos"; 
+import Header_title from "./Header_title";
+import Header_search_bar from "./Header_search_bar";
 // import Usedcarchild from "@/components/carschildcomponents/Usedcarchild.server";
 
 const Homepage = () => {
@@ -22,11 +24,9 @@ const Homepage = () => {
       <div className="home_main">
         <div className="home_header">
           <div className="grey_back"></div>
-          <div className="header_content" style={{position:'relative'}}>
-            <div className="header_title">
-              <h1>Find Used Cars in Pakistan</h1>
-              <p>With thousands of cars, we have just the right one for you</p>
-            </div>
+          {/* <div className="header_content" style={{position:'relative' }}> */}
+            <Header_title/>
+            <Header_search_bar/>
             {/* <div className="home_search">
               <input
                 type="text"
@@ -44,10 +44,10 @@ const Homepage = () => {
                 <i className="bx bx-search"></i>
               </div>
             </div> */}
-            <div className="advance_searchbtn">
+            {/* <div className="advance_searchbtn">
               <Link href="/used_cars/Search-car">Advance Search <i class='bx bx-search-alt-2'></i> </Link>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
         <div className="home_others">
           <div className="sell_links">
@@ -70,7 +70,7 @@ const Homepage = () => {
                       <span>&#10003;</span>Sell your car Fast at the Best Price
                     </li>
                   </ul>
-                  <Link href="/used_cars/-/Sell">Register Your Car</Link>
+                  <Link href="/used-cars/-/sell">Register Your Car</Link>
                 </div>
                 <div className="first_div">
                   <h4>Try Carselection Sell It For Me</h4>

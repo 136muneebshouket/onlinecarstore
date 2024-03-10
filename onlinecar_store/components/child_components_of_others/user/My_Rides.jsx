@@ -7,7 +7,6 @@ import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import price_converter from "@/components/processing_functions/Price_calculator";
-
 const Del_ad_modal = dynamic(
   () => import("@/components/Modals/del_ad_modal/Delete_ad_modal"),
   {
@@ -28,7 +27,7 @@ const FullLoader = dynamic(
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.message);
 
-const My_Ads = () => {
+const My_Rides = () => {
   const { data: sessionData } = useSession();
   let user_email = sessionData?.user.email;
 
@@ -38,8 +37,7 @@ const My_Ads = () => {
   const [loadiing, setLoadiing] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [type, setType] = useState("active");
-  const [ad_type, setAd_Type] = useState("cars");
+  const [type, setType] = useState("bikes");
 
   const handleOpenModal = (cardataprops) => {
     setCarprops(cardataprops);
@@ -51,7 +49,7 @@ const My_Ads = () => {
   };
 
   const { data, error, isLoading } = useSWR(
-    user_email ? `/api/user_ads/?user_email=${user_email}&type=${type}&ad_type=${ad_type}` : null,
+    user_email ? `/api/user_ads/?user_email=${user_email}&ad_type=${type}` : null,
     fetcher
   );
 
@@ -87,7 +85,7 @@ const My_Ads = () => {
       {isLoading && <FullLoader />}
 
       <div className="main_ads_section">
-        <div className="ads_links_section">
+        {/* <div className="ads_links_section">
           <div
             className="links"
             onClick={() => {
@@ -112,7 +110,7 @@ const My_Ads = () => {
           >
             Removed
           </div>
-        </div>
+        </div> */}
         <div className="my_Ads_section">
           <div className="cars" style={{ width: "100%" }}>
             {error && <h5>Something Went Wrong</h5>}
@@ -151,7 +149,7 @@ const My_Ads = () => {
                         <div style={{ textAlign: "left" }}>
                           <Link
                             className="car_content"
-                            href={`/used_cars/car/${obj.brand.replaceAll(
+                            href={`/used-bikes/${obj.brand.replaceAll(
                               " ",
                               "-"
                             )}-${obj.model.replaceAll(" ", "-")}-${
@@ -172,15 +170,15 @@ const My_Ads = () => {
                             <p>{obj.city}</p>
                             <div>
                               <span>{obj.Mileage} km</span>
-                              <span>{obj.enginecc}cc</span>
-                              <span className="hide_in_mbv">
+                              {/* <span>{obj.enginecc}cc</span> */}
+                              {/* <span className="hide_in_mbv">
                                 {obj.transmission}
-                              </span>
-                              <span className="hide_in_mbv">
+                              </span> */}
+                              {/* <span className="hide_in_mbv">
                                 {obj.enginetype}
-                              </span>
+                              </span> */}
                             </div>
-                            {obj.pending == 0 ? <p className="pending_banner">Pending</p> : null}
+                            {/* {obj.pending == 0 ? <p className="pending_banner">Pending</p> : null} */}
                           </Link>
                         </div>
                         <div className="car_price_section">
@@ -195,13 +193,9 @@ const My_Ads = () => {
                       </div>
                     </div>
                     <div className="edit_or_del_btns">
-                    <button style={{ background: "#3083d1" }}>
-                        {" "}
-                        <Link href={`/products/Inspection?ad_id=${obj._id}`}>Request Inspection</Link>
-                      </button>
                       <button style={{ background: "#3083d1" }}>
                         {" "}
-                        <Link href={`/users/edit_myad/${obj._id}`}>Update</Link>
+                        <Link href={`/users/edit_myad/bike/${obj._id}`}>Update</Link>
                       </button>
                       <button
                         style={{ background: "#b40000" }}
@@ -212,7 +206,8 @@ const My_Ads = () => {
                         Delete
                       </button>
                     </div>
-                    {obj.reject_reasons?.length > 0 ? (
+                    
+                    {/* {obj.reject_reasons?.length > 0 ? (
                       <div className="reject_reasons">
                         <div className="head">
                           <p>Reject Reasons</p>
@@ -227,7 +222,7 @@ const My_Ads = () => {
                               setToggle(!toggle);
                             }}
                           ></i>
-                          {/* <p className="" >&#8249;</p> */}
+                          
                         </div>
                         <ol style={{ height: `${toggle ? "auto" : "0"}` }}>
                           {obj.reject_reasons.map((v) => {
@@ -239,7 +234,8 @@ const My_Ads = () => {
                           })}
                         </ol>
                       </div>
-                    ) : null}
+                    ) : null} */}
+
                   </div>
                 </>
               );
@@ -253,7 +249,7 @@ const My_Ads = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           car={carprops}
-          ad_type={ad_type}
+          ad_type={type}
           // refresh={getuser_ads}
         />
       )}
@@ -261,4 +257,4 @@ const My_Ads = () => {
   );
 };
 
-export default My_Ads;
+export default My_Rides;

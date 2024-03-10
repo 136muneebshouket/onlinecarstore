@@ -43,6 +43,7 @@ export default async function handler(req, res) {
           });
 
           await find_reported_ad.save();
+
         } else {
           await new report_ad_schema({
             ad_id: ad_id,

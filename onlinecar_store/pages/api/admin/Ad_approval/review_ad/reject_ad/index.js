@@ -43,7 +43,7 @@ export default async function handler(req, res) {
           ${rejections}
         </ol>
         <div style="display: flex; justify-content: center;">
-        <a href='http://localhost:3000/' style="margin-top:40px; ">
+        <a href='${process.env.Host}' style="margin-top:40px; ">
         <button style="background-color: green; color:white; border: none;  padding: 10px 20px; font-size: 16px; border-radius: 5px;  cursor: pointer;">Add Task</button>
         </a>
         </div>`,

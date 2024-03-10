@@ -196,3 +196,13 @@ margin-bottom: 20px;
     color: white;
     border-radius: 10px;
 }
+.main_uploaded_img{
+    max-width: 700px;
+    margin:10px auto;
+    /* margin: 10px; */
+    border: 1px solid gray;
+}
+.main_uploaded_img img{
+    width: 100%;
+    height: auto;
+}

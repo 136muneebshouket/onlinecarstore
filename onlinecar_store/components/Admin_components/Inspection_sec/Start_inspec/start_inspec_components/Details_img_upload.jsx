@@ -4,7 +4,7 @@ import Context from "@/components/processing_functions/context";
 import Image from "next/image";
 import axios from "axios";
 
-const Main_img_upload = () => {
+const Details_img_upload = () => {
   const { message, setMessage } = useContext(Context);
   const router = useRouter();
   const Ad_id = router.query.Ad_id;
@@ -152,6 +152,9 @@ const Main_img_upload = () => {
             {/* <button onClick={upload_main_img}>Upload pic</button> */}
           </div>
         </div>
+         
+         
+
         <div className="car_basic_details">
           <div className="input_div">
             <label htmlFor="">Car Name</label>
@@ -302,4 +305,4 @@ const Main_img_upload = () => {
   );
 };
 
-export default React.memo(Main_img_upload);
+export default React.memo(Details_img_upload);

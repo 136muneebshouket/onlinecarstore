@@ -48,6 +48,8 @@
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 30%);
   border-radius: .30rem;
   transition: all .2s ease-in;
+  max-height: 0;
+  overflow: hidden;
 }
 
 
@@ -58,6 +60,7 @@
   right: 20%;
   opacity: 1;
   z-index: 999;
+  max-height: 200px;
 }
 
 
@@ -74,7 +77,7 @@
 }
 
 .NavBar .uppernav .profile .profileDropDown ul li {
-  padding: 3px 15px;
+  padding: 6px 15px;
   border-radius: .30rem;
   /* width: 90%; */
 }
@@ -124,6 +127,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  /* display: none; */
 }
 
 .NavBar .uppernav .profile .arrowDown i {
@@ -480,7 +484,7 @@
     flex-direction: column;
     margin: 0;
     justify-content: flex-start;
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid #c1c1c1;
     padding-bottom: 0px !important;
     align-items: flex-start;
   }
@@ -551,6 +555,10 @@
 }
 
 @media (max-width:800px) {
+  .signup_desktop{
+    display: none;
+  }
+
   .NavBar ,.NavBar_hide{
     position: sticky;
     width: 100%;
@@ -567,7 +575,7 @@
     position: fixed;
     top: 0;
     border: 1px solid rgb(206, 206, 206);
-    height: 88%;
+    height: 100%;
   }
 
   .NavBar nav .logo {
@@ -587,6 +595,7 @@
     border: none;
     height: 0;
   }
+  
   .NavBar .uppernav .profile .arrowDown{
     display: none;
   }
@@ -650,7 +659,7 @@
   }
 
   .NavBar .uppernav .profile .profileDropDown.active {
-    top: -120px;
+    top: -144px;
     right: 23px;
     width: max-content;
   }

@@ -66,7 +66,8 @@
 
 .upload_ad_page .uploadpage_banner .banner_title h1 {
     color: var(--redcode);
-    margin-bottom: 3px;
+    /* margin-bottom: 3px; */
+    margin-top: 20px;
 }
 
 .uploadpage_banner .banner_title p {
@@ -138,6 +139,7 @@
 
     padding-right: 20px;
     background: white;
+    box-shadow: 0px 0px 10px 0px #c4c4c45e;
     margin-bottom: 50px;
     padding-bottom: 30px;
 
@@ -225,7 +227,7 @@ input::placeholder ,textarea::placeholder,select::placeholder{
 .bx-error-circle,
 .number_upload_section .input_field p {
     font-size: 14px;
-    color: rgb(216, 1, 1);
+    color: var(--redcode);
     margin: 0;
 
 }
@@ -481,16 +483,16 @@ input::placeholder ,textarea::placeholder,select::placeholder{
     .watsapp_field {
         border: none;
         border-bottom: 1px solid #bebebe !important;
-        border-radius: unset !important;
+        /* border-radius: unset !important; */
         height: auto;
-        padding: 3px;
+        padding: 5px;
         /* box-shadow: 0px 0px 5px 0px #dbdbdbb5 inset !important; */
-        /* background-color: #80808014; */
+        background-color: #80808014;
     }
 
     .upload_ad_page form .upper_form_section .input_field div label,
     .number_upload_section .input_field label {
-        color: #333333;
+        color: #333333bf;
         font-weight: 600;
         font-size: 14px;
         padding-left: 5px;

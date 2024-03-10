@@ -1,6 +1,7 @@
 import cardataschema from "../../../../models/cardataschema";
 import dbConnect from "../../../../config/dbConnect";
 import usedbike_schema from "@/models/usedbike_schema";
+import { send_mail } from "../../mail_to_admin/sendmail";
 // const cloudinary = require("cloudinary").v2;
 const ImageKit = require("imagekit");
 // const  Cloudinary  = require("next-cloudinary");
@@ -137,6 +138,10 @@ export default async function handler(req, res) {
           let updated = await doc.save();
           // const user = await cardataschema.findByIdAndUpdate({id : });
           if (updated) {
+            if(req.body.ad_type == 'car'){
+              let send_email_admin = await send_mail(updated.slug)
+            }
+           
             res.status(201).json({
               success: true,
               message: "updated successfully",

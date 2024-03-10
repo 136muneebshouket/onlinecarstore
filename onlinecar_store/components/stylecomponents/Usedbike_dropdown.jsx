@@ -6,13 +6,13 @@ const Usedbike_dropdown = ({toggle}) => {
     <>
       <div style={{height:`${toggle ? 'auto': ''}`}} className="usedcar_dropdown">
         <div className="first_div">
-            <Link href={'/used_bikes/Search_bikes'} className="option">
+            <Link href={'used-bikes/search-bikes'} className="option">
                 <i>&#9906;</i>
                 <div> <p>Find Used Bikes For Sale</p>
                 <span>Search over 10k used Bikes</span></div>
             </Link>
            
-            <Link href={'/used_bikes/sell/Post_ad'} className="option">
+            <Link href={'/used-bikes/sell/post-ad'} className="option">
                 <i>&#9906;</i>
                 <div> <p>Sell Your Bike</p>
                 <span>Post Ad and Sell Your Bike</span></div>
@@ -72,19 +72,19 @@ const Usedbike_dropdown = ({toggle}) => {
         </div> */}
         <div className="first_div">
             <h5 style={{whiteSpace:'nowrap'}}>Popular Models</h5>
-            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Honda"],"model":["CG%20125"]}'} className="option">
+            <Link href={'used-bikes/search-bikes?filters={"brand":["Honda"],"model":["CG%20125"]}'} className="option">
                  <p>Honda CG 125</p>
             </Link>
-            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Honda"],"model":["CD%2070"]}'} className="option">
+            <Link href={'used-bikes/search-bikes?filters={"brand":["Honda"],"model":["CD%2070"]}'} className="option">
                  <p>Honda CC 70</p>
             </Link>
-            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Yamaha"],"model":["YBR%20125"]}'} className="option">
+            <Link href={'used-bikes/search-bikes?filters={"brand":["Yamaha"],"model":["YBR%20125"]}'} className="option">
                  <p>Yamaha YBR 125</p>
             </Link>
-            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Suzuki"],"model":["GS%20150"]}'} className="option">
+            <Link href={'used-bikes/search-bikes?filters={"brand":["Suzuki"],"model":["GS%20150"]}'} className="option">
                  <p>Suzuki GS 150</p>
             </Link>
-            <Link href={'/used_bikes/Search_bikes?filters={"brand":["Yamaha"],"model":["YBR%20125G"]}'} className="option">
+            <Link href={'used-bikes/search-bikes?filters={"brand":["Yamaha"],"model":["YBR%20125G"]}'} className="option">
                  <p>Yamaha YBR 125G</p>
             </Link>
             

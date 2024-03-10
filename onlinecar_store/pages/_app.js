@@ -31,6 +31,8 @@ import "@/styles/ad_caroptions.css";
 import "@/styles/shake_animations.css";
 import "@/styles/client_Inspection_report.css";
 import "@/styles/ad_new_blog.css";
+import "@/styles/blogs_all.css";
+import "@/styles/single_blogpage.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";

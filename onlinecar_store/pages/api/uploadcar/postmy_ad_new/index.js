@@ -3,6 +3,7 @@ import UserModel from "../../../../models/user";
 // import errors_handle from "@/models/errors_handle";
 import dbConnect from "../../../../config/dbConnect";
 import { p_func } from "@/components/processing_functions/progress";
+import { send_mail } from "../../mail_to_admin/sendmail";
 // import formidable from "formidable";
 
 export default async function handler(req, res) {
@@ -38,6 +39,7 @@ export default async function handler(req, res) {
           throw new Error("Error in uploading images");
         }
         if (imgs_stored_indb) {
+          let send_email_admin = await send_mail(carsaved.slug)
           let back = err(201, "succesfully saved", true , carsaved._id);
           if (back) {
             return;

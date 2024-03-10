@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from "react";
 import { useRouter } from "next/router";
 import Context from "@/components/processing_functions/context";
 import Image from "next/image";
-import Main_img_upload from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Main_img_upload";
+import Details_img_upload from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Details_img_upload";
 import Accident_checklist from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Accident_checklist";
 import ETC from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/ETC";
 import Brakes from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Brakes";
@@ -15,6 +15,7 @@ import Tyres from "@/components/Admin_components/Inspection_sec/Start_inspec/sta
 import Test_drive from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Test_drive";
 import Car_img from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Cars_scratches_dents/Car_img";
 import Calculate_insp from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/Calculate/Calculate_insp";
+import Main_image from "@/components/Admin_components/Inspection_sec/Start_inspec/start_inspec_components/main_img/Main_image";
 import useSWR, { mutate } from "swr";
 import axios from "axios";
 
@@ -34,12 +35,14 @@ const Start_inspection = () => {
   function refresh(){
     mutate() 
   }
+  // console.log(data)
  
   return (
     <>
       <div className="Start_inspec">
         <h1 style={{ padding: "10px 20px" }}>Start Inspection</h1>
-       <Main_img_upload/>
+        <Main_image/>
+       <Details_img_upload/>
        <Car_img/>
        <Accident_checklist exist={data} refresh={refresh}/>
        <ETC exist={data} refresh={refresh}/>

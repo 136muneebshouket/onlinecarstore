@@ -47,6 +47,20 @@ export default async function handler(req, res) {
               findobj.pending = 0;
             }
 
+        // count only 
+         if(req.query.count_only){
+          const count_cars = await cardataschema.find(findobj).count();
+          if(count_cars){
+            res.status(201).json({
+              success: true,
+              count: count_cars,
+            });
+            return
+          }
+         }
+      
+        // count only 
+
             const selectedfields = {
               brand: 1,
               model: 1,

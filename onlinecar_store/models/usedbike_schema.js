@@ -140,6 +140,10 @@ const BikeSchema = new mongoose.Schema(
       required:false,
       default:false
     },
+    views:{
+      type : Number , 
+      default : 0
+    },
     // certified: {
     //   type: Boolean,
     //   required:false,

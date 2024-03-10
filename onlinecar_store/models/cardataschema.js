@@ -178,6 +178,10 @@ const carSchema = new mongoose.Schema(
       required:false,
       default:false
     },
+    views:{
+      type : Number , 
+      default : 0
+    },
    
    
   },

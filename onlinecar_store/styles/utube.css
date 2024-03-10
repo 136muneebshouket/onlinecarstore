@@ -153,8 +153,8 @@
     border-radius: 50%;
 }
 .home_videos_sec a p{
-    font-size: max(14px,1.5vw);
-    padding: 5px;
+    font-size: max(14px,1.2vw);
+    padding: 7px;
     margin: 0;
 }
 @media only screen and (max-width:770px) {

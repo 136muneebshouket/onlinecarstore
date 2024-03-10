@@ -1,275 +1,339 @@
-.sell_main{
+.sell_main {}
+
+.sell_main .sell_header {
+  width: 100%;
+  background-color: #BEC9D9;
 
 }
-.sell_main .sell_header{
-    width: 100%;
-    background-color: #BEC9D9;
-   
+
+.sell_header .header_title {
+  text-align: center;
+  padding: 15px 0px;
 }
-.sell_header .header_title{
-    text-align: center;
-    padding: 15px 0px;
-}
-.sell_header .header_title h1{
-  font-size: max(2.5vw,27px);
+
+.sell_header .header_title h1 {
+  font-size: max(2.5vw, 27px);
   margin-top: 20px;
   font-weight: 500;
   color: #1d3367;
 }
 
-.sell_header .header_cards{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 50px;
+.sell_header .header_cards {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
 }
 
-.sell_header .header_cards .card{
-    display: flex;
-   
-    width: 30vw;
-    height: auto;
-    flex-direction: column;
-    background-color: #FFFFFF;
-    align-items: center;
-    padding:35px;
-border-radius: 5px;
-margin: 15px;
+
+.sell_header .header_cards .card {
+  display: flex;
+  width: 30vw;
+  height: auto;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  align-items: center;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 15px;
+  transition: .2s;
 }
-.sell_header .header_cards .card div{
-    text-align: center;
-    margin-bottom: 15px;
+
+.sell_header .header_cards .card:hover {
+  transform: scale(1.01);
 }
-.sell_header .header_cards .card div h2{
-    font-size: max(1.8vw,18px);
-    font-weight: 500;
-    color: #363636;
+
+.sell_header .header_cards .card div {
+  text-align: center;
 }
-.sell_header .header_cards .card div img{
-    max-width: 200px;
-    height: auto;
+
+.sell_header .header_cards .card div h2 {
+  font-size: max(1.8vw, 18px);
+  font-weight: 700;
+  color: #363636;
 }
-.header_cards .card ul{
-list-style: none;
-padding: 0;
-margin-bottom: 20px;
+
+.sell_header .header_cards .card div img {
+  max-width: 200px;
+  height: auto;
 }
-.header_cards .card ul li span{
-font-size: 13px;
-color: #434343;
+
+.header_cards .card ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0px;
 }
-.header_cards .card ul li i{
-font-size: 17px;
+
+.header_cards .card ul li {
+  line-height: 20px;
 }
-.header_cards .card div a button{
-padding: 10px 15px ;
-font-size: 14px;
-color: #fff;
-background-color: #233d7b;
-border-color: #1d3367;
-width: 60%;
-border: none;
-border-radius: 5px;
-font-weight: 600;
-cursor: pointer;
+
+.header_cards .card ul li span {
+  font-size: 13px;
+  color: var(--redcode);
+}
+
+.header_cards .card ul li i {
+  font-size: 17px;
+  color: var(--redcode);
+}
+
+.header_cards .card div a button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #233d7b;
+  border-color: #1d3367;
+  width: 60%;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 
 
 .sellpage .body {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sellpage .body .container {
+  width: max(80vw, min(700px, 90vw));
+  padding: 20px 0px;
+}
+
+.sellpage .body .container h2 {
+  margin: 40px 5px;
+  font-size: 26px;
+  color: #545454;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+
+.sellpage .container .cards {
+  display: flex;
+  justify-content: center;
+}
+
+.sellpage .cards .card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  /* background-color: lightblue; */
+  /* justify-content: center; */
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+}
+
+
+.sellpage .card img {
+  width: min(65px, 65%);
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0px 0px 13px 0px #808080a3;
+  margin: 10px;
+}
+
+.sellpage .card p {
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+}
+
+.sellpage .steps {
+  /* background-color: #d3d3d380 !important; */
+  width: 33% !important;
+}
+
+.sellpage .steps img {
+  border-radius: 0% !important;
+  box-shadow: none !important;
+}
+
+
+.sellpage .cards .q {
+  background-color: white !important;
+  border-radius: 2px;
+  border: 0.5px solid lightgray;
+}
+
+.sellpage .cards .q div {
+  margin: 10px 0px;
+}
+
+.sellpage .q img {
+  border-radius: 0% !important;
+  box-shadow: none !important;
+  margin: 0;
+}
+
+.sellpage .q h3 {
+  font-size: medium;
+  text-align: center;
+}
+
+.sellpage .more-padding {
+  padding: 15px 0px;
+}
+
+.sellpage .container .succes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 290px;
+  margin: 5px;
+  background-color: white;
+
+}
+
+.sellpage .container .succes iframe {
+  width: 100%;
+}
+
+.sellpage .container .overflow {
+  overflow: scroll;
+  padding: 5px 0px;
+  scrollbar-width: none;
+}
+
+.sellpage .cards .tips {
+  padding: 0 !important;
+}
+
+.sellpage .cards .tips h3,
+.tips p {
+  text-align: left !important;
+  margin: 12px !important;
+}
+
+.sellpage .container .overflow::-webkit-scrollbar {
+  display: none;
+}
+
+.sellpage .tip-pic {
+  height: auto !important;
+  width: 100% !important;
+}
+
+.sellpage .body .container>p {
+  margin: 8px;
+}
+
+@media only screen and (max-width:770px) {
+  .sell_header .header_cards>a {
+    width: -webkit-fill-available;
   }
-  
-  .sellpage .body .container {
-    width: max(80vw, min(700px,90vw));
-    padding: 20px 0px;
+
+  .sell_header .header_title {
+    padding: 2px 0px;
   }
-  
-  .sellpage .body .container h2 {
-    margin: 40px 5px;
-    font-size: 26px;
-    color: #545454;
-    font-weight: 700;
-    text-transform: capitalize;
+
+  .sell_header .header_cards .card div {
+    width: -webkit-fill-available;
+    text-align: left;
   }
-  
- 
-  .sellpage .container .cards{
-    display: flex;
-    justify-content: center;
-  }
-  .sellpage .cards .card {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    background-color: lightblue;
-    /* justify-content: center; */
-    align-items: center;
-    border-radius: 5px;
-    margin: 5px;
-    padding: 10px;
-  }
- 
-  
-  .sellpage .card img {
-    width: min(65px,65%);
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0px 0px 13px 0px #808080a3;
-    margin: 10px;
-  }
-  
-  .sellpage .card p {
-    text-align: center;
-    margin: 0;
-  }
-  
-  .sellpage .steps {
-    background-color: #d3d3d380 !important;
-    width: 33% !important;
-  }
-  
-  .sellpage .steps img {
-    border-radius: 0% !important;
-    box-shadow: none !important;
-  }
-  
-  
-  .sellpage .cards .q {
-    background-color: white !important;
-    border-radius: 2px;
-    border: 0.5px solid lightgray;
-  }
-  .sellpage .cards .q div{
+
+  .header_cards .card ul {
     margin: 10px 0px;
   }
-  
-  .sellpage .q img {
-    border-radius: 0% !important;
-    box-shadow: none !important;
-    margin: 0;
-  }
-    .sellpage .q h3{
-        font-size: medium;
-        text-align: center;
-    }
-  
-  .sellpage .more-padding {
-    padding: 15px 0px;
-  }
-  
-  .sellpage .container .succes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 290px;
-    margin: 5px;
-    background-color: white;
+
+  .sell_header .header_cards .card {
+    width: -webkit-fill-available;
+    padding: 20px;
+    margin: 10px;
 
   }
-  .sellpage .container .succes iframe{
-    width: 100%;
-  }
-  .sellpage .container .overflow{
-    overflow: scroll;
-    padding: 5px 0px;
-    scrollbar-width: none;
-  }
-  .sellpage .cards .tips{
-    padding: 0 !important;
-  }
-  .sellpage .cards .tips h3 , .tips p{
-    text-align: left !important;
-    margin: 10px !important;
+
+  .sell_header .header_cards .card div img {
+    width: 35%;
+    float: right;
   }
 
-  .sellpage .container .overflow::-webkit-scrollbar{
+  .header_cards .card ul li:nth-child(2),
+  .header_cards .card ul li:nth-child(3) {
     display: none;
   }
-  
-  .sellpage .tip-pic {
-    height: auto !important;
-    width: 100% !important;
-  }
-  .sellpage .body .container > p {
-   margin: 8px;
+
+  .header_cards .card div a button {
+    width: auto;
+    padding: 10px 25px;
   }
 
-  @media only screen and (max-width:770px) {
-
-    .sell_header .header_cards .card{
-      width: auto;
-      padding: 10px;
-      margin: 10px;
-    }
-    .sell_header .header_cards .card div img{
-      max-width: 80%;
-    }
-    .header_cards .card ul li:nth-child(2),.header_cards .card ul li:nth-child(3){
-      display: none;
-    }
-    .header_cards .card div a button{
-      width: auto;
-      padding: 10px 25px;
-    }
-    .header_cards .card ul{
+  /* .header_cards .card ul{
       margin-bottom: 10px;
-    }
-    .sellpage .body .container h2{
-      margin: 15px 5px;
-    }
-    .sellpage .body .container{
-        width: 95%;
-        padding: 20px 0px;
-    }
-    .sellpage .container .upload_cars{
-      flex-direction: column;
-        /* justify-content: center; */
-      }
-    .sellpage .container .upload_cars{
-      flex-direction: column; 
-        /* justify-content: center; */
-      }
-      .sellpage .cards .card{
-        padding: 4px;
-      }
-      .sellpage .container .cards{
-        justify-content: start;
-      }
-      .sellpage .card img{
-        margin: 4px;
-      }
-      .sellpage .container .upload_cars > .q{
-        display: flex;
-        flex-direction: row;
-        width: auto;
-      }
-      .sellpage .container .upload_cars > .q >div h3,.sellpage .container .upload_cars > .q >div p{
-      text-align: left;
-      margin-bottom: 2px;
-      }
-      .sellpage .card p{
-        font-size: 10px;
-      }
-      .background-grey{
-        display: none;
-      }
-      .sellpage .cards .tips{
-        justify-content: normal;
-      }
-      .sellpage .more-padding iframe{
-        height: auto;
-      }
-      .sell_header .header_cards{
-        /* display: none; */
-       padding-bottom: 20px;
-      }
-      .sellpage .container .overflow .card{
-        min-width: 200px;
-      }
+    } */
+  .sellpage .body .container h2 {
+    margin: 15px 5px;
   }
 
+  .sellpage .body .container {
+    width: 95%;
+    padding: 20px 0px;
+  }
+
+  .sellpage .container .upload_cars {
+    flex-direction: column;
+    /* justify-content: center; */
+  }
+
+  .sellpage .container .upload_cars {
+    flex-direction: column;
+    /* justify-content: center; */
+  }
+
+  .sellpage .cards .card {
+    padding: 4px;
+  }
+
+  .sellpage .container .cards {
+    justify-content: start;
+  }
+
+  .sellpage .card img {
+    margin: 4px;
+  }
+
+  .sellpage .container .upload_cars>.q {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+  }
+
+  .sellpage .container .upload_cars>.q>div h3,
+  .sellpage .container .upload_cars>.q>div p {
+    text-align: left;
+    margin-bottom: 2px;
+  }
+
+  .sellpage .card p {
+    font-size: 10px;
+  }
+
+  .background-grey {
+    display: none;
+  }
+
+  .sellpage .cards .tips {
+    justify-content: normal;
+  }
+
+  .sellpage .more-padding iframe {
+    height: auto;
+  }
+
+  .sell_header .header_cards {
+    /* display: none; */
+    padding-bottom: 20px;
+  }
+
+  .sellpage .container .overflow .card {
+    min-width: 200px;
+  }
+}

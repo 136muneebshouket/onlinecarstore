@@ -68,6 +68,7 @@ export default async function handler(req, res) {
           success: true,
           message: "uploaded",
         });
+        
       } catch (err) {
         if (err.code === 11000) {
           const field = Object.keys(err.keyValue)[0]; // Get the field causing the uniqueness error

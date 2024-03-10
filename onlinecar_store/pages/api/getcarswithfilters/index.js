@@ -9,14 +9,16 @@ export default async function handler(req, res) {
       //   var { password, email, full_name, username } = req.body;
 
       try {
-        const { filters } = req.query;
+        const { filters, text } = req.query;
+        console.log(text);
+
         // console.log(filters);
-        var limit = req.query.limit || 12
-        var page = req.query.page || 1
-        var skip = (limit * (page - 1))
+        var limit = req.query.limit || 12;
+        var page = req.query.page || 1;
+        var skip = limit * (page - 1);
         // console.log(limit)
 
-        const appliedfilters = { active:true };
+        const appliedfilters = { active: true };
         try {
           if (filters) {
             let queryobj = JSON.parse(filters);
@@ -30,15 +32,21 @@ export default async function handler(req, res) {
             });
           }
         } catch (error) {
-          console.log(error + 'json parse error')
+          console.log(error + "json parse error");
         }
-        
+        try {
+          if (text) {
+            appliedfilters["$text"] = { $search: text };
+          }
+        } catch (error) {
+          console.log(error + " text search error");
+        }
 
         // console.log(appliedfilters);
 
         const selectedfields = {
           brand: 1,
-          model:1,
+          model: 1,
           variant_name: 1,
           modelyear: 1,
           city: 1,
@@ -59,9 +67,13 @@ export default async function handler(req, res) {
         };
 
         // Perform the query with the specified projection
-        const result = await cardataschema.find(appliedfilters, selectedfields)
-        .limit(limit).skip(skip).sort({pending:-1,createdAt:-1}).populate("overall_incpection_rating", "overall_rating");
-        const count = await cardataschema.find(appliedfilters).count()
+        const result = await cardataschema
+          .find(appliedfilters, selectedfields)
+          .limit(limit)
+          .skip(skip)
+          .sort({ pending: -1, createdAt: -1 })
+          .populate("overall_incpection_rating", "overall_rating");
+        const count = await cardataschema.find(appliedfilters).count();
 
         // Process the query results
         // console.log(count); // This will contain documents with only the selected fields and the first element of the images array

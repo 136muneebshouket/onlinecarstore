@@ -40,6 +40,7 @@ const Locationsmodal = ({ onClose, carrdata }) => {
   });
 
   const addcity = async (obj) => {
+    setSearchval('')
     // console.log(obj)
     if (obj.cityname) {
     location.city=obj.cityname;
@@ -70,6 +71,7 @@ const Locationsmodal = ({ onClose, carrdata }) => {
       <div className="caroptions_search">
         <input
           type="search"
+          value={searchval}
           onChange={(e) => {
             setSearchval(e.target.value);
           }}
