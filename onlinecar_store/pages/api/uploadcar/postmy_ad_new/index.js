@@ -39,7 +39,7 @@ export default async function handler(req, res) {
           throw new Error("Error in uploading images");
         }
         if (imgs_stored_indb) {
-          let send_email_admin = await send_mail(carsaved.slug)
+          let send_email_admin = await send_mail(carsaved.slug , 'Approval')
           let back = err(201, "succesfully saved", true , carsaved._id);
           if (back) {
             return;

@@ -139,7 +139,7 @@ export default async function handler(req, res) {
           // const user = await cardataschema.findByIdAndUpdate({id : });
           if (updated) {
             if(req.body.ad_type == 'car'){
-              let send_email_admin = await send_mail(updated.slug)
+              let send_email_admin = await send_mail(updated.slug,'Approval')
             }
            
             res.status(201).json({

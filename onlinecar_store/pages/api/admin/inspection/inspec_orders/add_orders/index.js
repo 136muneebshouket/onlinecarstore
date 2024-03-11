@@ -5,6 +5,7 @@ import cardataschema from "@/models/cardataschema";
 import dbConnect from "@/config/dbConnect";
 import user from "@/models/user";
 import inspec_request from "@/models/inspec_request";
+import { send_mail } from "@/pages/api/mail_to_admin/sendmail";
 
 export default async function handler(req, res) {
   dbConnect();
@@ -24,7 +25,10 @@ export default async function handler(req, res) {
         //     throw new Error('You already requested this order')
         // }
         let addorder = await inspec_request.create(req.body)
-
+        let slug = `${req.body?.brand} ${req.body?.model} ${req.body?.variant_name} ${req.body?.city} ${req.body?.area}`
+        
+        let send_mail_admin = await send_mail( slug ,'Incpection') 
+        
         res.status(200).json({
           success: true,
           message: "Your Request has been received",

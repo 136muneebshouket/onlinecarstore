@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 
+
 import Link from "next/link";
 import Sellerdetails from "@/components/child_components_of_others/slug_car_components/Sellerdetails_box/Sellerdetails";
 import Contact_details from "@/components/child_components_of_others/slug_car_components/price_and_phone/Contact_details";
-
+import Count_views from "@/components/child_components_of_others/slug_car_components/view_count/Count_views";
 import Reporting_add from "@/components/child_components_of_others/slug_car_components/report_add/Reporting_add";
 
 import dynamic from "next/dynamic";
@@ -25,10 +26,14 @@ const FullLoader = dynamic(
 );
 
 const slug = ({ carrdata, loadiing }) => {
+
+ 
   // const [car, setCar] = useState({});
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(loadiing);
   const [images, setImages] = useState([]);
+
+
 
   useEffect(() => {
     if (carrdata) {
@@ -42,6 +47,7 @@ const slug = ({ carrdata, loadiing }) => {
       );
     }
   }, [carrdata]);
+  
   // console.log(images)
   // const [features, setFeatures] = useState([
   //   "ABS",
@@ -112,9 +118,13 @@ const slug = ({ carrdata, loadiing }) => {
                   {carrdata?.brand} {carrdata?.model} {carrdata?.variant_name}{" "}
                   {carrdata?.modelyear}
                 </h1>
+                <div style={{display:'flex', justifyContent:'space-between'}}>
                 <span style={{ color: "#223C7A" }}>
                   <i className="bx bxs-location-plus"></i>&nbsp;{carrdata.city}
                 </span>
+                <Count_views views={carrdata.views}/>
+                </div>
+               
               </div>
               <div className="img_section">
                 {images.map((url, i) => {

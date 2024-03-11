@@ -30,8 +30,8 @@ const Inspection = () => {
   const { message, setMessage } = useContext(Context);
   const router = useRouter();
   const url = router.asPath;
-  const pageurl = url.split("ad_id=");
-  const ad_id = pageurl[pageurl.length - 1];
+  const pageurl =   url.split("ad_id=") ;
+  const ad_id =url.includes('ad_id') ? pageurl[pageurl.length - 1] : undefined;
 
   const { data: sessionData } = useSession();
   let user_name = sessionData?.user.name;
@@ -61,9 +61,10 @@ const Inspection = () => {
     // if(inspection_obj.user_id){
     //   return
     // }else{
-    get_ad();
+        get_ad();
     // }
   }, [sessionData]);
+  // console.log(pageurl)
 
   //   const [Ad, setAd] = useState({});
 
@@ -101,6 +102,7 @@ const Inspection = () => {
           setMessage({ success: false, msg: err?.response?.data.message });
         });
     }
+   
   }
   // console.log(sessionData)
 

@@ -23,6 +23,10 @@
     color: var(--redcode);
     border-radius: 50px;
 }
+.sm_loder{
+    -webkit-animation: rotating 2s ease-out infinite;
+    animation: rotating 2s ease-out infinite;
+}
 
 .fullLoader i{
     -webkit-animation: rotating 2s ease-out infinite;

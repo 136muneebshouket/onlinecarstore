@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import price_converter from "@/components/processing_functions/Price_calculator";
@@ -7,26 +7,36 @@ import Image from "next/image";
 import useSWR from "swr";
 
 const Used_cars = () => {
-// console.log(carsdata)
+  // console.log(carsdata)
   // const [carsdata, setCarsdata] = useState([])
 
-  const { data, error, isLoading } = useSWR( `/api/getcarswithfilters/?limit=6`, (url)=> axios.get(url).then((res)=> res.data.data))
+  const { data, error, isLoading } = useSWR(
+    `/api/getcarswithfilters/?limit=6`,
+    (url) => axios.get(url).then((res) => res.data.data)
+  );
   // const [carsdata, setCarsdata] = useState(()=> (data || []));
-  if(isLoading){
-    return <><h2>Loading...</h2></>
+  if (isLoading) {
+    return (
+      <>
+        <h2>Loading...</h2>
+      </>
+    );
   }
-  if(error){
-    return <><h2>Somethings wrong in Used car fetching</h2></>
+  if (error) {
+    return (
+      <>
+        <h2>Somethings wrong in Used car fetching</h2>
+      </>
+    );
     // setMessage({ success: false, msg: error.response.data.message });
-   }
-  
+  }
+
   // useEffect(()=>{
   //   // console.log(data)
   //   setCarsdata(data)
   //   // getdata()
   //       // eslint-disable-next-line react-hooks/exhaustive-deps
   // },[data])
-
 
   // const [cardata, setCarrdata] = useState([
   //   // {
@@ -99,9 +109,8 @@ const Used_cars = () => {
   //   //   enginetype: "Petrol",
   //   //   price: 1200000,
   //   // },
-   
-  // ]);
 
+  // ]);
 
   // async function getdata(){
   //   try {
@@ -123,25 +132,27 @@ const Used_cars = () => {
   return (
     <>
       <div className="car_cars_sliders">
-      {isLoading && (
-        <>
-          <h2>Loading...</h2>
-        </>
-      )}
-      {error && (
-        <>
-          <h2>Somethings wrong in Used cars fetching</h2>
-        </>
-      )}
+        {isLoading && (
+          <>
+            <h2>Loading...</h2>
+          </>
+        )}
+        {error && (
+          <>
+            <h2>Somethings wrong in Used cars fetching</h2>
+          </>
+        )}
         {data?.map((obj, i) => {
           return (
             <>
               {/* <Link className="singlecar_link" href="#"> */}
               <Link
-                href={`used-cars/car/${obj?.brand.replaceAll(
+                href={`/used-cars/car/${obj?.brand.replaceAll(
                   " ",
                   "-"
-                )}-${obj?.model.replaceAll(" ", "-")}-${obj?.modelyear}-${
+                )}-${obj?.model.replaceAll(" ", "-")}-${
+                  obj?.modelyear
+                }-for-sale-in-${obj?.city.replaceAll(" ", "-")}-${
                   obj?._id
                 }`.toLowerCase()}
               >
@@ -162,7 +173,8 @@ const Used_cars = () => {
                     <div className="car_content">
                       <h3>
                         {obj?.brand} {obj?.model}{" "}
-                        {obj?.variant_name && obj?.variant_name} {obj?.modelyear}
+                        {obj?.variant_name && obj?.variant_name}{" "}
+                        {obj?.modelyear}
                       </h3>
                       {/* </Link> */}
 
@@ -183,7 +195,6 @@ const Used_cars = () => {
             </>
           );
         })}
-        
       </div>
       {/* <button onClick={()=>{getdata()}}>get please</button> */}
     </>

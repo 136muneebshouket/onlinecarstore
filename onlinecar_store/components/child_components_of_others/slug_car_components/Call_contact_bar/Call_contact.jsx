@@ -22,7 +22,7 @@ const Call_contact = ({ phone }) => {
       <div className="Call_contact_bar">
         <Link className="phone" href={`tel:${phone}`}>
           <div className={`call ${shake}`} style={{ background: "#283949" }}>
-            <i class="bx bxs-phone-call"></i>
+            <i className="bx bxs-phone-call"></i>
           </div>
         </Link>
 
@@ -31,7 +31,7 @@ const Call_contact = ({ phone }) => {
             className={`whatsapp_chat ${shake}`}
             style={{ background: "#3EB549" }}
           >
-            <i class="bx bxl-whatsapp"></i>
+            <i className="bx bxl-whatsapp"></i>
           </div>
         </Link>
       </div>
