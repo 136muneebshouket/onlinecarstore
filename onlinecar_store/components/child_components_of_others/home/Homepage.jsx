@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Slider from "@/components/fetched_cars_divs/Slider";
@@ -19,6 +19,8 @@ const Homepage = () => {
     "Budget",
     "Category",
   ]);
+  const [readmore_ul, setReadmore_ul] = useState(false);
+
   return (
     <>
       <div className="home_main">
@@ -58,35 +60,36 @@ const Homepage = () => {
               <div className="post_ad_sec">
                 <div className="first_div">
                   <h4>Post your Ad on Carselection</h4>
-                  <ul>
+                  <ul style={{maxHeight:`${readmore_ul?'220px':''}`}}>
                     <li>
-                      <span>&#10003;</span>Post your Ad for Free in 3 Easy Steps
+                      <span>&#10003;</span><p>Post your car ad <strong>FREE</strong> on our platform and connect with <strong>pre-verified</strong> buyers ready to purchase.</p>
                     </li>
                     <li>
-                      <span>&#10003;</span>Get Genuine offers from Verified
-                      Buyers
+                      <span>&#10003;</span><p><strong>Sell your car quickly</strong> and get the <strong>best possible price</strong> with our extensive network of interested buyers.</p>
                     </li>
                     <li>
-                      <span>&#10003;</span>Sell your car Fast at the Best Price
+                      <span>&#10003;</span><p><strong>Selling your car</strong> is now easier than ever! Our <strong>3-step ad posting</strong> takes the hassle out of the process.</p>
                     </li>
                   </ul>
-                  <Link href="/used-cars/-/sell">Register Your Car</Link>
+                  <i onClick={()=>{setReadmore_ul(!readmore_ul)}} className='bx bxs-down-arrow'></i>
+
+                  <Link href="/used-cars/-/sell">Post Your Car Ad</Link>
                 </div>
                 <div className="first_div">
                   <h4>Try Carselection Sell It For Me</h4>
-                  <ul>
+                  <ul style={{maxHeight:`${readmore_ul?'220px':''}`}}>
                     <li>
-                      <span>&#10003;</span>Dedicated Sales Expert to Sell your
-                      Car
+                      <span>&#10003;</span> <p><strong>Stress-Free Car Selling:</strong> Dedicated Sales Experts Get You <strong>Top Offers</strong></p> 
                     </li>
                     <li>
-                      <span>&#10003;</span>We Bargain for you and share the Best
-                      Offer
+                      <span>&#10003;</span>  <p><strong>Sell your car fast and hassle-free</strong> with our <strong>experienced sales specialists</strong>. We handle the negotiation and secure you the <strong>best possible offer</strong>.</p> 
                     </li>
                     <li>
-                      <span>&#10003;</span>We ensure Safe & Secure Transaction
+                      <span>&#10003;</span> <p><strong>Safe and Secure Transactions:</strong> Enjoy peace of mind knowing our process is designed to protect you throughout the entire <strong>sale</strong>.</p>  
                     </li>
+                    
                   </ul>
+                  <i onClick={()=>{setReadmore_ul(!readmore_ul)}} className='bx bxs-down-arrow'></i>
                   <Link
                     href="#"
                     style={{ background: "#3675B3", textDecoration: "none" }}
@@ -133,13 +136,16 @@ const Homepage = () => {
               <h2>Carselection offerings</h2>
               <div className="offers_divs">
                 <div>
+                  <Link style={{textDecoration:'none'}} href={'#'}>
                   <div className="offer">
-                    <Image src="/images/car1.jpg" width={1000} height={1000} alt="loading" />
+                    <Image src="/images/sell_it_for_me.webp" width={1000} height={1000} alt="loading" />
                     <div>
                       <span>Carselection</span>
                       <p>Sell it for me</p>
                     </div>
                   </div>
+                  </Link>
+                 
                   {/* <div className="offer">
                     <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
@@ -149,13 +155,16 @@ const Homepage = () => {
                   </div> */}
                 </div>
                 <div>
+                  <Link style={{textDecoration:'none'}} href={'/users/user_dashboard/Others?My_Ads'}>
                   <div className="offer">
-                    <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
+                    <Image src="/images/car_incepection.webp" width={1000} height={1000}  alt="loading" />
                     <div>
                       <span>Carselection</span>
-                      <p>Car Incepection</p>
+                      <p>Car Inspection</p>
                     </div>
                   </div>
+                  </Link>
+                 
                   {/* <div className="offer">
                     <Image src="/images/car1.jpg" width={1000} height={1000}  alt="loading" />
                     <div>
@@ -170,7 +179,7 @@ const Homepage = () => {
 
           <div className="offerings">
             <div className="inner_container">
-              <h2>Used Cars</h2>
+              <h2>Used Cars for Sale</h2>
               <div className="used_cars">
                 <Used_cars />
               </div>

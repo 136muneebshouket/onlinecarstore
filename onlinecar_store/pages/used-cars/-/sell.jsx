@@ -16,60 +16,62 @@ const Sell = () => {
       <div className="sell_main">
         <div className="sell_header">
           <div className="header_title">
-            <h1>Sell Your Car Online in Pakistan Instantly!</h1>
+            <h1>Sell Your Car Online in Pakistan Quickly!</h1>
             <h2>Choose How To Sell Your Car</h2>
           </div>
           <div className="header_cards">
-            <Link href="/used-cars/-/sell/post-ad" style={{textDecoration:'none'}}>
+            <Link
+              href="/used-cars/-/sell/post-ad"
+              style={{ textDecoration: "none" }}
+            >
               <div className="card">
-                <div>
+            
                   <h2>Post your Ad on Carselection</h2>
                   <Image
-                    src="/images/post_ad.jpg"
+                    src="/images/post_ad.webp"
                     alt="loading"
                     width={200}
                     height={200}
                   />
                   <ul>
                     <li>
+                    {/* <span>&#10003;</span>{" "} */}
                       <span>
                         Post your Ad and find the offer from our buyers
                       </span>
                     </li>
                   </ul>{" "}
                   {/* <button> post an add</button> */}
-                </div>
+        
               </div>
             </Link>
-            {/* <div className="card">
-              <div>
-                <h2>Post your Ad on Carselection</h2>
-                <Image
-                  src="/images/postad-img.png"
-                  alt="loading"
-                  width={200}
-                  height={200}
-                />
-                <ul>
-                  <li>
-                    <span>&#10003;</span>{" "}
-                    <span>Post your Ad for Free in 3 Easy Steps</span>
-                  </li>
-                  <li>
-                    <span>&#10003;</span>{" "}
-                    <span>Post your Ad for Free in 3 Easy Steps</span>
-                  </li>
-                  <li>
-                    <span>&#10003;</span>{" "}
-                    <span>Post your Ad for Free in 3 Easy Steps</span>
-                  </li>
-                </ul>
-                <Link href="/used_cars/-/sell/Post_ad">
-                  {" "}
-                  <button> post an add</button>
-                </Link>
+            <Link href="#" style={{ textDecoration: "none" }}>
+              <div className="card">
+         
+                  <h2>Try Carselection Sell it for me</h2>
+                  <Image
+                    src="/images/sell_it_for_me2.webp"
+                    alt="loading"
+                    width={200}
+                    height={200}
+                  />
+                  <ul>
+                    <li>
+                      {/* <span>&#10003;</span>{" "} */}
+                      <span>Car Selection will find best buyers for your car.</span>
+                    </li>
+                    <li>
+                      {/* <span>&#10003;</span>{" "} */}
+                      <span>Hustle free car sale.</span>
+                    </li>
+                    {/* <li>
+                      <span>&#10003;</span>{" "}
+                      <span>Post your Ad for Free in 3 Easy Steps</span>
+                    </li> */}
+                  </ul>
+         
               </div>
-            </div> */}
+            </Link>
           </div>
         </div>
         <div className="sellpage">

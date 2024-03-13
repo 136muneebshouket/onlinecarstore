@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
       try {
         const { filters, text } = req.query;
-        console.log(text);
+        // console.log(text);
 
         // console.log(filters);
         var limit = req.query.limit || 12;

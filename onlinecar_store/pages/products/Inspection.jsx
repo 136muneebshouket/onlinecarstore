@@ -7,13 +7,16 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import Context from "@/components/processing_functions/context";
 
-const Optionsmodal = dynamic(() => import("@/components/Modals/custom models/Option_modals/Optionsmodal"), {
-  loading: () => (
-    <div className="loder">
-      <h2>Loading...</h2>
-    </div>
-  ),
-});
+const Optionsmodal = dynamic(
+  () => import("@/components/Modals/custom models/Option_modals/Optionsmodal"),
+  {
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
+  }
+);
 // import Optionsmodal from "@/components/Modals/custom models/Option_modals/Optionsmodal";
 
 const Inspection = () => {
@@ -30,8 +33,8 @@ const Inspection = () => {
   const { message, setMessage } = useContext(Context);
   const router = useRouter();
   const url = router.asPath;
-  const pageurl =   url.split("ad_id=") ;
-  const ad_id =url.includes('ad_id') ? pageurl[pageurl.length - 1] : undefined;
+  const pageurl = url.split("ad_id=");
+  const ad_id = url.includes("ad_id") ? pageurl[pageurl.length - 1] : undefined;
 
   const { data: sessionData } = useSession();
   let user_name = sessionData?.user.name;
@@ -58,11 +61,7 @@ const Inspection = () => {
   const [inspection_obj, setInspection_obj] = useState(intialobj);
 
   useEffect(() => {
-    // if(inspection_obj.user_id){
-    //   return
-    // }else{
-        get_ad();
-    // }
+    get_ad();
   }, [sessionData]);
   // console.log(pageurl)
 
@@ -102,11 +101,8 @@ const Inspection = () => {
           setMessage({ success: false, msg: err?.response?.data.message });
         });
     }
-   
+    // if()
   }
-  // console.log(sessionData)
-
-  //   console.log(Ad);
 
   function onchangehandler(e) {
     setInspection_obj({ ...inspection_obj, [e.target.name]: e.target.value });
@@ -175,20 +171,20 @@ const Inspection = () => {
     e.preventDefault();
     setshowerr(true);
     try {
-      for(var key in inspection_obj){
+      for (var key in inspection_obj) {
         let v = inspection_obj[key];
         if (!v) {
           if (key != "ad_id") {
-            throw new Error(`${key} fields`)
+            throw new Error(`${key} fields`);
           }
         }
-      };
+      }
     } catch (error) {
       // console.log(error.message)
-      setMessage({ success: false, msg:error.message});
-      return ;
+      setMessage({ success: false, msg: error.message });
+      return;
     }
-    
+
     // console.log(inspection_obj);
     setMessage({ loader: true });
 
@@ -205,6 +201,27 @@ const Inspection = () => {
         setMessage({ success: false, msg: err?.response?.data.message });
       });
   }
+
+  const data = [
+    {
+      heading: "Book Inspection Slot",
+      content:
+        "Carselection Car Inspection services are available for your convenience. Schedule yours today!.",
+      cardImage: "/images/book_inspec.jpg",
+    },
+    {
+      heading: "CarSelection Conducts Inspection",
+      content:
+        "Experience the expertise of our inspectors through a comprehensive 200-point check, finished in a swift 45 minutes.",
+      cardImage: "/images/12.jpg",
+    },
+    {
+      heading: "Get Analysis Report",
+      content:
+        "This computer-generated report provides scores based on expert assessment.",
+      cardImage: "/images/13.jpg",
+    },
+  ];
   //
   return (
     <>
@@ -212,16 +229,17 @@ const Inspection = () => {
         <div className="header_inspection">
           <div className="img_div">
             <Image
-              src="/images/inspectionbanner.png"
+              src="/images/car-inspection_header.webp"
               width={100}
               height={100}
-              quality={80}
+              // quality={80}
+              unoptimized={true}
               alt="inspectionbanner.png"
             />
           </div>
           <div className="formsection">
             <form onSubmit={order_inspection}>
-              <h2>Shedule Carselection Car Incpection</h2>
+              <h2>Shedule Carselection Car Inspection</h2>
               <input
                 type="text"
                 name="location"
@@ -327,10 +345,81 @@ const Inspection = () => {
                   }`}
               </span>
 
-              <button  type="submit">
-                Submit
-              </button>
+              <button type="submit">Submit</button>
             </form>
+          </div>
+        </div>
+
+        <div className="second_div">
+          <div className="inspec_includes">
+            <h2>What our Inspection report includes ?</h2>
+            <div className="cards">
+              <div className="card">
+                <Image
+                  src={"/images/icons8-car-service-webp.webp"}
+                  unoptimized={true}
+                  width={100}
+                  height={100}
+                />
+                <p>
+                  <strong>Overall Condition Analysis</strong>
+                </p>
+              </div>
+              <div className="card">
+                <Image
+                  src={"/images/icons8-car-100.webp"}
+                  unoptimized={true}
+                  width={100}
+                  height={100}
+                />
+                <p>
+                  <strong>Car Exterior and Interior</strong>
+                </p>
+              </div>
+              <div className="card">
+                <Image
+                  src={"/images/icons8-car-inspection-webp.webp"}
+                  unoptimized={true}
+                  width={100}
+                  height={100}
+                />
+                <p>
+                  <strong>Overall health of car</strong>
+                </p>
+              </div>
+              <div className="card">
+                <Image
+                  src={"/images/icons8-car-check-webp.webp"}
+                  unoptimized={true}
+                  width={100}
+                  height={100}
+                />
+                <p>
+                  <strong>Overall ranking per equipment</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="who_it_works">
+            <h2>How CarSelection Inspection works ?</h2>
+            <div className="Cards">
+              {data.map((d) => (
+                <div key={d} className="card">
+                  <Image
+                    src={d.cardImage}
+                    className="cardImage"
+                    height={100}
+                    width={300}
+                    alt="Car Inspection Test"
+                  />
+                  <div className="cardData">
+                    <h2 className="cardHeading"><strong>{d.heading}</strong></h2>
+                    <p className="cardContent">{d.content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

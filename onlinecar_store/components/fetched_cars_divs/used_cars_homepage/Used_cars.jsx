@@ -178,9 +178,9 @@ const Used_cars = () => {
                       </h3>
                       {/* </Link> */}
 
-                      <p className="price_mbv">
+                      {/* <p className="price_mbv"> */}
                         <strong>PKR:{price_converter(obj?.price)}</strong>
-                      </p>
+                      {/* </p> */}
 
                       <p>{obj?.city}</p>
                       {/* <div>

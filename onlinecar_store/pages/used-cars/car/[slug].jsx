@@ -282,7 +282,7 @@ const slug = ({ carrdata, loadiing }) => {
                 {features.map((v, i) => {
                   return (
                     <>
-                      <p key={i}>{v}</p>
+                      <p key={i}>{v.replace(/_/g, " ")}</p>
                     </>
                   );
                 })}

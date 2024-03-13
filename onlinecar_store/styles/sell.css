@@ -28,7 +28,7 @@
 .sell_header .header_cards .card {
   display: flex;
   width: 30vw;
-  height: auto;
+  height: 100%;
   flex-direction: column;
   background-color: #FFFFFF;
   align-items: center;
@@ -36,23 +36,31 @@
   border-radius: 5px;
   margin: 15px;
   transition: .2s;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
 }
 
 .sell_header .header_cards .card:hover {
   transform: scale(1.01);
 }
 
-.sell_header .header_cards .card div {
-  text-align: center;
-}
+/* .sell_header .header_cards .card div {
 
-.sell_header .header_cards .card div h2 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  
+} */
+
+.sell_header .header_cards .card h2 {
   font-size: max(1.8vw, 18px);
   font-weight: 700;
   color: #363636;
 }
 
-.sell_header .header_cards .card div img {
+.sell_header .header_cards .card img {
   max-width: 200px;
   height: auto;
 }
@@ -61,15 +69,19 @@
   list-style: none;
   padding: 0;
   margin: 20px 0px;
+  text-align: left;
 }
 
 .header_cards .card ul li {
   line-height: 20px;
 }
 
-.header_cards .card ul li span {
-  font-size: 13px;
+.header_cards .card ul li span:first-child{
   color: var(--redcode);
+}
+.header_cards .card ul li span {
+  font-size: 15px;
+ 
 }
 
 .header_cards .card ul li i {
@@ -237,26 +249,35 @@
 
   .sell_header .header_cards .card div {
     width: -webkit-fill-available;
-    text-align: left;
+    /* text-align: left; */
   }
 
   .header_cards .card ul {
     margin: 10px 0px;
+    text-align: left;
   }
 
   .sell_header .header_cards .card {
     width: -webkit-fill-available;
-    padding: 20px;
+    padding: 10px;
     margin: 10px;
+    align-items: flex-start;
 
   }
-
-  .sell_header .header_cards .card div img {
+  .sell_header .header_cards .card h2, .sell_header .header_cards ul{
+    width: 60%;
+    text-align: left;
+  }
+  .sell_header .header_cards .card img {
     width: 35%;
-    float: right;
+  
+    margin: 10px;
+    position: absolute;
+ 
+    right: 0;
   }
 
-  .header_cards .card ul li:nth-child(2),
+  /* .header_cards .card ul li:nth-child(2), */
   .header_cards .card ul li:nth-child(3) {
     display: none;
   }
@@ -330,6 +351,7 @@
 
   .sell_header .header_cards {
     /* display: none; */
+    flex-direction: column;
     padding-bottom: 20px;
   }
 

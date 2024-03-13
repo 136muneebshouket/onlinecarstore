@@ -254,7 +254,7 @@
     position: fixed;
     bottom: 70px;
     right: 0;
-    z-index: 50;
+    z-index: 15;
     margin: 10px;
 }
 .Call_contact_bar a > div{

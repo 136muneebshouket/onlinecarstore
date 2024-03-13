@@ -1,43 +1,61 @@
-.main_inspection .header_inspection{
-background-color: #BEC9D9;
-padding: 30px;
-display: flex;
-justify-content: center;
-align-items: center;
+.main_inspection {}
+
+.main_inspection .header_inspection {
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
-.header_inspection .formsection form h2{
-    font-size: max(25px,1.6vw);
+
+.header_inspection .formsection form h2 {
+    font-size: max(25px, 1.6vw);
     text-align: center;
-    color: var(--bs-heading-color);
+    color: var(--paracolor);
 }
-.header_inspection .img_div,.header_inspection .formsection{
+
+.header_inspection .img_div,
+.header_inspection .formsection {
     width: 40%;
     margin: 20px;
 }
-.header_inspection .img_div img{
+
+.header_inspection .img_div img {
     width: 100%;
     height: auto;
 }
-.header_inspection .formsection{
-  background-color: white;
+
+.header_inspection .formsection {
+
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    ;
+    border: 1px solid rgba(200, 200, 200);
+    box-shadow: 0px 0px 10px 0px rgb(200 200 200 / 75%);
 }
-.header_inspection .formsection form{
+
+.header_inspection .formsection form {
     padding: 25px;
     display: flex;
     flex-direction: column;
 
 }
-.header_inspection .formsection form button{
+
+.header_inspection .formsection form button {
     background-color: var(--redcode);
     color: white;
     font-size: medium;
+    border: none !important;
     font-weight: 600;
 }
-.header_inspection .formsection form button:hover{
+
+.header_inspection .formsection form button:hover {
     background-color: #872121;
 }
-.header_inspection .formsection form input,.header_inspection .formsection form button{
+
+.header_inspection .formsection form input,
+.header_inspection .formsection form button {
     width: -webkit-fill-avaliable;
     padding: 10px;
     border: 1px solid rgb(218, 218, 218);
@@ -47,25 +65,146 @@ align-items: center;
     cursor: pointer;
     font-size: medium;
 }
-.header_inspection .formsection form .err_span{
+
+.header_inspection .formsection form .err_span {
     font-size: small;
     color: #d30000;
     font-weight: 600;
     margin-left: 5px;
 }
 
+.main_inspection .second_div {
+    width: max(80vw, min(700px, 95vw));
+    margin: auto;
+}
+.main_inspection .second_div > div{
+    padding: 40px 0px;
+}
+.main_inspection .second_div .inspec_includes h2 ,.main_inspection .second_div .who_it_works h2 {
+    font-size: 26px;
+    margin-bottom: max(10px, 2.5vw);
+}
+.main_inspection .second_div .inspec_includes .cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+   
+}
+.main_inspection .second_div .inspec_includes .cards .card{
+    border-radius: 10px;
+    background-color: white;
+    
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(45%,250px);
+    justify-content: center;
+    box-shadow: 0px 0px 10px 0px rgb(200 200 200 / 75%);
+    border: none;
+
+}
+.main_inspection .second_div .inspec_includes .cards .card p{
+    margin: 5px;
+    font-size: max(14px,1.2vw);
+}
+.main_inspection .second_div .inspec_includes .cards .card img{
+    width: max(70px, 3vw);
+    height: auto;
+    margin-bottom: 10px;
+}
+.main_inspection .second_div .who_it_works .Cards {
+
+    width: 100%;
+    margin: 10px;
+    height: min-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.main_inspection .second_div .who_it_works .Cards .card {
+    box-shadow: 0px 0px 10px 0px rgb(200 200 200 / 75%);
+    border: none;
+    width: 30%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_inspection .second_div .who_it_works .Cards .card .cardImage {
+    width: 100%;
+    border-radius: 8px;
+    height: auto;
+}
+.main_inspection .second_div .who_it_works .Cards .cardData {
+    padding: 10px;
+    text-align: center;
+}
+.main_inspection .second_div .who_it_works .Cards .cardData .cardHeading {
+    font-size: 1.3rem;
+    padding: 10px 0px;
+    margin: 0;
+}
+.main_inspection .second_div .who_it_works .Cards .cardData .cardContent {
+    line-height: 1.8;
+    padding: 10px;
+    font-size: 15px;
+}
+
+@media (max-width:558px) {
+  
+}
+
+
+
 
 @media only screen and (max-width: 800px) {
-    .main_inspection .header_inspection{
+    .main_inspection .second_div > div{
+        padding: 20px 0px;
+    }
+    .main_inspection .header_inspection {
         flex-direction: column-reverse;
         padding: 10px;
 
     }
-    .main_inspection .header_inspection > div{
+
+    .main_inspection .header_inspection>div {
         width: -webkit-fill-available;
         margin: 5px;
     }
-    .header_inspection .img_div{
-    padding: 30px;
+
+    .header_inspection .img_div {
+        padding: 30px;
+    }
+    .main_inspection .second_div .who_it_works .Cards {
+        width: 100%;
+        margin: 0;
+        gap: 15px 0;
+    }
+    
+    .main_inspection .second_div .who_it_works .Cards .card {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* .main_inspection .second_div .who_it_works .Cards .cardData { } */
+
+    .main_inspection .second_div .who_it_works .Cards .card .cardHeading { padding: 0; }
+    
+    .main_inspection .second_div .who_it_works .Cards .card .cardImage { width: 70%;  }
+    
+    .main_inspection .second_div .who_it_works .Cards .card .cardHeading {
+        padding: 0.5rem;
+        font-size: 1.1rem;
+    }
+    .main_inspection .second_div .who_it_works .Cards .cardData .cardContent {
+        padding: 0.5rem;
+        font-size: 14px;
     }
 }

@@ -78,7 +78,7 @@ const H_Videos = () => {
                     <div className="img_div">
                       <span className="play_icon">
                         {" "}
-                        <i>&#10148;</i>
+                        <span>&#9658;</span>
                       </span>
                       <img
                         loading="lazy"
@@ -100,7 +100,7 @@ const H_Videos = () => {
                     <div className="img_div">
                       <span className="play_icon">
                         {" "}
-                        <i>&#10148;</i>
+                        <span>&#9658;</span>
                       </span>
                       <img
                         loading="lazy"
@@ -120,7 +120,7 @@ const H_Videos = () => {
                     <div className="img_div">
                       <span className="play_icon">
                         {" "}
-                        <i>&#10148;</i>
+                        <span>&#9658;</span>
                       </span>
                       <img
                         loading="lazy"

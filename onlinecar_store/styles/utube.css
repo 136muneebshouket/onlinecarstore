@@ -124,7 +124,7 @@
 }
 .home_videos_sec .card{
     margin: 5px;
-   
+   overflow: hidden;
 }
 .home_videos_sec .second_div .card{
     width: max(22.4vw, min(200px, 42vw));
@@ -146,9 +146,9 @@
     align-items: center;
     background: transparent;
 }
-.home_videos_sec .img_div span.play_icon i{
+.home_videos_sec .img_div span.play_icon span{
     padding: 10px 15px;
-    background-color: #000000cf;
+    background-color: #000000ad;
     font-size: 20px;
     border-radius: 50%;
 }
