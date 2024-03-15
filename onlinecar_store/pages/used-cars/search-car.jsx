@@ -239,7 +239,7 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                             </h3>
 
                             <p className="price_mbv">
-                              <strong>PKR:{obj?.price}</strong>
+                              <strong>PKR:{price_converter(obj?.price)}</strong>
                             </p>
 
                             <p>{obj?.city}</p>
@@ -271,6 +271,12 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                     <div className="extra_details">
                       {obj?.pending == 0 ? (
                         <span className="pending_banner">Pending</span>
+                      ) : null}
+                      {obj?.managed_by == true ? (
+                        <span className="pending_banner">Managed by CarSelection</span>
+                      ) : null}
+                      {obj?.auction_sheet == true ? (
+                        <span className="pending_banner">&#10004; Auction Sheet</span>
                       ) : null}
                       
                         {obj?.overall_incpection_rating?.overall_rating ? (

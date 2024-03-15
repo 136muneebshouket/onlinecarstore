@@ -75,9 +75,6 @@ export default async function handler(req, res) {
           .populate("overall_incpection_rating", "overall_rating");
         const count = await cardataschema.find(appliedfilters).count();
 
-        // Process the query results
-        // console.log(count); // This will contain documents with only the selected fields and the first element of the images array
-        // console.log(result)
         if (result) {
           res.status(200).json({
             success: true,

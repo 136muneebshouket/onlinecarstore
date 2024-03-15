@@ -301,13 +301,18 @@ const slug = ({ carrdata, loadiing }) => {
               className="contact_dtals"
               price={carrdata.price}
               phone={carrdata.Phone_no}
+              managed_by ={carrdata?.managed_by}
             />
-            <Sellerdetails sellerid={carrdata.seller_email} />
-            <Reporting_add
+            <Sellerdetails sellerid={carrdata.seller_email} managed_by={carrdata?.managed_by} />
+            {carrdata?.managed_by == true ? null :<>
+              <Reporting_add
               selleremail={carrdata.seller_email}
               ad_id={carrdata._id}
               type={"car"}
+              
             />
+            </>} 
+          
           </div>
         </div>
         <div className="post_ad_link">

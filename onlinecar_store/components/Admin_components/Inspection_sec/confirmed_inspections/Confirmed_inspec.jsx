@@ -7,9 +7,9 @@ import useSWR from "swr";
 import axios from "axios";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
-const Confirm_inspec = ({completed}) => {
+const Confirm_inspec = ({completed ,order_type}) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/admin/inspection/inspec_orders/get_orders?accepted=true&completed=${completed}`,
+    `/api/admin/inspection/inspec_orders/get_orders?accepted=true&completed=${completed}&order_type=${order_type}`,
     fetcher
   );
 
@@ -31,7 +31,7 @@ const Confirm_inspec = ({completed}) => {
     <>
    
       <div className="inspection_req_main ">
-        <h1>Confirmed Inspections</h1>
+        <h1> {order_type} Confirmed requests</h1>
         <div className="request_sec">
           {isLoading ? <FullLoader /> : null}
           {error ? (
@@ -81,10 +81,9 @@ const Confirm_inspec = ({completed}) => {
                   </div>
                   <div className="buttons">
                     <Link
-                      href={`Inspection_sec/Start_inspec/Check_ad?Ad_id=${obj.ad_id}`}
+                      href={`Inspection_sec/Start_inspec/Check_ad?Ad_id=${obj?.ad_id}${order_type == 'sell-it-for-me' ? '&managed_ad=true':''}`}
                     >
                       <button
-                       
                         style={{ background: "#246524" }}
                       >
                         Check Ad

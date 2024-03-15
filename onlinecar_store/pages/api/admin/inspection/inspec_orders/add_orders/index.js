@@ -35,6 +35,7 @@ export default async function handler(req, res) {
         });
 
       } catch (err) {
+        console.log(err)
         if (err.code === 11000) {
           const field = Object.keys(err.keyValue)[0]; // Get the field causing the uniqueness error
           const errorMessage = `The ${field} already exists.`;

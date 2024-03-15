@@ -14,13 +14,18 @@ export default async function handler(req, res) {
         let obj = {};
         let selected_fields = {} 
 
-        // console.log( req.query)
+        // console.log(req.query)
   
         if(brand_key == 'ALL'){
           selected_fields['name'] = 1;
           selected_fields['_id'] = 0
-        }else if(brand_key != 'ALL' && brand_key != ''){
+        }else if(brand_key != 'ALL' && brand_key != '' && model_key == ''){
           obj.name = brand_key;
+          selected_fields["models.name"] = 1
+        }else if(brand_key != '' && model_key != ''){
+          obj.name = brand_key;
+          obj.models = {"$elemMatch": {name: model_key}}
+          selected_fields["models"] = {"$elemMatch": {name: model_key}}
         }
 
         let find = await options.find(obj,selected_fields);

@@ -43,6 +43,16 @@ const Ad_new_blog = dynamic(
     ),
   }
 );
+const Mngdcars_cmpnent = dynamic(
+  () => import("@/components/Admin_components/Managed_cars/Mngdcars_cmpnent"),
+  {
+    loading: () => (
+      <div className="loder">
+        <h2>Loading...</h2>
+      </div>
+    ),
+  }
+);
 
 const Dashboard = () => {
     
@@ -77,6 +87,11 @@ const Dashboard = () => {
               Add new blog
               </button>
             </li>
+            <li>
+              <button className="darkneon"  onClick={()=>{setComponent('Mngdcars_cmpnent'); setNavtoggle(false)}}>
+              Managed cars
+              </button>
+            </li>
           
           </ul>
         </div>
@@ -86,6 +101,7 @@ const Dashboard = () => {
         {(component == 'Incpection') && <Inspection/>}
         {(component == 'Ads_approve') && <Approval/>}
         {(component == 'Add new blog') && <Ad_new_blog/>}
+        {(component == 'Mngdcars_cmpnent') && <Mngdcars_cmpnent/>}
       </main>
       </div>
     </>

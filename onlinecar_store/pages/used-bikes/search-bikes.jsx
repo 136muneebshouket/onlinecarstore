@@ -186,7 +186,7 @@ async function pagination(hint){
                           </h3>
 
                           <p className="price_mbv">
-                            <strong>PKR:{obj.price}</strong>
+                            <strong>PKR:{price_converter(obj.price)}</strong>
                           </p>
 
                           <p>{obj.city}</p>

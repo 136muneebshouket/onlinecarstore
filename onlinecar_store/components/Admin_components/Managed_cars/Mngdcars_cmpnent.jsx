@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
-const Slots = dynamic(() => import("./inspection_Slots/Slots"), {
+const Slots = dynamic(() => import("@/components/Admin_components/Inspection_sec/inspection_Slots/Slots"), {
   loading: () => (
     <div className="loder">
       <h2>Loading...</h2>
     </div>
   ),
 });
-const Inspect_requests = dynamic(() => import("./insp_requests/Inspect_requests"), {
+const Inspect_requests = dynamic(() => import("@/components/Admin_components/Inspection_sec/insp_requests/Inspect_requests"), {
   loading: () => (
     <div className="loder">
       <h2>Loading...</h2>
     </div>
   ),
 });
-const Confirmed_inspec = dynamic(() => import("./confirmed_inspections/Confirmed_inspec"), {
-  loading: () => (
-    <div className="loder">
-      <h2>Loading...</h2>
-    </div>
-  ),
-});
-const Ad_caroptions = dynamic(() => import("../ad_options/Ad_caroptions/Ad_car_option"), {
+const Confirmed_inspec = dynamic(() => import("@/components/Admin_components/Inspection_sec/confirmed_inspections/Confirmed_inspec"), {
   loading: () => (
     <div className="loder">
       <h2>Loading...</h2>
@@ -30,10 +23,11 @@ const Ad_caroptions = dynamic(() => import("../ad_options/Ad_caroptions/Ad_car_o
   ),
 });
 
-const Inspection_page = () => {
+
+const Mngdcars_cmpnent = () => {
   const [sidebar, setSidebar] = useState(true);
   const [component, setComponent] = useState("");
-  const [links, setLinks] = useState(["Slots", "Inspections Requests",'Inspections tasks','Completed inspections','Ad Cars Options']);
+  const [links, setLinks] = useState(["Slots", "Sell Requests",'Sell tasks','Completed Sale']);
 
   // console.log(component)
   return (
@@ -72,14 +66,14 @@ const Inspection_page = () => {
 
         <div className="main_inspection">
           {component == "Slots" ? <Slots /> : null}
-          {component == "Inspections Requests" ? <Inspect_requests order_type={'Inspection'} /> : null}
-          {component == "Inspections tasks" ? <Confirmed_inspec order_type={'Inspection'} completed={false}/> : null}
-          {component == "Completed inspections" ? <Confirmed_inspec order_type={'Inspection'} completed={true}/> : null}
-          {component == "Ad Cars Options" ? <Ad_caroptions /> : null}
+          {component == "Sell Requests" ? <Inspect_requests order_type={'sell-it-for-me'} /> : null}
+          {component == "Sell tasks" ? <Confirmed_inspec order_type={'sell-it-for-me'} completed={false}/> : null}
+          {component == "Completed Sale" ? <Confirmed_inspec order_type={'sell-it-for-me'} completed={true}/> : null}
+        
         </div>
       </div>
     </>
   );
 };
 
-export default Inspection_page;
+export default Mngdcars_cmpnent;

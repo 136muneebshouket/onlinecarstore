@@ -56,6 +56,9 @@ export default async function handler(req, res) {
             ],
           }).save();
         }
+         if(ad_id){
+           let send_email_admin = await send_mail(ad_id , 'report')
+         }
 
         res.status(200).json({
           success: true,

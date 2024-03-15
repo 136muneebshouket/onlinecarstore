@@ -6,8 +6,9 @@ import axios from "axios";
 import Update_req_modal from "@/components/Modals/admin/Update_req_modal";
 import FullLoader from "@/components/Modals/Loader/FullLoader";
 
+
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
-const Inspect_requests = () => {
+const Inspect_requests = ({order_type}) => {
   const { message, setMessage } = useContext(Context);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalvalue, setModalvalue] = useState("");
@@ -19,7 +20,7 @@ const Inspect_requests = () => {
   }, []);
 
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/admin/inspection/inspec_orders/get_orders?accepted=false`,
+    `/api/admin/inspection/inspec_orders/get_orders?accepted=false&order_type=${order_type}`,
     fetcher
   );
   // if(data){
@@ -49,7 +50,7 @@ const Inspect_requests = () => {
     let admin_token = JSON.parse(localStorage.getItem('admin_token'))
     let obj ={
       req_id:v._id,
-      admin_token
+      admin_token,
     }
     setMessage({ loader: true });
     await axios.delete(`/api/admin/inspection/inspec_orders/del_orders`,{params: obj})
@@ -87,7 +88,7 @@ const Inspect_requests = () => {
   return (
     <>
       <div className="inspection_req_main">
-        <h1>Inspection requests</h1>
+        <h1>  { order_type + ' Requests'} </h1>
         <div className="request_sec">
           {isLoading ? <FullLoader /> : null}
           {error ? (

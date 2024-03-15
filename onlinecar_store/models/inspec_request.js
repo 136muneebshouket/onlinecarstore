@@ -6,6 +6,10 @@ import mongoose, { model } from "mongoose";
 
 const Error_handling = new mongoose.Schema(
   {
+    order_type:{
+      type:String,
+      required:[true, 'Order type is required']
+    },
     city: {
         type: String,
         minlength: [1,'too less city length'],
@@ -73,7 +77,7 @@ const Error_handling = new mongoose.Schema(
       },
       ad_id: {
         type:mongoose.Schema.Types.ObjectId,
-        minlength: [1,'too less ad_id length'],
+        // minlength: [1,'too less ad_id length'],
         maxlength: [200,'too much ad_id length'],
         required:false
       },

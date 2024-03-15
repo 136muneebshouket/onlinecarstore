@@ -136,7 +136,7 @@ const Homepage = () => {
               <h2>Carselection offerings</h2>
               <div className="offers_divs">
                 <div>
-                  <Link style={{textDecoration:'none'}} href={'#'}>
+                  <Link style={{textDecoration:'none'}} href={'/products/sell-it-for-me'}>
                   <div className="offer">
                     <Image src="/images/sell_it_for_me.webp" width={1000} height={1000} alt="loading" />
                     <div>

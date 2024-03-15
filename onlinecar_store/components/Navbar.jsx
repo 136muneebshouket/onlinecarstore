@@ -269,7 +269,7 @@ const NavBar = () => {
                 </Link>
               </div>
 
-              <Link href={"/used-cars/-/Sell"}>
+              <Link href={"/used-cars/-/sell"}>
                 <div className="link center_link">
                   <p>Sell</p>
                 </div>

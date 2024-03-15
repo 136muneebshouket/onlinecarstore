@@ -12,6 +12,7 @@ import { feature_generation } from "@/components/processing_functions/features_g
 import Context from "@/components/processing_functions/context";
 import { useContext } from "react";
 import useSWR from "swr";
+import { cleanDistDir } from "@/next.config";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
 
@@ -21,6 +22,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
   const [option_key, setOption_key] = useState({
     brand: "ALL",
     model: "",
+    
   });
 
   const { data, error, isLoading } = useSWR(
@@ -48,9 +50,14 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
       setMessage({ loader: false });
       setCarsoptions(data);
       setMaincarsoptions(data);
+      if(option_key.model != ''){
+        setVarients(data[0]?.models[0]?.versions)
+      }
       // console.log(data)
     }
   }, [data, isLoading, error]);
+
+  // console.log(maincarsoptions)
 
   useEffect(() => {
     if (filtermodal) {
@@ -64,9 +71,10 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
         const brandName = brand?.name?.toLowerCase();
         const modelNames = brand?.models?.map((model) => model.name.toLowerCase());
         // Check if the brand name includes the search term
-        if (brandName.includes(searchval.toLowerCase())) {
+        if (brandName?.includes(searchval.toLowerCase())) {
           return brand;
         }
+        // console.log(modelNames)
         // Check if any model name includes the search term
         return modelNames?.some((name) => name?.includes(searchval.toLowerCase()));
       });
@@ -92,7 +100,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
 
   // adding barnd  and model
   const addcar = (b, m, v) => {
-    // console.log(v)
+    setSearchval('')
     if (v?.length !== 0) {
       setVarients(v);
       setSearchval("");
@@ -103,13 +111,19 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
 
     //set data
     cardata_obj.modelyear = model_year;
-    cardata_obj.b = b;
-    cardata_obj.m = m;
+    if(b){
+      cardata_obj.b=b
+    }
+    if(m){
+      cardata_obj.m = m;
+    }
     setCardata_obj(cardata_obj);
-    // setOption_key({ ...option_key, brand: b, model: "" });
+    setOption_key({ ...option_key, brand: cardata_obj.b, model: cardata_obj.m });
     // console.log(cardata_obj)
     carrdata(cardata_obj);
+
   };
+  // console.log(cardata_obj)
 
   // adding varients and features
   const addvarients = async (obj) => {
@@ -162,6 +176,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
       await carrdata(cardata_obj);
        setOption_key({ ...option_key, brand: b, model: "" });
     }
+    setSearchval('')
   }
 
   return (
@@ -210,7 +225,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
               </>
             );
           })
-        ) : varients.length > 0 ? (
+        ) : varients?.length > 0 ? (
           <>
             {varients?.map((obj, index) => {
               // if (obj.start_duration <= model_year && !filtermodal) {
@@ -272,8 +287,8 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
               // }
             })}
           </>
-        ) : carsoptions.length > 0 ? (
-          carsoptions.map((brand, index) => {
+        ) : carsoptions?.length > 0 ? (
+          carsoptions?.map((brand, index) => {
             return (
               <>
                 <div className="car_option" key={index}>
@@ -299,7 +314,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
                   )} */}
                   {brand?.models?.map((model, index) => {
                     if (
-                      model.name.toLowerCase().includes(searchval.toLowerCase())
+                      model?.name?.toLowerCase().includes(searchval.toLowerCase())
                     ) {
                       return (
                         <>
@@ -307,7 +322,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
                             className="carmodel_name"
                             key={index}
                             onClick={() => {
-                              addcar(brand?.name, model?.name, model?.versions);
+                              addcar(brand.name, model?.name, model?.versions);
                             }}
                           >
                             {model.name}
@@ -315,7 +330,7 @@ const Cardatamodal = ({ onClose, carrdata, filtermodal }) => {
                         </>
                       );
                     } else if (
-                      brand.name.toLowerCase().includes(searchval.toLowerCase())
+                      brand?.name?.toLowerCase().includes(searchval.toLowerCase())
                     ) {
                       return (
                         <>

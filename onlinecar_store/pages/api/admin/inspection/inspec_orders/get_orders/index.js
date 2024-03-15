@@ -15,13 +15,16 @@ export default async function handler(req, res) {
         // if(!(req.query.slotdate)){
         //   throw new Error('please provide query')
         // }
-        // console.log(req.query.completed)
+        // console.log(req.query.order_type)
         if(req.query.slotdate){
             findobj.slot = req.query.slotdate
             selectedfields.slottime = 1
         }
         if(req.query.accepted){
             findobj.accepted = req.query.accepted;
+        }
+        if(req.query.order_type){
+          findobj.order_type = req.query.order_type
         }
         if(req.query.completed){
             findobj.completed = req.query.completed;

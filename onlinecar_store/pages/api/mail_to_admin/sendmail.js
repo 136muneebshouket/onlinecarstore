@@ -30,7 +30,16 @@ async function send_mail(ad ,mail_hint) {
      </a>
      </div>`
     }
-    // console.log(rejections);
+    if(mail_hint == 'report'){
+      mail_Html = `<h1 style="font-family: sans-serif;">Ad Reported</h1>
+      <p> ${ad} </p>
+     <div style="display: flex; justify-content: center;">
+     <a href='${process.env.Host}/admin/dashboard_page/Dashboard' style="margin-top:40px; ">
+     <button style="background-color: green; color:white; border: none;  padding: 10px 20px; font-size: 16px; border-radius: 5px;  cursor: pointer;">Check</button>
+     </a>
+     </div>`
+    }
+   
     const mailOptions = {
       // from: process.env.EMAIL_FROM,
       from: process.env.EMAIL_USER,

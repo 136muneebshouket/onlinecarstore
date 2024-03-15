@@ -77,45 +77,53 @@
     width: max(80vw, min(700px, 95vw));
     margin: auto;
 }
-.main_inspection .second_div > div{
+
+.main_inspection .second_div>div {
     padding: 40px 0px;
 }
-.main_inspection .second_div .inspec_includes h2 ,.main_inspection .second_div .who_it_works h2 {
+
+.main_inspection .second_div .inspec_includes h2,
+.main_inspection .second_div .who_it_works h2 {
     font-size: 26px;
     margin-bottom: max(10px, 2.5vw);
 }
-.main_inspection .second_div .inspec_includes .cards{
+
+.main_inspection .second_div .inspec_includes .cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
-   
-}
-.main_inspection .second_div .inspec_includes .cards .card{
-    border-radius: 10px;
-    background-color: white;
-    
-    margin: 5px;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(45%,250px);
-    justify-content: center;
-    box-shadow: 0px 0px 10px 0px rgb(200 200 200 / 75%);
-    border: none;
 
 }
-.main_inspection .second_div .inspec_includes .cards .card p{
+
+.main_inspection .second_div .inspec_includes .cards .card {
+    border-radius: 10px;
+    background-color: white;
     margin: 5px;
-    font-size: max(14px,1.2vw);
+    padding: 5px;
+    text-align: center;
+    display: flex;
+    /* width: -webkit-fill-available; */
+    width: 45%;
+    flex-direction: row;
+    box-shadow: 0px 0px 10px 0px rgb(200 200 200 / 75%);
+    border: none;
+    align-items: center;
+    text-align: left;
+    
 }
-.main_inspection .second_div .inspec_includes .cards .card img{
-    width: max(70px, 3vw);
+
+.main_inspection .second_div .inspec_includes .cards .card p {
+    margin: 5px;
+    font-size: max(14px, 1.2vw);
+}
+
+.main_inspection .second_div .inspec_includes .cards .card img {
+    width: max(50px, 4vw);
     height: auto;
-    margin-bottom: 10px;
+    margin: 10px;
 }
+
 .main_inspection .second_div .who_it_works .Cards {
 
     width: 100%;
@@ -134,6 +142,7 @@
     background-color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .main_inspection .second_div .who_it_works .Cards .card .cardImage {
@@ -141,32 +150,34 @@
     border-radius: 8px;
     height: auto;
 }
+
 .main_inspection .second_div .who_it_works .Cards .cardData {
     padding: 10px;
     text-align: center;
 }
+
 .main_inspection .second_div .who_it_works .Cards .cardData .cardHeading {
     font-size: 1.3rem;
     padding: 10px 0px;
     margin: 0;
 }
+
 .main_inspection .second_div .who_it_works .Cards .cardData .cardContent {
     line-height: 1.8;
     padding: 10px;
     font-size: 15px;
 }
 
-@media (max-width:558px) {
-  
-}
+@media (max-width:558px) {}
 
 
 
 
 @media only screen and (max-width: 800px) {
-    .main_inspection .second_div > div{
+    .main_inspection .second_div>div {
         padding: 20px 0px;
     }
+
     .main_inspection .header_inspection {
         flex-direction: column-reverse;
         padding: 10px;
@@ -178,31 +189,45 @@
         margin: 5px;
     }
 
+    .main_inspection .second_div .inspec_includes .cards .card {
+        width: -webkit-fill-available;
+        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+    }
+    .main_inspection .second_div .inspec_includes .cards .card div{
+        text-align: left;
+    }
     .header_inspection .img_div {
         padding: 30px;
     }
+
     .main_inspection .second_div .who_it_works .Cards {
         width: 100%;
         margin: 0;
         gap: 15px 0;
     }
-    
+
     .main_inspection .second_div .who_it_works .Cards .card {
         display: flex;
-        align-items: center;
-        width: 100%;
+        width: -webkit-fill-available;
     }
 
     /* .main_inspection .second_div .who_it_works .Cards .cardData { } */
 
-    .main_inspection .second_div .who_it_works .Cards .card .cardHeading { padding: 0; }
-    
-    .main_inspection .second_div .who_it_works .Cards .card .cardImage { width: 70%;  }
-    
+    .main_inspection .second_div .who_it_works .Cards .card .cardHeading {
+        padding: 0;
+    }
+
+    .main_inspection .second_div .who_it_works .Cards .card .cardImage {
+        width: 70%;
+    }
+
     .main_inspection .second_div .who_it_works .Cards .card .cardHeading {
         padding: 0.5rem;
         font-size: 1.1rem;
     }
+
     .main_inspection .second_div .who_it_works .Cards .cardData .cardContent {
         padding: 0.5rem;
         font-size: 14px;

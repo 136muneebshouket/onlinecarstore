@@ -13,7 +13,8 @@ export default async function handler(req, res) {
       try {
         // console.log(req.query)
         const id =req.query.id
-        // console.log(id)
+        const { managed_ad } = req.query;
+        // console.log(managed_ad)
         // // Perform the query with the specified projection
         const result = await cardataschema.findOne({_id:id }).populate("overall_incpection_rating", "overall_rating percentages createdAt");
         if(!result){
@@ -25,11 +26,14 @@ export default async function handler(req, res) {
         }
        
         if (result) {
-          const user_email = await userschema.findOne({_id: result.seller_id },{email:1});
-          result.seller_id = new mongoose.Types.ObjectId('553fed247701')
-          if(user_email){ 
-            result.seller_email = user_email.email;
+          if(managed_ad != 'true'){
+            const user_email = await userschema.findOne({_id: result.seller_id },{email:1});
+            result.seller_id = new mongoose.Types.ObjectId('seller123')
+            if(user_email){ 
+              result.seller_email = user_email.email;
+            }
           }
+        
             // console.log(obj)
             res.status(200).json({
             success: true,

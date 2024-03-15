@@ -124,7 +124,7 @@
     border: none;
     background-color: var(--redcode);
     border-radius: 5px;
-    height: -webkit-fill-available;
+  
 }
 .home_main .home_header .home_search button i{
   font-size: x-large;

@@ -103,6 +103,7 @@ const Login = () => {
     setModalOpen(false);
   };
 
+
   return (
     <>
       <div className="login-body">
@@ -123,7 +124,6 @@ const Login = () => {
                   }}
                 >
                   <button
-                   
                     onClick={() => {
                       router.push('/');
                     }}
