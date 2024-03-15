@@ -333,16 +333,23 @@ const slug = ({ carrdata, loadiing }) => {
 export async function getServerSideProps({ params, query, res }) {
   let pageurl = params.slug.split("-");
   let slugid = pageurl[pageurl.length - 1];
+  // console.log(slugid)
   const resp = await axios.get(
-    `${process.env.Host}/api/Singlecardata/?id=${slugid}`
-  );
-
-  const carrdata = resp.data.data;
+    `${process.env.Host}/api/Singlecardata?id=${slugid}`
+  )
+  // .then((result) => {
+  //   console.log(result.data)
+  //   console.log('then')
+  // }).catch((err) => {
+  //   console.log(err.response.data.message)
+  // });;
+  // console.log(resp)
+  const carrdata = resp?.data?.data;
   let loadingg = false;
   if (carrdata) {
     loadingg = false;
   }
-  // console.log(carrdata)
+ 
 
   res.setHeader(
     "Cache-Control",
