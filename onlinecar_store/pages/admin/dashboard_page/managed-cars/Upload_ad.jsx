@@ -48,6 +48,7 @@ const Upload_ad = () => {
   //  console.log(totalwork)
 
   const router = useRouter()
+  const owner_info = router.query.owner_info;
 
   const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
@@ -119,13 +120,13 @@ const Upload_ad = () => {
   useEffect(() => {
     // let userid = sessionData?.user._id;
 
-    // setCarobj((prevCarobj) => {
-    //   return {
-    //     ...prevCarobj,
-    //     ...{ seller_id: userid },
-    //   };
-    // });
-  }, [imagestoshow]);
+    setCarobj((prevCarobj) => {
+      return {
+        ...prevCarobj,
+        ...{ owner_info: owner_info },
+      };
+    });
+  }, [owner_info]);
 
   const resetState = () => {
     setCarobj(initialState);

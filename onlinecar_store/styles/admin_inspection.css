@@ -5,6 +5,7 @@
 .main_inspection h1{
     padding: 10px 20px;
     margin: 0;
+   font-size: max(25px,14px)
 }
 .sidebar_btn_div{
     display: flex;

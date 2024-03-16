@@ -3,6 +3,7 @@ import admin_schema from "@/models/admin_schema";
 // import errors_handle from "@/models/errors_handle";
 import dbConnect from "@/config/dbConnect";
 import { p_func } from "@/components/processing_functions/progress";
+import inspec_request from "@/models/inspec_request";
 import mongoose, { model } from "mongoose";
 // import { send_mail } from "../../mail_to_admin/sendmail";
 // import formidable from "formidable";
@@ -24,9 +25,9 @@ export default async function handler(req, res) {
     //   const check_user_exist = await UserModel.countDocuments({
     //     _id: seller_id,
     //   });
-    //   if (!check_user_exist) {
-    //     throw new Error("user not found");
-    //   }
+      if (!main_carobj.owner_info) {
+        throw new Error("Owner info is required");
+      }
 
          main_carobj.managed_by= true
          main_carobj.certified= true
@@ -54,6 +55,7 @@ export default async function handler(req, res) {
           throw new Error("Error in uploading images");
         }
         if (imgs_stored_indb) {
+          let done_inspec = await inspec_request.findOneAndUpdate({_id:main_carobj.owner_info} , {completed:true})
           let back = err(201, "succesfully saved", true , carsaved._id);
           if (back) {
             return;

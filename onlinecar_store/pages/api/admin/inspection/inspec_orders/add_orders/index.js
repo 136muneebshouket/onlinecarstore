@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "POST":
       try {
-        const { user_id ,ad_id  } = req.body;
+        const { user_id ,ad_id , order_type  } = req.body;
          
 
         let finduser = await user.countDocuments({_id: user_id});
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         let addorder = await inspec_request.create(req.body)
         let slug = `${req.body?.brand} ${req.body?.model} ${req.body?.variant_name} ${req.body?.city} ${req.body?.area}`
         
-        let send_mail_admin = await send_mail( slug ,'Incpection') 
+        let send_mail_admin = await send_mail( slug ,order_type) 
         
         res.status(200).json({
           success: true,

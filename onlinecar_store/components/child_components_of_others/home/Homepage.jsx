@@ -91,7 +91,7 @@ const Homepage = () => {
                   </ul>
                   <i onClick={()=>{setReadmore_ul(!readmore_ul)}} className='bx bxs-down-arrow'></i>
                   <Link
-                    href="#"
+                    href="/products/sell-it-for-me"
                     style={{ background: "#3675B3", textDecoration: "none" }}
                   >
                     Register Your Car

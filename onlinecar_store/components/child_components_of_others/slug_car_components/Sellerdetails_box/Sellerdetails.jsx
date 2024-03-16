@@ -55,7 +55,7 @@ const Sellerdetails = ({ sellerid , managed_by}) => {
               <img src="/images/default-profile-image-.gif" alt="loading" />
             )}
           </span>
-          {managed_by == true ?  <span className="pending_banner">CarSelection</span> : <div>
+          {managed_by ?  <span className="pending_banner">CarSelection</span> : <div>
             <p>{sellerdata.name ? sellerdata.name : "unknown"}</p>
             <p>Member since {sellerdata.date ? sellerdata.date : "unknown"}</p>
           </div>}

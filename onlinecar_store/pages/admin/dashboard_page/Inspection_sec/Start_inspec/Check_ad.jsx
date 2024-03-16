@@ -14,6 +14,7 @@ const Check_ad = ({}) => {
   const router = useRouter();
   const Ad_id = router.query.Ad_id;
   const managed_ad = router.query.managed_ad;
+  const owner_info = router.query.owner_info;
   // console.log(Ad_id)
 
   const { data, error, isLoading } = useSWR(
@@ -220,7 +221,8 @@ const Check_ad = ({}) => {
           <>
            <div style={{margin:'20px',border:'10px solid rgb(220,220,220)',padding:'10px'}}>
            <p>** If AD is not present and Ad is Managed Ad then:</p>
-            <Link href={"/admin/dashboard_page/managed-cars/Upload_ad"}>
+            <Link href={`/admin/dashboard_page/managed-cars/Upload_ad${owner_info ? `?owner_info=${owner_info}`:''}`}
+            >
               <button
                 className="approve_btn"
                 style={{ background: "#006d00", color:'white',padding:'10px 20px' }}

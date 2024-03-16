@@ -27,7 +27,7 @@ const Confirmed_inspec = dynamic(() => import("@/components/Admin_components/Ins
 const Mngdcars_cmpnent = () => {
   const [sidebar, setSidebar] = useState(true);
   const [component, setComponent] = useState("");
-  const [links, setLinks] = useState(["Slots", "Sell Requests",'Sell tasks','Completed Sale']);
+  const [links, setLinks] = useState(["Slots", "Sell Requests",'Sell tasks','Completed requests']);
 
   // console.log(component)
   return (
@@ -68,7 +68,7 @@ const Mngdcars_cmpnent = () => {
           {component == "Slots" ? <Slots /> : null}
           {component == "Sell Requests" ? <Inspect_requests order_type={'sell-it-for-me'} /> : null}
           {component == "Sell tasks" ? <Confirmed_inspec order_type={'sell-it-for-me'} completed={false}/> : null}
-          {component == "Completed Sale" ? <Confirmed_inspec order_type={'sell-it-for-me'} completed={true}/> : null}
+          {component == "Completed requests" ? <Confirmed_inspec order_type={'sell-it-for-me'} completed={true}/> : null}
         
         </div>
       </div>

@@ -115,11 +115,6 @@ const carSchema = new mongoose.Schema(
         required:false,
         default:''
     },
-    duration: {
-      type: String,
-      maxlength: [500,'too much duration length'],
-      default:''
-    },
     Secondary_no: {
       type: String,
       maxlength: [500,'too much Secondary_no length'],
@@ -147,7 +142,6 @@ const carSchema = new mongoose.Schema(
     reject_reasons: {
       type: Array,
       default: [],
-      required:false
     },
     featured: {
       type: Boolean,
@@ -157,12 +151,10 @@ const carSchema = new mongoose.Schema(
     certified: {
       type: Boolean,
       required:false,
-      default:false
     },
     inspected: {
       type: Boolean,
       required:false,
-      default:false
     },
     overall_incpection_rating:{
       type:mongoose.Schema.Types.ObjectId,
@@ -171,12 +163,14 @@ const carSchema = new mongoose.Schema(
     auction_sheet: {
       type: Boolean,
       required:false,
-      default:false
     },
     managed_by: {
       type: Boolean,
       required:false,
-      default:false
+    },
+    owner_info:{
+      type:mongoose.Schema.Types.ObjectId,
+      required:false,
     },
     views:{
       type : Number , 

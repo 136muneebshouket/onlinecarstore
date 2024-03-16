@@ -31,7 +31,7 @@ const Confirm_inspec = ({completed ,order_type}) => {
     <>
    
       <div className="inspection_req_main ">
-        <h1> {order_type} Confirmed requests</h1>
+        <h1>{order_type} Confirmed requests {completed ? <p style={{color:'green'}}>(completed)</p>:null}</h1>
         <div className="request_sec">
           {isLoading ? <FullLoader /> : null}
           {error ? (
@@ -79,9 +79,9 @@ const Confirm_inspec = ({completed ,order_type}) => {
                     <label>Phone</label>
                     <p>{obj?.phone_no}</p>
                   </div>
-                  <div className="buttons">
+                  { completed ? <></> :  <div className="buttons">
                     <Link
-                      href={`Inspection_sec/Start_inspec/Check_ad?Ad_id=${obj?.ad_id}${order_type == 'sell-it-for-me' ? '&managed_ad=true':''}`}
+                      href={`Inspection_sec/Start_inspec/Check_ad?Ad_id=${obj?.ad_id}${order_type == 'sell-it-for-me' ? `&managed_ad=true&owner_info=${obj._id}`:''}`}
                     >
                       <button
                         style={{ background: "#246524" }}
@@ -89,7 +89,8 @@ const Confirm_inspec = ({completed ,order_type}) => {
                         Check Ad
                       </button>
                     </Link>
-                  </div>
+                  </div> }
+                 
                 </div>
               </>
             );
