@@ -2,11 +2,28 @@ import admin_schema from "@/models/admin_schema";
 import utube_schema from "@/models/utube_schema";
 import dbConnect from "@/config/dbConnect";
 
+const ImageKit = require("imagekit");
+
+const imageKit = new ImageKit({
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
+});
+
+export const config = {
+  api: {
+    responseLimit: false,
+    bodyParser: {
+      sizeLimit: "100mb",
+    },
+  },
+};
+
 export default async function handler(req, res) {
   dbConnect();
   switch (req.method) {
     case "POST":
-      var { video, admin_token } = req.body;
+      var { video, img, admin_token } = req.body;
 
       try {
         if (!admin_token) {
@@ -43,18 +60,52 @@ export default async function handler(req, res) {
             // }
             // if (!checkvideo) {
               let addvideo = await utube_schema.create(video);
-              if (!addvideo) {
-                let back = err(502, "error adding video to database", false);
-                if (back) {
-                  return;
+              
+              if(!addvideo){
+                throw new Error('Error in uploading video');
+              }
+              
+              let cloud_img = {};
+              if ((img?.img_url) && (addvideo)) {
+                try {
+                  const response = await imageKit.upload({
+                    file: img?.img_url,
+                    fileName: img?.filename,
+                  });
+                  if (!response) {
+                    throw new Error("Error in uploading images");
+                  }
+                  if (response) {
+                    if (response.fileId) {
+                      cloud_img = {
+                        img_id: response.fileId,
+                        img_url: response.url,
+                      };
+                    }
+                  }
+                } catch (error) {
+                  throw new Error("Something wrong in saving img in cloud");
                 }
               }
-              if (addvideo) {
-                let back = err(201, "added video to database", false);
-                if (back) {
-                  return;
+                
+              if (cloud_img?.img_url) {
+              let done =  await utube_schema.findByIdAndUpdate(
+                  { _id: addvideo._id },
+                  { image : cloud_img }
+                );
+
+                if(!done){
+                  throw new Error("Something wrong in saving img in db");
+                }
+                if (done) {
+                  let back = err(201, "added video to database", false);
+                  if (back) {
+                    return;
+                  }
                 }
               }
+             
+             
             // }
           }
         }

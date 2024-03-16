@@ -82,7 +82,7 @@ const H_Videos = () => {
                       </span>
                       <img
                         loading="lazy"
-                        src={videos[0]?.image}
+                        src={videos[0]?.image?.img_url}
                         alt="loading"
                         width={1000}
                         height={1000}
@@ -104,7 +104,7 @@ const H_Videos = () => {
                       </span>
                       <img
                         loading="lazy"
-                        src={videos[1]?.image}
+                        src={videos[1]?.image?.img_url}
                         alt="loading"
                         width={1000}
                         height={1000}
@@ -124,7 +124,7 @@ const H_Videos = () => {
                       </span>
                       <img
                         loading="lazy"
-                        src={videos[2]?.image}
+                        src={videos[2]?.image?.img_url}
                         alt="loading"
                         width={1000}
                         height={1000}

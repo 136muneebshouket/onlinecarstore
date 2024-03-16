@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
     title:{
       type:String,
       required:[true, 'title is required'],
+      unique: [true, 'title already exist'],
     },
     source: {
       type: String,
@@ -23,8 +24,8 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'catogery is required'],
     },
     image: {
-      type: String,
-      required: [true, 'img is required'],
+      type: Object,
+      required:false
     },
     priority: {
       type: Number,

@@ -23,14 +23,15 @@ const Cat_component = ({ catgry }) => {
   const [loading, setLoading] = useState(false);
   // const [videos, setVideos] = useState([]);
 
+  const { data, error, isLoading } = useSWR(
+    `/api/admin/utube/getvideos?catogery=${catgry}&limit=6`,
+    (url) => axios.get(url).then((res) => res.data.payload)
+  );
 
-  const { data, error, isLoading } = useSWR(`/api/admin/utube/getvideos?catogery=${catgry}&limit=6`, (url)=> axios.get(url).then((res)=> res.data.payload))
-
-
-   if(error){
+  if (error) {
     setMessage({ success: false, msg: error.response.data.message });
-   }
-   
+  }
+
   // useEffect(() => {
   //   getvideos();
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +59,7 @@ const Cat_component = ({ catgry }) => {
   //       console.log(error);
   //     }
   //   }
-    
+
   // }
 
   return (
@@ -75,12 +76,15 @@ const Cat_component = ({ catgry }) => {
                   return (
                     <>
                       <div key={video._id} className="card succes">
-                        <Link href={`#`}>
+                        <Link href={`/videos_page/Videos?video_id=${video?._id}`}>
                           <div className="img_div">
-                          <span className="play_icon"> <i>&#10148;</i></span>
+                            <span className="play_icon">
+                              {" "}
+                              <span>&#9658;</span>
+                            </span>
                             <img
                               loading="lazy"
-                              src={video.image}
+                              src={video?.image?.img_url}
                               alt="loading"
                             />
                           </div>

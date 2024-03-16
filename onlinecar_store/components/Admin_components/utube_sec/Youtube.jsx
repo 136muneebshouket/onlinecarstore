@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import Context from "@/components/processing_functions/context";
-import { useContext } from "react";
+import { useContext , useRef } from "react";
+import Image from "next/image";
 
 
 const FullLoader = dynamic(
@@ -19,14 +20,58 @@ const FullLoader = dynamic(
 const Youtube = () => {
     const { message, setMessage } = useContext(Context);
   const [loading, setLoading] = useState(false);
-  const [video, setVideo] = useState({
-    title: "",
-    source: "",
-    description: "",
-    catogery: "",
-    image: "",
-    priority: 0,
-  });
+  const [img, setImg] = useState();
+  const fileInputRef = useRef(null);
+  let initial_obj ={ title: "",
+  source: "",
+  description: "",
+  catogery: "",
+  priority: 0,}
+
+  const [video, setVideo] = useState(initial_obj);
+
+  async function main_img_handler(event) {
+    setMessage({ loader: true });
+    const file = event.target.files[0];
+    // console.log(file);
+    try {
+      const promises = [];
+      if (file.size > 4 * 1024 * 1024) {
+        setMessage({
+          success: false,
+          msg: "Image size should not exceed 4MB. Upload your Image again",
+        });
+        return;
+      }
+
+      // Read the selected image and convert it to a Data URL
+      const reader = new FileReader();
+
+      const promise = new Promise((resolve) => {
+        reader.onload = (e) => {
+          setImg({ img_url: e.target.result, filename: file.name });
+          resolve();
+        };
+      });
+
+      reader.readAsDataURL(file);
+      promises.push(promise);
+      await Promise.all(promises);
+      setMessage({ loader: false });
+    } catch (error) {
+      setMessage({ loader: false });
+      setMessage({
+        success: false,
+        msg: error.message,
+      });
+    }
+    setMessage({ loader: false });
+    // Clear the file input after image selection
+    fileInputRef.current.value = null;
+  }
+
+
+// console.log(video.image) 
 
   async function uploadvideo(e) {
     e.preventDefault();
@@ -34,7 +79,8 @@ const Youtube = () => {
     let admin_token = JSON.parse(localStorage.getItem('admin_token'))
     let body={
         video,
-        admin_token
+        admin_token,
+        img
     }
     // console.log(video);
     await axios.post('/api/admin/utube/uplod_video',body)
@@ -42,6 +88,8 @@ const Youtube = () => {
       // console.log(res)
         setLoading(true)
         setMessage({success:true,msg:res?.data.message}); 
+        setVideo(initial_obj)
+        setImg(null)
     }).catch((err)=>{
       console.log(err)
         setLoading(true)
@@ -74,15 +122,19 @@ const Youtube = () => {
               }}
             />
           </div>
+          
+         
           <div className="input_label">
             <label htmlFor="">Add image (url) of video</label>
             <input
-              type="text"
-              value={video.image}
-              onChange={(e) => {
-                setVideo((s) => ({ ...s, image: e.target.value }));
-              }}
+              type="file"
+              ref={fileInputRef}
+              onChange={main_img_handler}
+              accept="image/*"
             />
+            {img?.img_url ?  <div className="video_img">
+            <Image src={img?.img_url} width={300} height={200} unoptimized={true} alt="videopreview"/>
+          </div> : null}
           </div>
           <div className="input_label">
             <label htmlFor="">Description</label>

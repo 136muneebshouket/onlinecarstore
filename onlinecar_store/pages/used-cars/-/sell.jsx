@@ -232,7 +232,7 @@ const Sell = () => {
                 </div>
               </div>
             </div>
-            <div className="container">
+            {/* <div className="container">
               <div className="divs more-padding">
                 <h2>Sell Car Success Stories</h2>
                 <div className="cards overflow">
@@ -268,7 +268,7 @@ const Sell = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="container">
               <div className="divs more-padding">
                 <h2>Interesting Tips</h2>
