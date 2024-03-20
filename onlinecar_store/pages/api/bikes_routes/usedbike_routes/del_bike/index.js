@@ -39,12 +39,12 @@ export default async function handler(req, res) {
         if (!ad_id) {
           throw new Error('Ad_Id not provided try reloading page')
         }
-        // let doc ;
+    
         // if(ad_type == 'cars'){
-        //   doc = await cardataschema.findOne({ _id: ad_id, seller_id:user_id });
+          let doc = await usedbike_schema.findOne({ _id: ad_id, seller_id:user_id });
         // }
         // if(ad_type == 'bikes'){
-         let doc = await cardataschema.findOne({ _id: ad_id, seller_id:user_id });
+        //   doc = await usedbike_schema.findOne({ _id: ad_id, seller_id:user_id });
         // }
         
         if (!doc) {

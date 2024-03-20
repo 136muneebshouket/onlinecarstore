@@ -1,7 +1,7 @@
-import cardataschema from "../../../../models/cardataschema";
-import dbConnect from "../../../../config/dbConnect";
+import cardataschema from "@/models/cardataschema";
+import dbConnect from "@/config/dbConnect";
 import usedbike_schema from "@/models/usedbike_schema";
-import { send_mail } from "../../mail_to_admin/sendmail";
+// import { send_mail } from "../../mail_to_admin/sendmail";
 // const cloudinary = require("cloudinary").v2;
 const ImageKit = require("imagekit");
 // const  Cloudinary  = require("next-cloudinary");
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       try {
         let recieved_obj = req.body;
         // console.log(recieved_obj);
-        var { _id, user_id, images_to_del ,total_imgs} = req.body.carobj;
+        var { _id, user_id, images_to_del ,total_imgs , imgs_to_uplod} = req.body.carobj;
         if(total_imgs.length == 0){
           throw new Error("PLease Upload Some images")
         }
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
         //   doc = await usedbike_schema.findOne({ _id: _id, seller_id: user_id });
         // }
         // if(req.body.ad_type == 'car'){
-         let doc = await cardataschema.findOne({ _id: _id, seller_id: user_id });
+         let doc = await usedbike_schema.findOne({ _id: _id, seller_id: user_id });
         // }
         
         if (!doc) {
@@ -68,15 +68,6 @@ export default async function handler(req, res) {
               doc[key] = value;
             }
           });
-
-          doc.slug = `${doc.brand.replaceAll(
-            " ",
-            "-"
-          )}-${doc.model.replaceAll(" ", "-")}-${
-            doc.modelyear
-          }-for-sale-in-${doc.city.replaceAll(" ", "-")}-${
-            doc._id
-          }`.toLowerCase()
 
           if (images_to_del?.length > 0) {
             // console.log(images_to_del)
@@ -103,42 +94,43 @@ export default async function handler(req, res) {
             });
             doc.images_url = newimages_url;
           }
-          // if (imgs_to_uplod?.length > 0) {
-          //   const imgs = [];
-          //   for (const obj of imgs_to_uplod) {
-          //     try {
-          //       const file = obj.url;
-          //       const imgname = obj.filename;
-          //       const response = await imageKit.upload({
-          //         file,
-          //         fileName: imgname,
-          //       });
-          //       if (response) {
-          //         console.log(response);
-          //         if (response.fileId) {
-          //           imgs.push({
-          //             img_id: response.fileId,
-          //             img_url: response.url,
-          //           });
-          //         }
-          //       }
-          //       if (!response) {
-          //         console.log("error in uploding imgs");
-          //         continue;
-          //       }
-          //     } catch (error) {
-          //       console.log(error);
-          //       continue;
-          //     }
-          //   }
-          //   if (imgs.length > 0) {
-          //     for (const obj of imgs) {
-          //       doc.images_url.push(obj);
-          //     }
-          //   } else {
-          //     throw new Error("error in imgkit uploding");
-          //   }
-          // }
+
+          if (imgs_to_uplod?.length > 0) {
+            const imgs = [];
+            for (const obj of imgs_to_uplod) {
+              try {
+                const file = obj.url;
+                const imgname = obj.filename;
+                const response = await imageKit.upload({
+                  file,
+                  fileName: imgname,
+                });
+                if (response) {
+                  console.log(response);
+                  if (response.fileId) {
+                    imgs.push({
+                      img_id: response.fileId,
+                      img_url: response.url,
+                    });
+                  }
+                }
+                if (!response) {
+                  console.log("error in uploding imgs");
+                  continue;
+                }
+              } catch (error) {
+                console.log(error);
+                continue;
+              }
+            }
+            if (imgs.length > 0) {
+              for (const obj of imgs) {
+                doc.images_url.push(obj);
+              }
+            } else {
+              throw new Error("error in imgkit uploding");
+            }
+          }
 
           // console.log(doc);
           doc.active = true;
@@ -148,13 +140,13 @@ export default async function handler(req, res) {
           // const user = await cardataschema.findByIdAndUpdate({id : });
           if (updated) {
             // if(req.body.ad_type == 'car'){
-              let send_email_admin = await send_mail(updated.slug,'Approval')
+            //   let send_email_admin = await send_mail(updated.slug,'Approval')
             // }
            
             res.status(201).json({
               success: true,
               message: "updated successfully",
-              car_id: doc._id,
+            //   car_id: doc._id,
             });
           } else {
             throw new Error(`${req.body.ad_type} not updated`);

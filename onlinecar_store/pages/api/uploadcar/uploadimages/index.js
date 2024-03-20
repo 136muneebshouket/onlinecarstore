@@ -13,13 +13,13 @@ export default async function handler(req, res) {
         // console.log(Cloudimages,Ad_id);
         if (Ad_id && Cloudimages.length > 0) {
 
-          let car;
-          if(ad_type == 'car'){
-            car = await cardataschema.findOne({ _id: Ad_id });
-          }
-          if(ad_type == 'bike'){
-            car = await usedbike_schema.findOne({ _id: Ad_id });
-          }
+          // let car;
+          // if(ad_type == 'car'){
+           let car = await cardataschema.findOne({ _id: Ad_id });
+          // }
+          // if(ad_type == 'bike'){
+          //   car = await usedbike_schema.findOne({ _id: Ad_id });
+          // }
 
            
           // const car = await cardataschema.updateOne( { _id: Ad_id }, { $pushAll: { images_url: Cloudimages } } )

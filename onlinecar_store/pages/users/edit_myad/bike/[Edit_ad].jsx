@@ -35,10 +35,10 @@ const Edit_ad = () => {
   const { message, setMessage } = useContext(Context);
   const { data: sessionData } = useSession();
 
-  const axiosConfig = {
-    maxContentLength: 100000000, // 100MB
-  };
-  const axiosInstance = axios.create(axiosConfig);
+  // const axiosConfig = {
+  //   maxContentLength: 100000000, // 100MB
+  // };
+  // const axiosInstance = axios.create(axiosConfig);
 
   // const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -425,9 +425,10 @@ useEffect(() => {
   // function for uploading cardata///////////////////////////////////////////////////////////////////////////
   const uploadcar = async (e) => {
     e.preventDefault();
-    await geterrors();
     // console.log(carobj)
-    // console.log(imagestoshow)
+    await geterrors();
+  
+    console.log(err_values)
 
     if (err_values.length == 0 && errors == false && phoneerr == false) {
     //   console.log("done");
@@ -437,8 +438,8 @@ useEffect(() => {
     //   console.log(imagestoshow)
     let obj={carobj,ad_type:'bike'}
     
-      await axiosInstance
-        .post(`/api/update_add/edit_myadd`,obj )
+      await axios
+        .post(`/api/bikes_routes/usedbike_routes/edit_bike`,obj )
         .then(async (res) => {
           if (res.status == 201) {
             // setError(res?.data);
@@ -454,6 +455,7 @@ useEffect(() => {
             resetState();
             resettextarea();
             setLoading(false);
+            setImagestoshow([])
             // setResponse(true)
             // setDberrors({ ...dberrors, msg: res?.data.message, success: true });
             setMessage({success:true,msg:res?.data.message});   
@@ -472,6 +474,15 @@ useEffect(() => {
         });
     }
   };
+
+  // change in index///////////////////////////////////////////////////////////////////////////////////////
+  function setcoverphoto(i){
+    let newarr = [...imagestoshow]
+    newarr.unshift(imagestoshow[i])
+    newarr.splice(i+1,1)
+    setImagestoshow(newarr)
+    setIsimgModalOpen(false);
+  }
   // console.log(carobj);
   // console.log(imagestoshow);
   // console.log(regex.test(carobj.Phone_no));
@@ -1173,7 +1184,8 @@ useEffect(() => {
                 </div>
 
                 <div className="submit_section">
-                  <button type="submit">Submit & Continue</button>
+                  
+                <button type="submit" >Submit & Continue</button>
                 </div>
               </form>
               {/* <button onClick={()=>{setMessage(Math.floor(Math.random() * 100));}}>send</button> */}
@@ -1195,6 +1207,8 @@ useEffect(() => {
           onClose={setIsimgModalOpen}
           selectedimg={selectedImageUrl}
           delimages={delimages}
+          setcoverphoto={setcoverphoto}
+          no_coverphoto={false}
         />
       )}
       {/* {dberrors.success != null && (

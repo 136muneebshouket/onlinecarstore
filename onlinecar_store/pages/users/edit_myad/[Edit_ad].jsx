@@ -114,7 +114,7 @@ const Edit_ad = () => {
         .get(`/api/update_add/get_my_ad`, { params: param })
         .then((res) => {
           if (res.status == 200) {
-            // console.log(res.data.data);
+            // console.log(res.data);
             res.data.data.user_id = userid;
             // console.log(res.data.data.images_url)
             let images = res.data.data.images_url;
@@ -519,6 +519,15 @@ const Edit_ad = () => {
        
     }
   };
+
+    // change in index///////////////////////////////////////////////////////////////////////////////////////
+    function setcoverphoto(i){
+      let newarr = [...imagestoshow]
+      newarr.unshift(imagestoshow[i])
+      newarr.splice(i+1,1)
+      setImagestoshow(newarr)
+      setIsimgModalOpen(false);
+    }
 
   // console.log(imagestoshow);
   // console.log(oldimages);
@@ -1189,6 +1198,8 @@ const Edit_ad = () => {
           onClose={setIsimgModalOpen}
           selectedimg={selectedImageUrl}
           delimages={delimages}
+          setcoverphoto={setcoverphoto}
+          no_coverphoto={false}
         />
       )}
         {/* {dberrors.success != null && (

@@ -37,8 +37,16 @@ const Modal = ({ isOpen, onClose, car ,refresh,ad_type}) => {
   async function delete_ad(car_id) {
     setLoading(true)
     // console.log(carid_to_del)
+    let api_url = ``;
+    if(ad_type == 'cars'){
+     api_url = `/api/del_my_ad`
+    }
+    if(ad_type == 'bikes'){
+      api_url = `/api/bikes_routes/usedbike_routes/del_bike`
+    }
+
     await axios
-      .delete(`/api/del_my_ad`, { params: {ad_id:car_id,user_id:userid,ad_type:ad_type} })
+      .delete(api_url, { params: {ad_id:car_id,user_id:userid,ad_type:ad_type} })
       .then((res) => {
         // console.log(res); 
         refresh()

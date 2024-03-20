@@ -1,6 +1,6 @@
-import cardataschema from "../../../../models/cardataschema";
+import cardataschema from "@/models/cardataschema";
 import usedbike_schema from "@/models/usedbike_schema";
-import dbConnect from "../../../../config/dbConnect";
+import dbConnect from "@/config/dbConnect";
 
 export default async function handler(req, res) {
   dbConnect();
@@ -12,57 +12,74 @@ export default async function handler(req, res) {
         // console.log(req.query)
         const { ad_id, user_id, ad_type } = req.query;
 
-        const rejectedfields = {
-          seller_email: 0,
-          featured: 0,
-          overall_incpection_rating: 0,
-          inspected: 0,
-          auction_sheet: 0,
-          certified: 0,
-          seller_id: 0,
-          createdAt: 0,
-          updatedAt: 0,
-          managed_by: 0,
-          reject_reasons: 0,
-          pending: 0,
-          active: 0,
-          __v: 0,
+        const selected_fields = {
+          city: 1,
+          area: 1,
+          brand: 1,
+          modelyear: 1,
+          color: 1,
+          Mileage: 1,
+          price: 1,
+          comments: 1,
+          enginetype: 1,
+          body_type: 1,
+          model: 1,
+          enginecc: 1,
+          Registered_In: 1,
+          transmission: 1,
+          Assembly: 1,
+          carfeatures: 1,
+          Phone_no: 1,
+          variant_name: 1,
+          Secondary_no: 1,
+          images_url: 1,
+          slug: 1,
+          // seller_email: 0,
+         
         };
-        
+
         // console.log(ad_id)
         // console.log(user_id)
         // console.log(id)
         // // Perform the query with the specified projection
-        let result;
-        if (ad_type == "car") {
-          result = await cardataschema.findOne(
+        // let result;
+      
+        if (req.query.ad_type == "car") {
+          let car = await cardataschema.findOne(
             { _id: ad_id, seller_id: user_id },
-            rejectedfields
+            selected_fields
           );
-        }
-        if (ad_type == "bike") {
-          result = await usedbike_schema.findOne(
-            { _id: ad_id, seller_id: user_id },
-            rejectedfields
-          );
-        }
-
-        if (!result) {
-          res.status(404).json({
-            success: false,
-            message: `no ${ad_type} exist`,
-          });
-          return;
-        }
-
-        if (result) {
-          // console.log(result)
+        
+          if (!car) {
+            throw new Error(`${ad_type} not exist`);
+          }
+          // console.log(car)
           res.status(200).json({
             success: true,
-            data: result,
+            data: car,
             message: "done",
           });
+    
         }
+        if (req.query.ad_type == "bike") {
+          let bike = await usedbike_schema.findOne(
+            { _id: ad_id, seller_id: user_id },
+            selected_fields
+          );
+          if (!bike) {
+            throw new Error(`${ad_type} not exist`);
+          }
+          res.status(200).json({
+            success: true,
+            data: bike,
+            message: "done",
+          });
+
+        }
+        
+        // if (result) {
+        //   // console.log(result)
+        // }
       } catch (err) {
         res.status(500).json({
           success: false,

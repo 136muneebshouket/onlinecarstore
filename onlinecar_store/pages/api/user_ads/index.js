@@ -80,7 +80,7 @@ export default async function handler(req, res) {
             if (req.query.ad_type == "bikes") {
               const bike = await usedbike_schema.find(findobj, selectedfields);
               if (!bike) {
-                throw new Error("Car not found");
+                throw new Error("bike not found");
               }
               if (bike) {
                 res.status(201).json({
