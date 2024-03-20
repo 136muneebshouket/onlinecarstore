@@ -1,9 +1,9 @@
 import { get } from "mongoose";
-import dbConnect from "../../../config/dbConnect";
-import userschema from "../../../models/user";
-import cardataschema from "../../../models/cardataschema";
+import dbConnect from "@/config/dbConnect";
+import userschema from "../../../../../models/user";
+// import cardataschema from "@/models/cardataschema";
 import usedbike_schema from "@/models/usedbike_schema";
-import errors_handle from "../../../models/errors_handle";
+// import errors_handle from "../../../models/errors_handle";
 // const cloudinary = require("cloudinary").v2;
 // const  Cloudinary  = require("next-cloudinary");
 const ImageKit = require("imagekit");
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
             throw new Error('Image deletion failed from imgkit')
           }         
           if(imgs_deleted == true){
-            let deleted_ad = await cardataschema.findByIdAndDelete(doc._id);
+            let deleted_ad = await usedbike_schema.findByIdAndDelete(doc._id);
             if (!deleted_ad) {
               throw new Error('cannot delete ad')
             }
