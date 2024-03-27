@@ -57,6 +57,9 @@ const Homepage = () => {
               <h3 style={{ textAlign: "center" }}>
                 Sell Your Car on Carselection and Get the Best Price
               </h3>
+              <div className="mobile_logo">
+                <Image src={'/images/logo.png'} unoptimized={true}  alt="Logo" width={100} height={100}/>
+              </div>
               <div className="post_ad_sec">
                 <div className="first_div">
                   <h4>Post your Ad on Carselection</h4>

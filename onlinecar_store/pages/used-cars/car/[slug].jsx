@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 
-
 import Link from "next/link";
 import Sellerdetails from "@/components/child_components_of_others/slug_car_components/Sellerdetails_box/Sellerdetails";
 import Contact_details from "@/components/child_components_of_others/slug_car_components/price_and_phone/Contact_details";
@@ -13,6 +12,9 @@ import dynamic from "next/dynamic";
 
 import price_converter from "@/components/processing_functions/Price_calculator";
 import Call_contact from "@/components/child_components_of_others/slug_car_components/Call_contact_bar/Call_contact";
+import All_features_icons from "@/components/icons/All_features_icons";
+import Images_modal from "@/components/Modals/Show_imgs_client/Images_modal";
+
 
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
@@ -32,6 +34,7 @@ const slug = ({ carrdata, loadiing }) => {
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(loadiing);
   const [images, setImages] = useState([]);
+  const [show_imgs, setShow_imgs] = useState(false);
 
 
 
@@ -126,7 +129,7 @@ const slug = ({ carrdata, loadiing }) => {
                 </div>
                
               </div>
-              <div className="img_section">
+              <div className="img_section" >
                 {images.map((url, i) => {
                   return (
                     <>
@@ -141,6 +144,7 @@ const slug = ({ carrdata, loadiing }) => {
                         height={100}
                         unoptimized={true}
                         priority={false}
+                        onClick={()=>{setShow_imgs(true)}}
                       />
                       {/* </div> */}
                     </>
@@ -271,6 +275,10 @@ const slug = ({ carrdata, loadiing }) => {
                 <span>{carrdata.enginecc}cc</span>
               </div>
               <div className="single_detail">
+                <span>Body Type</span>
+                <span>{carrdata.body_type}</span>
+              </div>
+              <div className="single_detail">
                 <span>Last Updated:</span>
                 <span>Aug 26, 2023</span>
               </div>
@@ -282,7 +290,8 @@ const slug = ({ carrdata, loadiing }) => {
                 {features.map((v, i) => {
                   return (
                     <>
-                      <p key={i}>{v.replace(/_/g, " ")}</p>
+                    {/* <All_features_icons f={v}/> */}
+                      <p key={i}> <All_features_icons f={v}/> {v.replace(/_/g, " ")}</p>
                     </>
                   );
                 })}
@@ -326,6 +335,16 @@ const slug = ({ carrdata, loadiing }) => {
       </div>
 
       <Call_contact phone={carrdata?.Phone_no} />
+
+
+      {show_imgs ? (
+        <Images_modal
+          imgs={images}
+          onClose={() => {
+            setShow_imgs(false);
+          }}
+        />
+      ) : null}
     </>
   );
 };

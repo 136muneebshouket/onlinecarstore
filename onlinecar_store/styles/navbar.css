@@ -138,14 +138,15 @@
 .NavBar nav .logo {
   padding: 0;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.NavBar nav svg {
-  height: 100%;
-  width: 120px;
+.NavBar nav .logo img {
+  height: auto;
+  width: 150px;
   transition: .5s;
   cursor: pointer;
-
 }
 
 

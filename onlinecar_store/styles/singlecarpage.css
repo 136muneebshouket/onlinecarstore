@@ -51,6 +51,7 @@
 
 .singlecar_page .car_section .single_spec p {
     margin: 0;
+   font-size:  max(14px,1.2vw)
 }
 
 .singlecar_page .car_section .single_spec {
@@ -118,9 +119,18 @@
 
 .singlecar_page .car_section .car_features .features p {
     /* margin: 20px 0px;   */
-    margin: 10px 0px;
-    width: 33%;
+    margin: 10px;
+    width: min(40%,170px);
     font-size: 14px;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+}
+.singlecar_page .car_section .car_features .features svg{
+    height: 20px !important;
+    width: 20px !important;
+    fill: var(--para_color);
+    margin-right: 5px;
 }
 
 .singlecar_page .car_section .car_upper_section h2 {

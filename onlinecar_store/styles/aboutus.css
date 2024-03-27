@@ -1,0 +1,30 @@
+
+.aboutus{
+  background-color: white;
+  height: 100%;
+  padding: 20px 0px;
+}
+
+.aboutus .content{
+    width: max(75vw, min(700px, 90vw));
+    /* margin: auto; */
+    margin: 20px auto;
+}
+.aboutus .content p{
+    text-align: justify;
+}
+
+.aboutus .content h1{
+    color: var(--redcode);
+}
+.aboutus .content h2{
+    font-size: large;
+    color: var(--redcode);
+}
+.aboutus .content .about_logo{
+    text-align: center;
+}
+.aboutus .content .about_logo img{
+    width: 70%;
+    height: auto;
+}

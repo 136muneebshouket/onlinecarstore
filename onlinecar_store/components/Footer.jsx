@@ -93,11 +93,8 @@ const Footer = () => {
         <hr />
         <div className="clearfix">
           <div className="other_pages">
-            <Link href={"#"}>About</Link>
-            <Link href={"#"}>About</Link>
-            <Link href={"#"}>About</Link>
-            <Link href={"#"}>About</Link>
-            <Link href={"#"}>About</Link>
+            <Link href={"/main/aboutus"}>About Us</Link>
+            <Link href={"/main/privacy"}>Privacy Policy</Link>
           </div>
           <hr />
           <div className="last_p">
