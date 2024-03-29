@@ -43,8 +43,14 @@ const Login = () => {
   const [errorstatus, setErrorstatus] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [previous_page, setPrevious_page] = useState("null");
 
-  // console.log(sessionData.user._id)
+ 
+  // useEffect(() => {
+  //   const previousURL = window.history;
+  //   console.log(previousURL);
+  //   // setPrevious_page()
+  // }, []);
 
   const login = async (e) => {
     setLoading(true);
@@ -55,14 +61,15 @@ const Login = () => {
         email,
         password,
       });
-
+      // setPrevious_page('next-auth')
+      
       if (data.status == 200) {
         setErrorstatus(data.status);
         setError(data.error);
         setMessage({ success: true, msg: data.error });
         setEmail("");
         setPassword("");
-        router.back();
+         router.back()
         setLoading(false);
       } else {
         setLoading(false);
@@ -70,6 +77,7 @@ const Login = () => {
         setError(data.error);
         setMessage({ success: false, msg: data.error });
       }
+      // router.back();
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -78,6 +86,14 @@ const Login = () => {
     }
   };
 
+  async function google_login() {
+    try {
+      let google_log = await signIn("google" ,{redirect:true});
+      // console.log(google_log)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   //  async function google_login(){
   //     try {
   //       await signIn("google");
@@ -103,7 +119,6 @@ const Login = () => {
     setModalOpen(false);
   };
 
-
   return (
     <>
       <div className="login-body">
@@ -113,7 +128,7 @@ const Login = () => {
           </label>
           {sessionData?.user?._id ? (
             <>
-              <div className="back_route" style={{height:'100%'}}>
+              <div className="back_route" style={{ height: "100%" }}>
                 <h2 style={{ textAlign: "center" }}>You are Logged In</h2>
 
                 <div
@@ -125,10 +140,11 @@ const Login = () => {
                 >
                   <button
                     onClick={() => {
-                      router.push('/');
+                      // router.push('/')
+                      history.go(-3)
                     }}
                   >
-                    Home
+                   let's go Back
                   </button>
                 </div>
               </div>
@@ -223,12 +239,7 @@ const Login = () => {
                   </button>
                 </form>
               </div>
-              <div
-                className="google_btn"
-                onClick={() => {
-                  signIn("google");
-                }}
-              >
+              <div className="google_btn" onClick={google_login}>
                 <span>Sign In with Google</span>
                 <button>
                   <Google_icon />

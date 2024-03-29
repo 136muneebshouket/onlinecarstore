@@ -34,6 +34,7 @@ import "@/styles/ad_new_blog.css";
 import "@/styles/blogs_all.css";
 import "@/styles/single_blogpage.css";
 import "@/styles/aboutus.css";
+import "@/styles/chatpage.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";

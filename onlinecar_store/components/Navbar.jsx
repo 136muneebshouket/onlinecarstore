@@ -114,6 +114,11 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link href="/users/user_dashboard/Others/?All_chats">
+                        My Chats
+                      </Link>
+                    </li>
+                    <li>
                       <a
                         href="#"
                         onClick={() => {

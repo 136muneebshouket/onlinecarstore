@@ -9,10 +9,13 @@ export default async function handler(req, res) {
       try {
         // console.log(req.query.userid)
         let carts = req.query.carts;
+        
         let usercarts =carts.split(',')
+        // console.log(usercarts)
         if (!carts) {
           return;
         }
+
         // let id = undefined;
         // if (user_email) {
         //   let user_id = await userschema.findOne(
@@ -49,12 +52,7 @@ export default async function handler(req, res) {
           const car = await cardataschema.find({ _id: { $in: usercarts }},selectedfields);
 
           if (!car) {
-            // console.log("Car not found");
-            res.status(400).json({
-              success: false,
-              message: "Car not found",
-            });
-            return;
+          throw new Error('car not found')
           } 
           if(car) {
             res.status(201).json({
@@ -67,7 +65,7 @@ export default async function handler(req, res) {
       } catch (err) {
         res.status(400).json({
           success: false,
-          message: err,
+          message: err.message,
         });
       }
       break;

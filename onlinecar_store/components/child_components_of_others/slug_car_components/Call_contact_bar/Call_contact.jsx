@@ -2,7 +2,7 @@
 import React, { useEffect, useState, memo } from "react";
 import Link from "next/link";
 
-const Call_contact = ({ phone }) => {
+const Call_contact = ({ phone , cardata}) => {
   const [shake, setShake] = useState("shake");
 
   useEffect(()=>{
@@ -32,6 +32,11 @@ const Call_contact = ({ phone }) => {
             style={{ background: "#3EB549" }}
           >
             <i className="bx bxl-whatsapp"></i>
+          </div>
+        </Link>
+        <Link className="phone" href={`/users/chat/${cardata?._id}`}>
+          <div className={`call ${shake}`} style={{ background: "#283949" }}>
+          <i className='bx bx-chat'></i>
           </div>
         </Link>
       </div>

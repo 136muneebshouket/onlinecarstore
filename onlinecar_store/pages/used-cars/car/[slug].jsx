@@ -334,7 +334,7 @@ const slug = ({ carrdata, loadiing }) => {
         </div>
       </div>
 
-      <Call_contact phone={carrdata?.Phone_no} />
+      <Call_contact phone={carrdata?.Phone_no} cardata={carrdata} />
 
 
       {show_imgs ? (
