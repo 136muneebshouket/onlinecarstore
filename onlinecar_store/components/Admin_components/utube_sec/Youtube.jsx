@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import Context from "@/components/processing_functions/context";
-import { useContext , useRef } from "react";
+import { useContext, useRef } from "react";
 import Image from "next/image";
-
 
 const FullLoader = dynamic(
   () => import("@/components/Modals/Loader/FullLoader"),
@@ -18,15 +17,17 @@ const FullLoader = dynamic(
 );
 
 const Youtube = () => {
-    const { message, setMessage } = useContext(Context);
+  const { message, setMessage } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState();
   const fileInputRef = useRef(null);
-  let initial_obj ={ title: "",
-  source: "",
-  description: "",
-  catogery: "",
-  priority: 0,}
+  let initial_obj = {
+    title: "",
+    source: "",
+    description: "",
+    catogery: "",
+    priority: 0,
+  };
 
   const [video, setVideo] = useState(initial_obj);
 
@@ -70,32 +71,33 @@ const Youtube = () => {
     fileInputRef.current.value = null;
   }
 
-
-// console.log(video.image) 
+  // console.log(video.image)
 
   async function uploadvideo(e) {
     e.preventDefault();
-    setLoading(true)
-    let admin_token = JSON.parse(localStorage.getItem('admin_token'))
-    let body={
-        video,
-        admin_token,
-        img
-    }
+    setLoading(true);
+    let admin_token = JSON.parse(localStorage.getItem("admin_token"));
+    let body = {
+      video,
+      admin_token,
+      img,
+    };
     // console.log(video);
-    await axios.post('/api/admin/utube/uplod_video',body)
-    .then((res)=>{
-      // console.log(res)
-        setLoading(true)
-        setMessage({success:true,msg:res?.data.message}); 
-        setVideo(initial_obj)
-        setImg(null)
-    }).catch((err)=>{
-      console.log(err)
-        setLoading(true)
-        setMessage({success:false,msg:err?.response?.data.message});
-    })
-    setLoading(false)
+    await axios
+      .post("/api/admin/utube/uplod_video", body)
+      .then((res) => {
+        // console.log(res)
+        setLoading(true);
+        setMessage({ success: true, msg: res?.data.message });
+        setVideo(initial_obj);
+        setImg(null);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(true);
+        setMessage({ success: false, msg: err?.response?.data.message });
+      });
+    setLoading(false);
   }
   return (
     <>
@@ -122,8 +124,7 @@ const Youtube = () => {
               }}
             />
           </div>
-          
-         
+
           <div className="input_label">
             <label htmlFor="">Add image (url) of video</label>
             <input
@@ -132,9 +133,17 @@ const Youtube = () => {
               onChange={main_img_handler}
               accept="image/*"
             />
-            {img?.img_url ?  <div className="video_img">
-            <Image src={img?.img_url} width={300} height={200} unoptimized={true} alt="videopreview"/>
-          </div> : null}
+            {img?.img_url ? (
+              <div className="video_img">
+                <Image
+                  src={img?.img_url}
+                  width={300}
+                  height={200}
+                  unoptimized={true}
+                  alt="videopreview"
+                />
+              </div>
+            ) : null}
           </div>
           <div className="input_label">
             <label htmlFor="">Description</label>
@@ -149,7 +158,7 @@ const Youtube = () => {
           <div className="input_label">
             <label htmlFor="">Priority</label>
             <input
-            value={video.priority}
+              value={video.priority}
               type="number"
               onChange={(e) => {
                 setVideo((s) => ({ ...s, priority: e.target.value }));
@@ -191,7 +200,9 @@ const Youtube = () => {
 
           <div className="input_label ">
             <label htmlFor="">Upload Video</label>
-            <button className="upload_btn" type="submit">Upload</button>
+            <button className="upload_btn" type="submit">
+              Upload
+            </button>
           </div>
         </form>
       </div>

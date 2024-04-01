@@ -165,6 +165,9 @@ const slug = ({ carrdata, loadiing }) => {
                   style={{ transform: `rotate(270deg)` }}
                   className="bx bx-chevron-down right_arrow"
                 ></i>
+                <div className="imgs_length">
+                  <span>{index + 1} / {images?.length}</span>
+                </div>
               </div>
               <h2
                 style={{

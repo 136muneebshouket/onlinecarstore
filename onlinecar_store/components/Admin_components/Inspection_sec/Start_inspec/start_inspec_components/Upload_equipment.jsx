@@ -174,16 +174,17 @@ const Upload_equipment = ({ equip_name, equip_parent,uploded,refresh }) => {
             <button
               className="edit_btn"
               onClick={() => {
-                handleOpenModal({ equip_parent, equip_name,Ad_id });
-              }}
-            >
-              Edit
-            </button>
-            <i
-              onClick={() => {
                 setToggle(!toggle);
               }}
-              className="bx bx-chevron-down"
+            >
+              Add
+            </button>
+            <i
+            style={{color:'#e23f3f' , fontSize:'x-large'}}
+              onClick={() => {
+                handleOpenModal({ equip_parent, equip_name,Ad_id });
+              }}
+              className='bx bxs-edit'
             ></i>
           </div>
         </div>

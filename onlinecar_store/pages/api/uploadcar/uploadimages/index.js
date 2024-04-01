@@ -9,40 +9,44 @@ export default async function handler(req, res) {
       //   var { password, email, full_name, username } = req.body;
 
       try {
-        const { Ad_id, Cloudimages , ad_type } = req.body;
+        const { Ad_id, Cloudimages, ad_type } = req.body;
         // console.log(Cloudimages,Ad_id);
         if (Ad_id && Cloudimages.length > 0) {
-
           // let car;
           // if(ad_type == 'car'){
-           let car = await cardataschema.findOne({ _id: Ad_id });
+          let car = await cardataschema.findOne({ _id: Ad_id });
           // }
           // if(ad_type == 'bike'){
           //   car = await usedbike_schema.findOne({ _id: Ad_id });
           // }
 
-           
           // const car = await cardataschema.updateOne( { _id: Ad_id }, { $pushAll: { images_url: Cloudimages } } )
 
           if (!car) {
-          throw new Error('Ad not found something wrong in uploading images')
+            throw new Error("Ad not found something wrong in uploading images");
+          }
+          if((Cloudimages.length < 1)){
+            throw new Error("something wrong in uploading images");
+          }
+          if((Cloudimages.length > 20)){
+            throw new Error("images should be less than 20");
           }
 
           for (const image of Cloudimages) {
             car.images_url.push(image);
           }
-        //   console.log(car);
+          //   console.log(car);
           let done = await car.save();
           if (!done) {
-            throw new Error('something wrong in uploading images')
-          } 
+            throw new Error("something wrong in uploading images");
+          }
           res.status(201).json({
             success: true,
             message: "car Ad has been stored",
           });
           // }
         } else {
-            throw new Error('something wrong in uploading images')
+          throw new Error("something wrong in uploading images");
         }
       } catch (err) {
         res.status(500).json({

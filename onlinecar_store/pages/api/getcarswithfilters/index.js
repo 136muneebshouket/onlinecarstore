@@ -9,15 +9,17 @@ export default async function handler(req, res) {
       //   var { password, email, full_name, username } = req.body;
 
       try {
-        const { filters, text } = req.query;
+        // console.log(req.query);
+        
+        const { filters, text , sortby } = req.query;
         // console.log(text);
 
-        // console.log(filters);
         var limit = req.query.limit || 12;
         var page = req.query.page || 1;
         var skip = limit * (page - 1);
         // console.log(limit)
 
+        let sortobj = { pending: -1, createdAt: -1 }
         const appliedfilters = { active: true };
         try {
           if (filters) {
@@ -41,8 +43,12 @@ export default async function handler(req, res) {
         } catch (error) {
           console.log(error + " text search error");
         }
-
-        // console.log(appliedfilters);
+        if (sortby){
+          delete sortobj['createdAt']
+          let sortKey = sortby.split("-")[0]
+          let sortOrder = sortby.includes("desc") ? -1 : 1;
+          sortobj[sortKey]= sortOrder;
+        }
 
         const selectedfields = {
           brand: 1,
@@ -71,7 +77,7 @@ export default async function handler(req, res) {
           .find(appliedfilters, selectedfields)
           .limit(limit)
           .skip(skip)
-          .sort({ pending: -1, createdAt: -1 })
+          .sort(sortobj)
           .populate("overall_incpection_rating", "overall_rating");
         const count = await cardataschema.find(appliedfilters).count();
 

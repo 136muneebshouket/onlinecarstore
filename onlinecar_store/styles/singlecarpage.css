@@ -43,6 +43,22 @@
     flex-grow: 0;
 }
 
+.singlecar_page .img_section .imgs_length{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    background-color: var(--primarycolor);
+    width: fit-content;
+    padding: 0px 10px;
+    border-radius: 10px;
+
+}
+.singlecar_page .img_section .imgs_length span{
+   font-size: 12px;
+   color: white;
+}
+
 .singlecar_page .car_section .car_specs {
     display: flex;
     margin: 20px 0px;

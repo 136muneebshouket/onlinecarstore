@@ -261,6 +261,8 @@ const Car_img = () => {
   // console.log(data)
   return (
     <>
+    <h3 style={{textAlign:'center'}}>Add Faults of Car body</h3>
+    <p style={{textAlign:'center',color:'red' , fontSize:'14px'}}>Please rotate phone while adding faults</p>
       <div className="car_inspec_img">
         <div
           className="img_div"

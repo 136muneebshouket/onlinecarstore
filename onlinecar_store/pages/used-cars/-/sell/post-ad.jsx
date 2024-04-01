@@ -410,6 +410,10 @@ const Post_ad = () => {
         continue;
       }
     }
+    if (Cloudimages.length < 1) {
+      setMessage({ success: false, msg: "Some error in uploading images" });
+      return;
+    }
 
     if (Cloudimages.length > 0) {
       let images = {
@@ -423,13 +427,13 @@ const Post_ad = () => {
           if (res.status == 201) {
             progress += progress_unit;
             setMessage({ progress: progress });
-            setMessage({ success: true, msg: res?.data?.message });
-            setMessage({ progress: null });
             resetState();
             resettextarea();
             setImagestoshow([]);
             progress = 0;
           }
+          setMessage({ success: true, msg: res?.data?.message });
+          setMessage({ progress: null });
         })
         .catch((err) => {
           setMessage({ progress: null });

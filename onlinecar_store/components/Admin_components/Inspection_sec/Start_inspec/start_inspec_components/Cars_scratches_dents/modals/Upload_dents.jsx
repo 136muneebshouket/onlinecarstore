@@ -204,7 +204,7 @@ const Upload_dents = ({ modalvalue, onClose ,refresh }) => {
 
       {isimgModalOpen ? (
         <Show_img_modal
-          onClose={setIsimgModalOpen}
+          onClose={()=>{setIsimgModalOpen(false)}}
           selectedimg={selectedImageUrl}
           delimages={() => {
             setImagestoshow(null);

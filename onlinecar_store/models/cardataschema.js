@@ -141,7 +141,6 @@ const carSchema = new mongoose.Schema(
     },
     reject_reasons: {
       type: Array,
-      default: [],
     },
     featured: {
       type: Boolean,

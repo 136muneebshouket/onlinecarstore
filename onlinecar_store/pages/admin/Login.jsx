@@ -75,7 +75,7 @@ const Login = () => {
         }
         setEmail("");
         setPassword("");
-        router.replace('dashboard_page/Dashboard')
+        router.replace('team/members')
       })
       .catch((err) => {
         console.log(err);

@@ -48,7 +48,7 @@ const Ad_section = ({ single_ad_data ,reset}) => {
       Ad_id:single_ad_data._id,
       admin_token
     }
-
+    // console.log(data)
     await axios.post(`/api/admin/Ad_approval/review_ad/approve_ad`,data)
     .then((res) => {
       setMessage({ loader: false });
@@ -110,6 +110,9 @@ const Ad_section = ({ single_ad_data ,reset}) => {
                 style={{ transform: `rotate(270deg)` }}
                 className="bx bx-chevron-down right_arrow"
               ></i>
+               <div className="imgs_length">
+                  <span>{index + 1} / {images?.length}</span>
+                </div>
             </div>
             <h2
               style={{

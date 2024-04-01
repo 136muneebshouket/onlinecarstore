@@ -43,7 +43,18 @@
     color: var(--redcode);
     margin: 15px 0px;
 }
-
+.main_searchcar .sort_div{
+    text-align: right;
+}
+.main_searchcar .sort_div select{
+    width: fit-content;
+    font-size: 14px;
+    margin-right: 10px;
+    border: 1px solid #d6d6d6;
+    padding: 3px 5px;
+    background-color: white;
+    color: var(--redcode);
+}
 .cars_and_filters {
     display: flex;
 }
@@ -173,7 +184,7 @@ font-size: x-large;
 
 .bxs-heart {
     margin: 10px;
-    font-size: x-large;
+    font-size: large;
     cursor: pointer;
     color: rgb(45, 45, 45);
     font-weight: 300;

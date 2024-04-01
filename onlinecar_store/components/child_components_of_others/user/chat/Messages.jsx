@@ -1,4 +1,4 @@
-import React, { useState, useMemo, memo } from "react";
+import React, { useState, useMemo, memo,useEffect } from "react";
 import useSWR from "swr";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -69,9 +69,21 @@ const Messages = ({ Ad }) => {
         setMessage({ success: false, msg: err.response.data.message });
       });
   }
+
+  useEffect(() => {
+    //Implementing the setInterval method
+    const interval = setInterval(() => {
+    mutate()
+    // console.log('nutate')
+    }, 3000);
+
+    //Clearing the interval
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      {isLoading && <FullLoader />}
+      {/* {isLoading && <FullLoader />} */}
       <div className="msgs">
         {error ? (
           <>
@@ -90,16 +102,14 @@ const Messages = ({ Ad }) => {
                         : { textAlign: "left" }
                     }
                   >
-                    <i >{obj?.from == "mine" ? 'you': null}</i>
+                    <i>{obj?.from == "mine" ? "you" : null}</i>
                     <span
                       style={
                         obj?.from == "mine" ? { background: "#a52a2a" } : {}
                       }
                     >
-                      
                       {obj.msg}
                     </span>
-                    
                   </p>
                 </>
               );

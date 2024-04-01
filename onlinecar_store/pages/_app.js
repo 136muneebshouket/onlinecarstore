@@ -35,6 +35,7 @@ import "@/styles/blogs_all.css";
 import "@/styles/single_blogpage.css";
 import "@/styles/aboutus.css";
 import "@/styles/chatpage.css";
+import "@/styles/team_members.css";
 
 import Head from "next/head";
 import Response_modal from "@/components/Modals/respnse_modal/Response_modal";

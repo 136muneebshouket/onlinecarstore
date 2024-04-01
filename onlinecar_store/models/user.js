@@ -30,11 +30,6 @@ const UserSchema = new mongoose.Schema(
       required:false,
       default:"Next_auth"
     },
-    role: {
-      type:String,
-      required:false,
-      default:"user"
-    },
     resetToken: {
       type:String,
       required:false,

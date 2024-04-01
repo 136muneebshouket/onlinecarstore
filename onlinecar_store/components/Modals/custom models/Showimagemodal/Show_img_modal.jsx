@@ -27,6 +27,7 @@ const Show_img_modal = ({ onClose, selectedimg, delimages, setcoverphoto, no_cov
           <button
             onClick={() => {
               delimages(selectedimg?.index);
+              onClose()
             }}
           >
             Delete image

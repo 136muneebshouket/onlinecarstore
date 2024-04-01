@@ -1,6 +1,7 @@
 import dbConnect from "@/config/dbConnect";
 import cardataschema from "@/models/cardataschema";
 import admin_schema from "@/models/admin_schema";
+import report_ad_schema from "@/models/report_ad_schema";
 const nodemailer = require("nodemailer");
 
 export default async function handler(req, res) {
@@ -52,18 +53,24 @@ export default async function handler(req, res) {
       if (!sended) {
         throw new Error("Failed to send Email!");
       }
-       let update_ad = await cardataschema.findByIdAndUpdate({_id:Ad_id },{$set:{active:false,reject_reasons:value}})
-       
-       if(!update_ad){
+      let update_ad = await cardataschema.findByIdAndUpdate(
+        { _id: Ad_id },
+        { $set: { active: false, reject_reasons: value } }
+      );
+
+      let approve_ad = await report_ad_schema.findOneAndDelete({
+        ad_id: Ad_id,
+      });
+
+      if (!update_ad) {
         throw new Error("Failed to send Email!");
-       }
+      }
       // const result = await cardataschema.find(find, selectedfields)
 
-        res.status(200).json({
-          success: true,
-          msg: "done",
-        });
-      
+      res.status(200).json({
+        success: true,
+        msg: "done",
+      });
     } catch (error) {
       res.status(400).json({
         success: false,

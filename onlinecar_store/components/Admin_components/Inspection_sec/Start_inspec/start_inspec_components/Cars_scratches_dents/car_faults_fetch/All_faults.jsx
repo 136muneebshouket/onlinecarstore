@@ -14,7 +14,7 @@ const All_faults = ({Ad_id, data}) => {
   return (
     <>
       <div className="cars_faults">
-      <h2>All Faults</h2>
+      <h3>All Faults</h3>
         <div className="faults_flex">
         {data?.map((v,index)=>{
             return<>

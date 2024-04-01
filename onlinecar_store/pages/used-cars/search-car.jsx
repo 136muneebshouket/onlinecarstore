@@ -32,6 +32,18 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
   const [filtersheading, setFiltersheading] = useState({});
   const [filterslength, setFilterslength] = useState(0);
   const [loading, setLoading] = useState(loadiing);
+  const [sortoptions, setSortoptions] = useState([
+    { value: "", html: "Sort" },
+    { value: "createdAt-desc", html: "Latest" },
+    { value: "createdAt-asc", html: "Oldest" },
+    { value: "price-asc", html: "price: Low to High" },
+    { value: "price-desc", html: "price: High to Low" },
+    { value: "modelyear-desc", html: "modelyear: High to Low" },
+    { value: "modelyear-asc", html: "modelyear: Low to High" },
+    { value: "Mileage-asc", html: "Mileage: Low to High" },
+    { value: "Mileage-desc", html: "Mileage: High to Low" },
+  ]);
+
   // const [carrdata, setCarrdata] = useState([
   //   {
   //     id:'12345678976543',
@@ -152,6 +164,30 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
     });
   }
 
+  async function handleSortBy(e) {
+    let sort = e.target.value;
+    // console.log(sort)
+    if (!sort) {
+      return;
+    }
+    await router.push({
+      ...router,
+      query: {
+        ...router.query,
+        sortby: sort,
+      },
+    });
+    // }
+  }
+
+  function checksort(val) {
+    let sortkey = router.query?.sortby;
+    if (val == sortkey) {
+      return true;
+    }else{
+      return false;
+    }
+  }
   // console.log(filterslength)
 
   return (
@@ -177,6 +213,20 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
         <div className="head">
           <h1>{filtersheading.toString()}</h1>
         </div>
+        <div className="sort_div">
+          {/* <button>Sort By: &nbsp;</button> */}
+          <select name="" id="" onChange={handleSortBy}>
+            {sortoptions?.map((v) => {
+              return (
+                <>
+                  <option value={v.value} selected={checksort(v.value)}>
+                    {v.html}
+                  </option>
+                </>
+              );
+            })}
+          </select>
+        </div>
         <div className="cars_and_filters">
           <div className="filters" id="filters">
             <Filtermodal
@@ -196,14 +246,13 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                       border: "1px solid rgb(216, 216, 216)",
                       boxShadow: "0 0 11px rgba(0,0,0,0.1)",
                       margin: "3px 0px",
-                      padding:'5px 0px'
+                      padding: "5px 0px",
                     }}
                   >
                     <div
                       key={obj?._id}
                       className="singlecar"
                       style={{
-                        
                         display: "flex",
                       }}
                     >
@@ -273,19 +322,22 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                         <span className="pending_banner">Pending</span>
                       ) : null}
                       {obj?.managed_by == true ? (
-                        <span className="pending_banner">Managed by CarSelection</span>
+                        <span className="pending_banner">
+                          Managed by CarSelection
+                        </span>
                       ) : null}
                       {obj?.auction_sheet == true ? (
-                        <span className="pending_banner">&#10004; Auction Sheet</span>
+                        <span className="pending_banner">
+                          &#10004; Auction Sheet
+                        </span>
                       ) : null}
-                      
-                        {obj?.overall_incpection_rating?.overall_rating ? (
-                          <span className="total_rating">
-                            {obj?.overall_incpection_rating?.overall_rating}
-                            /10
-                          </span>
-                        ) : null}
-                    
+
+                      {obj?.overall_incpection_rating?.overall_rating ? (
+                        <span className="total_rating">
+                          {obj?.overall_incpection_rating?.overall_rating}
+                          /10
+                        </span>
+                      ) : null}
                     </div>
                   </div>
 
@@ -333,7 +385,11 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
 
 export async function getServerSideProps({ params, query, res }) {
   const resp = await axios.get(
-    `${process.env.Host}/api/getcarswithfilters/?filters=${query.filters ? query.filters:''}&limit=12&page=${query.page ? query.page :''}&text=${query.text ? query.text : ''}`
+    `${process.env.Host}/api/getcarswithfilters/?filters=${
+      query.filters ? query.filters : ""
+    }&limit=12&page=${query.page ? query.page : ""}&text=${
+      query.text ? query.text : ""
+    }${query.sortby ? `&sortby=${query.sortby}` : ""}`
   );
   const carrdata = resp.data.data;
   const pages = Math.ceil(resp.data.count / 12);

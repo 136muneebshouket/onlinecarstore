@@ -43,6 +43,7 @@ const Start_inspection = () => {
         <h1 style={{ padding: "10px 20px" }}>Start Inspection</h1>
         <Main_image/>
        <Details_img_upload/>
+       <hr />
        <Car_img/>
        <Accident_checklist exist={data} refresh={refresh}/>
        <ETC exist={data} refresh={refresh}/>

@@ -3,6 +3,7 @@ import cardataschema from "@/models/cardataschema";
 import report_ad_schema from "@/models/report_ad_schema";
 import usedbike_schema from "@/models/usedbike_schema";
 import dbConnect from "@/config/dbConnect";
+import { send_mail } from "../../mail_to_admin/sendmail";
 
 export default async function handler(req, res) {
   dbConnect();
