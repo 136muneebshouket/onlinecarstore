@@ -8,8 +8,8 @@ import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
-const slug = () => {
+// const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
+const slug = ({loadiing , data}) => {
   const router = useRouter();
   const inspec_id = router.query.slug;
   // let url = router
@@ -18,10 +18,10 @@ const slug = () => {
   const [show_imgs, setShow_imgs] = useState(false);
   const [imgs_for_modal, setImgs_for_modal] = useState([]);
 
-  const { data, error, isLoading, mutate } = useSWR(
-    `${inspec_id ? `/api/client_inspec/get?Id=${inspec_id}` : null}`,
-    fetcher
-  );
+  // const { data, error, isLoading, mutate } = useSWR(
+  //   `${inspec_id ? `/api/client_inspec/get?Id=${inspec_id}` : null}`,
+  //   fetcher
+  // );
 
   function color(status) {
     let colour;
@@ -32,7 +32,7 @@ const slug = () => {
     });
     return colour;
   }
-  if (isLoading) {
+  if (loadiing) {
     return <FullLoader />;
   }
   // if(error) {
@@ -741,5 +741,32 @@ const slug = () => {
     </>
   );
 };
+
+
+export async function getServerSideProps({ params, query, res }) {
+  // console.log(params)
+  const resp = await axios.get(
+    `${process.env.Host}/api/client_inspec/get?Id=${params.slug}`
+  );
+  const data = resp.data.payload;
+  // console.log(blogsdata);
+  // const pages = Math.ceil(resp.data.count / 12);
+  let loadingg = true;
+  if (data) {
+    loadingg = false;
+  }
+
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+  return {
+    props: {
+      data,
+      loadiing: loadingg,
+    },
+    //   // revalidate: 300
+  };
+}
 
 export default slug;
