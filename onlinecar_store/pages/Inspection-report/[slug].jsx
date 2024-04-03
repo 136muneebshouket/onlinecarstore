@@ -11,7 +11,9 @@ import { useRouter } from "next/router";
 const fetcher = (url) => axios.get(url).then((res) => res.data.payload);
 const slug = () => {
   const router = useRouter();
-  const inspec_id = router.asPath.split("/")[2];
+  const inspec_id = router.query.slug;
+  // let url = router
+  // console.log(inspec_id)
 
   const [show_imgs, setShow_imgs] = useState(false);
   const [imgs_for_modal, setImgs_for_modal] = useState([]);
