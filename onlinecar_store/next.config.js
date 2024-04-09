@@ -49,8 +49,9 @@ const nextConfig = {
     //  GOOGLE_CLIENT_ID:'181411319845-4n9oh7qvmujl7790mh65r7vcf85qa6p8.apps.googleusercontent.com',
     //  GOOGLE_CLIENT_SECRET:'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'
 
+    Host: "https://carselection.pk",
     // Host: "https://car-selection.vercel.app",
-    Host:"http://localhost:3000",
+    // Host:"http://localhost:3000",
   },
   webpack: (config) => {
     /* On `node-fetch` v2, that `supabase-js` uses,
