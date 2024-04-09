@@ -188,6 +188,13 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
       return false;
     }
   }
+
+  function img_transformation(pic) {
+    let imgname = pic.split(`${process.env.URLENDPOINT}`)[1]
+    let newurl = process.env.URLENDPOINT + '/tr:q-50,ar-5-4,w-200,f-webp' + imgname;
+    // console.log(newurl)
+     return newurl;
+   }
   // console.log(filterslength)
 
   return (
@@ -259,9 +266,9 @@ const Search_car = ({ carrdata, loadiing, total, pagenum }) => {
                       <div className="car_img">
                         <Image
                           src={
-                            obj?.images_url[0]?.img_url
+                            img_transformation(obj?.images_url[0]?.img_url
                               ? obj?.images_url[0]?.img_url
-                              : obj?.images_url[0]
+                              : obj?.images_url[0])
                           }
                           width={200}
                           height={200}

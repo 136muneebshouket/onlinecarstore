@@ -87,11 +87,17 @@ const Login = () => {
   };
 
   async function google_login() {
+    setLoading(true);
     try {
       let google_log = await signIn("google" ,{redirect:true});
+      if(google_log){
+
+        setLoading(false);
+      }
       // console.log(google_log)
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   }
   //  async function google_login(){
@@ -239,12 +245,12 @@ const Login = () => {
                   </button>
                 </form>
               </div>
-              <div className="google_btn" onClick={google_login}>
+              <button className="google_btn" onClick={google_login} disabled={loading ? true:false}>
                 <span>Sign In with Google</span>
-                <button>
+                <i>
                   <Google_icon />
-                </button>
-              </div>
+                </i>
+              </button>
             </div>
           )}
         </div>

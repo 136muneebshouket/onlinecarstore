@@ -22,20 +22,27 @@
 .admin_nav button,.sidebar_btn{
     display: block;
     padding: 5px 15px;
-    color: rgb(255 255 255);
+    color: rgb(0, 63, 126);
     font-weight: 500;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     text-decoration: none;
     text-transform: uppercase;
-    margin: 4px;
+    /* margin: 4px; */
     border: none;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     /* border: 1px solid; */
-    background: rgb(0, 63, 126);
+    background: white;
     box-shadow: 0px 0px 3px 0px grey;
+    transition: .2s;
 }
 .sidebar_btn{
     padding:0px 15px;
+    color: white;
+    background: rgb(0, 63, 126);
+}
+.admin_nav button:hover{
+    color: white;
+    background: rgb(0, 63, 126);
 }
 .sidebar_btn span{
     font-size: 22px;
@@ -100,7 +107,7 @@ transition: .2s;
 }
 .nav_ul_admin{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 0;
     padding: 0;
     transition: .2s;

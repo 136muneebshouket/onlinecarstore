@@ -6,8 +6,8 @@ const nextConfig = {
   },
   reactStrictMode: true,
   env: {
-    // DB_URI: "mongodb+srv://mirza:mirza@cluster0.m1s8oai.mongodb.net/Online_cars",
-    DB_URI: "mongodb://mirza:mirza@ac-ujisrx2-shard-00-00.m1s8oai.mongodb.net:27017,ac-ujisrx2-shard-00-01.m1s8oai.mongodb.net:27017,ac-ujisrx2-shard-00-02.m1s8oai.mongodb.net:27017/Online_cars?replicaSet=atlas-vf9a5g-shard-0&ssl=true&authSource=admin",
+    DB_URI: "mongodb+srv://carselectionpk:CARselection%407176@cluster0.iowhdko.mongodb.net/Online_cars",
+    // DB_URI: "mongodb://mirza:mirza@ac-ujisrx2-shard-00-00.m1s8oai.mongodb.net:27017,ac-ujisrx2-shard-00-01.m1s8oai.mongodb.net:27017,ac-ujisrx2-shard-00-02.m1s8oai.mongodb.net:27017/Online_cars?replicaSet=atlas-vf9a5g-shard-0&ssl=true&authSource=admin",
     NEXTAUTH_SECRET: "codingwithmuneeb",
     // EMAIL_HOST: "smtp.gmail.com",
     // EMAIL_PORT: 587,
@@ -24,9 +24,17 @@ const nextConfig = {
     // APP_CLOUD_NAME:"dgyh5n01r",
     // APP_CLOUD_API_KEY:'319433391283272',
     // APP_SECRET_KEY:'r3aoC0X_ruUgq-rNqpEkPje_gsk',
-    PUBLIC_KEY: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
-    PRIVATEKEY: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
-    URLENDPOINT: "https://ik.imagekit.io/lxtg60t67",
+
+    // my image kit credentials
+    // PUBLIC_KEY: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
+    // PRIVATEKEY: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
+    // URLENDPOINT: "https://ik.imagekit.io/lxtg60t67",
+
+    // carselection imagekit credentials
+    PUBLIC_KEY: "public_+6aCO0GalAQwQzxDKgvMYr2cHo8=",
+    PRIVATEKEY: "private_fonoeWbVN0dGWGWkoB9vMM7FiE4=",
+    URLENDPOINT: "https://ik.imagekit.io/uaoenucv4i",
+
 
 
      Host:"https://car-selection.vercel.app",

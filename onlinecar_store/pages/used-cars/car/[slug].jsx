@@ -108,6 +108,14 @@ const slug = ({ carrdata, loadiing }) => {
     }
   };
 
+
+  function img_transformation(pic) {
+   let imgname = pic.split(`${process.env.URLENDPOINT}`)[1]
+   let newurl = process.env.URLENDPOINT + '/tr:q-10,ar-5-4,w-500,f-webp' + imgname;
+  //  console.log(newurl)
+    return newurl;
+  }
+
   // console.log(images[index])
   return (
     <>
@@ -137,7 +145,7 @@ const slug = ({ carrdata, loadiing }) => {
                       <Image
                         key={i}
                         style={{ translate: `${-100 * index}%` }}
-                        src={url}
+                        src={img_transformation(url)}
                         alt="loading"
                         loading="lazy"
                         width={100}

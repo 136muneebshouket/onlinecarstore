@@ -133,7 +133,7 @@ form .showpass_icon {
   background: rgba(47, 125, 228, 1);
   color: white;
 }
-.google_btn button{
+.google_btn i{
   background-color: #fff;
   border-radius: 50%;
   border: none;
@@ -141,6 +141,7 @@ form .showpass_icon {
   height:40px;
   padding: 0;
   margin: 5px 10px;
+  display: inline-block;
 }
 
 .back_route{
@@ -154,6 +155,6 @@ form .showpass_icon {
   width: fit-content;
   padding: 5px 20px;
   background: white;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 2px solid #283949;
 }

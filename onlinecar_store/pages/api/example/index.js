@@ -1,13 +1,15 @@
 // import { NextApiHandler } from "next";
 // import formidable from "formidable";
+import cardataschema from "@/models/cardataschema";
 import team from "@/models/team";
-// const ImageKit = require("imagekit");
+import dbConnect from "@/config/dbConnect";
+const ImageKit = require("imagekit");
 
-// const imageKit = new ImageKit({
-//   publicKey: process.env.PUBLIC_KEY,
-//   privateKey: process.env.PRIVATEKEY,
-//   urlEndpoint: process.env.URLENDPOINT,
-// });
+const imageKit = new ImageKit({
+  publicKey: process.env.PUBLIC_KEY,
+  privateKey: process.env.PRIVATEKEY,
+  urlEndpoint: process.env.URLENDPOINT,
+});
 export const config = {
   api: {
     responseLimit: false,
@@ -19,6 +21,7 @@ export const config = {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
+    dbConnect();
     console.log(req.body);
     // const form = formidable();
 
@@ -28,29 +31,11 @@ export default async function handler(req, res) {
     //   }
 
     try {
+     
 
-        let find = await team.find({  role: 'Inspection' },{ member:1,_id:0 }).populate('member' ,{email:1 , _id:0});
-        
-
-        console.log()
-
-        
-        
-      //       console.log(req.body)
-      //       // console.log(files + 'filename')
-      //   //   const uploadedImages = await Promise.all(
-      //   //     Object.values(files).map(async (file) => {
-      //   //       const imageFile = await imageKit.upload({
-      //   //         file: file.path,  // Path to the temporary file
-      //   //         fileName: file.name,
-      //   //       });
-
-      //   //       return {
-      //   //         img_id: imageFile.fileId,
-      //   //         img_url: imageFile.url,
-      //   //       };
-      //   //     // console.log(file.name + 'filename')
-      //   //     })
+      console.log(req.body);
+      // console.log(files + 'filename')
+     
       res.status(200).json({
         success: true,
         message: "example checked",
