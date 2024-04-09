@@ -26,27 +26,7 @@ const nextConfig = {
     GOOGLE_CLIENT_ID:"418417179637-g71g8g6090oa20adu4d0aahat8sm1al7.apps.googleusercontent.com",
     GOOGLE_CLIENT_SECRET: "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",
 
-    // my email send credentials
-    // EMAIL_HOST: "smtp.gmail.com",
-    // EMAIL_PORT: 587,
-    // EMAIL_USER: "muneeb.office136@gmail.com",
-    // EMAIl_PASS: "earrmqwgljbhkgas",
-    // EMAIl_FROM: "jakayla.toy@ethereal.email",
-
-    // cloudnary credentials
-    // APP_PRESET_NAME:"muneeb",
-    // APP_CLOUD_NAME:"dgyh5n01r",
-    // APP_CLOUD_API_KEY:'319433391283272',
-    // APP_SECRET_KEY:'r3aoC0X_ruUgq-rNqpEkPje_gsk',
-
-    // my image kit credentials
-    // PUBLIC_KEY: "public_WOcX0On81i5aCNQXgjCYQmA9OFY=",
-    // PRIVATEKEY: "private_SRKhBOqRvoKrZ6CUDARN7Ed8tdM=",
-    // URLENDPOINT: "https://ik.imagekit.io/lxtg60t67",
-
-    // my google auth credentials
-    //  GOOGLE_CLIENT_ID:'181411319845-4n9oh7qvmujl7790mh65r7vcf85qa6p8.apps.googleusercontent.com',
-    //  GOOGLE_CLIENT_SECRET:'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'
+   
 
     Host: "https://carselection.pk",
     // Host: "https://car-selection.vercel.app",
