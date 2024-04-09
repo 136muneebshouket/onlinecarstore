@@ -23,8 +23,7 @@ const nextConfig = {
     PRIVATEKEY: "private_fonoeWbVN0dGWGWkoB9vMM7FiE4=",
     URLENDPOINT: "https://ik.imagekit.io/uaoenucv4i",
     // carselection google auth credentials
-    GOOGLE_CLIENT_ID:
-      "418417179637-g71g8g6090oa20adu4d0aahat8sm1al7.apps.googleusercontent.com",
+    GOOGLE_CLIENT_ID:"418417179637-g71g8g6090oa20adu4d0aahat8sm1al7.apps.googleusercontent.com",
     GOOGLE_CLIENT_SECRET: "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",
 
     // my email send credentials
