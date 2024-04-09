@@ -112,7 +112,6 @@ const slug = ({ carrdata, loadiing }) => {
   function img_transformation(pic) {
    let imgname = pic.split(`${process.env.URLENDPOINT}`)[1]
    let newurl = process.env.URLENDPOINT + '/tr:q-10,ar-5-4,w-500,f-webp' + imgname;
-  //  console.log(newurl)
     return newurl;
   }
 

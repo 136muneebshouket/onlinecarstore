@@ -73,7 +73,7 @@ async function send_mail(ad, mail_hint) {
     const mailOptions = {
       // from: process.env.EMAIL_FROM,
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      to: to_emails,
       subject: "Alert",
       html: mail_Html,
     };
