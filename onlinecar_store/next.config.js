@@ -57,7 +57,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://carselection.pk/",
+            value: "https://carselection.pk",
           }, // replace this your actual origin
           {
             key: "Access-Control-Allow-Methods",
